@@ -182,22 +182,12 @@ export default function LinkedInFunnelPage() {
             Free LinkedIn Content Engine
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-on-surface leading-[1.1] mb-5">
-            30 Days of{" "}
-            <span className="gradient-text">LinkedIn Content</span>
-            <br />
-            Built for{" "}
-            <span className="relative inline-block">
-              <span className="text-[#0A66C2]">You</span>
-              <span className="absolute -bottom-1 left-0 w-full h-1 bg-[#0A66C2]/30 rounded-full" />
-            </span>
-            . Delivered Free.
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-on-surface leading-[1.2] mb-5 text-balance mx-auto max-w-4xl">
+            30 Days of <span className="gradient-text">LinkedIn Content</span> Built for <span className="text-[#0A66C2]">You</span>.
           </h1>
 
-          <p className="text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-2xl mx-auto mb-8">
-            Paste your LinkedIn URL. Our AI reads your profile, understands your
-            industry, and builds a complete 30-day content calendar — posts,
-            image concepts, video scripts — sent straight to your inbox.
+          <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-3xl mx-auto mb-8 text-balance">
+            Paste your LinkedIn URL. Our AI analyzes your profile and builds a complete 30-day content calendar — posts, image ideas, and video scripts — sent straight to your inbox for free.
           </p>
 
           {/* Trust badges */}
