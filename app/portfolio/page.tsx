@@ -95,7 +95,7 @@ export default function PortfolioPage() {
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               
@@ -133,12 +133,12 @@ export default function PortfolioPage() {
       </div>
 
       {/* CTA */}
-      <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto bg-gradient-to-br from-indigo-950 via-indigo-900 to-purple-900 text-white border border-indigo-900/50 shadow-2xl">
-        <h2 className="text-3xl font-bold text-white mb-4">Want to see similar results?</h2>
-        <p className="text-indigo-200 mb-8 max-w-xl mx-auto">
+      <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+        <h2 className="text-3xl font-bold text-on-surface mb-4">Want to see similar results?</h2>
+        <p className="text-on-surface-variant mb-8 max-w-xl mx-auto">
           Let&apos;s discuss your goals and how we can implement these strategies for your brand.
         </p>
-        <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-indigo-900 font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-transform hover:bg-indigo-50">
+        <Link href="/contact" className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-transform hover:bg-primary-container">
           Start a Project <span className="material-symbols-outlined">rocket_launch</span>
         </Link>
       </div>

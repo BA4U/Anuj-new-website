@@ -40,9 +40,7 @@ export default function ContactPage() {
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
       console.error("Error submitting contact form:", err);
-      // Fallback response for local preview if Firebase offline
-      setSuccess(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setError("Something went wrong. Please try again or email me directly at contact@anuj4u.in.");
     } finally {
       setLoading(false);
     }

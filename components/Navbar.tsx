@@ -1,12 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { LinkedInLogo } from "@/components/LinkedInLogo";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -14,11 +22,20 @@ export default function Navbar() {
     { name: "Portfolio", href: "/portfolio" },
     { name: "About", href: "/about" },
     { name: "Testimonials", href: "/testimonials" },
-    { name: "Contact", href: "/contact" },
+  ];
+
+  const specialLinks = [
+    { name: "LinkedIn Funnel", href: "/linkedin-funnel", badge: "FREE" },
   ];
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 transition-all duration-300">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 shadow-sm"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
       <div className="flex justify-between items-center px-6 lg:px-16 py-4 w-full max-w-[1400px] mx-auto">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -32,7 +49,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-8 items-center">
+        <nav className="hidden md:flex gap-6 items-center">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -46,6 +63,27 @@ export default function Navbar() {
                 }`}
               >
                 {link.name}
+              </Link>
+            );
+          })}
+          {/* Special highlighted links */}
+          {specialLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative inline-flex items-center gap-1.5 font-semibold transition-all duration-200 px-3 py-1 rounded-lg hover:bg-[#0A66C2]/10 hover:text-[#0A66C2] ${
+                  isActive ? "text-[#0A66C2] bg-[#0A66C2]/10" : "text-on-surface/80"
+                }`}
+              >
+                <LinkedInLogo className="w-4 h-4" />
+                {link.name}
+                {link.badge && (
+                  <span className="absolute -top-2 -right-2 bg-[#0A66C2] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full leading-none">
+                    {link.badge}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -71,7 +109,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-surface-container-lowest border-b border-outline-variant px-6 py-6 space-y-4 shadow-xl animate-in slide-in-from-top duration-300">
+        <div className="md:hidden absolute top-full left-0 w-full bg-surface-container-lowest/95 backdrop-blur-xl border-b border-outline-variant px-6 py-6 space-y-4 shadow-xl">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -84,6 +122,28 @@ export default function Navbar() {
                 }`}
               >
                 {link.name}
+              </Link>
+            );
+          })}
+          {/* Special mobile links */}
+          {specialLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`flex items-center gap-2 py-2 text-lg font-semibold transition-colors ${
+                  isActive ? "text-[#0A66C2]" : "text-[#0A66C2]/80"
+                }`}
+              >
+                <LinkedInLogo className="w-5 h-5" />
+                {link.name}
+                {link.badge && (
+                  <span className="bg-[#0A66C2] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full">
+                    {link.badge}
+                  </span>
+                )}
               </Link>
             );
           })}
