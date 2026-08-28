@@ -48,8 +48,9 @@ export default function ServicesPage() {
       {/* Why Work With Me */}
       <section className="mb-24">
         <div className="text-center mb-12">
+          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">Why Me</p>
           <h2 className="text-3xl font-bold text-on-surface mb-3">Your Growth, My Expertise</h2>
-          <p className="text-on-surface-variant text-base">Why Work With Me? 👇</p>
+          <p className="text-on-surface-variant text-base">What makes the difference when you work with me.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -175,15 +176,14 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA Box */}
-      <section className="glass-card rounded-3xl p-10 text-center max-w-4xl mx-auto relative overflow-hidden bg-gradient-to-br from-indigo-950 via-indigo-900 to-purple-900 text-white border border-indigo-900/50 shadow-2xl">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Let&apos;s Build Your Strategy Today</h2>
-        <p className="text-indigo-200 text-base mb-8 max-w-xl mx-auto">
+      <section className="glass-card rounded-3xl p-10 text-center max-w-4xl mx-auto relative overflow-hidden bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-on-surface">Let&apos;s Build Your Strategy Today</h2>
+        <p className="text-on-surface-variant text-base mb-8 max-w-xl mx-auto">
           Reach out for a free consultation on how we can optimize your video retention and marketing pipeline.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 bg-white text-indigo-900 font-bold px-8 py-3.5 rounded-full hover:bg-indigo-50 transition-all shadow-lg hover:scale-105"
+          className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-3.5 rounded-full hover:bg-primary-container transition-all shadow-lg hover:scale-105"
         >
           Book Consultation
           <span className="material-symbols-outlined">calendar_today</span>

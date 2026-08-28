@@ -203,14 +203,14 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto bg-gradient-to-br from-indigo-950 via-indigo-900 to-purple-900 text-white border border-indigo-900/50 shadow-2xl mt-12">
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to elevate your content?</h2>
-        <p className="text-indigo-200 mb-8 max-w-xl mx-auto">
-          I'm currently accepting a limited number of clients. Let's build something great together.
+      <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl mt-12">
+        <h2 className="text-3xl font-bold text-on-surface mb-4">Ready to elevate your content?</h2>
+        <p className="text-on-surface-variant mb-8 max-w-xl mx-auto">
+          I&apos;m currently accepting a limited number of clients. Let&apos;s build something great together.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 bg-white text-indigo-900 font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-transform hover:bg-indigo-50"
+          className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-transform hover:bg-primary-container"
         >
           Let&apos;s Work Together
           <span className="material-symbols-outlined">arrow_forward</span>

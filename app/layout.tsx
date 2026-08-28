@@ -26,6 +26,27 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Anuj Mishra",
+              url: "https://anuj4u.in",
+              jobTitle: "Video Editor & Growth Marketing Specialist",
+              email: "contact@anuj4u.in",
+              knowsAbout: [
+                "Video Editing",
+                "Social Media Management",
+                "Google Ads",
+                "YouTube Channel Management",
+                "AI Automation",
+              ],
+              sameAs: ["https://linkedin.com"],
+            }),
+          }}
+        />
       </head>
       <body className="min-h-screen flex flex-col justify-between bg-surface text-on-surface antialiased">
         <Navbar />

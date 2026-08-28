@@ -2,39 +2,122 @@ import React from "react";
 import Link from "next/link";
 
 export default function Footer() {
+  const quickLinks = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "About", href: "/about" },
+    { name: "Testimonials", href: "/testimonials" },
+    { name: "Contact", href: "/contact" },
+  ];
+
+  const socials = [
+    { name: "LinkedIn", href: "https://linkedin.com", icon: "person" },
+    { name: "WhatsApp", href: "https://wa.me/919999999999", icon: "chat" },
+    { name: "Telegram", href: "https://t.me", icon: "send" },
+    { name: "Discord", href: "https://discord.com", icon: "forum" },
+  ];
+
   return (
-    <footer className="bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 border-t border-purple-200/50 w-full py-12" id="footer">
-      <div className="flex flex-col md:flex-row justify-between items-center px-6 lg:px-16 gap-8 max-w-[1400px] mx-auto">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-sm">
-            A
+    <footer
+      className="bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 border-t border-purple-200/50 w-full pt-16 pb-8"
+      id="footer"
+    >
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
+        {/* Main Footer Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          {/* Brand Column */}
+          <div className="md:col-span-1">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                A
+              </div>
+              <span className="font-bold text-xl text-on-surface">
+                Anuj Mishra
+              </span>
+            </div>
+            <p className="text-on-surface-variant text-sm leading-relaxed mb-6 max-w-xs">
+              Helping creators and brands grow through video editing, social
+              media strategy, and performance marketing.
+            </p>
+            <a
+              href="mailto:contact@anuj4u.in"
+              className="text-sm font-semibold text-primary hover:underline decoration-primary/40"
+            >
+              contact@anuj4u.in
+            </a>
           </div>
-          <span className="font-bold text-xl text-on-surface">Anuj Mishra</span>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-xs font-bold text-on-surface uppercase tracking-widest mb-5">
+              Quick Links
+            </h4>
+            <ul className="space-y-3">
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-on-surface-variant hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Connect */}
+          <div>
+            <h4 className="text-xs font-bold text-on-surface uppercase tracking-widest mb-5">
+              Connect
+            </h4>
+            <div className="flex flex-wrap gap-3 mb-6">
+              {socials.map((social) => (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-10 h-10 rounded-xl bg-white/70 backdrop-blur-sm border border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary/40 transition-all hover:scale-110"
+                  aria-label={social.name}
+                >
+                  <span className="material-symbols-outlined text-lg">
+                    {social.icon}
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div className="glass-card rounded-xl p-4 inline-block">
+              <p className="text-xs font-semibold text-on-surface mb-1">
+                Open for projects
+              </p>
+              <p className="text-xs text-on-surface-variant">
+                I typically respond within 24 hours.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-6">
-          <Link
-            href="#"
-            className="text-body-md text-on-secondary-container hover:text-primary transition-colors hover:underline decoration-primary/30"
-          >
-            Privacy Policy
-          </Link>
-          <Link
-            href="#"
-            className="text-body-md text-on-secondary-container hover:text-primary transition-colors hover:underline decoration-primary/30"
-          >
-            Terms of Service
-          </Link>
-          <Link
-            href="/contact"
-            className="text-body-md text-on-secondary-container hover:text-primary transition-colors hover:underline decoration-primary/30"
-          >
-            Contact
-          </Link>
-        </div>
-
-        <div className="text-body-md text-on-surface-variant">
-          © {new Date().getFullYear()} Anuj Mishra Portfolio. All rights reserved.
+        {/* Bottom Bar */}
+        <div className="border-t border-purple-300/40 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-on-surface-variant">
+            © {new Date().getFullYear()} Anuj Mishra. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <Link
+              href="#"
+              className="text-xs text-on-surface-variant hover:text-primary transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="#"
+              className="text-xs text-on-surface-variant hover:text-primary transition-colors"
+            >
+              Terms
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

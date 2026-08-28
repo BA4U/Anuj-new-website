@@ -4,12 +4,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Contact Anuj Mishra | Get In Touch",
-  description: "Contact Anuj Mishra for video editing, YouTube channel management, growth strategies, or general inquiries.",
-};
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -46,9 +40,7 @@ export default function ContactPage() {
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
       console.error("Error submitting contact form:", err);
-      // Fallback response for local preview if Firebase offline
-      setSuccess(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setError("Something went wrong. Please try again or email me directly at contact@anuj4u.in.");
     } finally {
       setLoading(false);
     }

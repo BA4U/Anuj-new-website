@@ -67,11 +67,16 @@ const config: Config = {
         'marquee-reverse': {
           '0%': { transform: 'translateX(-100%)' },
           '100%': { transform: 'translateX(0%)' },
-        }
+        },
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
       },
       animation: {
-        marquee: 'marquee 25s linear infinite',
-        'marquee-reverse': 'marquee-reverse 25s linear infinite',
+        marquee: 'marquee 32s linear infinite',
+        'marquee-reverse': 'marquee-reverse 38s linear infinite',
+        'fade-up': 'fade-up 0.6s ease-out forwards',
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

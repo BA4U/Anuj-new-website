@@ -12,8 +12,9 @@
   }
 }
 
+/* === Gradient Utilities === */
 .gradient-text {
-  background: linear-gradient(135deg, #6355FF 0%, #9F55FF 100%);
+  background: linear-gradient(135deg, #6355FF 0%, #8B5CF6 50%, #A855F7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -22,12 +23,18 @@
   background: linear-gradient(135deg, #6355FF 0%, #9F55FF 100%);
 }
 
+/* === Glass Morphism === */
 .glass-card {
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(190, 185, 210, 0.8);
   box-shadow: 0 4px 20px -2px rgba(99, 85, 255, 0.08), 0 0 0 1px rgba(255,255,255,0.5) inset;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 0 8px 32px -4px rgba(99, 85, 255, 0.14), 0 0 0 1px rgba(255,255,255,0.6) inset;
 }
 
 .dark .glass-card {
@@ -53,7 +60,6 @@
   pointer-events: none;
 }
 
-
 .glass-panel {
   background: rgba(252, 248, 249, 0.8);
   backdrop-filter: blur(20px);
@@ -61,11 +67,12 @@
   border: 1px solid rgba(200, 196, 217, 0.5);
 }
 
+/* === Ambient Backgrounds === */
 .ambient-glow {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(99, 85, 255, 0.15) 0%, rgba(159, 85, 255, 0) 70%);
+  background: radial-gradient(circle, rgba(99, 85, 255, 0.12) 0%, rgba(159, 85, 255, 0) 70%);
   filter: blur(80px);
   pointer-events: none;
   border-radius: 50%;
@@ -75,12 +82,13 @@
   position: absolute;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(159, 85, 255, 0.15) 0%, rgba(99, 85, 255, 0) 70%);
+  background: radial-gradient(circle, rgba(159, 85, 255, 0.12) 0%, rgba(99, 85, 255, 0) 70%);
   filter: blur(80px);
   pointer-events: none;
   border-radius: 50%;
 }
 
+/* === Material Symbols === */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -95,3 +103,23 @@
   direction: ltr;
   -webkit-font-smoothing: antialiased;
 }
+
+/* === Scroll Reveal Animations === */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for children */
+.stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+.stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+.stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+.stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+.stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+.stagger > .reveal:nth-child(6) { transition-delay: 400ms; }

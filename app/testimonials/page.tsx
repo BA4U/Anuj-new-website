@@ -97,14 +97,14 @@ export default function TestimonialsPage() {
       </div>
 
       {/* CTA Box */}
-      <div className="glass-card rounded-3xl p-10 text-center max-w-3xl mx-auto bg-gradient-to-br from-indigo-950 via-indigo-900 to-purple-900 text-white border border-indigo-900/50 shadow-2xl">
-        <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white">Want to join these success stories?</h3>
-        <p className="text-indigo-200 text-sm md:text-base mb-6">
+      <div className="glass-card rounded-3xl p-10 text-center max-w-3xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+        <h3 className="text-2xl md:text-3xl font-bold mb-3 text-on-surface">Want to join these success stories?</h3>
+        <p className="text-on-surface-variant text-sm md:text-base mb-6">
           Let&apos;s discuss how we can grow your channel, podcast, or business.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 bg-white text-indigo-950 font-bold px-8 py-3.5 rounded-full hover:bg-indigo-50 transition-all shadow-md"
+          className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-3.5 rounded-full hover:bg-primary-container transition-all shadow-md hover:scale-105"
         >
           Get in Touch
           <span className="material-symbols-outlined">send</span>
