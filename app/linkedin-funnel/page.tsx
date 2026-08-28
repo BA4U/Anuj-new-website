@@ -182,7 +182,7 @@ export default function LinkedInFunnelPage() {
             Free LinkedIn Content Engine
           </div>
 
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-on-surface leading-[1.2] mb-5 text-balance mx-auto max-w-4xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-on-surface leading-[1.2] mb-5 text-balance mx-auto max-w-4xl">
             30 Days of <span className="gradient-text">LinkedIn Content</span> Built for <span className="text-[#0A66C2]">You</span>.
           </h1>
 
