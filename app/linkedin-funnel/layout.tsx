@@ -19,6 +19,15 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://anuj4u.in/linkedin-funnel",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Get Your FREE 30-Day LinkedIn Content Plan",
+    description:
+      "AI-generated LinkedIn content strategy: 30 posts, image prompts, video concepts & why each post will perform — sent directly to your inbox.",
+  },
+  alternates: {
+    canonical: "/linkedin-funnel",
+  },
 };
 
 export default function LinkedInFunnelLayout({

@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { LinkedInLogo } from "@/components/LinkedInLogo";
+import { trackEvent } from "@/lib/analytics";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 type PageState = "input" | "analyzing" | "preview";
@@ -158,6 +159,10 @@ export default function LinkedInFunnelPage() {
       });
       if (!res.ok) throw new Error();
       setEmailState("sent");
+      trackEvent("Funnel Conversion", {
+        source: "linkedin-content-funnel",
+        email_provided: true,
+      });
     } catch {
       setEmailState("idle");
     }
@@ -203,6 +208,21 @@ export default function LinkedInFunnelPage() {
                 {b.text}
               </div>
             ))}
+          </div>
+
+          {/* See a sample */}
+          <div className="mt-8 flex justify-center">
+            <a
+              href="#preview-anchor"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("preview-anchor")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0A66C2] hover:text-[#0A66C2]/80 transition-colors underline decoration-[#0A66C2]/30"
+            >
+              <span className="material-symbols-outlined text-base">visibility</span>
+              See a sample calendar first
+            </a>
           </div>
         </div>
       </section>
@@ -397,6 +417,76 @@ export default function LinkedInFunnelPage() {
           </div>
         </section>
       )}
+
+      {/* ══════════════════════════════════════════════════════
+          SOCIAL PROOF
+      ══════════════════════════════════════════════════════ */}
+      <section className="py-20 px-6 lg:px-16 max-w-[1400px] mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
+            Trusted by Creators & Founders
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-on-surface">
+            People are already getting results
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              quote:
+                "I used to dread posting on LinkedIn. This calendar gave me a structure I could actually stick to — and I got my first 100+ comment post within 2 weeks.",
+              name: "Priya Nair",
+              title: "Product Manager, Bangalore",
+              initials: "PN",
+              color: "from-violet-500 to-indigo-600",
+            },
+            {
+              quote:
+                "The AI-generated hooks are genuinely good. I&apos;ve been using them verbatim and getting DMs about my posts for the first time in 3 years.",
+              name: "Rahul Mehta",
+              title: "Startup Founder, Mumbai",
+              initials: "RM",
+              color: "from-blue-500 to-cyan-600",
+            },
+            {
+              quote:
+                "Anuj doesn&apos;t just give you a calendar — he gives you the why behind every post. That context changed how I think about LinkedIn entirely.",
+              name: "Sarah Dsouza",
+              title: "Content Strategist, Dubai",
+              initials: "SD",
+              color: "from-emerald-500 to-teal-600",
+            },
+          ].map((t) => (
+            <div
+              key={t.name}
+              className="glass-card rounded-3xl p-7 hover:-translate-y-1 transition-all duration-300 flex flex-col"
+            >
+              <div className="flex gap-1 mb-4">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <span key={s} className="material-symbols-outlined text-amber-400 text-base">
+                    star
+                  </span>
+                ))}
+              </div>
+              <blockquote className="text-on-surface-variant text-sm leading-relaxed mb-6 flex-1">
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+              <div className="flex items-center gap-3 pt-4 border-t border-outline-variant/30">
+                <div
+                  className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-bold text-sm shrink-0`}
+                >
+                  {t.initials}
+                </div>
+                <div>
+                  <p className="font-bold text-on-surface text-sm">{t.name}</p>
+                  <p className="text-xs text-on-surface-variant">{t.title}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════════════════════
           PREVIEW — shown after analysis completes
