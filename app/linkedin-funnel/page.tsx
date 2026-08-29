@@ -102,6 +102,86 @@ const FAQS = [
   },
 ];
 
+// ─── Thank You State ──────────────────────────────────────────────────────────
+function ThankYouState({ email }: { email: string }) {
+  return (
+    <div className="glass-card rounded-3xl p-8 md:p-10 text-center border border-emerald-200/60 bg-emerald-50/40 overflow-hidden relative">
+      <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/80 to-transparent pointer-events-none" />
+
+      {/* Success icon */}
+      <div className="relative z-10">
+        <div className="w-20 h-20 rounded-full bg-emerald-500 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-emerald-500/30">
+          <span className="material-symbols-outlined text-white text-4xl">check</span>
+        </div>
+
+        <h3 className="text-2xl font-extrabold text-on-surface mb-3">
+          Your calendar is on its way! 🎉
+        </h3>
+        <p className="text-on-surface-variant text-sm mb-8 max-w-sm mx-auto">
+          Check <strong>{email}</strong> — your full 30-day LinkedIn plan will arrive in the next few minutes.
+        </p>
+
+        {/* Next steps */}
+        <div className="bg-white rounded-2xl p-6 mb-6 border border-emerald-100 text-left">
+          <p className="text-xs font-bold text-emerald-700 uppercase tracking-widest mb-4">
+            While you wait — 3 things to do next
+          </p>
+          <ul className="space-y-3">
+            {[
+              {
+                icon: "inbox",
+                title: "Check your spam folder",
+                desc: "Sometimes the email lands there. Mark it 'Not Spam' so you don't miss future tips.",
+              },
+              {
+                icon: "person_search",
+                title: "Update your LinkedIn banner",
+                desc: "First impressions matter. A clean, professional banner boosts profile visits by up to 40%.",
+              },
+              {
+                icon: "calendar_month",
+                title: "Bookmark this page",
+                desc: "Come back and reference your calendar — you'll get a reminder in your inbox too.",
+              },
+            ].map((step, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <div className="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                  {i + 1}
+                </div>
+                <div>
+                  <p className="font-semibold text-on-surface text-sm flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-emerald-600 text-base">{step.icon}</span>
+                    {step.title}
+                  </p>
+                  <p className="text-on-surface-variant text-xs leading-relaxed mt-0.5">{step.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Share & explore */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link
+            href="/funnels"
+            className="inline-flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface font-semibold px-6 py-3 rounded-xl hover:border-emerald-500/50 hover:text-emerald-700 transition-all text-sm"
+          >
+            <span className="material-symbols-outlined text-emerald-600 text-base">bolt</span>
+            Explore more free tools
+          </Link>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center gap-2 bg-[#0A66C2] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#0A66C2]/90 transition-all text-sm"
+          >
+            <span className="material-symbols-outlined text-white text-base">mail</span>
+            Work with Anuj
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Page Component ────────────────────────────────────────────────────────────
 export default function LinkedInFunnelPage() {
   const [linkedinUrl, setLinkedinUrl] = useState("");
@@ -511,16 +591,7 @@ export default function LinkedInFunnelPage() {
           {/* ── Email capture ── */}
           <div className="max-w-xl mx-auto mb-12">
             {emailState === "sent" ? (
-              <div className="glass-card rounded-2xl p-6 text-center border border-emerald-200/60 bg-emerald-50/40">
-                <span className="material-symbols-outlined text-4xl text-emerald-500 mb-3 block">
-                  check_circle
-                </span>
-                <h3 className="font-bold text-on-surface mb-1">Check your inbox! 🎉</h3>
-                <p className="text-sm text-on-surface-variant">
-                  Your 30-day LinkedIn calendar is on its way to{" "}
-                  <strong>{email}</strong>
-                </p>
-              </div>
+              <ThankYouState email={email} />
             ) : (
               <div className="glass-card rounded-2xl p-6 border-2 border-[#0A66C2]/20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0A66C2]/4 to-primary/4 pointer-events-none" />
