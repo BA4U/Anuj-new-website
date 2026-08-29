@@ -6,6 +6,20 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Anuj Mishra | Video Editor & Growth Specialist",
   description: "Learn about Anuj Mishra's professional journey, growth philosophy, and expertise in video editing, social media strategy, and marketing.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Anuj Mishra | Video Editor & Growth Specialist",
+    description: "Learn about Anuj Mishra's professional journey, growth philosophy, and expertise in video editing, social media strategy, and marketing.",
+    url: "https://anuj4u.in/about",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Anuj Mishra | Video Editor & Growth Specialist",
+    description: "Learn about Anuj Mishra's professional journey, growth philosophy, and expertise in video editing, social media strategy, and marketing.",
+  },
 };
 
 export default function AboutPage() {
@@ -202,6 +216,81 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Work With Me */}
+      <section className="mb-24 relative z-10">
+        <div className="glass-card rounded-3xl p-10 md:p-14 relative overflow-hidden bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none" />
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="max-w-xl">
+              <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">Work With Me</p>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-on-surface mb-4">
+                Let&apos;s build your growth engine
+              </h2>
+              <p className="text-on-surface-variant text-base leading-relaxed mb-6">
+                I take on a limited number of clients each month so I can give every project real attention. If you&apos;re serious about turning content into revenue, I&apos;d love to hear from you.
+              </p>
+              <ul className="space-y-2 mb-8">
+                {[
+                  "A free 20-minute intro call to scope your goals",
+                  "A tailored plan across editing, social, and ads",
+                  "Clear monthly reporting on what's working",
+                ].map((point, i) => (
+                  <li key={i} className="flex items-center gap-2 text-sm text-on-surface">
+                    <span className="material-symbols-outlined text-emerald-600 text-base">check_circle</span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col gap-3 shrink-0">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-transform hover:bg-primary-container"
+              >
+                Work With Me
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 border-2 border-primary/40 text-on-surface font-semibold px-8 py-4 rounded-full hover:border-primary hover:text-primary transition-all text-center justify-center"
+              >
+                See Plans &amp; Pricing
+                <span className="material-symbols-outlined">sell</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted by — client logos */}
+      <section className="mb-24 relative z-10">
+        <div className="text-center mb-10">
+          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">Trusted By</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-on-surface">
+            Creators &amp; brands I&apos;ve partnered with
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {clientLogos.map((client) => (
+            <div
+              key={client.name}
+              className="glass-card rounded-2xl py-6 px-4 flex flex-col items-center justify-center text-center gap-1 hover:-translate-y-1 transition-all duration-300"
+            >
+              <span className="material-symbols-outlined text-primary/70 text-2xl">
+                {client.icon}
+              </span>
+              <span className="font-bold text-on-surface text-sm">{client.name}</span>
+              <span className="text-[10px] uppercase tracking-wider text-on-surface-variant">
+                {client.role}
+              </span>
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-xs text-on-surface-variant mt-6">
+          Want your brand featured here? Let&apos;s create results worth showing off.
+        </p>
+      </section>
+
       {/* CTA */}
       <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl mt-12">
         <h2 className="text-3xl font-bold text-on-surface mb-4">Ready to elevate your content?</h2>
@@ -219,3 +308,10 @@ export default function AboutPage() {
     </div>
   );
 }
+
+const clientLogos = [
+  { name: "Victor Chan", role: "YouTuber", icon: "smart_display" },
+  { name: "Harjeet Dhillon", role: "Author", icon: "auto_stories" },
+  { name: "Dr. Maurice Maurer", role: "Educator", icon: "school" },
+  { name: "Blake Reddy", role: "Adviser", icon: "account_balance" },
+];

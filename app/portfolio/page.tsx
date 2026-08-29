@@ -6,6 +6,20 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Portfolio & Case Studies | Anuj Mishra",
   description: "Explore the portfolio of Anuj Mishra, featuring high-retention video editing, social media management, and performance marketing case studies.",
+  alternates: {
+    canonical: "/portfolio",
+  },
+  openGraph: {
+    title: "Portfolio & Case Studies | Anuj Mishra",
+    description: "Explore the portfolio of Anuj Mishra, featuring high-retention video editing, social media management, and performance marketing case studies.",
+    url: "https://anuj4u.in/portfolio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio & Case Studies | Anuj Mishra",
+    description: "Explore the portfolio of Anuj Mishra, featuring high-retention video editing, social media management, and performance marketing case studies.",
+  },
 };
 
 export default function PortfolioPage() {
@@ -17,7 +31,12 @@ export default function PortfolioPage() {
       description: "Edited a high-retention Video Sales Letter (VSL) focusing on pacing, visual hooks, and clear messaging to increase course conversion rates.",
       image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD9yRc9SLVU3wxVmFvr7DMbGjSG3qYpjfjh9tYzKpUK33eg2W1nnTjvlsrLhaBi6krKX0TdNuf7yLsAsOYdU0JLMomjjGoi8SejZX8T3hCSpIAsARplRb8T70IM2rYKk5Ol3q4KoPIE-WoRs5APA61VFmLYbW3uQbgFXi7YB-juA37Eo8ILQ718O2RtslZ9odscWJ2rdNEn697yO0U8SxV4Hs0xAN-6D1M18mtUaFkHgsfZF3v8LBALQw",
       tags: ["Premiere Pro", "VSL", "Retention"],
-      link: "#"
+      problem: "Course sales page had strong traffic but a low conversion rate — the explainer video lost viewers before the offer.",
+      action: "Re-cut the VSL with a stronger hook in the first 5 seconds, tighter pacing, and on-screen proof points throughout.",
+      result: "+38% course signup rate from the same traffic",
+      resultMetric: "+38%",
+      serviceName: "Expert Video Editing",
+      serviceHref: "/services"
     },
     {
       title: "Author Podcast Launch",
@@ -26,7 +45,12 @@ export default function PortfolioPage() {
       description: "Full-stack launch of a new podcast. Managed video editing, created engaging thumbnails, and wrote SEO-optimized YouTube descriptions.",
       image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDX1QBf9H4AztNNXxJlgKiDlGRYZEWbkt_1zlSxhOqPxmx9g4D8Hj517r9BGAq_OylFTF-Yi2yNgkVnqlzeylUdTAri15J_Y_EZg3bclrmRi9BQVtKDy4n7Co3py0VBeZrGaO9d3QcfDbd_bOGyoh1ZaJORB1eriKxwVcZBsoP0k8abvyR3OnPCKDUMpWsQVdZE7ZRcQB0bdhwoBj8VQEkiy4TO54TrP_r87Qr5lXuA7zh7j3vlgLeBDQ",
       tags: ["Podcast", "Thumbnails", "SEO"],
-      link: "#"
+      problem: "A first-time author wanted to launch a podcast but had no editing workflow, branding, or distribution plan.",
+      action: "Built the full launch: episode edits, custom thumbnails, SEO descriptions, and a consistent posting calendar.",
+      result: "1,200+ listens in the first 30 days with zero paid promotion",
+      resultMetric: "1.2K",
+      serviceName: "AI-Powered Social Media Management",
+      serviceHref: "/services"
     },
     {
       title: "Scientific Channel Growth",
@@ -35,7 +59,12 @@ export default function PortfolioPage() {
       description: "Provided comprehensive video editing and graphic design to elevate the visual quality of complex scientific explanations.",
       image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBDZ6INETUPr4mfcMG6fzakgmVe5e0s0KvLX5o9-bovSubFnxmIk9lm30G7Ll4D6BdJK7ytOohIo7vBYXU2GMvrqiEEmvbG2xvd4HAv2BiMhpjz3Gh-edOo3E3tJgdnPaFhtPMXA3hqMQ6HJM_Dj0YDOq517NWpHXYbHIQ7cNvICkULHA7Y1P5DdAK24q-lcIRCF2yHsMw0clQk7pKVik8UrA0Kp4AEBB7E9l-mmVaAzSsasp7CGmeZDg",
       tags: ["DaVinci Resolve", "Education", "Design"],
-      link: "#"
+      problem: "Complex science content had great substance but flat visuals that hurt watch-time and credibility.",
+      action: "Elevated every video with motion graphics, clear on-screen diagrams, and tighter retention-focused edits.",
+      result: "+25% average view duration across the channel",
+      resultMetric: "+25%",
+      serviceName: "Expert Video Editing",
+      serviceHref: "/services"
     },
     {
       title: "Wealth Adviser Shorts",
@@ -44,7 +73,12 @@ export default function PortfolioPage() {
       description: "Designed bespoke video layouts and templates for podcast clips, saving the client hours of production time weekly.",
       image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAcV5YGRB486ybQ9zwbwu0Ihd1rDTcA1kf0hwynkmwEXSqTX_79g7gIDH2nZ8y2C5BQz8-bmX9SUCHmwklbnNosL59RHW49XgZpUMfaw7lthcJ4jGoOCpOker1OCanqdNjv7CyOaM_PJ4IxgIsk9uAXdxu0A6MrrK5NhtnhOj6BGFYv5NDx0iIr3LJ4dapkVvKiPUUFDWo9323rCyOH5QneWioGae6YJMew3Ch6Dw0DebyQ3i7jed8hrQ",
       tags: ["Shorts", "Templates", "Finance"],
-      link: "#"
+      problem: "Repurposing long podcast episodes into shorts took the client hours of manual work every week.",
+      action: "Designed a reusable short-form template system and clip selection workflow for fast, on-brand edits.",
+      result: "6+ hours saved every week of production time",
+      resultMetric: "6 hrs/wk",
+      serviceName: "Digital Solutions",
+      serviceHref: "/services"
     }
   ];
 
@@ -111,21 +145,54 @@ export default function PortfolioPage() {
                   <h3 className="text-2xl font-bold text-on-surface mb-1">{project.title}</h3>
                   <p className="text-sm font-semibold text-on-surface-variant">Client: {project.client}</p>
                 </div>
-                <a href={project.link} className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                <span className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary shrink-0">
                   <span className="material-symbols-outlined text-sm">north_east</span>
-                </a>
+                </span>
               </div>
-              
-              <p className="text-on-surface-variant text-base leading-relaxed mb-8 flex-grow">
+
+              <p className="text-on-surface-variant text-base leading-relaxed mb-6">
                 {project.description}
               </p>
-              
+
+              {/* Case study: problem / action / result */}
+              <div className="space-y-3 mb-6">
+                <div className="flex gap-3">
+                  <span className="material-symbols-outlined text-error text-base shrink-0 mt-0.5">priority_high</span>
+                  <p className="text-sm text-on-surface-variant leading-relaxed">
+                    <span className="font-semibold text-on-surface">Problem: </span>
+                    {project.problem}
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <span className="material-symbols-outlined text-primary text-base shrink-0 mt-0.5">play_circle</span>
+                  <p className="text-sm text-on-surface-variant leading-relaxed">
+                    <span className="font-semibold text-on-surface">Action: </span>
+                    {project.action}
+                  </p>
+                </div>
+                <div className="flex gap-3 items-center">
+                  <span className="material-symbols-outlined text-emerald-600 text-base shrink-0">trending_up</span>
+                  <p className="text-sm text-on-surface leading-relaxed">
+                    <span className="font-bold text-emerald-700">{project.resultMetric}</span>
+                    <span className="font-semibold text-on-surface"> Result: </span>
+                    {project.result}
+                  </p>
+                </div>
+              </div>
+
               <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-outline-variant/30">
                 {project.tags.map((tag, tIdx) => (
                   <span key={tIdx} className="bg-surface-container-low border border-outline-variant/40 text-on-surface-variant px-3 py-1 rounded-md text-xs font-semibold">
                     {tag}
                   </span>
                 ))}
+                <Link
+                  href={project.serviceHref}
+                  className="ml-auto inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1 rounded-md text-xs font-semibold hover:bg-primary/20 transition-colors"
+                >
+                  {project.serviceName}
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </Link>
               </div>
             </div>
           </div>

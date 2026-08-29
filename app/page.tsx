@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
+import { AbTest } from "@/components/AbTest";
 
 export default function Home() {
   const coreTags = [
@@ -12,6 +13,26 @@ export default function Home() {
     "Google & LinkedIn Ads",
     "AI Tools & Automation",
   ];
+
+  const marqueeRef = useRef<HTMLElement>(null);
+  const [marqueePaused, setMarqueePaused] = useState(false);
+
+  useEffect(() => {
+    const el = marqueeRef.current;
+    if (!el) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => setMarqueePaused(!entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="relative overflow-hidden -mt-20">
@@ -34,15 +55,29 @@ export default function Home() {
               I&apos;m Anuj — a video editor and growth marketer who helps creators and brands turn content into real revenue. No templates, no fluff.
             </p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons — A/B tested: portfolio (A) vs LinkedIn funnel (B) */}
             <div className="flex flex-wrap items-center gap-4 mb-12">
-              <Link
-                href="/portfolio"
-                className="bg-primary hover:bg-primary-container text-white font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 flex items-center gap-2"
-              >
-                See my work
-                <span className="material-symbols-outlined text-lg">arrow_forward</span>
-              </Link>
+              <AbTest
+                experiment="hero_cta"
+                variantA={
+                  <Link
+                    href="/portfolio"
+                    className="bg-primary hover:bg-primary-container text-white font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 flex items-center gap-2"
+                  >
+                    See my work
+                    <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                  </Link>
+                }
+                variantB={
+                  <Link
+                    href="/linkedin-funnel"
+                    className="bg-primary hover:bg-primary-container text-white font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 flex items-center gap-2"
+                  >
+                    Get your content plan
+                    <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                  </Link>
+                }
+              />
               <Link
                 href="/contact"
                 className="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant/60 text-on-surface font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-sm hover:scale-105"
@@ -121,7 +156,11 @@ export default function Home() {
 
       {/* ─── TESTIMONIALS MARQUEE ─── */}
       <ScrollReveal>
-        <section className="py-16 bg-surface overflow-hidden border-b border-outline-variant/30">
+        <section
+          ref={marqueeRef}
+          data-marquee-paused={marqueePaused ? "true" : "false"}
+          className="py-16 bg-surface overflow-hidden border-b border-outline-variant/30"
+        >
           <div className="max-w-[1400px] mx-auto px-6 lg:px-16 mb-10">
             <div className="text-center w-full">
               <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">What Clients Say</p>
@@ -434,6 +473,42 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
+      {/* ─── FREE TOOLS STRIP ─── */}
+      <ScrollReveal>
+        <section className="py-12 px-6 lg:px-16 max-w-[1400px] mx-auto">
+          <div className="relative overflow-hidden rounded-3xl glass-card border border-primary/20 bg-gradient-to-br from-primary/5 via-secondary-fixed/40 to-primary/5 shadow-xl">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-primary/15 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8 p-8 md:p-12">
+              <div className="flex items-center gap-5">
+                <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/25">
+                  <span className="material-symbols-outlined text-white text-3xl">
+                    bolt
+                  </span>
+                </div>
+                <div>
+                  <span className="text-xs font-black uppercase tracking-widest text-primary">
+                    Free Tools
+                  </span>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-on-surface mb-1">
+                    Get a free growth tool
+                  </h2>
+                  <p className="text-on-surface-variant text-sm md:text-base max-w-md">
+                    Generate a 30-day LinkedIn content calendar with AI — completely free. More tools on the way.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/funnels"
+                className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all shrink-0"
+              >
+                Explore Free Tools
+                <span className="material-symbols-outlined">arrow_forward</span>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
       {/* ─── BOTTOM CTA ─── */}
       <ScrollReveal>
         <section className="py-12 px-6 lg:px-16 max-w-[1400px] mx-auto">
@@ -445,13 +520,22 @@ export default function Home() {
               <p className="text-on-surface-variant text-base md:text-lg mb-8">
                 Let&apos;s talk about your content, your goals, and how I can help you get there. No pitch decks — just a real conversation.
               </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all"
-              >
-                Start a Project
-                <span className="material-symbols-outlined">send</span>
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all"
+                >
+                  Start a Project
+                  <span className="material-symbols-outlined">send</span>
+                </Link>
+                <Link
+                  href="/funnels"
+                  className="inline-flex items-center gap-2 border-2 border-primary/40 text-on-surface font-semibold px-8 py-4 rounded-full hover:border-primary hover:text-primary transition-all"
+                >
+                  Get a free tool
+                  <span className="material-symbols-outlined">bolt</span>
+                </Link>
+              </div>
             </div>
           </div>
         </section>

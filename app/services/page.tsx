@@ -1,10 +1,25 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import FAQAccordion from "@/components/FAQAccordion";
 
 export const metadata: Metadata = {
   title: "Services | Anuj Mishra",
   description: "Expert services in high-retention video editing, AI-powered social media management, and performance paid media (Google Ads & LinkedIn).",
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    title: "Services | Anuj Mishra",
+    description: "Expert services in high-retention video editing, AI-powered social media management, and performance paid media (Google Ads & LinkedIn).",
+    url: "https://anuj4u.in/services",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Services | Anuj Mishra",
+    description: "Expert services in high-retention video editing, AI-powered social media management, and performance paid media (Google Ads & LinkedIn).",
+  },
 };
 
 export default function ServicesPage() {
@@ -176,6 +191,95 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* Pricing — Tiered Packages */}
+      <section className="mb-24">
+        <div className="text-center mb-14">
+          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">Working Together</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-3">
+            Choose Your <span className="gradient-text">Growth Plan</span>
+          </h2>
+          <p className="text-on-surface-variant text-base md:text-lg max-w-2xl mx-auto">
+            Transparent monthly packages designed to scale with you. Every plan is tailored to your goals — prices are indicative bands and confirmed on a free intro call.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          {packages.map((pkg, idx) => {
+            const isFeatured = pkg.featured;
+            return (
+              <div
+                key={pkg.name}
+                className={`relative rounded-3xl p-8 flex flex-col ${
+                  isFeatured
+                    ? "bg-gradient-to-br from-primary to-primary-container text-white shadow-2xl md:-translate-y-4"
+                    : "glass-card border border-outline-variant/50"
+                }`}
+              >
+                {isFeatured && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-primary text-[10px] font-black px-3 py-1 rounded-full tracking-wider shadow-md">
+                    MOST POPULAR
+                  </span>
+                )}
+                <h3 className={`text-xl font-bold mb-1 ${isFeatured ? "text-white" : "text-on-surface"}`}>
+                  {pkg.name}
+                </h3>
+                <p className={`text-sm mb-5 ${isFeatured ? "text-white/80" : "text-on-surface-variant"}`}>
+                  {pkg.tagline}
+                </p>
+
+                <div className="mb-6">
+                  <span className={`text-3xl font-extrabold ${isFeatured ? "text-white" : "text-on-surface"}`}>
+                    {pkg.price}
+                  </span>
+                  <span className={`text-sm font-medium ${isFeatured ? "text-white/70" : "text-on-surface-variant"}`}>
+                    {" "}/ mo
+                  </span>
+                </div>
+
+                <ul className="space-y-3 mb-8 flex-grow">
+                  {pkg.features.map((f, fIdx) => (
+                    <li key={fIdx} className="flex items-start gap-2 text-sm">
+                      <span
+                        className={`material-symbols-outlined text-base shrink-0 mt-0.5 ${
+                          isFeatured ? "text-white" : "text-primary"
+                        }`}
+                      >
+                        check_circle
+                      </span>
+                      <span className={isFeatured ? "text-white/90" : "text-on-surface-variant"}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href={`/contact?plan=${pkg.slug}`}
+                  className={`inline-flex items-center justify-center gap-2 font-bold px-6 py-3.5 rounded-full transition-all hover:scale-105 text-sm ${
+                    isFeatured
+                      ? "bg-white text-primary hover:bg-white/90"
+                      : "bg-primary text-white hover:bg-primary-container"
+                  }`}
+                >
+                  Book a Call
+                  <span className="material-symbols-outlined text-base">calendar_today</span>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+        <p className="text-center text-xs text-on-surface-variant mt-6">
+          Not sure which fits? Book a free call and I&apos;ll recommend the right starting point.
+        </p>
+      </section>
+
+      {/* FAQ */}
+      <section className="mb-24 max-w-3xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">FAQ</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-on-surface">Questions? Answered.</h2>
+        </div>
+        <FAQAccordion items={servicesFaqs} />
+      </section>
+
       <section className="glass-card rounded-3xl p-10 text-center max-w-4xl mx-auto relative overflow-hidden bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-on-surface">Let&apos;s Build Your Strategy Today</h2>
         <p className="text-on-surface-variant text-base mb-8 max-w-xl mx-auto">
@@ -192,3 +296,70 @@ export default function ServicesPage() {
     </div>
   );
 }
+
+const packages = [
+  {
+    name: "Starter",
+    slug: "starter",
+    tagline: "For creators getting consistent",
+    price: "₹18K",
+    featured: false,
+    features: [
+      "4 edited videos / month (Shorts or long-form)",
+      "1 social platform management",
+      "Basic content calendar",
+      "Monthly performance report",
+    ],
+  },
+  {
+    name: "Growth",
+    slug: "growth",
+    tagline: "For brands ready to scale",
+    price: "₹42K",
+    featured: true,
+    features: [
+      "12 edited videos / month (mixed formats)",
+      "2 platforms + AI content calendar",
+      "1 Google or LinkedIn ad campaign",
+      "Bi-weekly strategy calls",
+      "Priority 48-hr turnaround",
+    ],
+  },
+  {
+    name: "Scale",
+    slug: "scale",
+    tagline: "Full-growth partnership",
+    price: "₹85K+",
+    featured: false,
+    features: [
+      "Unlimited video editing queue",
+      "Full social + paid media management",
+      "Multi-channel ad campaigns",
+      "Dedicated growth strategist",
+      "Weekly reporting & optimization",
+    ],
+  },
+];
+
+const servicesFaqs = [
+  {
+    q: "How are payments structured?",
+    a: "All plans are billed monthly. The prices shown are indicative bands — final scope and pricing are confirmed on a free intro call so we match the plan to your exact goals and budget.",
+  },
+  {
+    q: "Can I switch plans later?",
+    a: "Absolutely. Most clients start on Growth and scale up (or down) as their needs change. There's no lock-in — plans can be adjusted with a simple conversation.",
+  },
+  {
+    q: "What do you need from me to start?",
+    a: "Access to your channels, a short brand brief, and your raw footage or assets. I'll handle the strategy, editing, posting, and reporting from there.",
+  },
+  {
+    q: "Do you offer one-off projects?",
+    a: "Yes — if you only need a single VSL, podcast edit, or ad campaign, book a call and we'll scope it as a project rather than a monthly plan.",
+  },
+  {
+    q: "What results can I expect?",
+    a: "Results depend on your niche and starting point, but clients typically see improved retention, more consistent posting, and clearer funnel performance within the first 60–90 days.",
+  },
+];
