@@ -1,4 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import {
+  generateWithGemini,
+  sendFunnelEmail,
+  logToSheets,
+} from "@/lib/funnel";
+import { enqueueNurture } from "@/lib/nurture";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 interface ContentDay {
@@ -22,17 +28,10 @@ interface RequestBody {
   goal?: string;
 }
 
-// ─── AI: Gemini Content Generation ───────────────────────────────────────────
-async function generateContent(body: RequestBody): Promise<ContentDay[]> {
-  const apiKey = process.env.GEMINI_API_KEY;
-
-  if (!apiKey) {
-    console.log("ℹ️  No GEMINI_API_KEY — returning mock content (add key to .env.local)");
-    return generateMockContent(body.linkedinUrl);
-  }
-
-  const prompt = `You are a world-class LinkedIn growth strategist and copywriter.
-Create a highly personalized 30-day LinkedIn content calendar for a professional whose LinkedIn profile is: ${body.linkedinUrl}
+// ─── AI: Gemini Content Generation (via shared engine) ───────────────────────
+function buildLinkedInPrompt(linkedinUrl: string): string {
+  return `You are a world-class LinkedIn growth strategist and copywriter.
+Create a highly personalized 30-day LinkedIn content calendar for a professional whose LinkedIn profile is: ${linkedinUrl}
 
 Analyze the URL structure to infer their name and industry. Generate exactly 30 content pieces.
 Return ONLY a valid JSON array with no markdown, no explanation, no code fences:
@@ -59,42 +58,17 @@ Rules:
 - Every hook must be unique — no repeated patterns
 - Posts build progressively over 30 days
 - Return ONLY the JSON array`;
+}
 
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          temperature: 0.8,
-          maxOutputTokens: 8192,
-          responseMimeType: "application/json",
-        },
-      }),
-    }
+async function generateContent(body: RequestBody): Promise<ContentDay[]> {
+  const apiKey = process.env.GEMINI_API_KEY;
+  const generated = await generateWithGemini<ContentDay[]>(
+    buildLinkedInPrompt(body.linkedinUrl),
+    () => generateMockContent(body.linkedinUrl),
+    apiKey ? { apiKey } : {}
   );
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error("Gemini API error:", errorText);
-    console.log("Falling back to mock content...");
-    return generateMockContent(body.linkedinUrl);
-  }
-
-  const result = await response.json();
-  const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || "[]";
-
-  try {
-    const parsed = JSON.parse(text);
-    const arr = Array.isArray(parsed) ? parsed : parsed.content_plan || [];
-    if (arr.length === 0) throw new Error("Empty AI response");
-    return arr;
-  } catch {
-    console.error("Failed to parse Gemini response, using mock content");
-    return generateMockContent(body.linkedinUrl);
-  }
+  // Guard against empty AI responses
+  return generated.length > 0 ? generated : generateMockContent(body.linkedinUrl);
 }
 
 // ─── Mock Content (used when no Gemini API key) ───────────────────────────────
@@ -163,88 +137,34 @@ function generateMockContent(linkedinUrl: string): ContentDay[] {
   });
 }
 
-// ─── Email: Send via Resend ───────────────────────────────────────────────────
+// ─── Email: Send via Resend (uses shared engine) ─────────────────────────────
 async function sendEmail(
   toEmail: string,
   linkedinUrl: string,
   content: ContentDay[]
-) {
-  const resendKey = process.env.RESEND_API_KEY;
-
-  if (!resendKey) {
-    // Hard fail — we don't silently skip. The user should know.
-    throw new Error(
-      "EMAIL_NOT_CONFIGURED: Add RESEND_API_KEY to your .env.local file. See .env.local.example for instructions."
-    );
-  }
-
-  const fromAddress =
-    process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
-  const adminBcc = process.env.ADMIN_EMAIL || undefined;
-
+): Promise<string | null> {
   const emailHtml = buildEmailHtml(toEmail, linkedinUrl, content);
-
-  const payload: Record<string, unknown> = {
-    from: `Anuj Mishra <${fromAddress}>`,
-    to: [toEmail],
-    reply_to: "contact@anuj4u.in",
+  return sendFunnelEmail({
+    to: toEmail,
     subject: "🚀 Your 30-Day LinkedIn Content Calendar is Ready!",
     html: emailHtml,
-  };
-
-  // BCC Anuj on every submission so he has a full lead log in his inbox
-  if (adminBcc && adminBcc !== toEmail) {
-    payload.bcc = [adminBcc];
-  }
-
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${resendKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
   });
-
-  const data = await res.json();
-
-  if (!res.ok) {
-    console.error("Resend API error:", data);
-    const resendMsg = data?.message || data?.name || "Unknown error";
-    throw new Error(`Failed to send email: ${resendMsg}`);
-  }
-
-  console.log("✅ Email sent via Resend:", data.id);
-  return data;
 }
 
-// ─── Storage: Google Sheets via Apps Script Webhook ───────────────────────────
-// No npm package needed — just a URL from your Google Apps Script web app.
-// See .env.local.example for setup instructions.
+// ─── Storage: Google Sheets via Apps Script Webhook (uses shared engine) ──────
 async function logToGoogleSheets(
   data: RequestBody,
   emailId: string | null
 ): Promise<void> {
-  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (!webhookUrl) return; // Optional — doesn't block email delivery
-
-  try {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        timestamp: new Date().toISOString(),
-        email: data.email,
-        linkedinUrl: data.linkedinUrl,
-        emailId: emailId || "not_sent",
-        status: emailId ? "sent" : "failed",
-      }),
-    });
-    console.log("✅ Logged to Google Sheets");
-  } catch (err) {
-    // Non-blocking — log failure but don't crash the request
-    console.warn("⚠️  Google Sheets logging failed:", err);
-  }
+  await logToSheets({
+    funnel: "linkedin",
+    source: "linkedin-content-funnel",
+    date: new Date().toISOString().slice(0, 10),
+    email: data.email,
+    linkedinUrl: data.linkedinUrl,
+    emailId: emailId || "not_sent",
+    status: emailId ? "new" : "failed",
+  });
 }
 
 // ─── Email HTML Template ──────────────────────────────────────────────────────
@@ -374,6 +294,9 @@ function buildEmailHtml(
 
 // ─── Main API Handler ─────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
+  const maxRetries = 2;
+  let lastError: unknown = null;
+
   try {
     const body: RequestBody = await req.json();
 
@@ -403,12 +326,42 @@ export async function POST(req: NextRequest) {
     const content = await generateContent(body);
     console.log(`✅ Generated ${content.length} content days for ${body.email}`);
 
-    // ── Send email (hard fail if not configured) ──
-    const emailResult = await sendEmail(body.email, body.linkedinUrl, content);
-    const emailId = emailResult?.id || null;
+    // ── Send email with retry logic (hard fail if not configured) ──
+    let emailResult: string | null = null;
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        emailResult = await sendEmail(body.email, body.linkedinUrl, content);
+        if (emailResult) {
+          console.log(`✅ Email sent on attempt ${attempt + 1}`);
+          break;
+        }
+      } catch (err: unknown) {
+        lastError = err;
+        if (err instanceof Error && err.message.startsWith("EMAIL_NOT_CONFIGURED:")) {
+          // Don't retry if email is not configured
+          throw err;
+        }
+        console.warn(`⚠️  Email attempt ${attempt + 1} failed:`, err);
+        if (attempt < maxRetries) {
+          // Wait 1 second before retry (except on last attempt)
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+      }
+    }
+
+    if (!emailResult && !(lastError instanceof Error && lastError.message.startsWith("EMAIL_NOT_CONFIGURED:"))) {
+      throw lastError || new Error("Failed to send email after retries");
+    }
+
+    const emailId = emailResult || null;
 
     // ── Log to Google Sheets (non-blocking, optional) ──
     logToGoogleSheets(body, emailId).catch(() => {}); // fire-and-forget
+
+    // ── Enqueue 3-email nurture sequence (no-op if admin not configured) ──
+    enqueueNurture(body.email, body.linkedinUrl).catch((err) =>
+      console.warn("⚠️  Nurture enqueue skipped:", err)
+    );
 
     return NextResponse.json({
       success: true,
