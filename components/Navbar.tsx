@@ -19,9 +19,9 @@ export default function Navbar() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
-    { name: "Portfolio", href: "/portfolio" },
+    { name: "Work", href: "/work" },
+    { name: "Free Tools", href: "/free-tools" },
     { name: "About", href: "/about" },
-    { name: "Testimonials", href: "/testimonials" },
   ];
 
   const specialLinks = [

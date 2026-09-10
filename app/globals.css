@@ -123,3 +123,27 @@
 .stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
 .stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
 .stagger > .reveal:nth-child(6) { transition-delay: 400ms; }
+
+/* === Performance & Accessibility === */
+/* Pause continuously-running marquee animations when scrolled out of view. */
+[data-marquee-paused="true"] .animate-marquee,
+[data-marquee-paused="true"] .animate-marquee-reverse {
+  animation-play-state: paused;
+}
+
+/* Respect users who prefer reduced motion: disable non-essential animation. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-reverse,
+  .animate-bounce,
+  .animate-pulse,
+  .animate-in,
+  .reveal {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

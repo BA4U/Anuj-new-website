@@ -5,17 +5,17 @@ export default function Footer() {
   const quickLinks = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
-    { name: "Portfolio", href: "/portfolio" },
+    { name: "Work", href: "/work" },
+    { name: "Free Tools", href: "/free-tools" },
     { name: "About", href: "/about" },
-    { name: "Testimonials", href: "/testimonials" },
     { name: "Contact", href: "/contact" },
   ];
 
   const socials = [
-    { name: "LinkedIn", href: "https://linkedin.com", icon: "person" },
-    { name: "WhatsApp", href: "https://wa.me/919999999999", icon: "chat" },
-    { name: "Telegram", href: "https://t.me", icon: "send" },
-    { name: "Discord", href: "https://discord.com", icon: "forum" },
+    { name: "LinkedIn", href: "https://www.linkedin.com/in/byanuj4u/", icon: "person" },
+    { name: "WhatsApp", href: "https://wa.me/9123997677", icon: "chat" },
+    { name: "Telegram", href: "https://t.me/anujmishra4u", icon: "send" },
+    { name: "Skype", href: "https://join.skype.com/invite/yCZ9IhClcTvD", icon: "forum" },
   ];
 
   return (
@@ -106,7 +106,7 @@ export default function Footer() {
           </p>
           <div className="flex gap-6">
             <Link
-              href="#"
+              href="/privacy-policy"
               className="text-xs text-on-surface-variant hover:text-primary transition-colors"
             >
               Privacy Policy

@@ -6,6 +6,20 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Client Testimonials | Anuj Mishra",
   description: "Read success stories and feedback from creators, authors, and professionals who have worked with Anuj Mishra.",
+  alternates: {
+    canonical: "/testimonials",
+  },
+  openGraph: {
+    title: "Client Testimonials | Anuj Mishra",
+    description: "Read success stories and feedback from creators, authors, and professionals who have worked with Anuj Mishra.",
+    url: "https://anuj4u.in/testimonials",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Client Testimonials | Anuj Mishra",
+    description: "Read success stories and feedback from creators, authors, and professionals who have worked with Anuj Mishra.",
+  },
 };
 
 export default function TestimonialsPage() {
