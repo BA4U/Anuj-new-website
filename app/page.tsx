@@ -8,10 +8,10 @@ import { AbTest } from "@/components/AbTest";
 import { EmailCapture } from "@/components/EmailCapture";
 
 const trustLogos = [
-  { name: "Victor Chan", role: "Launch Excel", icon: "smart_display" },
-  { name: "Harjeet Dhillon", role: "Author & Actress", icon: "auto_stories" },
-  { name: "Dr. Maurice Maurer", role: "Science Educator", icon: "school" },
-  { name: "Blake Reddy", role: "Wealth Adviser", icon: "account_balance" },
+  { name: "Victor Chan", role: "Launch Excel", image: "https://anuj4u.in/wp-content/uploads/2025/03/victor-chan.jpg" },
+  { name: "Harjeet Dhillon", role: "Author & Actress", image: "https://anuj4u.in/wp-content/uploads/2025/03/harjeet-dhillon-1-1.png" },
+  { name: "Dr. Maurice Maurer", role: "Science Educator", image: "https://anuj4u.in/wp-content/uploads/2025/03/maurice-maurer.png" },
+  { name: "Blake Reddy", role: "Wealth Adviser", image: "https://anuj4u.in/wp-content/uploads/2025/03/blake-pic-website-1-1.png" },
 ];
 
 const offers = [
@@ -156,6 +156,18 @@ const processSteps = [
   },
 ];
 
+const marqueeTestimonials = [
+  { name: "Victor Chan", role: "Founder, Launch Excel", quote: "Anuj has been a game-changer for my video production, handling both long-form YouTube edits and sales-page VSLs with excellent results. I look forward to working with him some more." },
+  { name: "Harjeet Dhillon", role: "Actress & Author", quote: "Anuj has been monumental in creating my podcast. He has a solid work ethic and is awesome at receiving feedback. I am so glad I worked with him." },
+  { name: "Dr. Maurice Maurer", role: "Science Educator", quote: "The quality of edits and strategic inputs on content packaging have significantly boosted our channel retention. Creative, innovative, and brilliant ideas." },
+];
+
+const videoTestimonials = [
+  { name: "Victor Chan", role: "Founder, Launch Excel", videoId: "y11b_rVHcyg", quote: "The VSL re-cut drove a 38% increase in course signups." },
+  { name: "Dr. Maurice Maurer", role: "Science Educator", videoId: "izidLZclYZs", quote: "The episode edit with motion graphics was exceptional." },
+  { name: "Harjeet Dhillon", role: "Author & Actress", videoId: "Cd4YRPSLBVE", quote: "Multi-cam interview with captions and B-roll — perfectly done." },
+];
+
 export default function Home() {
   const marqueeRef = useRef<HTMLElement>(null);
   const [marqueePaused, setMarqueePaused] = useState(false);
@@ -178,7 +190,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative overflow-hidden -mt-20">
+    <div className="relative overflow-hidden">
       {/* Background ambient light */}
       <div className="ambient-glow -top-24 -left-24"></div>
       <div className="ambient-glow-2 top-1/2 -right-24"></div>
@@ -203,12 +215,13 @@ export default function Home() {
                 experiment="hero_cta"
                 variantA={
                   <Link
-                    href="/contact"
-                    className="bg-primary hover:bg-primary-container text-white font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 flex items-center gap-2"
-                  >
-                    Book a strategy call
-                    <span className="material-symbols-outlined text-lg">arrow_forward</span>
-                  </Link>
+                  href="/contact"
+                  className="bg-primary hover:bg-primary-container text-white font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 flex items-center gap-2"
+                  aria-label="Book a strategy call"
+                >
+                  Book a strategy call
+                  <span className="material-symbols-outlined text-lg" aria-hidden="true">arrow_forward</span>
+                </Link>
                 }
                 variantB={
                   <Link
@@ -223,8 +236,9 @@ export default function Home() {
               <Link
                 href="/free-tools"
                 className="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant/60 text-on-surface font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-sm hover:scale-105 flex items-center gap-2"
+                aria-label="Try a free tool"
               >
-                <span className="material-symbols-outlined text-lg">bolt</span>
+                <span className="material-symbols-outlined text-lg" aria-hidden="true">bolt</span>
                 Try a free tool
               </Link>
             </div>
@@ -247,13 +261,14 @@ export default function Home() {
 
               <div className="relative rounded-3xl overflow-hidden glass-card p-4 shadow-2xl border border-white/60 bg-white/40">
                 <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-tr from-indigo-100 via-purple-50 to-pink-50">
-                  <Image
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuApVgUM1CPI-chpiQnnacQOAazwKAIf2X5MgiRD1canwHi3-PNyeCAN1VYG06tYjQXLskeEt_ktPsUvDxxN_L9Ohk4yupNmlg-bnC10qZyeDx8ECQZEKVtWU5uq9eVhCx-qcTE5wosJfkt6NTN6fw9c2ZtGqxAoEYBnAnJcnKUPeyciq0_zM4K1C4Dtx2W0MJQ8MRGsfWMx0jiAQKjKTIiW7Jelor9RbkB7lzUza283dH10yzGnlDwkwt3iQtBL7DGOtn_1Z9OgjKUy2mg"
-                    alt="Anuj Mishra"
-                    fill
-                    className="object-cover object-top hover:scale-105 transition-transform duration-700"
-                    priority
-                  />
+<Image
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuApVgUM1CPI-chpiQnnacQOAazwKAIf2X5MgiRD1canwHi3-PNyeCAN1VYG06tYjQXLskeEt_ktPsUvDxxN_L9Ohk4yupNmlg-bnC10qZyeDx8ECQZEKVtWU5uq9eVhCx-qcTE5wosJfkt6NTN6fw9c2ZtGqxAoEYBnAnJcnKUPeyciq0_zM4K1C4Dtx2W0MJQ8MRGsfWMx0jiAQKjKTIiW7Jelor9RbkB7lzUza283dH10yzGnlDwkwt3iQtBL7DGOtn_1Z9OgjKUy2mg"
+                      alt="Anuj Mishra"
+                      fill
+                      sizes="(max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-top hover:scale-105 transition-transform duration-700"
+                      priority
+                    />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
                   <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white/40">
@@ -287,9 +302,15 @@ export default function Home() {
                   key={logo.name}
                   className="flex items-center justify-center gap-3 py-3 px-4"
                 >
-                  <span className={`material-symbols-outlined text-2xl text-primary/70`}>
-                    {logo.icon}
-                  </span>
+                  <div className="relative w-8 h-8 rounded-full overflow-hidden border border-outline-variant/40">
+                    <Image
+                      src={logo.image}
+                      alt={logo.name}
+                      fill
+                      className="object-cover"
+                      sizes="32px"
+                    />
+                  </div>
                   <div className="text-left">
                     <p className="text-sm font-bold text-on-surface leading-tight">
                       {logo.name}
@@ -511,6 +532,61 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── VIDEO SHOWCASE ─── */}
+      <ScrollReveal>
+        <section className="py-20 bg-surface-container-low/40">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
+                Watch the work
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-4">
+                Video portfolio highlights
+              </h2>
+              <p className="text-on-surface-variant text-base md:text-lg">
+                A selection of recent projects. Full videos linked to YouTube.
+              </p>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <ScrollReveal stagger>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1400px] mx-auto px-6 lg:px-16 mb-16">
+          {videoTestimonials.map((vt) => (
+            <a
+              key={vt.videoId}
+              href={`https://www.youtube.com/watch?v=${vt.videoId}`}
+              target="_blank"
+              rel="noreferrer"
+              className="group block glass-card rounded-2xl overflow-hidden border border-outline-variant/40 hover:-translate-y-1 hover:shadow-xl transition-all"
+            >
+              <div className="relative aspect-video bg-black">
+                <Image
+                  src={`https://img.youtube.com/vi/${vt.videoId}/hqdefault.jpg`}
+                  alt={vt.name}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                  className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-transparent" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-white text-5xl drop-shadow-lg group-hover:scale-110 transition-transform" aria-hidden="true">
+                    play_circle
+                  </span>
+                </div>
+              </div>
+              <div className="p-5">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
+                  {vt.name}
+                </p>
+                <h3 className="text-base font-bold text-on-surface mb-1">{vt.quote}</h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </ScrollReveal>
+
       {/* ─── FREE TOOLS ─── */}
       <section className="py-16 bg-surface-container-low/40">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
@@ -618,37 +694,21 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative flex overflow-x-hidden group py-4">
-          <div className="animate-marquee flex whitespace-nowrap gap-6 px-3 group-hover:[animation-play-state:paused]">
+<div className="relative flex overflow-x-hidden group py-4">
+           <div className="animate-marquee flex whitespace-nowrap gap-6 px-3 group-hover:[animation-play-state:paused]">
             {[...Array(2)].map((_, i) => (
               <React.Fragment key={i}>
-                <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                  <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                    &quot;Anuj has been a game-changer for my video production, handling both long-form YouTube edits and sales-page VSLs with excellent results. I look forward to working with him some more.&quot;
-                  </p>
-                  <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                    <h4 className="font-bold text-on-surface text-sm">Victor Chan</h4>
-                    <p className="text-xs text-on-surface-variant">Founder, Launch Excel</p>
+                {marqueeTestimonials.map((t) => (
+                  <div key={t.name} className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
+                    <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
+                      &quot;{t.quote}&quot;
+                    </p>
+                    <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
+                      <h4 className="font-bold text-on-surface text-sm">{t.name}</h4>
+                      <p className="text-xs text-on-surface-variant">{t.role}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                  <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                    &quot;Anuj has been monumental in creating my podcast. He has a solid work ethic and is awesome at receiving feedback. I am so glad I worked with him.&quot;
-                  </p>
-                  <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                    <h4 className="font-bold text-on-surface text-sm">Harjeet Dhillon</h4>
-                    <p className="text-xs text-on-surface-variant">Actress & Author</p>
-                  </div>
-                </div>
-                <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                  <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                    &quot;The quality of edits and strategic inputs on content packaging have significantly boosted our channel retention. Creative, innovative, and brilliant ideas.&quot;
-                  </p>
-                  <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                    <h4 className="font-bold text-on-surface text-sm">Dr. Maurice Maurer</h4>
-                    <p className="text-xs text-on-surface-variant">Science Educator</p>
-                  </div>
-                </div>
+                ))}
               </React.Fragment>
             ))}
           </div>
@@ -660,7 +720,7 @@ export default function Home() {
       {/* ─── BOTTOM CTA ─── */}
       <ScrollReveal>
         <section className="py-16 px-6 lg:px-16 max-w-[1400px] mx-auto">
-          <div className="glass-card rounded-3xl p-10 md:p-16 text-center relative overflow-hidden bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+          <div className="glass-card rounded-3xl p-10 md:p-16 text-center relative overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-700 shadow-2xl">
             <div className="relative z-10 max-w-2xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-on-surface">
                 Ready to grow?
@@ -671,13 +731,14 @@ export default function Home() {
                 deck.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all"
-                >
-                  Book a strategy call
-                  <span className="material-symbols-outlined">event</span>
-                </Link>
+<Link
+                   href="/contact"
+                   className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all"
+                   aria-label="Book a strategy call"
+                 >
+                   Book a strategy call
+                   <span className="material-symbols-outlined" aria-hidden="true">event</span>
+                 </Link>
                 <Link
                   href="/free-tools"
                   className="inline-flex items-center justify-center gap-2 border-2 border-primary/40 text-on-surface font-semibold px-8 py-4 rounded-full hover:border-primary hover:text-primary transition-all"

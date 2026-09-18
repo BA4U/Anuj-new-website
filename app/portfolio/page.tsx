@@ -1,5 +1,129 @@
-import { redirect } from "next/navigation";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Portfolio | Anuj Mishra",
+  description: "A curated collection of video editing work — long-form, short-form, thumbnails, and motion graphics.",
+  alternates: { canonical: "/portfolio" },
+  openGraph: {
+    title: "Portfolio | Anuj Mishra",
+    description: "Curated video editing portfolio.",
+    url: "https://anuj4u.in/portfolio",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Portfolio | Anuj Mishra",
+    description: "Curated video editing portfolio.",
+  },
+};
+
+const featuredProjects = [
+  {
+    id: "y11b_rVHcyg",
+    title: "Launch Excel — VSL re-cut",
+    client: "Victor Chan",
+    category: "Long-form",
+    metric: "+38% course signups",
+  },
+  {
+    id: "izidLZclYZs",
+    title: "Training Scientists — episode edit",
+    client: "Dr. Maurice Maurer",
+    category: "Long-form",
+    metric: "Motion graphics overlay",
+  },
+  {
+    id: "h2O8Gnq7w24",
+    title: "Hook-first vertical",
+    client: "Author channel",
+    category: "Short-form",
+    metric: "30s reel",
+  },
+  {
+    id: "Cd4YRPSLBVE",
+    title: "Carousel-to-video clip",
+    client: "Course creator",
+    category: "Short-form",
+    metric: "45s loop",
+  },
+];
 
 export default function PortfolioPage() {
-  redirect("/work");
+  return (
+    <div className="py-12 px-6 lg:px-16 max-w-[1400px] mx-auto relative overflow-hidden min-h-screen">
+      <div className="ambient-glow top-0 left-[-100px]"></div>
+      <div className="ambient-glow-2 top-1/2 right-[-100px]"></div>
+
+      <section className="mb-12 pt-6 relative z-10">
+        <div className="inline-block text-[10px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded-full mb-4">
+          Featured work
+        </div>
+        <h1 className="text-4xl md:text-6xl font-extrabold text-on-surface mb-4 leading-tight">
+          Portfolio <span className="gradient-text">Highlights</span>
+        </h1>
+        <p className="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+          A curated selection of recent video editing projects across long-form, short-form, and motion graphics.
+        </p>
+      </section>
+
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+        {featuredProjects.map((p) => (
+          <a
+            key={p.id}
+            href={`https://www.youtube.com/watch?v=${p.id}`}
+            target="_blank"
+            rel="noreferrer"
+            className="group block glass-card rounded-2xl overflow-hidden border border-outline-variant/40 hover:-translate-y-1 hover:shadow-xl transition-all"
+          >
+            <div className="relative aspect-video bg-black">
+              <Image
+                src={`https://img.youtube.com/vi/${p.id}/hqdefault.jpg`}
+                alt={p.title}
+                fill
+                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-transparent" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="material-symbols-outlined text-white text-4xl drop-shadow-lg group-hover:scale-110 transition-transform" aria-hidden="true">
+                  play_circle
+                </span>
+              </div>
+            </div>
+            <div className="p-4">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-primary mb-1">
+                {p.client}
+              </p>
+              <h3 className="text-sm font-bold text-on-surface mb-1 group-hover:text-primary transition-colors">
+                {p.title}
+              </h3>
+              <p className="text-[10px] text-on-surface-variant">{p.category}</p>
+              <p className="text-xs font-semibold text-primary mt-1">{p.metric}</p>
+            </div>
+          </a>
+        ))}
+      </section>
+
+      <section className="mt-16 relative z-10">
+        <div className="glass-card rounded-3xl p-8 text-center max-w-3xl mx-auto bg-gradient-to-br from-primary/10 to-primary/5 shadow-2xl">
+          <h2 className="text-2xl md:text-3xl font-bold text-on-surface mb-3">
+            See the full portfolio
+          </h2>
+          <p className="text-on-surface-variant text-sm md:text-base mb-6">
+            Browse all long-form edits, short-form reels, thumbnails, and case studies.
+          </p>
+          <Link
+            href="/work"
+            className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-3.5 rounded-full shadow-md hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all"
+          >
+            View all work
+            <span className="material-symbols-outlined">arrow_forward</span>
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
 }

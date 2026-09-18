@@ -127,7 +127,7 @@ export default function WorkPage() {
       </section>
 
       <section className="mt-16 relative z-10">
-        <div className="glass-card rounded-3xl p-10 text-center max-w-3xl mx-auto bg-gradient-to-br from-purple-50 via-purple-100 to-pink-200 shadow-2xl">
+        <div className="glass-card rounded-3xl p-10 text-center max-w-3xl mx-auto bg-gradient-to-br from-emerald-50 to-teal-100 shadow-2xl">
           <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-4">
             Want your work featured here?
           </h2>

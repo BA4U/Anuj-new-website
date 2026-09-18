@@ -124,7 +124,7 @@ export default function ThumbnailsPage() {
       </section>
 
       <section className="mt-16 relative z-10">
-        <div className="glass-card rounded-3xl p-8 text-center max-w-3xl mx-auto bg-gradient-to-br from-amber-50 via-purple-100 to-pink-200 shadow-2xl">
+        <div className="glass-card rounded-3xl p-8 text-center max-w-3xl mx-auto bg-gradient-to-br from-amber-50 to-orange-100 shadow-2xl">
           <h2 className="text-2xl md:text-3xl font-bold text-on-surface mb-3">
             Need thumbnails for your channel?
           </h2>

@@ -20,7 +20,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 border-t border-purple-200/50 w-full pt-16 pb-8"
+      className="bg-surface border-t border-outline-variant/30 w-full pt-16 pb-8"
       id="footer"
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
