@@ -54,7 +54,7 @@ const tools = [
   {
     title: "YouTube Channel Audit",
     desc: "Score your channel on 5 growth levers and get a one-page action plan. Built from the same audit I run for paying clients.",
-    href: "/youtube-audit",
+    href: "/youtube-funnel",
     icon: "analytics",
     color: "text-red-600",
     bg: "from-red-500/15 to-red-500/0",

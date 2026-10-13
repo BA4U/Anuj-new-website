@@ -47,7 +47,7 @@ const tools: Tool[] = [
     tagline: "Top-3 fixes to keep viewers watching",
     description:
       "Drop your YouTube channel URL. Our AI maps your retention drop-offs and emails the three highest-impact fixes you can ship this week — completely free.",
-    href: "/youtube-audit",
+    href: "/youtube-funnel",
     badge: "FREE",
     accent: "#FF0000",
     features: [
