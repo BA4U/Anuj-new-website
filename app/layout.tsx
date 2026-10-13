@@ -3,17 +3,44 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+const SITE_URL = "https://anuj-portfolio-website-rho.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Anuj Mishra | Social Media & Video Growth Specialist",
-  description: "Maximize Reach & Revenue with Expert Social Media Strategy, Video Editing (Descript, DaVinci Resolve), YouTube Management & Growth Marketing by Anuj Mishra.",
-  keywords: ["Anuj Mishra", "Video Editing", "Social Media Management", "YouTube Management", "Canva Design", "Google Ads", "Growth Marketing"],
-  authors: [{ name: "Anuj Mishra" }],
-  openGraph: {
-    title: "Anuj Mishra | Portfolio",
-    description: "I help creators and brands scale through data-driven content, video editing, and conversion-focused ad management.",
-    type: "website",
-    url: "https://anuj4u.in",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Anuj Mishra — Video Editing & YouTube Growth for Creators",
+    template: "%s | Anuj Mishra",
   },
+  description:
+    "High-retention video editing, YouTube channel management and paid media for creators and brands. Real edits, real numbers, reply within 24 hours.",
+  keywords: [
+    "Anuj Mishra",
+    "Video Editing",
+    "YouTube Management",
+    "Social Media Management",
+    "Descript Editor",
+    "DaVinci Resolve",
+    "Google Ads",
+    "Growth Marketing",
+  ],
+  authors: [{ name: "Anuj Mishra" }],
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "Anuj Mishra — Video Editing & YouTube Growth for Creators",
+    description:
+      "High-retention video editing, YouTube management and paid ads. Real edits, real numbers, reply within 24 hours.",
+    type: "website",
+    url: "/",
+    siteName: "Anuj Mishra",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anuj Mishra — Video Editing & YouTube Growth",
+    description:
+      "High-retention video editing, YouTube management and paid ads for creators and brands.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({
@@ -31,11 +58,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Person",
+              "@type": "ProfessionalService",
               name: "Anuj Mishra",
-              url: "https://anuj4u.in",
-              jobTitle: "Video Editor & Growth Marketing Specialist",
+              url: SITE_URL,
               email: "contact@anuj4u.in",
+              slogan: "Videos that hook. Strategy that scales.",
+              description:
+                "Video editing, YouTube channel management, thumbnail design and performance paid ads for creators and brands.",
+              founder: { "@type": "Person", name: "Anuj Mishra", jobTitle: "Video Editor & Growth Marketing Specialist" },
+              areaServed: "Worldwide",
               knowsAbout: [
                 "Video Editing",
                 "Social Media Management",
@@ -43,14 +74,13 @@ export default function RootLayout({
                 "YouTube Channel Management",
                 "AI Automation",
               ],
-              sameAs: ["https://linkedin.com"],
             }),
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col justify-between bg-surface text-on-surface antialiased">
+      <body className="min-h-screen flex flex-col bg-surface text-on-surface antialiased">
         <Navbar />
-        <main className="flex-grow pt-20">{children}</main>
+        <main className="flex-grow pt-14">{children}</main>
         <Footer />
       </body>
     </html>

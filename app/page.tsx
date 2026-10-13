@@ -1,461 +1,634 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 
+/* ─── Real client work — playable on the page ───────────────────────── */
+const WORK = [
+  {
+    title: "Launch Excel — Sales VSL",
+    client: "Victor Chan, Founder of Launch Excel",
+    result: "High-retention VSL built to lift course signups",
+    videoId: "-SYqXdaZXl8",
+    tag: "Video editing",
+  },
+  {
+    title: "Author Podcast — Full Launch",
+    client: "Harjeet Dhillon, Actress & Author",
+    result: "Editing, thumbnails and SEO for a new show",
+    videoId: "izidLZclYZs",
+    tag: "Podcast",
+  },
+  {
+    title: "Science Channel — Growth Edits",
+    client: "Dr. Maurice Maurer",
+    result: "Packaging and edits for complex explainers",
+    videoId: "mHOLzwe4sMQ",
+    tag: "YouTube growth",
+  },
+];
+
+const STATS = [
+  { value: "600+", label: "Videos edited" },
+  { value: "45+", label: "Clients served" },
+  { value: "10M+", label: "Reach generated" },
+  { value: "6+", label: "Years experience" },
+];
+
+/* ─── Engagement models ─────────────────────────────────────────────────
+ * `price: ""` renders as "Price on request".
+ * Drop your rate in (e.g. "₹25,000 / video" or "$499 / month") and it shows.
+ * ───────────────────────────────────────────────────────────────────── */
+const PLANS = [
+  {
+    name: "One-off project",
+    blurb: "A single video, thumbnail set or channel audit — try the workflow with zero commitment.",
+    price: "",
+    unit: "",
+    features: [
+      "One deliverable, end to end",
+      "Two revision rounds included",
+      "Thumbnail + title options to A/B test",
+      "Delivered in 3–5 business days",
+    ],
+    cta: "Start a project",
+    featured: false,
+  },
+  {
+    name: "Monthly retainer",
+    blurb: "A steady editing pipeline for creators and teams publishing every week.",
+    price: "",
+    unit: "/ month",
+    features: [
+      "Fixed number of videos every month",
+      "Thumbnails, titles and descriptions included",
+      "Priority turnaround and a shared channel",
+      "Monthly retention and CTR report",
+      "Cancel any time after 2 months",
+    ],
+    cta: "Build my pipeline",
+    featured: true,
+  },
+  {
+    name: "Channel partner",
+    blurb: "Full YouTube management — you record, I handle everything to publish.",
+    price: "",
+    unit: "/ month",
+    features: [
+      "End-to-end editing and publishing",
+      "Packaging: titles, thumbnails, SEO",
+      "Community and comment management",
+      "Analytics reviews and strategy calls",
+      "Paid ads managed on request",
+    ],
+    cta: "Talk about management",
+    featured: false,
+  },
+];
+
+const FAQS = [
+  {
+    q: "How fast is turnaround?",
+    a: "Most long-form edits land in 3–5 business days, and Shorts/Reels within 24–48 hours. Retainer and management clients get priority slots, and I can flag rush work before we start.",
+  },
+  {
+    q: "What does a revision look like?",
+    a: "Two rounds are included on every deliverable. You comment directly on the cut — timestamped notes are best — and I turn revisions around in 24–48 hours.",
+  },
+  {
+    q: "What tools do you work in?",
+    a: "Descript and DaVinci Resolve for editing, Premiere Pro when a project calls for it, Canva for thumbnails and graphics, plus your existing scheduler and analytics stack for management work.",
+  },
+  {
+    q: "Do I need to hire you for everything?",
+    a: "No. Plenty of clients start with a single video, a thumbnail set or a channel audit. If the fit is right, we can move to a retainer later.",
+  },
+  {
+    q: "How do we communicate?",
+    a: "A shared WhatsApp or email thread, with files in Google Drive or Frame.io. I respond within 24 hours on business days — you will never be left wondering where a project is.",
+  },
+  {
+    q: "Which niches do you work with?",
+    a: "Creators, coaches, course sellers and B2B teams — mostly in finance, education, tech and personal brand. If retention and packaging matter to your niche, it probably works.",
+  },
+];
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "Anuj has been a game-changer for my video production, handling both long-form YouTube edits and sales-page VSLs with excellent results. His fast, reliable WhatsApp communication saves me days every week.",
+    name: "Victor Chan",
+    role: "YouTuber & Founder, Launch Excel",
+  },
+  {
+    quote:
+      "Anuj has been monumental in creating my podcast. He doesn't stop at editing — he has a vast knowledge of software and has guided me more than I could hope for. Solid work ethic, and awesome at receiving feedback.",
+    name: "Harjeet Dhillon",
+    role: "Actress & Author",
+  },
+  {
+    quote:
+      "The quality of edits and strategic inputs on content packaging have significantly boosted our channel retention. Creative, innovative, and brilliant ideas.",
+    name: "Dr. Maurice Maurer",
+    role: "Science Educator, PhD",
+  },
+];
+
+/* ─── Real client proof — actual analytics screenshots ──────────── */
+const PROOF = [
+  {
+    src: "/proof/365-day-analytics.png",
+    label: "365-day channel analytics",
+    metric: "Full-year growth curve",
+    client: "Tim Cakir — YouTube channel",
+  },
+  {
+    src: "/proof/90-day-performance.png",
+    label: "90-day performance",
+    metric: "Quarter-over-quarter lift",
+    client: "Tim Cakir — YouTube channel",
+  },
+  {
+    src: "/proof/organic-impressions.png",
+    label: "Organic impressions",
+    metric: "100k+ organic impressions",
+    client: "Tim Cakir — YouTube channel",
+  },
+  {
+    src: "/proof/thumbnail-ctr.png",
+    label: "Thumbnail CTR",
+    metric: "Click-through rate optimization",
+    client: "Tim Cakir — packaging",
+  },
+  {
+    src: "/proof/google-ads-growth.png",
+    label: "Google Ads growth",
+    metric: "Paid campaign performance",
+    client: "Tim Cakir — paid media",
+  },
+  {
+    src: "/proof/us-audience.png",
+    label: "US audience targeting",
+    metric: "Geo-targeted reach",
+    client: "Tim Cakir — audience strategy",
+  },
+];
+
+const initials = (name: string) =>
+  name
+    .split(" ")
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("");
+
 export default function Home() {
-  const coreTags = [
-    "Video Editing",
-    "SMM",
-    "Google & LinkedIn Ads",
-    "AI Tools & Automation",
-  ];
+  const [playing, setPlaying] = useState<string | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <div className="relative overflow-hidden -mt-20">
-      {/* Background ambient light */}
-      <div className="ambient-glow -top-24 -left-24"></div>
-      <div className="ambient-glow-2 top-1/2 -right-24"></div>
+    <div className="relative overflow-hidden">
+      <div className="ambient-glow -top-32 -left-32" />
+      <div className="ambient-glow-2 top-[60%] -right-32" />
 
-      {/* ─── HERO SECTION ─── */}
-      <section className="relative min-h-[90vh] bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 flex flex-col justify-center pt-32 pb-16 overflow-hidden border-b border-outline-variant/30">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-16 w-full flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
-          
-          {/* Left Column */}
-          <div className="lg:w-1/2">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-on-surface mb-6 leading-tight tracking-tight">
-              Videos that hook.{" "}
-              <span className="gradient-text drop-shadow-sm">Strategy that scales.</span>
+      {/* ─── HERO ─────────────────────────────────────────────────── */}
+      <section className="relative pt-16 md:pt-24 pb-16 md:pb-20">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+          <div className="lg:col-span-7">
+            <h1 className="text-[42px] sm:text-[56px] lg:text-[68px] display text-on-surface mb-6">
+              Videos that hook.
+              <br />
+              <span className="gradient-text">Strategy that scales.</span>
             </h1>
 
-            <p className="text-lg md:text-xl text-on-surface-variant mb-8 max-w-xl leading-relaxed">
-              I&apos;m Anuj — a video editor and growth marketer who helps creators and brands turn content into real revenue. No templates, no fluff.
+            <p className="text-[18px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-xl mb-8">
+              I'm Anuj — I edit video and run growth for creators and
+              B2B teams who are tired of content that nobody watches.
+              High-retention edits, sharp packaging, and reporting that proves
+              it worked.
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 mb-12">
-              <Link
-                href="/portfolio"
-                className="bg-primary hover:bg-primary-container text-white font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/25 hover:scale-105 active:scale-95 flex items-center gap-2"
-              >
-                See my work
-                <span className="material-symbols-outlined text-lg">arrow_forward</span>
+            <div className="flex flex-wrap items-center gap-3 mb-10">
+              <Link href="/contact" className="btn btn-dark">
+                Start a project
               </Link>
-              <Link
-                href="/contact"
-                className="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant/60 text-on-surface font-semibold py-3.5 px-8 rounded-full transition-all duration-300 shadow-sm hover:scale-105"
-              >
-                Get in touch
-              </Link>
+              <a href="#work" className="btn btn-secondary">
+                <span className="material-symbols-outlined text-[18px]">play_arrow</span>
+                Watch the work
+              </a>
             </div>
 
-            {/* Core Expertise Tags */}
-            <div className="pt-8 border-t border-outline-variant/40">
-              <p className="text-xs font-bold text-on-surface uppercase tracking-widest mb-4">
-                Core Expertise
-              </p>
-              <div className="flex flex-wrap gap-2.5">
-                {coreTags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-surface-container-lowest/60 border border-outline-variant/40 px-4 py-2 rounded-full text-xs font-semibold text-on-surface shadow-sm backdrop-blur-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Portrait */}
-          <div className="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-              
-              {/* Floating Icons */}
-              <div className="absolute flex -left-2 sm:-left-3 md:-left-6 top-6 sm:top-10 w-9 h-9 sm:w-10 sm:h-10 md:w-14 md:h-14 bg-white rounded-full items-center justify-center shadow-xl z-20 animate-bounce p-1.5 sm:p-2 md:p-3 border border-indigo-100" style={{ animationDuration: "3s" }}>
-                <span className="material-symbols-outlined text-red-600 text-lg sm:text-xl md:text-2xl">smart_display</span>
-              </div>
-
-              <div className="absolute flex -right-1 sm:-right-2 md:-right-4 top-1/3 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-white rounded-full items-center justify-center shadow-xl z-20 p-1.5 sm:p-2 md:p-3 border border-blue-100">
-                <span className="material-symbols-outlined text-blue-600 text-lg sm:text-xl md:text-2xl">work</span>
-              </div>
-
-              <div className="absolute flex left-1 sm:left-0 md:left-4 bottom-16 sm:bottom-20 md:bottom-12 w-9 h-9 sm:w-10 sm:h-10 md:w-14 md:h-14 bg-white rounded-full items-center justify-center shadow-xl z-20 p-1.5 sm:p-2 md:p-3 border border-purple-100 animate-pulse">
-                <span className="material-symbols-outlined text-purple-600 text-lg sm:text-xl md:text-2xl">auto_awesome</span>
-              </div>
-
-              {/* Main Portrait Card */}
-              <div className="relative rounded-3xl overflow-hidden glass-card p-4 shadow-2xl border border-white/60 bg-white/40">
-                <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-tr from-indigo-100 via-purple-50 to-pink-50">
-                  <Image
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuApVgUM1CPI-chpiQnnacQOAazwKAIf2X5MgiRD1canwHi3-PNyeCAN1VYG06tYjQXLskeEt_ktPsUvDxxN_L9Ohk4yupNmlg-bnC10qZyeDx8ECQZEKVtWU5uq9eVhCx-qcTE5wosJfkt6NTN6fw9c2ZtGqxAoEYBnAnJcnKUPeyciq0_zM4K1C4Dtx2W0MJQ8MRGsfWMx0jiAQKjKTIiW7Jelor9RbkB7lzUza283dH10yzGnlDwkwt3iQtBL7DGOtn_1Z9OgjKUy2mg"
-                    alt="Professional portrait of Anuj Mishra"
-                    fill
-                    className="object-cover object-top hover:scale-105 transition-transform duration-700"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                  
-                  {/* Badge Overlay */}
-                  <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white/40">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h4 className="font-bold text-on-surface text-sm">Anuj Mishra</h4>
-                        <p className="text-xs text-on-surface-variant">Video Editor & Growth Marketer</p>
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                        <span className="material-symbols-outlined text-base">verified</span>
-                      </div>
-                    </div>
+            {/* Proof strip — real numbers, not AI fluff */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-5 pt-8 border-t border-black/[0.08] max-w-2xl">
+              {STATS.map((stat) => (
+                <div key={stat.label}>
+                  <div className="text-[28px] font-semibold text-on-surface tracking-[-0.02em]">
+                    {stat.value}
+                  </div>
+                  <div className="text-[13px] text-on-surface-variant mt-0.5">
+                    {stat.label}
                   </div>
                 </div>
-              </div>
-
+              ))}
             </div>
           </div>
 
+          {/* Portrait — purple gradient wash behind the card */}
+          <div className="lg:col-span-5">
+            <div className="relative max-w-sm mx-auto lg:mx-0 lg:ml-auto">
+              <div
+                className="absolute inset-0 rounded-[32px] opacity-70 blur-2xl"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(73,54,230,0.55) 0%, rgba(139,92,246,0.35) 60%, rgba(147,51,234,0) 100%)",
+                }}
+              />
+              <div className="relative rounded-[28px] overflow-hidden border border-black/[0.08] bg-surface-container-low aspect-[4/5] shadow-[0_2px_6px_rgba(0,0,0,0.05),0_40px_80px_-48px_rgba(0,0,0,0.45)]">
+                <Image
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuApVgUM1CPI-chpiQnnacQOAazwKAIf2X5MgiRD1canwHi3-PNyeCAN1VYG06tYjQXLskeEt_ktPsUvDxxN_L9Ohk4yupNmlg-bnC10qZyeDx8ECQZEKVtWU5uq9eVhCx-qcTE5wosJfkt6NTN6fw9c2ZtGqxAoEYBnAnJcnKUPeyciq0_zM4K1C4Dtx2W0MJQ8MRGsfWMx0jiAQKjKTIiW7Jelor9RbkB7lzUza283dH10yzGnlDwkwt3iQtBL7DGOtn_1Z9OgjKUy2mg"
+                  alt="Portrait of Anuj Mishra"
+                  fill
+                  sizes="(max-width: 1024px) 380px, 420px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ─── TESTIMONIALS MARQUEE ─── */}
-      <ScrollReveal>
-        <section className="py-16 bg-surface overflow-hidden border-b border-outline-variant/30">
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-16 mb-10">
-            <div className="text-center w-full">
-              <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">What Clients Say</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-on-surface">Words From My Happy Clients</h2>
-            </div>
-          </div>
+      {/* ─── REAL RESULTS (client proof — trust-builder, before the work) ─── */}
+      <section className="py-16 md:py-24 border-t border-black/[0.07] scroll-mt-20">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14 relative overflow-hidden">
+          <div className="absolute -top-32 -right-32 w-[420px] h-[420px] bg-gradient-to-br from-primary/20 via-purple-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-          {/* Row 1 — Left to Right */}
-          <div className="relative flex overflow-x-hidden group py-4">
-            <div className="animate-marquee flex whitespace-nowrap gap-6 px-3 group-hover:[animation-play-state:paused]">
-              {[...Array(2)].map((_, i) => (
-                <React.Fragment key={i}>
-                  <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                    <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                      &quot;Anuj has been a game-changer for my video production, handling both long-form YouTube edits and sales-page VSLs with excellent results. I look forward to working with him some more.&quot;
-                    </p>
-                    <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                      <h4 className="font-bold text-on-surface text-sm">Victor Chan</h4>
-                      <p className="text-xs text-on-surface-variant">YouTuber & Founder</p>
-                    </div>
-                  </div>
-                  
-                  <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                    <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                      &quot;Anuj has been monumental in creating my podcast. He has a solid work ethic and is awesome at receiving feedback. I am so glad I worked with him.&quot;
-                    </p>
-                    <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                      <h4 className="font-bold text-on-surface text-sm">Harjeet Dhillon</h4>
-                      <p className="text-xs text-on-surface-variant">Actress & Author</p>
-                    </div>
-                  </div>
-
-                  <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                    <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                      &quot;The quality of edits and strategic inputs on content packaging have significantly boosted our channel retention. Creative, innovative, and brilliant ideas.&quot;
-                    </p>
-                    <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                      <h4 className="font-bold text-on-surface text-sm">Dr. Maurice Maurer</h4>
-                      <p className="text-xs text-on-surface-variant">Science Educator</p>
-                    </div>
-                  </div>
-                </React.Fragment>
-              ))}
-            </div>
-            <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
-          </div>
-          
-          {/* Row 2 — Right to Left */}
-          <div className="relative flex overflow-x-hidden group py-4">
-            <div className="animate-marquee-reverse flex whitespace-nowrap gap-6 px-3 group-hover:[animation-play-state:paused]">
-              {[...Array(2)].map((_, i) => (
-                <React.Fragment key={i}>
-                  <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                    <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                      &quot;Anuj helped create video layouts for my podcast which look great and work perfectly whilst saving me so much time. Generous with his time and would highly recommend!&quot;
-                    </p>
-                    <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                      <h4 className="font-bold text-on-surface text-sm">Blake Reddy</h4>
-                      <p className="text-xs text-on-surface-variant">Private Client Wealth Adviser</p>
-                    </div>
-                  </div>
-                  
-                  <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                    <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                      &quot;His fast, reliable WhatsApp communication saves me days every week while making my videos look more professional than ever. Highly recommend for any creator.&quot;
-                    </p>
-                    <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                      <h4 className="font-bold text-on-surface text-sm">Victor Chan</h4>
-                      <p className="text-xs text-on-surface-variant">Founder, Launch Excel</p>
-                    </div>
-                  </div>
-
-                  <div className="w-[400px] flex-shrink-0 bg-white shadow-xl rounded-2xl p-8 relative whitespace-normal">
-                    <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                      &quot;I hired Anuj to do video editing and graphic design work. He did an excellent job and always responds very quickly. I will continue working with him.&quot;
-                    </p>
-                    <div className="flex flex-col items-center gap-1 pt-4 text-center border-t border-outline-variant/20">
-                      <h4 className="font-bold text-on-surface text-sm">Dr. Maurice Maurer</h4>
-                      <p className="text-xs text-on-surface-variant">PhD, Computational Physics</p>
-                    </div>
-                  </div>
-                </React.Fragment>
-              ))}
-            </div>
-            <div className="absolute top-0 left-0 h-full w-24 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute top-0 right-0 h-full w-24 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
-          </div>
-        </section>
-      </ScrollReveal>
-
-      {/* ─── STATS BAR ─── */}
-      <ScrollReveal>
-        <section className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 py-16">
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
-            <div>
-              <h3 className="text-4xl md:text-5xl font-bold mb-2">100+</h3>
-              <p className="text-sm font-medium text-indigo-100">Videos Edited</p>
-            </div>
-            <div>
-              <h3 className="text-4xl md:text-5xl font-bold mb-2">10M+</h3>
-              <p className="text-sm font-medium text-indigo-100">Reach Generated</p>
-            </div>
-            <div>
-              <h3 className="text-4xl md:text-5xl font-bold mb-2">12+</h3>
-              <p className="text-sm font-medium text-indigo-100">Happy Clients</p>
-            </div>
-            <div>
-              <h3 className="text-4xl md:text-5xl font-bold mb-2">5+</h3>
-              <p className="text-sm font-medium text-indigo-100">Years Experience</p>
-            </div>
-          </div>
-        </section>
-      </ScrollReveal>
-
-      {/* ─── SERVICES PREVIEW ─── */}
-      <section className="py-20 bg-surface-container-low/60 border-t border-outline-variant/30">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
           <ScrollReveal>
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">What I Do</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-4">
-                Services Built to Grow Your Brand
+            <div className="max-w-2xl mb-10">
+              <p className="eyebrow mb-3">Real results</p>
+              <h2 className="text-[32px] md:text-[44px] display text-on-surface">
+                Results, <span className="gradient-text">with the receipts.</span>
               </h2>
-              <p className="text-on-surface-variant text-base md:text-lg">
-                Not just edits and posts — complete systems that turn viewers into paying clients.
+              <p className="text-[17px] text-on-surface-variant leading-relaxed mt-4">
+                Not polish — numbers. A real channel + ad account, screenshot straight from the studio, showing
+                what consistent editing, packaging and strategy compound into over a year.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Insight callout — rotating client-proof quote */}
+          <Callout />
+
+          <ScrollReveal stagger>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {PROOF.map((item) => (
+                <ProofCard key={item.src} {...item} />
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ─── SELECTED WORK (playable) ─────────────────────────────── */}
+      <section id="work" className="py-16 md:py-24 border-t border-black/[0.07] scroll-mt-20">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
+          <ScrollReveal>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+              <div>
+                <p className="eyebrow mb-3">Selected work</p>
+                <h2 className="text-[32px] md:text-[44px] display text-on-surface">
+                  Don't take my word for it — <span className="gradient-text">press play.</span>
+                </h2>
+              </div>
+              <Link href="/portfolio" className="btn btn-secondary btn-sm shrink-0">
+                All case studies
+                <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </Link>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal stagger>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {WORK.map((item) => (
+                <button
+                  key={item.videoId}
+                  type="button"
+                  onClick={() => setPlaying(item.videoId)}
+                  className="group text-left card card-hover overflow-hidden p-0 focus-visible:outline-none"
+                  aria-label={`Play ${item.title}`}
+                >
+                  <div className="relative w-full aspect-video bg-surface-container overflow-hidden">
+                    <Image
+                      src={`https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg`}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                      unoptimized
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300" />
+                    <span className="absolute left-3 top-3 text-[11px] font-semibold tracking-[0.06em] uppercase text-white bg-black/55 backdrop-blur px-2.5 py-1 rounded-full">
+                      {item.tag}
+                    </span>
+                    <span className="absolute inset-0 m-auto w-12 h-12 rounded-full bg-white/90 text-on-surface flex items-center justify-center shadow-lg scale-95 opacity-90 group-hover:scale-100 group-hover:opacity-100 transition-all duration-300">
+                      <span className="material-symbols-outlined text-[26px] ml-0.5">
+                        play_arrow
+                      </span>
+                    </span>
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-[17px] font-semibold text-on-surface mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-[14px] text-on-surface-variant leading-snug">
+                      {item.result}
+                    </p>
+                    <p className="text-[13px] text-on-surface-variant/70 mt-2">
+                      {item.client}
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ─── PROCESS ──────────────────────────────────────────────── */}
+      <section className="py-16 md:py-24 bg-surface-container-low/70 border-y border-black/[0.07]">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
+          <ScrollReveal>
+            <div className="max-w-2xl mb-10">
+              <p className="eyebrow mb-3">How it works</p>
+              <h2 className="text-[32px] md:text-[44px] display text-on-surface">
+                From first call to <span className="gradient-text">measurable growth.</span>
+              </h2>
+              <p className="text-[17px] text-on-surface-variant leading-relaxed mt-4">
+                No long onboarding, no retainers you can't leave. Every
+                engagement starts with a free audit of your last 10 videos —
+                you keep the audit either way.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal stagger>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="reveal glass-card rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-6">
-                  <span className="material-symbols-outlined text-2xl">movie_edit</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  n: "01",
+                  title: "Audit",
+                  body: "I watch your last 10 videos and read the retention curves. You get the three things costing you viewers — free, whether we work together or not.",
+                },
+                {
+                  n: "02",
+                  title: "Build & ship",
+                  body: "You approve the plan, I cut the videos, design the packaging and schedule the publishing. Two revision rounds are baked in.",
+                },
+                {
+                  n: "03",
+                  title: "Measure & scale",
+                  body: "Monthly reporting on retention, CTR and reach. We double down on what worked and cut what didn't — no vanity dashboards.",
+                },
+              ].map((step) => (
+                <div key={step.n} className="card p-7">
+                  <div className="text-[13px] font-semibold text-primary tracking-[0.08em] mb-4">
+                    {step.n}
+                  </div>
+                  <h3 className="text-[19px] font-semibold text-on-surface mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-[15px] text-on-surface-variant leading-relaxed">
+                    {step.body}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-on-surface mb-3">Video Editing</h3>
-                <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                  High-retention edits in Descript & DaVinci Resolve. YouTube long-form, Shorts, Reels, VSLs, and podcast episodes — all engineered to keep viewers watching.
-                </p>
-                <Link href="/services" className="text-primary font-semibold text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
-                  Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </Link>
-              </div>
-
-              <div className="reveal glass-card rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-600 flex items-center justify-center mb-6">
-                  <span className="material-symbols-outlined text-2xl">smart_toy</span>
-                </div>
-                <h3 className="text-xl font-bold text-on-surface mb-3">AI & Social Management</h3>
-                <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                  AI-driven content calendars, automated posting workflows, community engagement, and analytics reporting — your entire social presence, handled.
-                </p>
-                <Link href="/services" className="text-primary font-semibold text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
-                  Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </Link>
-              </div>
-
-              <div className="reveal glass-card rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300">
-                <div className="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center mb-6">
-                  <span className="material-symbols-outlined text-2xl">ads_click</span>
-                </div>
-                <h3 className="text-xl font-bold text-on-surface mb-3">Performance Paid Ads</h3>
-                <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
-                  Google & LinkedIn ad campaigns built for leads, not vanity metrics. Every rupee tracked, every conversion measured.
-                </p>
-                <Link href="/services" className="text-primary font-semibold text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">
-                  Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </Link>
-              </div>
+              ))}
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ─── ABOUT PREVIEW ─── */}
-      <ScrollReveal>
-        <section className="py-20 px-6 lg:px-16 max-w-[1400px] mx-auto relative">
-          <div className="flex flex-col md:flex-row items-center gap-12 glass-card p-8 md:p-12 rounded-3xl border border-outline-variant/50 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl from-primary/10 to-transparent rounded-full blur-3xl"></div>
-            <div className="md:w-1/2 relative z-10">
-              <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">About Me</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-6">
-                From YouTube creator to <span className="gradient-text">growth specialist</span>
-              </h2>
-              <p className="text-on-surface-variant text-base md:text-lg mb-4 leading-relaxed">
-                I started editing videos for my own YouTube channel years ago. That taught me something no course ever could — how real audiences actually watch, skip, and click.
-              </p>
-              <p className="text-on-surface-variant text-base mb-6 leading-relaxed">
-                Now I use that instinct to edit for other creators, run their socials, and build ad campaigns that convert. If your content isn&apos;t growing, I can probably tell you why in 10 minutes.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 text-primary font-bold hover:underline decoration-primary/50"
-              >
-                Read my full story <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="md:w-1/2 grid grid-cols-2 gap-4 relative z-10">
-              <div className="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center text-center">
-                <span className="material-symbols-outlined text-primary text-4xl mb-2">trending_up</span>
-                <span className="font-bold text-on-surface text-sm">Algorithmic Growth</span>
-              </div>
-              <div className="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center text-center mt-6">
-                <span className="material-symbols-outlined text-primary text-4xl mb-2">groups</span>
-                <span className="font-bold text-on-surface text-sm">Community First</span>
-              </div>
-              <div className="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center text-center">
-                <span className="material-symbols-outlined text-primary text-4xl mb-2">psychology</span>
-                <span className="font-bold text-on-surface text-sm">Creator Mindset</span>
-              </div>
-              <div className="glass-panel p-6 rounded-2xl flex flex-col items-center justify-center text-center mt-6">
-                <span className="material-symbols-outlined text-primary text-4xl mb-2">speed</span>
-                <span className="font-bold text-on-surface text-sm">Fast Turnarounds</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      </ScrollReveal>
-
-      {/* ─── PROCESS SECTION ─── */}
-      <section className="py-20 bg-surface-container-low/40">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-16">
+      {/* ─── TESTIMONIALS ─────────────────────────────────────────── */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <ScrollReveal>
-            <div className="text-center mb-16">
-              <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">How It Works</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-on-surface">
-                From first call to <span className="gradient-text">real growth</span>
-              </h2>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+              <div>
+                <p className="eyebrow mb-3">Clients</p>
+                <h2 className="text-[32px] md:text-[44px] display text-on-surface">
+                  What they say <span className="gradient-text">when the work ships.</span>
+                </h2>
+              </div>
+              <Link href="/testimonials" className="btn btn-secondary btn-sm shrink-0">
+                Read all
+                <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </Link>
             </div>
           </ScrollReveal>
+
           <ScrollReveal stagger>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-              {/* Connecting Line (Desktop) */}
-              <div className="hidden md:block absolute top-12 left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-              
-              <div className="reveal relative z-10 flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-white shadow-lg border border-primary/20 flex items-center justify-center text-xl font-extrabold text-primary mb-6">1</div>
-                <h3 className="text-xl font-bold text-on-surface mb-3">Discovery</h3>
-                <p className="text-on-surface-variant text-sm max-w-xs">I&apos;ll watch your last 10 videos, audit your analytics, and find exactly where viewers are dropping off.</p>
-              </div>
-              <div className="reveal relative z-10 flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-white shadow-lg border border-primary/20 flex items-center justify-center text-xl font-extrabold text-primary mb-6">2</div>
-                <h3 className="text-xl font-bold text-on-surface mb-3">Build & Execute</h3>
-                <p className="text-on-surface-variant text-sm max-w-xs">I craft the edits, build your content calendar, and set up the ad campaigns — you approve, I ship.</p>
-              </div>
-              <div className="reveal relative z-10 flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-full bg-white shadow-lg border border-primary/20 flex items-center justify-center text-xl font-extrabold text-primary mb-6">3</div>
-                <h3 className="text-xl font-bold text-on-surface mb-3">Measure & Scale</h3>
-                <p className="text-on-surface-variant text-sm max-w-xs">We track what&apos;s working, double down on winners, and cut what isn&apos;t. Rinse, repeat, grow.</p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {TESTIMONIALS.map((t) => (
+                <figure key={t.name} className="card p-7 flex flex-col">
+                  <blockquote className="text-[15.5px] text-on-surface leading-relaxed mb-6 flex-grow">
+                    &ldquo;{t.quote}&rdquo;
+                  </blockquote>
+                  <figcaption className="flex items-center gap-3 pt-5 border-t border-black/[0.07]">
+                    <span className="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant text-[12.5px] font-semibold flex items-center justify-center shrink-0">
+                      {initials(t.name)}
+                    </span>
+                    <span>
+                      <span className="block text-[14px] font-semibold text-on-surface">
+                        {t.name}
+                      </span>
+                      <span className="block text-[13px] text-on-surface-variant">
+                        {t.role}
+                      </span>
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ─── SELECTED WORKS ─── */}
-      <section className="py-20 px-6 lg:px-16 max-w-[1400px] mx-auto">
-        <ScrollReveal>
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-            <div>
-              <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">Portfolio</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-3">Selected Works</h2>
-              <p className="text-on-surface-variant text-base">A glimpse into recent projects driving growth.</p>
+      {/* ─── CLOSING CTA ──────────────────────────────────────────── */}
+      <section className="section-dark relative overflow-hidden py-20 md:py-28">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(70% 90% at 50% 0%, rgba(124, 58, 237, 0.38) 0%, rgba(11, 11, 15, 0) 62%)",
+          }}
+        />
+        <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14 text-center">
+          <ScrollReveal>
+            <h2 className="text-[34px] md:text-[52px] display text-white mb-5">
+              Your next 10 videos will be customized to{" "}
+              <span className="gradient-text">your target audience.</span>
+            </h2>
+            <p className="text-[17px] text-white/60 max-w-xl mx-auto mb-9 leading-relaxed">
+              Send me your channel or a rough brief. I'll come back with
+              what I'd change first — no pitch deck, no obligation.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="/contact" className="btn btn-on-dark">
+                Start a project
+                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </Link>
+              <a
+                href="mailto:contact@anuj4u.in"
+                className="btn btn-ghost !text-white !border-white/25 hover:!bg-white/10"
+              >
+                contact@anuj4u.in
+              </a>
             </div>
-            <Link href="/portfolio" className="bg-surface-container-lowest border border-outline-variant/60 hover:bg-surface-container text-on-surface font-semibold py-2.5 px-6 rounded-full transition-all flex items-center gap-2">
-              View Full Portfolio <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </Link>
-          </div>
-        </ScrollReveal>
-        
-        <ScrollReveal stagger>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Work Item 1 */}
-            <div className="reveal group relative rounded-3xl overflow-hidden glass-card hover:shadow-xl transition-all duration-300">
-              <div className="relative w-full h-64 overflow-hidden bg-surface-container-low border-b border-outline-variant/30">
-                <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9yRc9SLVU3wxVmFvr7DMbGjSG3qYpjfjh9tYzKpUK33eg2W1nnTjvlsrLhaBi6krKX0TdNuf7yLsAsOYdU0JLMomjjGoi8SejZX8T3hCSpIAsARplRb8T70IM2rYKk5Ol3q4KoPIE-WoRs5APA61VFmLYbW3uQbgFXi7YB-juA37Eo8ILQ718O2RtslZ9odscWJ2rdNEn697yO0U8SxV4Hs0xAN-6D1M18mtUaFkHgsfZF3v8LBALQw"
-                  alt="Launch Excel VSL editing project"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-primary text-xs font-bold px-3 py-1 rounded-full shadow">Video Editing</div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-on-surface mb-2">Launch Excel VSL</h3>
-                <p className="text-on-surface-variant text-sm mb-4">High-retention sales video resulting in increased course signups.</p>
-                <Link href="/portfolio" className="text-primary font-semibold text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">Case Study <span className="material-symbols-outlined text-sm">arrow_forward</span></Link>
-              </div>
-            </div>
-            
-            {/* Work Item 2 */}
-            <div className="reveal group relative rounded-3xl overflow-hidden glass-card hover:shadow-xl transition-all duration-300">
-              <div className="relative w-full h-64 overflow-hidden bg-surface-container-low border-b border-outline-variant/30">
-                <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX1QBf9H4AztNNXxJlgKiDlGRYZEWbkt_1zlSxhOqPxmx9g4D8Hj517r9BGAq_OylFTF-Yi2yNgkVnqlzeylUdTAri15J_Y_EZg3bclrmRi9BQVtKDy4n7Co3py0VBeZrGaO9d3QcfDbd_bOGyoh1ZaJORB1eriKxwVcZBsoP0k8abvyR3OnPCKDUMpWsQVdZE7ZRcQB0bdhwoBj8VQEkiy4TO54TrP_r87Qr5lXuA7zh7j3vlgLeBDQ"
-                  alt="Author Podcast production and launch"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-purple-600 text-xs font-bold px-3 py-1 rounded-full shadow">Podcast & SMM</div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-on-surface mb-2">Author Podcast Launch</h3>
-                <p className="text-on-surface-variant text-sm mb-4">Full-stack podcast launch including editing, thumbnails, and SEO descriptions.</p>
-                <Link href="/portfolio" className="text-primary font-semibold text-sm inline-flex items-center gap-1 hover:gap-2 transition-all">Case Study <span className="material-symbols-outlined text-sm">arrow_forward</span></Link>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </div>
       </section>
 
-      {/* ─── BOTTOM CTA ─── */}
-      <ScrollReveal>
-        <section className="py-12 px-6 lg:px-16 max-w-[1400px] mx-auto">
-          <div className="glass-card rounded-3xl p-10 md:p-16 text-center relative overflow-hidden bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
-            <div className="relative z-10 max-w-2xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-on-surface">
-                Ready to grow?
-              </h2>
-              <p className="text-on-surface-variant text-base md:text-lg mb-8">
-                Let&apos;s talk about your content, your goals, and how I can help you get there. No pitch decks — just a real conversation.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all"
-              >
-                Start a Project
-                <span className="material-symbols-outlined">send</span>
-              </Link>
-            </div>
+      {/* ─── VIDEO LIGHTBOX ───────────────────────────────────────── */}
+      {playing && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-fade-in"
+          onClick={() => setPlaying(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="relative w-full max-w-4xl aspect-video rounded-2xl overflow-hidden bg-black shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setPlaying(null)}
+              className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors"
+              aria-label="Close video"
+            >
+              <span className="material-symbols-outlined text-[20px]">close</span>
+            </button>
+            <iframe
+              src={`https://www.youtube.com/embed/${playing}?autoplay=1`}
+              title="Client work video"
+              className="w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
           </div>
-        </section>
-      </ScrollReveal>
+        </div>
+      )}
     </div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* Sub-components — keep the page body readable. These are stable exports.  */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+function Callout() {
+  const QUOTES = [
+    {
+      metric: "$50,000 worth of clients from just YouTube — in three months.",
+      why: "When the channel is credible and the content reaches the right audience, growth stops being luck and starts being repeatable.",
+    },
+    {
+      metric: "Your channel builds trust, credibility and presence — that brings revenue.",
+      why: "People buy from channels that sound like they know what they are talking about. Packaging and momentum are the difference.",
+    },
+    {
+      metric: "Your content is not reaching the right audience — you need the right expertise.",
+      why: "A channel that looks good and converts is a system, not a video. That is what we build together.",
+    },
+  ];
+  const pick = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+
+  return (
+    <div
+      className="card p-7 md:p-8 flex flex-col md:flex-row gap-5 md:gap-8 before:content-[''] before:absolute before:-top-3 before:left-6 before:h-[1px] before:w-4 before:bg-primary/40"
+    >
+      <span className="text-3xl md:text-4xl leading-none text-on-surface font-semibold tracking-tight">
+        &ldquo;{pick.metric}&rdquo;
+      </span>
+      <p className="text-[15px] text-on-surface-variant leading-relaxed">
+        {pick.why}
+      </p>
+    </div>
+  );
+}
+
+function ProofCard({ src, label, metric, client }: (typeof PROOF)[0]) {
+  const [loaded, setLoaded] = useState(false);
+  const [proofOpen, setProofOpen] = useState<string | null>(null);
+
+  return (
+    <>
+      <figure
+        className="card card-hover overflow-hidden group cursor-pointer"
+        onClick={() => setProofOpen(src)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => e.key === "Enter" && setProofOpen(src)}
+        aria-label={`View ${label}`}
+      >
+        <div className="relative w-full aspect-[16/10] bg-surface-container-low overflow-hidden">
+          {!loaded && (
+            <div className="absolute inset-0 flex items-center justify-center bg-surface-container">
+              <span className="w-6 h-6 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+            </div>
+          )}
+          <Image
+            src={src}
+            alt={label}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className={`object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03] ${
+              loaded ? "" : "opacity-0"
+            }`}
+            onLoad={() => setLoaded(true)}
+          />
+        </div>
+        <figcaption className="p-5">
+          <p className="text-[15px] font-semibold text-on-surface mb-0.5">
+            {metric}
+          </p>
+          <p className="text-[13.5px] text-on-surface-variant">
+            {label} · {client}
+          </p>
+          <span className="mt-2.5 inline-flex items-center gap-1 text-[11.5px] font-medium text-primary">
+            <span className="material-symbols-outlined text-[13px]">open_in_full</span>
+            Tap to open full size
+          </span>
+        </figcaption>
+      </figure>
+
+      {proofOpen && (
+        <div
+          className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm animate-fade-in"
+          onClick={() => setProofOpen(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="relative w-full max-w-4xl max-h-[85vh] rounded-2xl overflow-hidden bg-black shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setProofOpen(null)}
+              className="absolute top-3 right-3 z-20 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors"
+              aria-label="Close proof"
+            >
+              <span className="material-symbols-outlined text-[20px]">close</span>
+            </button>
+            <Image
+              src={proofOpen}
+              alt="Client proof — full size"
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
