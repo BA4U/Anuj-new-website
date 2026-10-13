@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "LinkedIn Content Funnel | Get Your 30-Day Content Plan — Anuj Mishra",
+  title: "Free 30-Day LinkedIn Content Plan",
   description:
     "Enter your LinkedIn profile URL and receive a FREE AI-generated 30-day content calendar with posts, image ideas, video concepts & strategic rationale — delivered to your inbox.",
   keywords: [

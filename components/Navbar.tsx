@@ -64,7 +64,7 @@ export default function Navbar() {
             </Link>
           ))}
           <Link href="/contact" className="btn btn-dark btn-sm ml-2">
-            Book a call
+            Start a project
           </Link>
         </nav>
 
@@ -103,7 +103,7 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             className="btn btn-dark w-full mt-3"
           >
-            Book a call
+            Start a project
           </Link>
         </div>
       )}

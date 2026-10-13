@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Anuj Mishra | Video Editor & Growth Specialist",
+  title: "About Anuj — Video Editor & Growth Specialist",
   description: "Learn about Anuj Mishra's professional journey, growth philosophy, and expertise in video editing, social media strategy, and marketing.",
 };
 
@@ -49,7 +49,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="py-12 px-6 lg:px-16 max-w-[1400px] mx-auto relative overflow-hidden">
+    <div className="py-12 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto relative overflow-hidden">
       {/* Ambient background glow */}
       <div className="ambient-glow top-0 right-0"></div>
       <div className="ambient-glow-2 top-1/3 left-0"></div>
@@ -60,9 +60,8 @@ export default function AboutPage() {
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container text-primary font-semibold text-xs tracking-wide uppercase w-fit">
             About Me
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-on-surface leading-tight">
-            👋 I&apos;m <br />
-            <span className="gradient-text">Anuj Mishra</span>
+          <h1 className="text-4xl md:text-6xl display text-on-surface leading-tight">
+            👋 I&apos;m <span className="gradient-text">Anuj Mishra</span>
           </h1>
           <p className="text-lg text-on-surface-variant leading-relaxed max-w-xl">
             I help creators & brands maximize reach and revenue with expert video editing in Descript, YouTube channel management, and conversion-focused design in Canva. Leveraging 5+ years of experience, I create content that connects and strategies that scale.
@@ -117,7 +116,7 @@ export default function AboutPage() {
           </div>
 
           {/* Bento 2 */}
-          <div className="col-span-1 glass-card rounded-2xl p-8 flex flex-col justify-between min-h-[320px] hover:-translate-y-1 transition-transform">
+          <div className="col-span-1 glass-card rounded-2xl p-8 flex flex-col justify-between min-h-[320px] transition-transform">
             <div>
               <span className="material-symbols-outlined text-primary mb-4 text-4xl">analytics</span>
               <h3 className="text-2xl font-bold text-on-surface mb-2">Data-Driven Growth</h3>
@@ -131,7 +130,7 @@ export default function AboutPage() {
           </div>
 
           {/* Bento 3 */}
-          <div className="col-span-1 glass-card rounded-2xl p-8 flex flex-col justify-between min-h-[320px] hover:-translate-y-1 transition-transform">
+          <div className="col-span-1 glass-card rounded-2xl p-8 flex flex-col justify-between min-h-[320px] transition-transform">
             <div>
               <span className="material-symbols-outlined text-primary mb-4 text-4xl">groups</span>
               <h3 className="text-2xl font-bold text-on-surface mb-2">Community-First</h3>
@@ -203,14 +202,14 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl mt-12">
+      <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto  shadow-2xl mt-12">
         <h2 className="text-3xl font-bold text-on-surface mb-4">Ready to elevate your content?</h2>
         <p className="text-on-surface-variant mb-8 max-w-xl mx-auto">
           I&apos;m currently accepting a limited number of clients. Let&apos;s build something great together.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 transition-transform hover:bg-primary-container"
+          className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-4 rounded-full shadow-lg transition-transform hover:bg-primary-container"
         >
           Let&apos;s Work Together
           <span className="material-symbols-outlined">arrow_forward</span>

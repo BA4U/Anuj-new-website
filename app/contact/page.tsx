@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
@@ -46,35 +45,8 @@ export default function ContactPage() {
     }
   };
 
-  const socials = [
-    {
-      name: "LinkedIn",
-      href: "https://linkedin.com",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuBNWHHyIDzpj8sfFWVk8Qjy1SB9-KJH5v7FfQD1PbcVrLD2H0CdcLGyABMCGDz-gm1IVbPXGphTTcAO7Fcmpy7T6I7JkJpdMYj3lav-pyTCfTte6ekNAgk5KEgp0U0vM9qm5OinZN6exvoCb0atsMP4MJ3z3Eu5HzSi2oVGa2QUGqmCtffKHWb8Gl1NVmepAD4IRoeqKsfo2nJttV-9Z1O9NrKEYyLrJn8knGg4j84sWbbhytE5vSNBTQ",
-    },
-    {
-      name: "WhatsApp",
-      href: "https://wa.me/919999999999",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuA17F-y8vrxW3bvBAdkowyk3b-xCxG0RKf1uyvnpnKB2sQ9VgSutDDDsaXFZ5RdQf-J1CB7EJzyeupk8w033Hge7oT6SybHcrdLAXFOlksCYJB4R3bUr-LLWYz4ryIQb733hhgkzDfUi3iEJO6dGFFgXDRa_L21xXsmQr89xhVQl_d7cT0VxkG7IpFMrJMU2KLA_h_VW_qz0PjvxHMtLYgvZM-x4E2VOXsCue49R1ZSXk6PTpiUvDZmrQ",
-    },
-    {
-      name: "Telegram",
-      href: "https://t.me",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuCz--i1jo-8rVGLtpEaPYryXe4Q9bY9CRis-TqviQeUK0fm-7nfvXRFUFX730foWg1VSnRoDbc7JSw2Xz05fqk0FnzIZKtN9UN2Ohl7LbHod0C8P5XIWxkjYBQ_4lgpFUXeCQH60c3roznYYjgdU7p9UjtMlKrX9Y_UF1mwZBZkLayce71unDpwZGqJwFWNNwICx9LQ7eDOeE9kce7sK5P_4oUt8xUg-TvSRSfKc_8mMNvcq3tw5hbPxw",
-    },
-    {
-      name: "Discord",
-      href: "https://discord.com",
-      image:
-        "https://lh3.googleusercontent.com/aida-public/AB6AXuCLaGWuLKxFIkKUH8dkWz73wi5Na49KXqUquaELYPXhG0n8JY3sVyEANKOmVVBWvnKxDWGEsvCTVERFqy5r_UqrQVZuYFfM5L1_bnip6zvSLSOpDSM0tMRuEn4mTKkrCsNocsJ5aC-GVZoijkYH8V7yDRvtXUkSkxNt0MzFkioMpoE7q3Df8Nuq-k3arsnNA6tZk0IgP1y3q5ulRGiPeZmw7cYarPMmVmaE6Vewoj91oMRuwDkOldVeoQ",
-    },
-  ];
-
-  return (
-    <div className="py-12 px-6 lg:px-16 max-w-[1400px] mx-auto relative overflow-hidden">
+    return (
+    <div className="py-12 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto relative overflow-hidden">
       {/* Background Glow */}
       <div className="ambient-glow top-0 left-[-100px]"></div>
       <div className="ambient-glow-2 bottom-10 right-[-100px]"></div>
@@ -84,7 +56,7 @@ export default function ContactPage() {
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container text-primary font-semibold text-xs tracking-wide uppercase mb-6 shadow-sm">
           Get In Touch
         </div>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-on-surface mb-6 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl display text-on-surface mb-6 leading-tight">
           Let&apos;s create something <span className="gradient-text">extraordinary.</span>
         </h1>
         <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-xl mx-auto">
@@ -118,32 +90,44 @@ export default function ContactPage() {
             </a>
           </div>
 
-          {/* Social Grid */}
-          <div className="glass-card rounded-3xl p-8">
-            <h3 className="text-xs font-bold text-on-surface-variant mb-6 uppercase tracking-wider">
-              Connect with me
+          {/* What happens next */}
+          <div className="card p-8">
+            <h3 className="text-[11px] font-semibold text-on-surface-variant mb-5 uppercase tracking-[0.14em]">
+              What happens next
             </h3>
-            <div className="grid grid-cols-2 gap-4">
-              {socials.map((social, idx) => (
-                <a
-                  key={idx}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-3 p-3.5 rounded-xl bg-surface hover:bg-secondary-container transition-all group border border-outline-variant/30"
-                >
-                  <div className="relative w-6 h-6 shrink-0">
-                    <Image
-                      src={social.image}
-                      alt={social.name}
-                      fill
-                      className="object-contain group-hover:scale-110 transition-transform"
-                    />
-                  </div>
-                  <span className="font-semibold text-sm text-on-surface">{social.name}</span>
-                </a>
+            <ol className="space-y-5">
+              {[
+                {
+                  n: "1",
+                  t: "I reply within 24 hours",
+                  d: "A real answer from me — not an autoresponder.",
+                },
+                {
+                  n: "2",
+                  t: "Free 20-minute audit call",
+                  d: "I review your last 10 videos and flag what is costing you viewers.",
+                },
+                {
+                  n: "3",
+                  t: "A plan and a quote",
+                  d: "Scope, timeline and price in writing. No obligation either way.",
+                },
+              ].map((step) => (
+                <li key={step.n} className="flex gap-4">
+                  <span className="w-7 h-7 rounded-full bg-on-surface/[0.06] text-on-surface text-[13px] font-semibold flex items-center justify-center shrink-0">
+                    {step.n}
+                  </span>
+                  <span>
+                    <span className="block text-[15px] font-semibold text-on-surface">
+                      {step.t}
+                    </span>
+                    <span className="block text-[14px] text-on-surface-variant leading-relaxed mt-0.5">
+                      {step.d}
+                    </span>
+                  </span>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </div>
 

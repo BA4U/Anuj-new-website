@@ -1,10 +1,9 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Client Testimonials | Anuj Mishra",
+  title: "Client Testimonials",
   description: "Read success stories and feedback from creators, authors, and professionals who have worked with Anuj Mishra.",
 };
 
@@ -41,7 +40,7 @@ export default function TestimonialsPage() {
   ];
 
   return (
-    <div className="py-12 px-6 lg:px-16 max-w-[1400px] mx-auto relative overflow-hidden">
+    <div className="py-12 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto relative overflow-hidden">
       {/* Glow background */}
       <div className="ambient-glow top-0 right-1/4"></div>
 
@@ -50,7 +49,7 @@ export default function TestimonialsPage() {
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container text-primary font-semibold text-xs tracking-wide uppercase mb-6 shadow-sm">
           Client Feedback
         </div>
-        <h1 className="text-4xl md:text-6xl font-extrabold text-on-surface mb-6">
+        <h1 className="text-4xl md:text-6xl display text-on-surface mb-6">
           Client <span className="gradient-text">Success</span> Stories
         </h1>
         <p className="text-lg text-on-surface-variant leading-relaxed">
@@ -63,7 +62,7 @@ export default function TestimonialsPage() {
         {testimonials.map((t, idx) => (
           <div
             key={idx}
-            className="glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden border border-outline-variant/40 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            className="glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden border border-outline-variant/40 flex flex-col justify-between hover:shadow-xl transition-all duration-300"
           >
             <span
               className="material-symbols-outlined absolute top-6 right-6 text-7xl text-primary/20 select-none pointer-events-none"
@@ -78,14 +77,9 @@ export default function TestimonialsPage() {
               </p>
 
               <div className="flex items-center gap-4 pt-4 border-t border-outline-variant/30">
-                <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-primary/20 shrink-0">
-                  <Image
-                    src={t.image}
-                    alt={t.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <span className="w-14 h-14 rounded-full bg-surface-container text-on-surface-variant text-[15px] font-semibold flex items-center justify-center shrink-0 ring-1 ring-black/5">
+                    {t.name.split(" ").map((w) => w[0]).slice(0, 2).join("")}
+                  </span>
                 <div>
                   <h4 className="font-bold text-on-surface text-base">{t.name}</h4>
                   <p className="text-xs text-on-surface-variant font-medium">{t.role}</p>
@@ -97,14 +91,14 @@ export default function TestimonialsPage() {
       </div>
 
       {/* CTA Box */}
-      <div className="glass-card rounded-3xl p-10 text-center max-w-3xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+      <div className="glass-card rounded-3xl p-10 text-center max-w-3xl mx-auto  shadow-2xl">
         <h3 className="text-2xl md:text-3xl font-bold mb-3 text-on-surface">Want to join these success stories?</h3>
         <p className="text-on-surface-variant text-sm md:text-base mb-6">
           Let&apos;s discuss how we can grow your channel, podcast, or business.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-3.5 rounded-full hover:bg-primary-container transition-all shadow-md hover:scale-105"
+          className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-3.5 rounded-full hover:bg-primary-container transition-all shadow-md"
         >
           Get in Touch
           <span className="material-symbols-outlined">send</span>

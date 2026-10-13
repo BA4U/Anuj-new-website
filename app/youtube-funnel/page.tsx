@@ -2,15 +2,13 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-
-type PageState = "input" | "analyzing" | "preview";
-type EmailState = "idle" | "sending" | "sent";
+import { parseChannelUrl } from "@/lib/youtube";
 
 const ANALYSIS_STEPS = [
-  { label: "Reading your channel analytics…", icon: "play_circle" },
-  { label: "Checking retention and hook performance…", icon: "psychology" },
-  { label: "Scanning thumbnails, titles and packaging…", icon: "image" },
-  { label: "Auditing audience and targeting signals…", icon: "person_search" },
+  { label: "Checking your channel link…", icon: "play_circle" },
+  { label: "Matching your niche and audience…", icon: "psychology" },
+  { label: "Drafting hook and title ideas…", icon: "image" },
+  { label: "Planning thumbnail direction…", icon: "person_search" },
   { label: "Building a custom 30-day YouTube plan…", icon: "calendar_month" },
   { label: "Finalizing your strategy ✨", icon: "check_circle" },
 ];
@@ -20,15 +18,15 @@ const HOW_IT_WORKS = [
     step: "01",
     icon: "play_circle",
     title: "Share Your Channel URL",
-    desc: "Paste your YouTube channel URL. We read the public analytics, packaging and recent output — no extra forms needed.",
+    desc: "Paste your YouTube channel link. That's all I need to start — no long forms.",
     color: "from-purple-500/20 to-indigo-500/5",
     iconColor: "text-purple-600",
   },
   {
     step: "02",
     icon: "psychology",
-    title: "AI Analyzes & Builds",
-    desc: "Our AI understands your niche, hook strength, thumbnail CTR and audience. It then crafts a 30-day plan with the specific fixes that will move your numbers.",
+    title: "Your Plan Gets Built",
+    desc: "AI plus proven retention and packaging playbooks turn your niche into a 30-day plan: hooks, titles and thumbnail directions to test.",
     color: "from-blue-500/20 to-cyan-500/5",
     iconColor: "text-blue-600",
   },
@@ -60,7 +58,7 @@ const PREVIEW_DAYS = [
     pillarColor: "text-blue-600",
     pillarBg: "bg-blue-50 border-blue-200/60",
     hook: "3 thumbnail + title pairs built around the same video — pick the one that earns the click.",
-    why: "CTR is the gatekeeper. A stronger thumbnail and tighter title can double impressions without changing the video itself.",
+    reason: "CTR is the gatekeeper. A stronger thumbnail and tighter title can double impressions without changing the video itself.",
     time: "Video 2 · next week",
   },
   {
@@ -70,7 +68,7 @@ const PREVIEW_DAYS = [
     pillarColor: "text-emerald-600",
     pillarBg: "bg-emerald-50 border-emerald-200/60",
     hook: "Your current audience looks broader than your best viewers. Narrow the framing to the people who actually finish.",
-    why: "A channel that speaks to everyone usually speaks to no one. Sharper audience framing raises retention and makes every upload work harder.",
+    reason: "A channel that speaks to everyone usually speaks to no one. Sharper audience framing raises retention and makes every upload work harder.",
     time: "Video 3 · in 2 weeks",
   },
 ];
@@ -78,7 +76,7 @@ const PREVIEW_DAYS = [
 const FAQS = [
   {
     q: "Does this actually analyze my YouTube channel?",
-    a: "Yes. Your channel URL gives us the public analytics context — recent videos, packaging, audience, and how the last uploads performed. The AI uses this to suggest the fixes most likely to move your numbers, not generic advice.",
+    a: "Your plan is built from your channel link and likely niche, using AI plus proven retention and packaging playbooks. It can't see your private YouTube Studio data — reply to the email with a screenshot of your last 90 days and I'll review it personally.",
   },
   {
     q: "What do I get with the free plan?",
@@ -97,26 +95,27 @@ const FAQS = [
 export default function YouTubeFunnelPage() {
   const [channelUrl, setChannelUrl] = useState("");
   const [urlError, setUrlError] = useState("");
-  const [pageState, setPageState] = useState<PageState>("input");
+  const [pageState, setPageState] = useState<"input" | "analyzing" | "preview">("input");
   const [analysisStep, setAnalysisStep] = useState(0);
   const [analysisProgress, setAnalysisProgress] = useState(0);
   const [urlTipOpen, setUrlTipOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [emailState, setEmailState] = useState<EmailState>("idle");
+  const [emailState, setEmailState] = useState<"idle" | "sending" | "sent">("idle");
+  const [emailError, setEmailError] = useState("");
+  const [sentMode, setSentMode] = useState<"plan" | "review">("plan");
+  const [honey, setHoney] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault();
     setUrlError("");
 
-    if (
-      !/youtu\.be\/|youtube\.com\/(channel\/|c\/|user\/)/i.test(channelUrl)
-    ) {
-      setUrlError(
-        "Please enter a valid YouTube channel URL (e.g. youtube.com/@yourchannel)"
-      );
+    const parsed = parseChannelUrl(channelUrl);
+    if (!parsed.ok) {
+      setUrlError(parsed.error);
       return;
     }
+    setChannelUrl(parsed.url);
 
     setPageState("analyzing");
     setAnalysisStep(0);
@@ -134,21 +133,24 @@ export default function YouTubeFunnelPage() {
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setEmailError("");
     setEmailState("sending");
     try {
       const res = await fetch("/api/youtube-funnel", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          channelUrl,
-          email,
-          niche: "auto",
-          goal: "auto",
-        }),
+        body: JSON.stringify({ channelUrl, email, website: honey }),
       });
-      if (!res.ok) throw new Error();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setEmailError(data?.error || "Something went wrong. Please try again.");
+        setEmailState("idle");
+        return;
+      }
+      setSentMode(data?.mode === "review" ? "review" : "plan");
       setEmailState("sent");
     } catch {
+      setEmailError("Network problem — please check your connection and try again.");
       setEmailState("idle");
     }
   };
@@ -161,12 +163,9 @@ export default function YouTubeFunnelPage() {
         <div className="ambient-glow-2 bottom-[15%] right-[-5%] opacity-40" />
       </div>
 
-      {/* ══════════════════════════════════════════════════════
-          HERO
-      ══════════════════════════════════════════════════════ */}
+      {/* HERO */}
       <section className="relative pt-10 pb-10 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-600 font-semibold text-xs tracking-wide uppercase mb-7">
             <span className="w-5 h-5 rounded-[4px] bg-purple-600 text-white text-[11px] font-bold flex items-center justify-center">
               yt
@@ -175,20 +174,20 @@ export default function YouTubeFunnelPage() {
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-on-surface leading-[1.2] mb-5 text-balance mx-auto max-w-4xl">
-            A free 30-day YouTube plan, <span className="gradient-text">built around your channel.</span>
+            A free 30-day YouTube plan,{" "}
+            <span className="gradient-text">built around your channel.</span>
           </h1>
 
           <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-3xl mx-auto mb-8 text-balance">
-            Paste your YouTube channel URL. Our AI reads the analytics, packaging and audience signals, then builds a
-            30-day strategy — hooks, titles, thumbnail direction and the one change that matters most — straight to your inbox.
+            Paste your YouTube channel link and get a 30-day plan — hooks, titles, thumbnail direction and
+            the one change that matters most — straight to your inbox.
           </p>
 
-          {/* Trust badges */}
           <div className="flex flex-wrap justify-center gap-5 text-sm text-on-surface-variant">
             {[
               { icon: "schedule", text: "Ready in ~60 seconds" },
               { icon: "mail", text: "Delivered to inbox" },
-              { icon: "lock", text: "Public data only" },
+              { icon: "lock", text: "Free · no credit card" },
               { icon: "star", text: "Built for your niche" },
             ].map((b) => (
               <div key={b.text} className="flex items-center gap-1.5">
@@ -200,15 +199,11 @@ export default function YouTubeFunnelPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          URL INPUT — BEFORE "HOW IT WORKS"
-      ══════════════════════════════════════════════════════ */}
+      {/* URL INPUT */}
       <section className="px-5 sm:px-6 lg:px-10 xl:px-14 pb-20 max-w-[1240px] mx-auto">
         <div className="max-w-2xl mx-auto">
-          {/* ── Input state ── */}
           {pageState === "input" && (
             <div className="glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden">
-              {/* Top accent line */}
               <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-purple-600 via-primary to-purple-500/50 rounded-t-3xl" />
               <div className="absolute top-0 right-0 w-52 h-52 rounded-full bg-purple-500/5 blur-3xl pointer-events-none" />
 
@@ -216,7 +211,7 @@ export default function YouTubeFunnelPage() {
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-11 h-11 rounded-xl bg-purple-600 flex items-center justify-center shrink-0 shadow-md">
                     <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
-                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C23.498 15.93 23.498 12 23.498 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C23.498 15.93 23.498 12 23.498 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                     </svg>
                   </div>
                   <div>
@@ -237,10 +232,14 @@ export default function YouTubeFunnelPage() {
                         className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-purple-600"
                         fill="currentColor"
                       >
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C23.498 15.93 23.498 12 23.498 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C23.498 15.93 23.498 12 23.498 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                       </svg>
                       <input
-                        type="url"
+                        type="text"
+                        inputMode="url"
+                        autoCapitalize="none"
+                        autoCorrect="off"
+                        spellCheck={false}
                         required
                         placeholder="https://youtube.com/@yourchannel"
                         value={channelUrl}
@@ -259,7 +258,6 @@ export default function YouTubeFunnelPage() {
                       </p>
                     )}
 
-                    {/* Tip toggle */}
                     <button
                       type="button"
                       onClick={() => setUrlTipOpen((p) => !p)}
@@ -309,14 +307,13 @@ export default function YouTubeFunnelPage() {
             </div>
           )}
 
-          {/* ── Analyzing state ── */}
           {pageState === "analyzing" && (
             <div className="glass-card rounded-3xl p-10 text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-primary/5 pointer-events-none" />
               <div className="relative z-10">
                 <div className="w-16 h-16 rounded-2xl bg-purple-600 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-purple-500/30">
                   <svg viewBox="0 0 24 24" className="w-8 h-8 text-white animate-pulse" fill="currentColor">
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C23.498 15.93 23.498 12 23.498 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C23.498 15.93 23.498 12 23.498 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                   </svg>
                 </div>
                 <h3 className="text-xl font-bold text-on-surface mb-1.5">
@@ -326,7 +323,6 @@ export default function YouTubeFunnelPage() {
                   {ANALYSIS_STEPS[analysisStep]?.label}
                 </p>
 
-                {/* Progress bar */}
                 <div className="w-full h-2 bg-surface-container-high rounded-full overflow-hidden mb-6">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-purple-600 to-primary transition-all duration-700"
@@ -334,7 +330,6 @@ export default function YouTubeFunnelPage() {
                   />
                 </div>
 
-                {/* Step pills */}
                 <div className="flex flex-wrap justify-center gap-2">
                   {ANALYSIS_STEPS.map((step, i) => (
                     <div
@@ -361,9 +356,7 @@ export default function YouTubeFunnelPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          HOW IT WORKS — only visible before preview
-      ══════════════════════════════════════════════════════ */}
+      {/* HOW IT WORKS */}
       {pageState !== "preview" && (
         <section className="py-20 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
           <div className="text-center mb-14">
@@ -400,36 +393,43 @@ export default function YouTubeFunnelPage() {
         </section>
       )}
 
-      {/* ══════════════════════════════════════════════════════
-          PREVIEW — shown after analysis completes
-      ══════════════════════════════════════════════════════ */}
+      {/* PREVIEW */}
       {pageState === "preview" && (
         <section className="py-12 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
-          {/* Header */}
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-xs mb-4">
               <span className="material-symbols-outlined text-base">check_circle</span>
-              Your 30-Day YouTube Plan Is Ready!
+              Almost there — one last step
             </div>
             <h2 className="text-2xl md:text-4xl font-bold text-on-surface mb-3">
-              Here's a Sneak Peek of Your Strategy
+              Here's what your 30-day plan looks like
             </h2>
             <p className="text-on-surface-variant max-w-lg mx-auto">
               Enter your email below to receive all 30 days in your inbox — completely free.
             </p>
           </div>
 
-          {/* ── Email capture ── */}
           <div className="max-w-xl mx-auto mb-12">
             {emailState === "sent" ? (
               <div className="glass-card rounded-2xl p-6 text-center border border-emerald-200/60 bg-emerald-50/40">
                 <span className="material-symbols-outlined text-4xl text-emerald-500 mb-3 block">
                   check_circle
                 </span>
-                <h3 className="font-bold text-on-surface mb-1">Check your inbox! 🎉</h3>
+                <h3 className="font-bold text-on-surface mb-1">
+                  {sentMode === "plan" ? "Check your inbox! 🎉" : "Got it — I'm on it ✅"}
+                </h3>
                 <p className="text-sm text-on-surface-variant">
-                  Your 30-day YouTube strategy is on its way to{" "}
-                  <strong>{email}</strong>
+                  {sentMode === "plan" ? (
+                    <>
+                      Your 30-day YouTube plan is on its way to <strong>{email}</strong>. If it doesn&apos;t show up in a
+                      few minutes, check spam.
+                    </>
+                  ) : (
+                    <>
+                      I&apos;ve received your channel and will email your personal 30-day plan to <strong>{email}</strong>{" "}
+                      within 24 hours.
+                    </>
+                  )}
                 </p>
               </div>
             ) : (
@@ -445,6 +445,16 @@ export default function YouTubeFunnelPage() {
                     </p>
                   </div>
                   <form onSubmit={handleEmailSubmit} className="flex gap-3">
+                    <input
+                      type="text"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      value={honey}
+                      onChange={(e) => setHoney(e.target.value)}
+                      className="hidden"
+                    />
                     <input
                       type="email"
                       required
@@ -468,6 +478,12 @@ export default function YouTubeFunnelPage() {
                       )}
                     </button>
                   </form>
+                  {emailError && (
+                    <p role="alert" className="text-sm text-red-600 mt-3 flex items-start gap-1.5">
+                      <span className="material-symbols-outlined text-base shrink-0">error</span>
+                      {emailError}
+                    </p>
+                  )}
                   <p className="text-xs text-on-surface-variant/50 mt-2 flex items-center gap-1">
                     <span className="material-symbols-outlined text-sm">lock</span>
                     No spam. We only send your strategy.
@@ -477,11 +493,9 @@ export default function YouTubeFunnelPage() {
             )}
           </div>
 
-          {/* ── Preview day cards ── */}
           <div className="space-y-6 mb-16">
             {PREVIEW_DAYS.map((day) => (
               <div key={day.day} className="glass-card rounded-3xl p-8 relative overflow-hidden">
-                {/* Day header */}
                 <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-purple-600 text-white font-bold text-sm flex items-center justify-center shrink-0">
@@ -502,7 +516,6 @@ export default function YouTubeFunnelPage() {
                   </div>
                 </div>
 
-                {/* Insight — visible */}
                 <div
                   className="rounded-xl p-4 mb-5"
                   style={{ borderLeft: "3px solid #7c3aed", background: "rgba(124,58,237,0.04)" }}
@@ -515,7 +528,6 @@ export default function YouTubeFunnelPage() {
                   </p>
                 </div>
 
-                {/* Blurred full plan */}
                 <div className="relative mb-5">
                   <div
                     className="text-on-surface-variant text-sm leading-relaxed select-none pointer-events-none"
@@ -523,7 +535,7 @@ export default function YouTubeFunnelPage() {
                   >
                     <p className="mb-2">
                       Detailed step-by-step plan for this video — retentions targets, the exact hook line, the thumbnail concept,
-                      the title options, the posting time and the one metric to watch. This is built from your channel, not a template.
+                      the title options, the posting time and the one metric to watch. Your emailed plan covers all 30 days.
                     </p>
                     <p>
                       Supporting rationale, the audience takeaway, and the follow-up action that compounds the result over the next 30 days.
@@ -539,7 +551,6 @@ export default function YouTubeFunnelPage() {
                   </div>
                 </div>
 
-                {/* Why this works — visible */}
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/60 border border-emerald-200/50 mb-5">
                   <span className="material-symbols-outlined text-emerald-500 text-xl shrink-0 mt-0.5">
                     lightbulb
@@ -552,7 +563,6 @@ export default function YouTubeFunnelPage() {
                   </div>
                 </div>
 
-                {/* Locked: thumbnail direction + title set */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
                     {
@@ -570,7 +580,6 @@ export default function YouTubeFunnelPage() {
                       key={item.label}
                       className="relative rounded-xl overflow-hidden border border-outline-variant/30"
                     >
-                      {/* Blurred content underneath */}
                       <div
                         className="p-4 select-none pointer-events-none bg-surface-container-low"
                         style={{ filter: "blur(4px)" }}
@@ -586,7 +595,6 @@ export default function YouTubeFunnelPage() {
                           professional brand visual design concept.
                         </p>
                       </div>
-                      {/* Lock overlay */}
                       <div className="absolute inset-0 flex items-center justify-center bg-surface/50">
                         <button
                           className="flex items-center gap-1.5 bg-on-surface text-surface-container-lowest text-xs font-bold px-4 py-2 rounded-lg hover:bg-on-surface/80 transition-all shadow-md"
@@ -602,7 +610,6 @@ export default function YouTubeFunnelPage() {
               </div>
             ))}
 
-            {/* More days teaser */}
             <div className="glass-card rounded-3xl p-6 text-center border-2 border-dashed border-outline-variant/40">
               <p className="text-on-surface-variant text-sm mb-1">
                 <strong className="text-on-surface">+ 27 more days</strong> of strategy waiting in your inbox
@@ -615,9 +622,7 @@ export default function YouTubeFunnelPage() {
         </section>
       )}
 
-      {/* ══════════════════════════════════════════════════════
-          FAQ
-      ══════════════════════════════════════════════════════ */}
+      {/* FAQ */}
       <section className="py-16 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">

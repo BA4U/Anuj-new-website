@@ -46,10 +46,27 @@ export default function Footer() {
             >
               contact@anuj4u.in
             </a>
+            <div className="mt-8 max-w-sm">
+              <div className="rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-transparent border border-white/10 p-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-purple-300/80 mb-2">
+                Free channel audit
+              </p>
+              <p className="text-[13px] text-white/60 leading-relaxed mb-3">
+                Paste your YouTube channel and get a 30-day plan — hooks, titles, thumbnail direction and the one fix that matters.
+              </p>
+              <Link
+                href="/youtube-funnel"
+                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-white hover:text-white/80 transition-colors"
+              >
+                Analyze my YouTube channel
+                <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </Link>
+              </div>
+            </div>
           </div>
 
           {/* Sitemap */}
-          <div className="md:col-span-4 md:col-start-7">
+          <div className="md:col-span-2 md:col-start-7">
             <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
               Explore
             </h4>
@@ -84,25 +101,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Lead magnet card — secondary, not a hard sell */}
-          <div className="md:col-span-5 md:col-start-8">
-            <div className="rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-transparent border border-white/10 p-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-purple-300/80 mb-2">
-                Free channel audit
-              </p>
-              <p className="text-[13px] text-white/60 leading-relaxed mb-3">
-                Paste your YouTube channel and get a 30-day plan — hooks, titles, thumbnail direction and the one fix that matters.
-              </p>
-              <Link
-                href="/youtube-funnel"
-                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-white hover:text-white/80 transition-colors"
-              >
-                Analyze my YouTube channel
-                <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-              </Link>
-            </div>
           </div>
 
           {/* Connect */}

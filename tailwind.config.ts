@@ -10,78 +10,92 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Brand accent — used sparingly: links, one primary action per view
         primary: "#4936e6",
-        "primary-container": "#6355ff",
-        "primary-fixed": "#e3dfff",
-        "primary-fixed-dim": "#c4c0ff",
+        "primary-container": "#4335d8",
+        "primary-fixed": "#eae7ff",
+        "primary-fixed-dim": "#d5cdff",
         "on-primary": "#ffffff",
-        "on-primary-container": "#f9f4ff",
-        
-        "gradient-start": "#6355FF",
-        "gradient-end": "#9F55FF",
-        
-        surface: "#fcf8f9",
-        "surface-bright": "#fcf8f9",
-        "surface-dim": "#dcd9da",
+        "on-primary-container": "#ffffff",
+
+        "gradient-start": "#4936e6",
+        "gradient-end": "#8b5cf6",
+
+        // Surfaces: white → Apple's neutral greys
+        surface: "#ffffff",
+        "surface-bright": "#ffffff",
+        "surface-dim": "#e8e8ed",
         "surface-container-lowest": "#ffffff",
-        "surface-container-low": "#f6f3f4",
-        "surface-container": "#f0edee",
-        "surface-container-high": "#eae7e8",
-        "surface-container-highest": "#e5e2e3",
-        "surface-variant": "#e5e2e3",
-        "surface-accent": "#FFEFDF",
-        
-        "on-surface": "#1c1b1c",
-        "on-surface-variant": "#464556",
-        "on-background": "#1c1b1c",
-        
-        secondary: "#5e5d68",
-        "secondary-container": "#e4e1ee",
-        "secondary-fixed": "#e4e1ee",
-        "secondary-fixed-dim": "#c7c5d1",
+        "surface-container-low": "#f7f7f9",
+        "surface-container": "#f2f2f5",
+        "surface-container-high": "#ececf0",
+        "surface-container-highest": "#e4e4e9",
+        "surface-variant": "#e4e4e9",
+        "surface-accent": "#eef0ff",
+
+        "on-surface": "#1d1d1f",
+        "on-surface-variant": "#6e6e73",
+        "on-background": "#1d1d1f",
+
+        secondary: "#6e6e73",
+        "secondary-container": "#ededf2",
+        "secondary-fixed": "#ededf2",
+        "secondary-fixed-dim": "#dcdce3",
         "on-secondary": "#ffffff",
-        "on-secondary-container": "#64636e",
-        
-        outline: "#777587",
-        "outline-variant": "#c8c4d9",
-        
+        "on-secondary-container": "#3a3a3f",
+
+        outline: "#8e8e93",
+        "outline-variant": "#d8d8de",
+
         tertiary: "#943e00",
         "tertiary-container": "#bb5000",
         "tertiary-fixed": "#ffdbcb",
-        
+
         error: "#ba1a1a",
-        "error-container": "#ffdad6"
+        "error-container": "#ffdad6",
       },
       spacing: {
         "margin-mobile": "20px",
         unit: "8px",
         gutter: "24px",
         "margin-desktop": "80px",
-        "section-gap": "120px"
+        "section-gap": "120px",
       },
       keyframes: {
         marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
         },
-        'marquee-reverse': {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(0%)' },
+        "marquee-reverse": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0%)" },
         },
-        'fade-up': {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(12px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
       animation: {
-        marquee: 'marquee 32s linear infinite',
-        'marquee-reverse': 'marquee-reverse 38s linear infinite',
-        'fade-up': 'fade-up 0.6s ease-out forwards',
+        marquee: "marquee 48s linear infinite",
+        "marquee-reverse": "marquee-reverse 56s linear infinite",
+        "fade-up": "fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "fade-in": "fade-in 0.3s ease-out forwards",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        inter: ["Inter", "sans-serif"]
-      }
+        sans: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Inter",
+          "system-ui",
+          "Segoe UI",
+          "sans-serif",
+        ],
+        inter: ["Inter", "system-ui", "sans-serif"],
+      },
     },
   },
   plugins: [],

@@ -10,6 +10,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.gstatic.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'anuj4u.in',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+      },
     ],
   },
 };

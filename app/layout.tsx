@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MotionProvider from "@/components/MotionProvider";
 
 const SITE_URL = "https://anuj-portfolio-website-rho.vercel.app";
 
@@ -79,6 +80,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-surface text-on-surface antialiased">
+        <MotionProvider />
         <Navbar />
         <main className="flex-grow pt-14">{children}</main>
         <Footer />
