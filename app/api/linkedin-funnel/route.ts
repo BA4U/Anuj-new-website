@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { enqueueNurture } from "@/lib/nurture";
 import { GEMINI_MODEL, emailConfigured, sendEmail as sendLeadEmail, notifyAdmin, logLead, escapeHtml, rateLimited } from "@/lib/leads";
 
 export const maxDuration = 60;
@@ -378,6 +379,11 @@ export async function POST(req: NextRequest) {
 
     // ── Log to Google Sheets (non-blocking, optional) ──
     logToGoogleSheets(body, emailId).catch(() => {}); // fire-and-forget
+
+    // ── Enqueue 3-email nurture sequence (no-op if Firebase admin not configured) ──
+    enqueueNurture(body.email, body.linkedinUrl).catch((err) =>
+      console.warn("Nurture enqueue skipped:", err)
+    );
 
     return NextResponse.json({
       success: true,

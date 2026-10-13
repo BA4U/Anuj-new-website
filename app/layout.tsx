@@ -2,46 +2,52 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 import MotionProvider from "@/components/MotionProvider";
 
-const SITE_URL = "https://anuj-portfolio-website-rho.vercel.app";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL("https://anuj4u.in"),
   title: {
-    default: "Anuj Mishra — Video Editing & YouTube Growth for Creators",
+    default: "Anuj Mishra | Social Media & Video Growth Specialist",
     template: "%s | Anuj Mishra",
   },
-  description:
-    "High-retention video editing, YouTube channel management and paid media for creators and brands. Real edits, real numbers, reply within 24 hours.",
-  keywords: [
-    "Anuj Mishra",
-    "Video Editing",
-    "YouTube Management",
-    "Social Media Management",
-    "Descript Editor",
-    "DaVinci Resolve",
-    "Google Ads",
-    "Growth Marketing",
-  ],
+  description: "Maximize Reach & Revenue with Expert Social Media Strategy, Video Editing (Descript, DaVinci Resolve), YouTube Management & Growth Marketing by Anuj Mishra.",
+  keywords: ["Anuj Mishra", "Video Editing", "Social Media Management", "YouTube Management", "Canva Design", "Google Ads", "Growth Marketing"],
   authors: [{ name: "Anuj Mishra" }],
-  alternates: { canonical: "/" },
+  creator: "Anuj Mishra",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Anuj Mishra — Video Editing & YouTube Growth for Creators",
-    description:
-      "High-retention video editing, YouTube management and paid ads. Real edits, real numbers, reply within 24 hours.",
     type: "website",
-    url: "/",
     siteName: "Anuj Mishra",
     locale: "en_US",
+    title: "Anuj Mishra | Portfolio",
+    description: "I help creators and brands scale through data-driven content, video editing, and conversion-focused ad management.",
+    url: "https://anuj4u.in",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Anuj Mishra - Video Editor and Growth Marketer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anuj Mishra — Video Editing & YouTube Growth",
-    description:
-      "High-retention video editing, YouTube management and paid ads for creators and brands.",
+    title: "Anuj Mishra | Portfolio",
+    description: "I help creators and brands scale through data-driven content, video editing, and conversion-focused ad management.",
+    images: ["/api/og"],
   },
-  robots: { index: true, follow: true },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", type: "image/x-icon" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: [{ url: "/icon.svg" }],
+  },
+  manifest: "/manifest.webmanifest",
 };
 
 export default function RootLayout({
@@ -59,31 +65,64 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              name: "Anuj Mishra",
-              url: SITE_URL,
-              email: "contact@anuj4u.in",
-              slogan: "Videos that hook. Strategy that scales.",
-              description:
-                "Video editing, YouTube channel management, thumbnail design and performance paid ads for creators and brands.",
-              founder: { "@type": "Person", name: "Anuj Mishra", jobTitle: "Video Editor & Growth Marketing Specialist" },
-              areaServed: "Worldwide",
-              knowsAbout: [
-                "Video Editing",
-                "Social Media Management",
-                "Google Ads",
-                "YouTube Channel Management",
-                "AI Automation",
+              "@graph": [
+                {
+                  "@type": "ProfessionalService",
+                  "@id": "https://anuj4u.in/#business",
+                  name: "Anuj Mishra — Video Editing & Growth Marketing",
+                  url: "https://anuj4u.in",
+                  image: "https://anuj4u.in/api/og",
+                  email: "contact@anuj4u.in",
+                  priceRange: "$$",
+                  areaServed: "Worldwide",
+                  serviceType: [
+                    "Video Editing",
+                    "Social Media Management",
+                    "YouTube Channel Management",
+                    "Google Ads",
+                    "LinkedIn Ads",
+                    "AI Automation",
+                  ],
+                  address: {
+                    "@type": "PostalAddress",
+                    addressCountry: "IN",
+                  },
+                  founder: { "@type": "Person", name: "Anuj Mishra" },
+                  sameAs: ["https://linkedin.com"],
+                },
+                {
+                  "@type": "Person",
+                  name: "Anuj Mishra",
+                  url: "https://anuj4u.in",
+                  jobTitle: "Video Editor & Growth Marketing Specialist",
+                  email: "contact@anuj4u.in",
+                  knowsAbout: [
+                    "Video Editing",
+                    "Social Media Management",
+                    "Google Ads",
+                    "YouTube Channel Management",
+                    "AI Automation",
+                  ],
+                  sameAs: ["https://linkedin.com"],
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://anuj4u.in/#website",
+                  url: "https://anuj4u.in",
+                  name: "Anuj Mishra",
+                  inLanguage: "en",
+                },
               ],
             }),
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-surface text-on-surface antialiased">
+      <body className="min-h-screen flex flex-col justify-between bg-surface text-on-surface antialiased">
         <MotionProvider />
         <Navbar />
         <main className="flex-grow pt-14">{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );

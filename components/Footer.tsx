@@ -1,25 +1,25 @@
 import React from "react";
 import Link from "next/link";
 
-/**
- * Real social profiles go here.
- * Leave the array empty until the URLs are confirmed — dead placeholder
- * links (wa.me/919999999999, t.me, discord.com) cost more trust than they earn.
- */
 const socials: { name: string; href: string; icon: string }[] = [
-  // { name: "LinkedIn", href: "https://www.linkedin.com/in/…", icon: "linkedin" },
-  // { name: "YouTube", href: "https://www.youtube.com/@…", icon: "smart_display" },
-  // { name: "Instagram", href: "https://instagram.com/…", icon: "photo_camera" },
-];  const quickLinks = [
-    { name: "Work", href: "/portfolio" },
-    { name: "About", href: "/about" },
-    { name: "Testimonials", href: "/testimonials" },
-    { name: "Contact", href: "/contact" },
-  ];
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/byanuj4u/", icon: "person" },
+  { name: "WhatsApp", href: "https://wa.me/9123997677", icon: "chat" },
+  { name: "Telegram", href: "https://t.me/anujmishra4u", icon: "send" },
+  { name: "Skype", href: "https://join.skype.com/invite/yCZ9IhClcTvD", icon: "forum" },
+];
+
+const quickLinks = [
+  { name: "Services", href: "/services" },
+  { name: "Work", href: "/work" },
+  { name: "About", href: "/about" },
+  { name: "Testimonials", href: "/testimonials" },
+  { name: "Contact", href: "/contact" },
+];
 
   const tools = [
     { name: "Free LinkedIn plan", href: "/linkedin-funnel" },
     { name: "Analyze my YouTube channel", href: "/youtube-funnel" },
+    { name: "All free tools", href: "/free-tools" },
   ];
 
 export default function Footer() {
@@ -144,9 +144,9 @@ export default function Footer() {
           <p className="text-[12px] text-white/40">
             © {new Date().getFullYear()} Anuj Mishra. All rights reserved.
           </p>
-          <p className="text-[12px] text-white/40">
-            Built for creators who measure twice.
-          </p>
+          <Link href="/privacy-policy" className="text-[12px] text-white/40 hover:text-white/70 transition-colors">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>

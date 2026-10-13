@@ -1,26 +1,25 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL = "https://anuj-portfolio-website-rho.vercel.app";
+const BASE_URL = "https://anuj4u.in";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
-    "",
-    "/services",
-    "/portfolio",
-    "/portfolio/video-editing",
-    "/portfolio/shorts-editing-portfolio",
-    "/portfolio/graphic-design-portfolio",
-    "/portfolio/youtube-management-portfolio",
-    "/about",
-    "/testimonials",
-    "/contact",
-    "/linkedin-funnel",
+    { path: "", priority: 1, changeFrequency: "weekly" as const },
+    { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/services", priority: 0.9, changeFrequency: "monthly" as const },
+    { path: "/portfolio", priority: 0.9, changeFrequency: "monthly" as const },
+    { path: "/testimonials", priority: 0.7, changeFrequency: "monthly" as const },
+    { path: "/contact", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/linkedin-funnel", priority: 0.9, changeFrequency: "weekly" as const },
+    { path: "/youtube-funnel", priority: 0.9, changeFrequency: "weekly" as const },
   ];
 
+  const now = new Date();
+
   return routes.map((route) => ({
-    url: `${SITE_URL}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: route === "" ? 1 : 0.7,
+    url: `${BASE_URL}${route.path}`,
+    lastModified: now,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
   }));
 }

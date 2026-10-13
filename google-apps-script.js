@@ -7,9 +7,13 @@
  * HOW TO SET UP (5 minutes):
  * ──────────────────────────
  * 1. Create a new Google Sheet at https://sheets.google.com
- *    - Name the sheet "LinkedIn Funnel Leads" (optional)
+ *    - Name the sheet "Funnel Leads" (optional)
  *    - Add these headers in Row 1:
- *      A: Timestamp | B: Email | C: LinkedIn URL | D: Email ID | E: Status
+ *      A: Timestamp | B: Date | C: Email | D: Funnel | E: Detail | F: Email ID | G: Status
+ *
+ *      Funnel = "linkedin" | "reel-hooks" | "youtube-audit" (the lead-magnet source)
+ *      Detail = LinkedIn URL, YouTube channel URL, or the user's niche
+ *      Status flows: new → contacted → client  (update manually or via the script)
  *
  * 2. In the sheet, click Extensions → Apps Script
  *
@@ -37,10 +41,12 @@ function doPost(e) {
     
     sheet.appendRow([
       data.timestamp || new Date().toISOString(),
+      data.date || new Date().toISOString().slice(0, 10),
       data.email || "",
-      data.linkedinUrl || "",
+      data.funnel || data.source || "unknown",
+      data.linkedinUrl || data.channelUrl || data.niche || "",
       data.emailId || "unknown",
-      data.status || "submitted"
+      data.status || "new"
     ]);
     
     return ContentService
@@ -59,10 +65,12 @@ function testAppend() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   sheet.appendRow([
     new Date().toISOString(),
+    new Date().toISOString().slice(0, 10),
     "test@example.com",
+    "linkedin",
     "https://linkedin.com/in/test-user",
     "test_email_id",
-    "test"
+    "new"
   ]);
   Logger.log("Test row appended successfully!");
 }

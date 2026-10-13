@@ -451,3 +451,9 @@
     backdrop-filter: none;
   }
 }
+
+/* Pause marquee animations when scrolled out of view (used by /work pages). */
+[data-marquee-paused="true"] .animate-marquee,
+[data-marquee-paused="true"] .animate-marquee-reverse {
+  animation-play-state: paused;
+}
