@@ -237,7 +237,7 @@ function ContactForm() {
           {/* Quick contact */}
           <aside className="md:col-span-2 flex flex-col gap-4 text-center md:text-left">
             <div className="card-glow p-6">
-              <p className="eyebrow mb-2 !text-[11px]">Prefer to talk?</p>
+              <p className="label mb-2 !text-[11px]">Prefer to talk?</p>
               <div className="flex flex-col gap-2.5">
                 {BOOKING_URL && (
                   <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn btn-dark w-full">

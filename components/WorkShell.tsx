@@ -31,7 +31,7 @@ export default function WorkShell({
             <span className="material-symbols-outlined text-[16px]">arrow_back</span>
             All work
           </Link>
-          <p className="eyebrow mb-4">{pill}</p>
+          <p className="eyebrow mb-2">{pill}</p>
           <h1 className="text-[38px] sm:text-[52px] md:text-[64px] display text-on-surface mb-4">
             {title} <span className="gradient-text">{accent}</span>
           </h1>

@@ -3,6 +3,7 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { LinkedInLogo } from "@/components/LinkedInLogo";
+import BrandIcon from "@/components/BrandIcon";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 type PageState = "input" | "analyzing" | "preview";
@@ -24,8 +25,8 @@ const HOW_IT_WORKS = [
     icon: "person_search",
     title: "Share Your LinkedIn URL",
     desc: "Just paste your LinkedIn profile URL. We read your profile, industry, and professional context, no extra forms needed.",
-    color: "from-violet-500/20 to-indigo-500/5",
-    iconColor: "text-violet-600",
+    color: "from-blue-500/20 to-indigo-500/5",
+    iconColor: "text-blue-600",
   },
   {
     step: "02",
@@ -174,7 +175,7 @@ export default function LinkedInFunnelPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface overflow-x-hidden">
+    <div className="min-h-screen bg-surface overflow-x-hidden theme-li">
       {/* Ambient background */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="ambient-glow top-[-80px] left-[10%] opacity-60" />
@@ -188,7 +189,7 @@ export default function LinkedInFunnelPage() {
         <div className="text-center max-w-4xl mx-auto">
           {/* Badge, real LinkedIn logo */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0A66C2]/10 border border-[#0A66C2]/20 text-[#0A66C2] font-semibold text-xs tracking-wide uppercase mb-7">
-            <LinkedInLogo className="w-3.5 h-3.5" />
+            <BrandIcon brand="linkedin" size={16} />
             Free LinkedIn Content Engine
           </div>
 
@@ -209,7 +210,7 @@ export default function LinkedInFunnelPage() {
               { icon: "star", text: "100% personalized" },
             ].map((b) => (
               <div key={b.text} className="flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-primary text-base">{b.icon}</span>
+                <span className="material-symbols-outlined text-[#0A66C2] text-base">{b.icon}</span>
                 {b.text}
               </div>
             ))}
@@ -227,7 +228,7 @@ export default function LinkedInFunnelPage() {
           {pageState === "input" && (
             <div className="glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden">
               {/* Top accent line */}
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0A66C2] via-primary to-[#0A66C2]/50 rounded-t-3xl" />
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0A66C2] via-[#0A66C2] to-[#0A66C2]/50 rounded-t-3xl" />
               <div className="absolute top-0 right-0 w-52 h-52 rounded-full bg-[#0A66C2]/5 blur-3xl pointer-events-none" />
 
               <div className="relative z-10">
@@ -293,7 +294,7 @@ export default function LinkedInFunnelPage() {
                         {[
                           "Open LinkedIn → click your profile photo → View Profile → copy the URL from your browser's address bar.",
                           "On mobile: tap your profile → tap ··· → tap Copy link to profile.",
-                          <>It looks like: <code className="bg-surface-container px-1.5 py-0.5 rounded font-mono text-primary text-[11px]">linkedin.com/in/your-name</code></>,
+                          <>It looks like: <code className="bg-surface-container px-1.5 py-0.5 rounded font-mono text-[#0A66C2] text-[11px]">linkedin.com/in/your-name</code></>,
                         ].map((tip, i) => (
                           <div key={i} className="flex gap-2.5">
                             <span className="text-[#0A66C2] font-bold text-xs shrink-0 mt-0.5">{i + 1}.</span>
@@ -325,7 +326,7 @@ export default function LinkedInFunnelPage() {
           {/* ── Analyzing state ── */}
           {pageState === "analyzing" && (
             <div className="glass-card rounded-3xl p-10 text-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#0A66C2]/5 to-primary/5 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#0A66C2]/5 to-[#0A66C2]/5 pointer-events-none" />
               <div className="relative z-10">
                 <div className="w-16 h-16 rounded-2xl bg-[#0A66C2] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#0A66C2]/30">
                   <LinkedInLogo className="w-8 h-8 text-white animate-pulse" />
@@ -340,7 +341,7 @@ export default function LinkedInFunnelPage() {
                 {/* Progress bar */}
                 <div className="w-full h-2 bg-surface-container-high rounded-full overflow-hidden mb-6">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-[#0A66C2] to-primary transition-all duration-700"
+                    className="h-full rounded-full bg-gradient-to-r from-[#0A66C2] to-[#0A66C2] transition-all duration-700"
                     style={{ width: `${analysisProgress}%` }}
                   />
                 </div>
@@ -379,7 +380,7 @@ export default function LinkedInFunnelPage() {
       {pageState !== "preview" && (
         <section className="py-20 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
+            <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">
               The Process
             </p>
             <h2 className="text-3xl md:text-4xl font-bold text-on-surface">
@@ -388,7 +389,7 @@ export default function LinkedInFunnelPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-            <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-violet-300 via-blue-300 to-emerald-300 opacity-40" />
+            <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-blue-300 via-blue-300 to-emerald-300 opacity-40" />
             {HOW_IT_WORKS.map((step, idx) => (
               <div
                 key={idx}
@@ -458,7 +459,7 @@ export default function LinkedInFunnelPage() {
               </div>
             ) : (
               <div className="glass-card rounded-2xl p-6 border-2 border-[#0A66C2]/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0A66C2]/4 to-primary/4 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0A66C2]/4 to-[#0A66C2]/4 pointer-events-none" />
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="material-symbols-outlined text-[#0A66C2] text-xl">
@@ -523,7 +524,7 @@ export default function LinkedInFunnelPage() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-secondary-fixed text-primary">
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-secondary-fixed text-[#0A66C2]">
                       {day.type}
                     </span>
                     <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${day.pillarBg} ${day.pillarColor}`}>
@@ -566,9 +567,9 @@ export default function LinkedInFunnelPage() {
                     </p>
                   </div>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="glass-card px-4 py-2 rounded-xl flex items-center gap-2 border border-primary/20 shadow-sm">
-                      <span className="material-symbols-outlined text-primary text-base">mail</span>
-                      <span className="text-xs font-bold text-primary">
+                    <div className="glass-card px-4 py-2 rounded-xl flex items-center gap-2 border border-[#0A66C2]/20 shadow-sm">
+                      <span className="material-symbols-outlined text-[#0A66C2] text-base">mail</span>
+                      <span className="text-xs font-bold text-[#0A66C2]">
                         Full post unlocked in your inbox
                       </span>
                     </div>
@@ -689,7 +690,7 @@ export default function LinkedInFunnelPage() {
                 className="absolute inset-0"
                 style={{ filter: "blur(14px)", transform: "scale(1.03)" }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-[#0A66C2] via-indigo-700 to-violet-700" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0A66C2] via-indigo-700 to-blue-700" />
                 {/* Decorative elements inside blur */}
                 <div className="absolute inset-0 flex items-center px-[8%] gap-8">
                   <div className="flex-1 space-y-4">
@@ -744,7 +745,7 @@ export default function LinkedInFunnelPage() {
       <section className="py-20 px-6 lg:px-16 bg-surface-container-low/50">
         <div className="max-w-[1240px] mx-auto">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
+            <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">
               Everything Included
             </p>
             <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-3">
@@ -758,8 +759,8 @@ export default function LinkedInFunnelPage() {
                 icon: "edit_note",
                 title: "Full Post Copy",
                 desc: "Complete, ready-to-post content. Not just a topic, the entire post.",
-                color: "text-violet-600",
-                bg: "from-violet-500/15 to-indigo-500/5",
+                color: "text-blue-600",
+                bg: "from-blue-500/15 to-indigo-500/5",
                 tag: "FREE",
               },
               {
@@ -838,7 +839,7 @@ export default function LinkedInFunnelPage() {
       ══════════════════════════════════════════════════════ */}
       <section className="py-20 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
         <div className="text-center mb-14">
-          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
+          <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">
             Content Architecture
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-3">
@@ -855,7 +856,7 @@ export default function LinkedInFunnelPage() {
               icon: "workspace_premium",
               count: "8 posts",
               desc: "Position you as the expert",
-              color: "from-violet-500 to-indigo-600",
+              color: "from-blue-500 to-indigo-600",
               pct: "27%",
             },
             {
@@ -898,7 +899,7 @@ export default function LinkedInFunnelPage() {
                 {p.pct}
               </div>
               <h3 className="text-base font-bold text-on-surface mb-1">{p.pillar}</h3>
-              <p className="text-xs font-semibold text-primary mb-2">{p.count}</p>
+              <p className="text-xs font-semibold text-[#0A66C2] mb-2">{p.count}</p>
               <p className="text-xs text-on-surface-variant leading-relaxed">{p.desc}</p>
             </div>
           ))}
@@ -911,7 +912,7 @@ export default function LinkedInFunnelPage() {
       <section className="py-20 px-6 lg:px-16 bg-surface-container-low/50">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">FAQ</p>
+            <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-3">FAQ</p>
             <h2 className="text-3xl font-bold text-on-surface">Questions? Answered.</h2>
           </div>
           <div className="space-y-3">
@@ -923,7 +924,7 @@ export default function LinkedInFunnelPage() {
                 >
                   <span className="font-semibold text-on-surface text-sm pr-4">{faq.q}</span>
                   <span
-                    className={`material-symbols-outlined text-primary shrink-0 transition-transform duration-300 ${openFaq === idx ? "rotate-180" : ""}`}
+                    className={`material-symbols-outlined text-[#0A66C2] shrink-0 transition-transform duration-300 ${openFaq === idx ? "rotate-180" : ""}`}
                   >
                     expand_more
                   </span>
@@ -944,7 +945,7 @@ export default function LinkedInFunnelPage() {
       ══════════════════════════════════════════════════════ */}
       <section className="py-24 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
         <div className="glass-card rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0A66C2]/8 via-transparent to-primary/8 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A66C2]/8 via-transparent to-[#0A66C2]/8 pointer-events-none" />
           <div className="ambient-glow top-[-60px] right-[-60px] opacity-20 pointer-events-none" />
           <div className="relative z-10">
             <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">
@@ -971,7 +972,7 @@ export default function LinkedInFunnelPage() {
               </button>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface font-semibold px-8 py-4 rounded-2xl hover:border-primary/40 hover:text-primary transition-all text-lg"
+                className="inline-flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface font-semibold px-8 py-4 rounded-2xl hover:border-[#0A66C2]/40 hover:text-[#0A66C2] transition-all text-lg"
               >
                 Talk to Anuj Instead
               </Link>
@@ -998,8 +999,8 @@ export default function LinkedInFunnelPage() {
             </button>
 
             <div className="text-center mb-6">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-[#0A66C2]/10 flex items-center justify-center mx-auto mb-4">
-                <span className="material-symbols-outlined text-3xl text-primary">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#0A66C2]/20 to-[#0A66C2]/10 flex items-center justify-center mx-auto mb-4">
+                <span className="material-symbols-outlined text-3xl text-[#0A66C2]">
                   lock_open
                 </span>
               </div>
@@ -1043,7 +1044,7 @@ export default function LinkedInFunnelPage() {
 
             <Link
               href="/contact"
-              className="w-full flex items-center justify-center gap-2 bg-primary text-white font-bold py-3.5 rounded-xl hover:bg-primary-container transition-all text-sm"
+              className="w-full flex items-center justify-center gap-2 bg-[#0A66C2] text-white font-bold py-3.5 rounded-xl hover:bg-primary-container transition-all text-sm"
             >
               <span className="material-symbols-outlined text-lg">mail</span>
               Contact Anuj to Unlock Premium

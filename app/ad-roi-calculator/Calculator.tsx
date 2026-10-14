@@ -497,7 +497,7 @@ export default function Calculator() {
 
       {/* CTA, back to funnels */}
       <section className="py-20 px-6 lg:px-16 max-w-[1400px] mx-auto">
-        <div className="glass-card rounded-3xl p-10 md:p-14 text-center relative overflow-hidden bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500/30 shadow-xl">
+        <div className="cta-card rounded-3xl p-10 md:p-14 text-center relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-extrabold text-on-surface mb-4">
               Want your ads <span className="gradient-text">actually managed?</span>

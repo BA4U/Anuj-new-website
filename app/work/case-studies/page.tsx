@@ -1,3 +1,4 @@
+import PlayThumb from "@/components/PlayThumb";
 import type { Metadata } from "next";
 import Link from "next/link";
 import WorkShell from "@/components/WorkShell";
@@ -53,18 +54,10 @@ export default function CaseStudiesPage() {
         {rest.map((c) => (
           <article key={c.client} className="reveal card-glow p-0 text-center overflow-hidden flex flex-col">
             {c.videoId && (
-              <a
-                href={`https://www.youtube.com/watch?v=${c.videoId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative block aspect-video bg-surface-container overflow-hidden"
-                aria-label={`Watch a video edited for ${c.client}`}
-              >
-                <YtThumb id={c.videoId} alt={`Video edited for ${c.client}`} />
-              </a>
+              <PlayThumb id={c.videoId} title={`Video edited for ${c.client}`} />
             )}
             <div className={`p-6 flex-1 flex flex-col items-center ${c.videoId ? "" : "justify-center py-10"}`}>
-              <p className="eyebrow mb-1.5 !text-[10.5px]">{c.role}</p>
+              <p className="label mb-1.5 !text-[10.5px]">{c.role}</p>
               <h3 className="text-[22px] font-semibold text-on-surface mb-2">{c.client}</h3>
               <p className="text-[15px] text-on-surface-variant leading-relaxed mb-4">&ldquo;{c.quote}&rdquo;</p>
               <div className="flex flex-wrap justify-center gap-2 mt-auto">

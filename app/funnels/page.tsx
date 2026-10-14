@@ -237,7 +237,7 @@ export default function FunnelsPage() {
       </ScrollReveal>
 
       {/* CTA */}
-      <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+      <div className="text-center relative z-10 cta-card p-12 rounded-3xl max-w-4xl mx-auto ">
         <h2 className="text-3xl font-bold text-on-surface mb-4">Need a custom growth plan?</h2>
         <p className="text-on-surface-variant mb-8 max-w-xl mx-auto">
           These tools are a great start, but if you want hands-on help editing, managing, and

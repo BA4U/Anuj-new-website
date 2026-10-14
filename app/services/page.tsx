@@ -270,7 +270,7 @@ export default function ServicesPage() {
         <FAQAccordion items={servicesFaqs} />
       </section>
 
-      <section className="glass-card rounded-3xl p-10 text-center max-w-4xl mx-auto relative overflow-hidden bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+      <section className="cta-card rounded-3xl p-10 text-center max-w-4xl mx-auto relative overflow-hidden ">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-on-surface">Not sure which plan fits?</h2>
         <p className="text-on-surface-variant text-base mb-8 max-w-xl mx-auto">
           Book a free 20-minute call. We will look at your content and your

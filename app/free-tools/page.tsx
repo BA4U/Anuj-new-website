@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import BrandIcon, { type Brand } from "@/components/BrandIcon";
 import { EmailCapture } from "@/components/EmailCapture";
 
 export const metadata: Metadata = {
@@ -25,10 +26,11 @@ const tools = [
     title: "LinkedIn Funnel Planner",
     desc: "Get a 3-step funnel plan for your LinkedIn profile in under 2 minutes. Built for consultants, coaches, and B2B founders who want leads from LinkedIn.",
     href: "/linkedin-funnel",
-    icon: "hub",
-    color: "text-blue-600",
-    bg: "from-blue-500/15 to-blue-500/0",
-    iconBg: "bg-blue-500/10",
+    brand: "linkedin" as Brand,
+    color: "text-[#0A66C2]",
+    btn: "bg-[#0A66C2] hover:bg-[#084e96]",
+    bg: "from-[#0A66C2]/12 to-transparent",
+    iconBg: "bg-white",
     bullets: [
       "Profile and headline rewrite prompt",
       "3 content pillars generated for your ICP",
@@ -40,10 +42,11 @@ const tools = [
     title: "Reel Hooks Generator",
     desc: "Generate 10 scroll-stopping hook ideas for your next short-form video. Built from hook structures I have used on real client videos.",
     href: "/reel-hooks",
-    icon: "movie_filter",
-    color: "text-pink-600",
-    bg: "from-pink-500/15 to-pink-500/0",
-    iconBg: "bg-pink-500/10",
+    brand: "instagram" as Brand,
+    color: "text-[#D62976]",
+    btn: "bg-gradient-to-r from-[#962FBF] via-[#D62976] to-[#FA7E1E] hover:brightness-110",
+    bg: "from-[#D62976]/12 via-[#962FBF]/6 to-transparent",
+    iconBg: "bg-white",
     bullets: [
       "10 hook ideas in 30 seconds",
       "Mix of curiosity, contrarian, and proof hooks",
@@ -55,10 +58,11 @@ const tools = [
     title: "YouTube Channel Audit",
     desc: "Score your channel on 5 growth levers and get a one-page action plan. Built from the same audit I run for paying clients.",
     href: "/youtube-funnel",
-    icon: "analytics",
-    color: "text-red-600",
-    bg: "from-red-500/15 to-red-500/0",
-    iconBg: "bg-red-500/10",
+    brand: "youtube" as Brand,
+    color: "text-[#E00000]",
+    btn: "bg-[#E00000] hover:bg-[#b80000]",
+    bg: "from-[#FF0000]/10 to-transparent",
+    iconBg: "bg-white",
     bullets: [
       "Score on 5 growth levers",
       "One-page action plan",
@@ -95,16 +99,14 @@ export default function FreeToolsPage() {
           {tools.map((tool) => (
             <article
               key={tool.title}
-              className="group glass-card rounded-3xl p-8 border border-outline-variant/40 hover:-translate-y-1 hover:shadow-2xl transition-all flex flex-col bg-gradient-to-br from-surface to-surface"
+              className="group glass-card rounded-3xl p-8 hover:-translate-y-1 transition-all flex flex-col relative overflow-hidden"
             >
               <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${tool.bg} pointer-events-none`} />
               <div className="relative z-10 flex flex-col flex-grow">
                 <div
-                  className={`w-14 h-14 rounded-2xl ${tool.iconBg} ${tool.color} flex items-center justify-center mb-5`}
+                  className={`w-14 h-14 rounded-2xl ${tool.iconBg} shadow-[0_6px_18px_-8px_rgba(0,0,0,0.25)] flex items-center justify-center mb-5`}
                 >
-                  <span className="material-symbols-outlined text-3xl">
-                    {tool.icon}
-                  </span>
+                  <BrandIcon brand={tool.brand} size={30} />
                 </div>
                 <h2 className="text-xl font-bold text-on-surface mb-2">
                   {tool.title}
@@ -129,7 +131,7 @@ export default function FreeToolsPage() {
                 </ul>
                 <Link
                   href={tool.href}
-                  className={`mt-auto inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-full shadow-md hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all`}
+                  className={`mt-auto inline-flex items-center justify-center gap-2 ${tool.btn} text-white font-semibold px-6 py-3 rounded-full shadow-md whitespace-nowrap transition-all`}
                 >
                   {tool.cta}
                   <span className="material-symbols-outlined text-base">
@@ -149,7 +151,7 @@ export default function FreeToolsPage() {
 
       {/* Cross-sell */}
       <section className="relative z-10 max-w-4xl mx-auto">
-        <div className="glass-card rounded-3xl p-10 text-center bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+        <div className="cta-card rounded-3xl p-10 text-center ">
           <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-primary bg-white/80 px-3 py-1.5 rounded-full mb-4">
             Want this run for you?
           </span>

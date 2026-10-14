@@ -117,7 +117,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {story.map((st) => (
               <div key={st.title} className="card-glow p-6 text-center">
-                <p className="eyebrow mb-2 !text-[11px]">{st.year}</p>
+                <p className="label mb-2 !text-[11px]">{st.year}</p>
                 <h3 className="text-[18px] font-semibold text-on-surface mb-2 leading-snug">{st.title}</h3>
                 <p className="text-[14.5px] text-on-surface-variant leading-relaxed">{st.body}</p>
               </div>

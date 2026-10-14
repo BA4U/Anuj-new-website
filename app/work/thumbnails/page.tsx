@@ -34,7 +34,7 @@ export default function ThumbnailsPage() {
               />
             </div>
             <figcaption className="p-4">
-              <p className="eyebrow mb-1 !text-[10.5px]">{t.client}</p>
+              <p className="label mb-1 !text-[10.5px]">{t.client}</p>
               <p className="text-[15px] font-semibold text-on-surface leading-snug">{t.title}</p>
             </figcaption>
           </figure>

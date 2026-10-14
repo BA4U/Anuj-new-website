@@ -361,7 +361,7 @@ export default function LinkedInFunnelSystemPage() {
 
       {/* Final CTA */}
       <section className="relative z-10">
-        <div className="glass-card rounded-3xl p-10 md:p-16 text-center max-w-4xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
+        <div className="cta-card rounded-3xl p-10 md:p-16 text-center max-w-4xl mx-auto ">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-on-surface">
             Ready to make LinkedIn work for you?
           </h2>
