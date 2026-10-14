@@ -147,17 +147,17 @@ export default function Home() {
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj. Here&apos;s what I do</p>
+              <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj. Here&apos;s how I help</p>
               <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[56px] display text-on-surface mb-5">
-                I edit your videos
+                I help creators and brands
                 <br />
-                <span className="gradient-text-animated">and grow your channel.</span>
+                <span className="gradient-text-animated">grow reach and revenue.</span>
               </h1>
               <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-5">
-                Video editor and content manager for YouTube creators, coaches and brands. You record. I handle the editing, thumbnails, Shorts and Reels, blog posts and publishing.
+                I turn your videos and social content into a sales funnel. Sharper edits and thumbnails earn more clicks, the right audience finds you, and viewers become leads, clients and revenue.
               </p>
               <ul className="reveal flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
-                {["Long-form and Shorts", "Thumbnails", "Publishing and reports"].map((t) => (
+                {["More clicks", "The right audience", "Leads and sales"].map((t) => (
                   <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-white/70 border border-primary/15 px-3 py-1.5 text-[13px] font-medium text-on-surface">
                     <span className="material-symbols-outlined text-[16px] text-primary">check_circle</span>
                     {t}

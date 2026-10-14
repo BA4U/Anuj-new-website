@@ -4,19 +4,19 @@ import type { Metadata } from "next";
 import FAQAccordion from "@/components/FAQAccordion";
 
 export const metadata: Metadata = {
-  title: "Services & Pricing",
-  description: "Three productized content services for coaches, authors, and founders. LinkedIn Funnel System $800/mo, Content Engine $2,500/mo, Content Production System $1,500/mo.",
+  title: "Services",
+  description: "Three content services for creators, coaches, authors and founders: LinkedIn Funnel System, Content Engine and Content Production System.",
   alternates: { canonical: "/services" },
   openGraph: {
-    title: "Services & Pricing | Anuj Mishra",
-    description: "Three productized services with transparent monthly pricing.",
+    title: "Services | Anuj Mishra",
+    description: "Three content services built to grow your reach and revenue.",
     url: "https://anuj4u.in/services",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Services & Pricing | Anuj Mishra",
-    description: "Three productized services with transparent monthly pricing.",
+    title: "Services | Anuj Mishra",
+    description: "Three content services built to grow your reach and revenue.",
   },
 };
 
@@ -47,7 +47,7 @@ const services: Service[] = [
     idealFor:
       "Consultants, coaches, and B2B founders who want leads from LinkedIn without spending all day on it.",
     icon: "hub",
-    price: "$800/mo",
+    price: "Custom quote after a short call",
     featured: true,
   },
   {
@@ -65,7 +65,7 @@ const services: Service[] = [
     idealFor:
       "Coaches, authors, and founders who post but are not growing. This is the flagship.",
     icon: "rocket_launch",
-    price: "$2,500/mo",
+    price: "Custom quote after a short call",
   },
   {
     id: "content-production-system",
@@ -82,14 +82,14 @@ const services: Service[] = [
     idealFor:
       "Agencies and small teams that need a faster, repeatable content production system without scaling headcount.",
     icon: "movie_edit",
-    price: "$1,500/mo",
+    price: "Custom quote after a short call",
   },
 ];
 
 const servicesFaqs = [
   {
-    q: "How are payments structured?",
-    a: "All plans are billed monthly at the price shown. There are no upsells or hidden costs, final scope is confirmed on a free intro call so we match the plan to your goals and budget.",
+    q: "How does pricing work?",
+    a: "Plans are billed monthly. After a short intro call I send a quote that matches your goals and budget, with no upsells or hidden costs.",
   },
   {
     q: "Can I switch plans later?",
@@ -117,14 +117,14 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="mb-20 text-center max-w-3xl mx-auto pt-6">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container text-primary font-semibold text-xs tracking-wide uppercase mb-6 shadow-sm">
-          Services & Pricing
+          Services
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold text-on-surface mb-6 leading-tight">
           Three ways to <span className="gradient-text">work together</span>
         </h1>
         <p className="text-lg text-on-surface-variant leading-relaxed">
           Pick the plan that matches where you are right now. Every plan is
-          monthly, transparent on price, and pause or swap anytime. I can also
+          built around your goals, and you can pause or swap anytime. I can also
           automate a full channel, from scripting to reporting.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 mt-7">

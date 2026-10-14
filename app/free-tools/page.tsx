@@ -43,9 +43,9 @@ const tools = [
     desc: "Generate 10 scroll-stopping hook ideas for your next short-form video. Built from hook structures I have used on real client videos.",
     href: "/reel-hooks",
     brand: "instagram" as Brand,
-    color: "text-[#D62976]",
-    btn: "bg-gradient-to-r from-[#962FBF] via-[#D62976] to-[#FA7E1E] hover:brightness-110",
-    bg: "from-[#D62976]/12 via-[#962FBF]/6 to-transparent",
+    color: "text-primary",
+    btn: "bg-primary hover:bg-primary-container",
+    bg: "from-primary/12 to-transparent",
     iconBg: "bg-white",
     bullets: [
       "10 hook ideas in 30 seconds",

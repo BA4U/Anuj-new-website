@@ -43,7 +43,7 @@ const FAQS = [
 const ANGLE_COLORS: Record<string, { text: string; bg: string }> = {
   Curiosity: { text: "text-violet-600", bg: "bg-violet-50 border-violet-200/60" },
   Controversy: { text: "text-red-600", bg: "bg-red-50 border-red-200/60" },
-  Story: { text: "text-pink-600", bg: "bg-pink-50 border-pink-200/60" },
+  Story: { text: "text-violet-600", bg: "bg-violet-50 border-violet-200/60" },
   List: { text: "text-blue-600", bg: "bg-blue-50 border-blue-200/60" },
   Result: { text: "text-emerald-600", bg: "bg-emerald-50 border-emerald-200/60" },
   Question: { text: "text-amber-600", bg: "bg-amber-50 border-amber-200/60" },
@@ -97,7 +97,7 @@ export default function ReelHooksPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface overflow-x-hidden theme-ig">
+    <div className="min-h-screen bg-surface overflow-x-hidden ">
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="ambient-glow top-[-80px] left-[10%] opacity-60" />
         <div className="ambient-glow-2 bottom-[15%] right-[-5%] opacity-40" />
@@ -106,7 +106,7 @@ export default function ReelHooksPage() {
       {/* HERO */}
       <section className="relative pt-10 pb-10 px-6 lg:px-16 max-w-[1400px] mx-auto">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D62976]/10 border border-[#D62976]/20 text-[#D62976] font-semibold text-xs tracking-wide uppercase mb-7">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-semibold text-xs tracking-wide uppercase mb-7">
             <BrandIcon brand="instagram" size={18} />
             Free Reel Hooks Generator
           </div>
@@ -128,7 +128,7 @@ export default function ReelHooksPage() {
               { icon: "paid", text: "100% free" },
             ].map((b) => (
               <div key={b.text} className="flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-[#D62976] text-base">{b.icon}</span>
+                <span className="material-symbols-outlined text-primary text-base">{b.icon}</span>
                 {b.text}
               </div>
             ))}
@@ -141,8 +141,8 @@ export default function ReelHooksPage() {
         <div className="max-w-2xl mx-auto">
           {pageState === "input" && (
             <div className="glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#D62976] via-[#D62976] to-[#4F5BD5]/50 rounded-t-3xl" />
-              <div className="absolute top-0 right-0 w-52 h-52 rounded-full bg-[#D62976]/5 blur-3xl pointer-events-none" />
+              <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-primary via-primary to-[#4F5BD5]/50 rounded-t-3xl" />
+              <div className="absolute top-0 right-0 w-52 h-52 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
 
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-6">
@@ -166,7 +166,7 @@ export default function ReelHooksPage() {
                         setNiche(e.target.value);
                         setNicheError("");
                       }}
-                      className="w-full px-4 py-4 rounded-xl bg-surface-container border border-outline-variant/50 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-[#D62976]/30 focus:border-[#D62976]/50 transition-all text-sm font-medium"
+                      className="w-full px-4 py-4 rounded-xl bg-surface-container border border-outline-variant/50 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all text-sm font-medium"
                     />
                     {nicheError && (
                       <p className="text-xs text-error flex items-center gap-1 mt-2">
@@ -188,8 +188,8 @@ export default function ReelHooksPage() {
                           onClick={() => setPlatform(p.id)}
                           className={`flex flex-col items-center gap-1.5 py-3 rounded-xl border transition-all text-sm font-semibold ${
                             platform === p.id
-                              ? "border-[#D62976] bg-[#D62976]/10 text-[#D62976]"
-                              : "border-outline-variant/50 text-on-surface-variant hover:border-[#D62976]/30"
+                              ? "border-primary bg-primary/10 text-primary"
+                              : "border-outline-variant/50 text-on-surface-variant hover:border-primary/30"
                           }`}
                         >
                           <span className="material-symbols-outlined text-xl">{p.icon}</span>
@@ -202,7 +202,7 @@ export default function ReelHooksPage() {
                   <button
                     type="submit"
                     disabled={!niche.trim()}
-                    className="w-full flex items-center justify-center gap-2 bg-[#D62976] text-white font-bold py-4 rounded-xl hover:bg-[#D62976]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-[#D62976]/20 text-base"
+                    className="w-full flex items-center justify-center gap-2 bg-primary text-white font-bold py-4 rounded-xl hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-primary/20 text-base"
                   >
                     <span className="material-symbols-outlined text-xl">auto_awesome</span>
                     Generate My 30 Hooks
@@ -220,7 +220,7 @@ export default function ReelHooksPage() {
           {/* Generating state */}
           {pageState === "generating" && (
             <div className="glass-card rounded-3xl p-10 text-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#D62976]/5 to-[#D62976]/5 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/5 pointer-events-none" />
               <div className="relative z-10">
                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#962FBF] via-[#D62976] to-[#FA7E1E] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-[#D62976]/30">
                   <span className="text-white animate-pulse"><BrandIcon brand="instagram" size={34} mono /></span>
@@ -230,7 +230,7 @@ export default function ReelHooksPage() {
                   Crafting 30 scroll-stoppers for &ldquo;{niche}&rdquo;&hellip;
                 </p>
                 <div className="w-full h-2 bg-surface-container-high rounded-full overflow-hidden mb-4">
-                  <div className="h-full rounded-full bg-gradient-to-r from-[#D62976] to-[#4F5BD5] w-2/3 animate-pulse" />
+                  <div className="h-full rounded-full bg-gradient-to-r from-primary to-[#4F5BD5] w-2/3 animate-pulse" />
                 </div>
                 <p className="text-xs text-on-surface-variant/60">Mixing curiosity, controversy, story &amp; more…</p>
               </div>
@@ -266,24 +266,24 @@ export default function ReelHooksPage() {
                 <div className="mt-5 flex flex-col sm:flex-row gap-3 justify-center">
                   <Link
                     href="/funnels"
-                    className="inline-flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface font-semibold px-6 py-3 rounded-xl hover:border-[#D62976]/40 hover:text-[#D62976] transition-all text-sm"
+                    className="inline-flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface font-semibold px-6 py-3 rounded-xl hover:border-primary/40 hover:text-primary transition-all text-sm"
                   >
                     Explore more free tools
                   </Link>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center justify-center gap-2 bg-[#D62976] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#D62976]/90 transition-all text-sm"
+                    className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-6 py-3 rounded-xl hover:bg-primary/90 transition-all text-sm"
                   >
                     Work with Anuj
                   </Link>
                 </div>
               </div>
             ) : (
-              <div className="glass-card rounded-2xl p-6 border-2 border-[#D62976]/20 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#D62976]/4 to-[#D62976]/4 pointer-events-none" />
+              <div className="glass-card rounded-2xl p-6 border-2 border-primary/20 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/4 to-primary/4 pointer-events-none" />
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="material-symbols-outlined text-[#D62976] text-xl">mark_email_read</span>
+                    <span className="material-symbols-outlined text-primary text-xl">mark_email_read</span>
                     <p className="font-bold text-on-surface">Where should we send your hooks?</p>
                   </div>
                   <form onSubmit={handleEmailSubmit} className="flex gap-3">
@@ -293,12 +293,12 @@ export default function ReelHooksPage() {
                       placeholder="your@email.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="flex-1 px-4 py-3 rounded-xl bg-surface-container border border-outline-variant/50 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-[#D62976]/30 focus:border-[#D62976]/50 transition-all text-sm"
+                      className="flex-1 px-4 py-3 rounded-xl bg-surface-container border border-outline-variant/50 text-on-surface placeholder:text-on-surface-variant/40 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all text-sm"
                     />
                     <button
                       type="submit"
                       disabled={emailState === "sending"}
-                      className="flex items-center gap-1.5 bg-[#D62976] text-white font-bold px-5 py-3 rounded-xl hover:bg-[#D62976]/90 disabled:opacity-60 transition-all shrink-0 text-sm"
+                      className="flex items-center gap-1.5 bg-primary text-white font-bold px-5 py-3 rounded-xl hover:bg-primary/90 disabled:opacity-60 transition-all shrink-0 text-sm"
                     >
                       {emailState === "sending" ? (
                         <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -322,11 +322,11 @@ export default function ReelHooksPage() {
           {/* Sample hook cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12 max-w-4xl mx-auto">
             {SAMPLE_HOOKS.map((h, i) => {
-              const tone = ANGLE_COLORS[h.angle] || { text: "text-[#D62976]", bg: "bg-primary-fixed" };
+              const tone = ANGLE_COLORS[h.angle] || { text: "text-primary", bg: "bg-primary-fixed" };
               return (
                 <div key={i} className="glass-card rounded-2xl p-5 relative overflow-hidden">
                   <div className="flex items-start gap-3">
-                    <div className="bg-[#D62976] text-white rounded-lg min-w-[28px] h-7 flex items-center justify-center font-bold text-xs shrink-0">
+                    <div className="bg-primary text-white rounded-lg min-w-[28px] h-7 flex items-center justify-center font-bold text-xs shrink-0">
                       {i + 1}
                     </div>
                     <div className="flex-1">
@@ -363,7 +363,7 @@ export default function ReelHooksPage() {
       <section className="py-20 px-6 lg:px-16 bg-surface-container-low/50">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-14">
-            <p className="text-xs font-bold text-[#D62976] uppercase tracking-widest mb-3">FAQ</p>
+            <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">FAQ</p>
             <h2 className="text-3xl font-bold text-on-surface">Questions? Answered.</h2>
           </div>
           <div className="space-y-3">
@@ -375,7 +375,7 @@ export default function ReelHooksPage() {
                 >
                   <span className="font-semibold text-on-surface text-sm pr-4">{faq.q}</span>
                   <span
-                    className={`material-symbols-outlined text-[#D62976] shrink-0 transition-transform duration-300 ${openFaq === idx ? "rotate-180" : ""}`}
+                    className={`material-symbols-outlined text-primary shrink-0 transition-transform duration-300 ${openFaq === idx ? "rotate-180" : ""}`}
                   >
                     expand_more
                   </span>
@@ -394,9 +394,9 @@ export default function ReelHooksPage() {
       {/* FINAL CTA */}
       <section className="py-24 px-6 lg:px-16 max-w-[1400px] mx-auto">
         <div className="glass-card rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#D62976]/8 via-transparent to-[#D62976]/8 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-transparent to-primary/8 pointer-events-none" />
           <div className="relative z-10">
-            <p className="text-xs font-bold text-[#D62976] uppercase tracking-widest mb-4">Start Today</p>
+            <p className="text-xs font-bold text-primary uppercase tracking-widest mb-4">Start Today</p>
             <h2 className="text-3xl md:text-5xl font-extrabold text-on-surface mb-6 leading-tight">
               Never Write a <span className="gradient-text">Blank Script</span> Again
             </h2>
@@ -409,14 +409,14 @@ export default function ReelHooksPage() {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                   setPageState("input");
                 }}
-                className="group inline-flex items-center justify-center gap-2 bg-[#D62976] text-white font-bold px-10 py-4 rounded-2xl hover:bg-[#D62976]/90 transition-all hover:scale-105 shadow-xl hover:shadow-[#D62976]/20 text-lg"
+                className="group inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-10 py-4 rounded-2xl hover:bg-primary/90 transition-all hover:scale-105 shadow-xl hover:shadow-primary/20 text-lg"
               >
                 <span className="material-symbols-outlined">auto_awesome</span>
                 Generate My Hooks
               </button>
               <Link
                 href="/funnels"
-                className="inline-flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface font-semibold px-8 py-4 rounded-2xl hover:border-[#D62976]/40 hover:text-[#D62976] transition-all text-lg"
+                className="inline-flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface font-semibold px-8 py-4 rounded-2xl hover:border-primary/40 hover:text-primary transition-all text-lg"
               >
                 See all free tools
               </Link>
