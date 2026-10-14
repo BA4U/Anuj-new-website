@@ -31,7 +31,7 @@ export default function BlogIndex() {
         <ScrollReveal each className="grid grid-cols-1 gap-5">
           {POSTS.map((p) => (
             <Link key={p.slug} href={`/blog/${p.slug}`} className="reveal group card-glow spotlight p-6 md:p-8 text-center flex flex-col items-center">
-              <time dateTime={p.date} className="eyebrow mb-2 !text-[11px]">{fmt(p.date)}</time>
+              <time dateTime={p.date} className="label mb-2 !text-[11px]">{fmt(p.date)}</time>
               <h2 className="text-[22px] md:text-[28px] font-semibold tracking-[-0.02em] text-on-surface group-hover:text-primary transition-colors max-w-2xl">
                 {p.title}
               </h2>

@@ -51,6 +51,15 @@
 @layer components {
   /* ─── Eyebrow / kicker ─────────────────────────────────────────── */
   .eyebrow {
+    font-family: "Caveat", "Kaushan Script", cursive;
+    font-size: 24px;
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #5b3fe0;
+  }
+  .label {
     @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant;
   }
 
@@ -164,16 +173,24 @@
 
   /* ─── Legacy class compatibility (used across inner pages) ─────── */
   .glass-card {
-    background: rgba(255, 255, 255, 0.82);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-    backdrop-filter: saturate(180%) blur(20px);
-    border: 1px solid rgba(0, 0, 0, 0.07);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 14px 36px -26px rgba(0, 0, 0, 0.28);
-    transition: box-shadow 250ms ease, border-color 250ms ease;
+    position: relative;
+    background:
+      radial-gradient(120% 90% at 0% 0%, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0) 55%),
+      rgba(255, 255, 255, 0.68);
+    -webkit-backdrop-filter: saturate(180%) blur(22px);
+    backdrop-filter: saturate(180%) blur(22px);
+    border: 1px solid transparent;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 22px 48px -28px rgba(73, 54, 230, 0.38);
+    transition: box-shadow 300ms ease, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .glass-card:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 20px 44px -26px rgba(0, 0, 0, 0.32);
-    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      0 2px 4px rgba(0, 0, 0, 0.05),
+      0 30px 60px -26px rgba(73, 54, 230, 0.5);
   }
 
   .glass-panel {
@@ -364,11 +381,16 @@
   position: relative;
   background:
     radial-gradient(120% 90% at 0% 0%, rgba(139, 92, 246, 0.10) 0%, rgba(139, 92, 246, 0) 55%),
-    linear-gradient(180deg, #ffffff 0%, #faf9ff 100%);
-  border: 1px solid rgba(73, 54, 230, 0.12);
+    rgba(255, 255, 255, 0.72);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  backdrop-filter: saturate(180%) blur(22px);
+  border: 1px solid transparent;
   border-radius: 22px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 18px 40px -28px rgba(73, 54, 230, 0.35);
-  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease, border-color 300ms ease;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 22px 48px -28px rgba(73, 54, 230, 0.4);
+  transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease;
   overflow: hidden;
 }
 .card-glow::before {
@@ -382,8 +404,10 @@
 }
 .card-glow:hover {
   transform: translate3d(0, -4px, 0);
-  border-color: rgba(73, 54, 230, 0.28);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04), 0 28px 56px -26px rgba(73, 54, 230, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 32px 64px -26px rgba(73, 54, 230, 0.55);
 }
 .card-glow:hover::before { opacity: 1; }
 
@@ -487,3 +511,52 @@
 @media (prefers-reduced-motion: reduce) {
   .tm-in, .tm-ring, .tm-ring > * { animation: none; }
 }
+
+
+/* ─── Shared gradient hairline border for every glass surface ───── */
+.glass-card::after,
+.card-glow::after,
+.cta-card::after,
+.card-soft::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, rgba(139, 92, 246, 0.55) 0%, rgba(73, 54, 230, 0.12) 38%, rgba(255, 255, 255, 0.7) 60%, rgba(168, 85, 247, 0.45) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Light blue-lilac glass card (forms, email capture) */
+.card-soft {
+  position: relative;
+  border-radius: 22px;
+  border: 1px solid transparent;
+  background:
+    radial-gradient(110% 90% at 0% 0%, rgba(99, 102, 241, 0.14) 0%, rgba(99, 102, 241, 0) 60%),
+    linear-gradient(180deg, rgba(238, 241, 255, 0.85), rgba(246, 243, 255, 0.8));
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  backdrop-filter: saturate(180%) blur(22px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.04), 0 22px 48px -28px rgba(73, 54, 230, 0.4);
+}
+
+/* Purple gradient glass call-to-action card */
+.cta-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid transparent;
+  background:
+    radial-gradient(90% 70% at 10% 0%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(135deg, #f3ecff 0%, #d9c8ff 45%, #a97cf6 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.05), 0 40px 80px -36px rgba(105, 62, 230, 0.7);
+}
+
+/* Brand themes for free-tool pages */
+.theme-yt .gradient-text { background-image: linear-gradient(90deg,#FF0000,#C4001A); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.theme-ig .gradient-text { background-image: linear-gradient(90deg,#962FBF,#D62976,#FA7E1E); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.theme-li .gradient-text { background-image: linear-gradient(90deg,#0A66C2,#378FE9); -webkit-background-clip: text; background-clip: text; color: transparent; }

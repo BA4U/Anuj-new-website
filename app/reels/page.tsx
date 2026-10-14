@@ -1,4 +1,5 @@
 import React from "react";
+import PlayWrap from "@/components/PlayWrap";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -79,10 +80,9 @@ function ReelTile({
   duration: string;
 }) {
   return (
-    <a
-      href={`https://www.youtube.com/watch?v=${id}`}
-      target="_blank"
-      rel="noreferrer"
+    <PlayWrap
+      id={id}
+      title={title}
       className="group block glass-card rounded-2xl overflow-hidden border border-outline-variant/40 hover:-translate-y-1 hover:shadow-xl transition-all"
     >
       <div className="relative aspect-square bg-black">
@@ -112,7 +112,7 @@ function ReelTile({
           {desc}
         </p>
       </div>
-    </a>
+    </PlayWrap>
   );
 }
 

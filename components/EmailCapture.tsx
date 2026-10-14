@@ -13,9 +13,9 @@ interface EmailCaptureProps {
 }
 
 const variantClasses: Record<Variant, string> = {
-  card: "glass-card rounded-3xl p-8 md:p-10 bg-gradient-to-br from-purple-50 via-purple-100 to-pink-200 shadow-2xl",
-  inline: "glass-card rounded-2xl p-6 bg-gradient-to-br from-indigo-50 to-purple-50 border border-primary/20",
-  sidebar: "glass-card rounded-2xl p-6 border border-outline-variant/40",
+  card: "card-soft p-8 md:p-10",
+  inline: "card-soft p-6",
+  sidebar: "card-soft p-6",
 };
 
 export function EmailCapture({

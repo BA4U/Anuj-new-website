@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import BrandIcon from "@/components/BrandIcon";
 
 const socials: { name: string; href: string; icon: string }[] = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/byanuj4u/", icon: "person" },
@@ -120,9 +121,13 @@ export default function Footer() {
                     className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white hover:border-white/40 transition-colors duration-150"
                     aria-label={social.name}
                   >
-                    <span className="material-symbols-outlined text-[18px]">
-                      {social.icon}
-                    </span>
+                    {social.name === "LinkedIn" ? (
+                      <BrandIcon brand="linkedin" size={16} mono />
+                    ) : (
+                      <span className="material-symbols-outlined text-[18px]">
+                        {social.icon}
+                      </span>
+                    )}
                   </a>
                 ))}
               </div>

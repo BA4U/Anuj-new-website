@@ -35,28 +35,28 @@ export default function Navbar() {
           : "border-b border-transparent"
       }`}
     >
-      <div className="flex justify-between items-center px-5 sm:px-6 lg:px-10 xl:px-14 h-14 w-full max-w-[1240px] mx-auto">
+      <div className="flex justify-between items-center px-5 sm:px-6 lg:px-10 xl:px-14 h-[68px] w-full max-w-[1240px] mx-auto">
         {/* Wordmark */}
         <Link
           href="/"
           className="flex items-center gap-2.5 group shrink-0"
           aria-label="Anuj Mishra, home"
         >
-          <span className="w-7 h-7 rounded-[8px] bg-on-surface text-white text-[13px] font-semibold flex items-center justify-center tracking-tight group-hover:bg-primary transition-colors duration-200">
+          <span className="w-9 h-9 rounded-[10px] bg-on-surface text-white text-[16px] font-semibold flex items-center justify-center tracking-tight group-hover:bg-primary transition-colors duration-200">
             A
           </span>
-          <span className="font-semibold text-[15px] text-on-surface tracking-[-0.01em]">
+          <span className="font-semibold text-[18px] text-on-surface tracking-[-0.01em]">
             Anuj Mishra
           </span>
         </Link>
 
         {/* Desktop navigation */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1.5">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className={`px-3 py-1.5 rounded-full text-[14px] transition-colors duration-150 ${
+              className={`px-4 py-2 rounded-full text-[16px] transition-colors duration-150 ${
                 isActive(link.href)
                   ? "text-on-surface font-medium bg-black/[0.055]"
                   : "text-on-surface-variant hover:text-on-surface hover:bg-black/[0.035]"
@@ -65,7 +65,7 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          <Link href="/contact" className="btn btn-dark btn-sm ml-2">
+          <Link href="/contact" className="btn btn-dark ml-3 !py-3 !px-6 !text-[15px]">
             Start a project
           </Link>
         </nav>
@@ -91,7 +91,7 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className={`block px-3 py-2.5 rounded-xl text-[15px] transition-colors ${
+              className={`block px-4 py-3 rounded-xl text-[17px] transition-colors ${
                 isActive(link.href)
                   ? "text-on-surface font-medium bg-black/[0.05]"
                   : "text-on-surface-variant hover:bg-black/[0.035]"
