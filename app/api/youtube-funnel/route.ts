@@ -57,18 +57,18 @@ function planEmailHtml(channelUrl: string, plan: PlanDay[]) {
     <p style="margin:0;font-size:13px;opacity:.85;">${escapeHtml(channelUrl)}</p>
   </div>
   <div style="max-width:640px;margin:0 auto;padding:24px;">
-    <p style="font-size:14px;color:#374151;line-height:1.6;">This plan is built from best practice for your likely niche — I haven't seen your private analytics yet. Reply to this email with a screenshot of your last 90 days in YouTube Studio and I'll tell you which three days matter most for <i>your</i> channel.</p>
+    <p style="font-size:14px;color:#374151;line-height:1.6;">This plan is built from best practice for your likely niche, I haven't seen your private analytics yet. Reply to this email with a screenshot of your last 90 days in YouTube Studio and I'll tell you which three days matter most for <i>your</i> channel.</p>
     ${rows}
-    <p style="font-size:13px;color:#6b7280;margin-top:24px;">— Anuj Mishra · <a href="mailto:contact@anuj4u.in">contact@anuj4u.in</a></p>
+    <p style="font-size:13px;color:#6b7280;margin-top:24px;">Anuj Mishra · <a href="mailto:contact@anuj4u.in">contact@anuj4u.in</a></p>
   </div></body></html>`;
 }
 
 function reviewEmailHtml(channelUrl: string) {
   return `<!DOCTYPE html><html><body style="font-family:Segoe UI,Helvetica,Arial,sans-serif;color:#111827;line-height:1.6;max-width:560px;margin:0 auto;padding:24px;">
   <h2 style="color:#4936e6;">Got your channel ✅</h2>
-  <p>Thanks — I've received <b>${escapeHtml(channelUrl)}</b>.</p>
+  <p>Thanks, I've received <b>${escapeHtml(channelUrl)}</b>.</p>
   <p>I'll review it personally and send your 30-day plan within 24 hours. If you want it sharper, reply with a screenshot of your last 90 days from YouTube Studio.</p>
-  <p>— Anuj Mishra<br/><a href="mailto:contact@anuj4u.in">contact@anuj4u.in</a></p></body></html>`;
+  <p>Anuj Mishra<br/><a href="mailto:contact@anuj4u.in">contact@anuj4u.in</a></p></body></html>`;
 }
 
 export async function POST(request: NextRequest) {
@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json().catch(() => ({}));
     const { channelUrl: rawUrl, email: rawEmail, website } = body as Record<string, string>;
 
-    // Honeypot — real users never fill this hidden field
+    // Honeypot, real users never fill this hidden field
     if (website) return NextResponse.json({ ok: true, mode: "review" });
 
     const parsed = parseChannelUrl(rawUrl);
@@ -106,7 +106,7 @@ export async function POST(request: NextRequest) {
 
     if (!emailConfigured()) {
       if (sheetOk) return NextResponse.json({ ok: true, mode: "review" });
-      console.error("[youtube-funnel] No RESEND_API_KEY and no GOOGLE_SHEETS_WEBHOOK_URL — lead NOT captured:", email, parsed.url);
+      console.error("[youtube-funnel] No RESEND_API_KEY and no GOOGLE_SHEETS_WEBHOOK_URL, lead NOT captured:", email, parsed.url);
       return NextResponse.json(
         { error: "Our email service isn't set up yet. Please email contact@anuj4u.in with your channel link and I'll send your plan personally." },
         { status: 503 }
@@ -115,14 +115,14 @@ export async function POST(request: NextRequest) {
 
     // 3) Tell Anuj, then email the lead
     await notifyAdmin(
-      `New YouTube funnel lead — ${parsed.label}`,
-      `<p><b>${escapeHtml(email)}</b> submitted <a href="${escapeHtml(parsed.url)}">${escapeHtml(parsed.url)}</a></p><p>Plan auto-generated: <b>${hasPlan ? "yes" : "NO — follow up manually"}</b></p>`
+      `New YouTube funnel lead, ${parsed.label}`,
+      `<p><b>${escapeHtml(email)}</b> submitted <a href="${escapeHtml(parsed.url)}">${escapeHtml(parsed.url)}</a></p><p>Plan auto-generated: <b>${hasPlan ? "yes" : "NO, follow up manually"}</b></p>`
     );
 
     try {
       await sendEmail({
         to: [email],
-        subject: hasPlan ? "Your 30-day YouTube plan is ready" : "Got your channel — your plan is coming",
+        subject: hasPlan ? "Your 30-day YouTube plan is ready" : "Got your channel, your plan is coming",
         html: hasPlan ? planEmailHtml(parsed.url, plan as PlanDay[]) : reviewEmailHtml(parsed.url),
       });
     } catch (e) {

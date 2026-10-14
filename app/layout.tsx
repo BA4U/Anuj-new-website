@@ -69,7 +69,7 @@ export default function RootLayout({
                 {
                   "@type": "ProfessionalService",
                   "@id": "https://anuj4u.in/#business",
-                  name: "Anuj Mishra — Video Editing & Growth Marketing",
+                  name: "Anuj Mishra, Video Editing & Growth Marketing",
                   url: "https://anuj4u.in",
                   image: "https://anuj4u.in/api/og",
                   email: "contact@anuj4u.in",

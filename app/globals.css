@@ -69,6 +69,7 @@
       box-shadow 200ms ease, transform 120ms cubic-bezier(0.22, 1, 0.36, 1);
     user-select: none;
     cursor: pointer;
+    white-space: nowrap;
   }
   .btn:active {
     transform: scale(0.97);
@@ -120,6 +121,14 @@
   }
   .btn-on-dark:hover {
     background: #f2f2f5;
+  }
+  .btn-ghost-on-dark {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .btn-ghost-on-dark:hover {
+    background: rgba(255, 255, 255, 0.18);
   }
 
   .btn-sm {

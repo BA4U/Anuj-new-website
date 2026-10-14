@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Reels & Shorts | Anuj Mishra",
+  title: "Reels & Shorts",
   description: "Engaging short-form reels and YouTube Shorts. Vertical clips for social media that stop the scroll.",
   alternates: { canonical: "/reels" },
   openGraph: {

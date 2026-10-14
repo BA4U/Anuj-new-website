@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "LinkedIn Funnel System | Anuj Mishra",
+  title: "LinkedIn Funnel System",
   description: "A complete LinkedIn lead generation system for coaches, consultants, and B2B founders. Profile rewrite, content pillars, and a posting rhythm that turns views into booked calls.",
   alternates: { canonical: "/linkedin-funnel-system" },
   openGraph: {

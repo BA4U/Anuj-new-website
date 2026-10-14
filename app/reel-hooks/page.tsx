@@ -14,12 +14,12 @@ const PLATFORMS = [
 ];
 
 const SAMPLE_HOOKS = [
-  { hook: "Stop scrolling — this niche mistake is costing you followers", angle: "Curiosity", format: "Reel" },
+  { hook: "Stop scrolling, this niche mistake is costing you followers", angle: "Curiosity", format: "Reel" },
   { hook: "I tried the worst advice on the internet so you don't have to", angle: "Story", format: "Short" },
   { hook: "Nobody talks about this truth (and it changed everything)", angle: "Controversy", format: "TikTok" },
   { hook: "3 habits that quietly ruined my growth", angle: "List", format: "Reel" },
   { hook: "The result I got in 30 days will surprise you", angle: "Result", format: "Short" },
-  { hook: "Everyone gets this step wrong — here's the fix", angle: "Myth-Bust", format: "Reel" },
+  { hook: "Everyone gets this step wrong, here's the fix", angle: "Myth-Bust", format: "Reel" },
   { hook: "Behind the scenes of an actual creator's workflow", angle: "Behind-the-Scenes", format: "TikTok" },
   { hook: "The first thing I'd change if I restarted from zero", angle: "Question", format: "Short" },
 ];
@@ -31,11 +31,11 @@ const FAQS = [
   },
   {
     q: "Can I use these on TikTok too?",
-    a: "Yes. The hooks work across Reels, YouTube Shorts, and TikTok — short-form attention mechanics are the same everywhere.",
+    a: "Yes. The hooks work across Reels, YouTube Shorts, and TikTok, short-form attention mechanics are the same everywhere.",
   },
   {
     q: "Is it really free?",
-    a: "Completely free. The 30-hook swipe file is yours at no cost. If you want help scripting and editing your videos, you can book a call — no obligation.",
+    a: "Completely free. The 30-hook swipe file is yours at no cost. If you want help scripting and editing your videos, you can book a call, no obligation.",
   },
 ];
 
@@ -115,8 +115,8 @@ export default function ReelHooksPage() {
           </h1>
 
           <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-3xl mx-auto mb-8 text-balance">
-            Tell us your niche. Our AI writes 30 copy-paste hooks — each tagged with its angle and
-            format — so you never stare at a blank script again.
+            Tell us your niche. Our AI writes 30 copy-paste hooks, each tagged with its angle and
+            format, so you never stare at a blank script again.
           </p>
 
           <div className="flex flex-wrap justify-center gap-5 text-sm text-on-surface-variant">
@@ -250,7 +250,7 @@ export default function ReelHooksPage() {
               A Sneak Peek of Your 30 Hooks
             </h2>
             <p className="text-on-surface-variant max-w-lg mx-auto">
-              Enter your email below to get all 30 in your inbox — completely free.
+              Enter your email below to get all 30 in your inbox, completely free.
             </p>
           </div>
 

@@ -1,7 +1,7 @@
 /**
  * Server-only helpers shared by the lead-magnet funnels (YouTube + LinkedIn):
  * Resend email, Google-Sheets lead log, Gemini JSON generation, tiny rate limiter.
- * Every env var is optional — callers decide how to degrade honestly.
+ * Every env var is optional, callers decide how to degrade honestly.
  */
 
 export const escapeHtml = (s: string) =>

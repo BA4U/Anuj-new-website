@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import FAQAccordion from "@/components/FAQAccordion";
 
 export const metadata: Metadata = {
-  title: "Services & Pricing | Anuj Mishra",
+  title: "Services & Pricing",
   description: "Three productized content services for coaches, authors, and founders. LinkedIn Funnel System $800/mo, Content Engine $2,500/mo, Content Production System $1,500/mo.",
   alternates: { canonical: "/services" },
   openGraph: {
@@ -89,7 +89,7 @@ const services: Service[] = [
 const servicesFaqs = [
   {
     q: "How are payments structured?",
-    a: "All plans are billed monthly at the price shown. There are no upsells or hidden costs — final scope is confirmed on a free intro call so we match the plan to your goals and budget.",
+    a: "All plans are billed monthly at the price shown. There are no upsells or hidden costs, final scope is confirmed on a free intro call so we match the plan to your goals and budget.",
   },
   {
     q: "Can I switch plans later?",
@@ -124,11 +124,16 @@ export default function ServicesPage() {
         </h1>
         <p className="text-lg text-on-surface-variant leading-relaxed">
           Pick the plan that matches where you are right now. Every plan is
-          monthly, transparent on price, and pause or swap anytime.
+          monthly, transparent on price, and pause or swap anytime. I can also
+          automate a full channel, from scripting to reporting.
         </p>
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
+          <Link href="/youtube-funnel" className="btn btn-glow">Audit my channel</Link>
+          <Link href="/contact" className="btn btn-secondary">Book a call</Link>
+        </div>
       </section>
 
-      {/* Services — Vertical Stacked Cards */}
+      {/* Services, Vertical Stacked Cards */}
       <section className="mb-24 space-y-6">
         {services.map((service) => (
           <article
@@ -203,7 +208,7 @@ export default function ServicesPage() {
             How we <span className="gradient-text">work together</span>
           </h2>
           <p className="text-on-surface-variant text-base md:text-lg max-w-2xl mx-auto">
-            A simple, predictable engagement — from first call to first deliverable in
+            A simple, predictable engagement, from first call to first deliverable in
             under 7 days.
           </p>
         </div>

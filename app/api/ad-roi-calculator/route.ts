@@ -13,7 +13,7 @@ interface RequestBody {
 
 /**
  * Fire-and-forget analytics for the Ad ROI calculator.
- * No email capture — this is a pure client-side tool. We only log
+ * No email capture, this is a pure client-side tool. We only log
  * usage to Google Sheets (when configured) so Anuj can see what
  * numbers visitors are testing.
  */

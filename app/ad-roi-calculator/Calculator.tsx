@@ -65,7 +65,7 @@ function compute(spend: number, ctrPct: number, convPct: number, aov: number, cu
     verdictDescription = "This creative is a money printer. Scale the budget and ship variations to protect it from creative fatigue.";
   } else if (roasDerived >= 2) {
     verdict = "good";
-    verdictLabel = "Profitable — scale it";
+    verdictLabel = "Profitable, scale it";
     verdictColor = "text-emerald-600";
     verdictDescription = "You're comfortably profitable. Test new audiences and double down on what's working.";
   } else if (roasDerived >= 1) {
@@ -103,7 +103,7 @@ function generateTips(result: Result, spend: number, ctrPct: number, convPct: nu
       primary:
         "Scale the budget by 20% every 48 hours. Sudden jumps reset the learning phase and tank your CPM.",
       secondary:
-        "Build 3 new creatives using your current winner's hook — same first 3 seconds, different angles for the rest.",
+        "Build 3 new creatives using your current winner's hook, same first 3 seconds, different angles for the rest.",
       tertiary:
         "Move 10% of your budget to a lookalike audience of purchasers, not the broad audience. Higher intent, lower CPA.",
     };
@@ -111,18 +111,18 @@ function generateTips(result: Result, spend: number, ctrPct: number, convPct: nu
   if (result.roas >= 1) {
     return {
       primary:
-        "Your CTR is the first lever. Test 5 new hooks in the first 3 seconds — that single metric usually moves ROAS more than any other.",
+        "Your CTR is the first lever. Test 5 new hooks in the first 3 seconds, that single metric usually moves ROAS more than any other.",
       secondary:
         "Tighten your landing page above the fold. Match the headline to the ad's exact promise. A 1% lift in conversion rate often doubles profitability.",
       tertiary:
         "Cut your 20% worst-performing audiences/placements before adding budget. Refresh the surviving 80% first.",
     };
   }
-  // Poor — different advice for CTR vs conversion
+  // Poor, different advice for CTR vs conversion
   if (ctrPct < 1.0) {
     return {
       primary:
-        "Your creative isn't stopping the scroll. Test pattern-interrupt hooks in the first second — text on screen, a question, or a stat that breaks the feed rhythm.",
+        "Your creative isn't stopping the scroll. Test pattern-interrupt hooks in the first second, text on screen, a question, or a stat that breaks the feed rhythm.",
       secondary:
         "Try a 9:16 vertical format if you're running square. Vertical creatives consistently beat square on Meta by 30%+ on thumb-stop ratio.",
       tertiary:
@@ -132,7 +132,7 @@ function generateTips(result: Result, spend: number, ctrPct: number, convPct: nu
   if (convPct < 1.5) {
     return {
       primary:
-        "The click is happening but the page isn't closing. Cut every step between the ad click and the checkout — one tap, one decision, one form field.",
+        "The click is happening but the page isn't closing. Cut every step between the ad click and the checkout, one tap, one decision, one form field.",
       secondary:
         "Add a single, time-bound offer above the fold (e.g. 'free shipping until Sunday'). Anchors action when the page itself feels generic.",
       tertiary:
@@ -160,7 +160,7 @@ const FAQS = [
   },
   {
     q: "How are impressions and clicks calculated here?",
-    a: "We assume an average CPM (cost per 1,000 impressions) of $10 USD / ₹800 INR, then apply your CTR to get clicks and your conversion rate to get sales. Real CPMs vary by niche, country, and platform — use your own ad manager numbers for the truest read.",
+    a: "We assume an average CPM (cost per 1,000 impressions) of $10 USD / ₹800 INR, then apply your CTR to get clicks and your conversion rate to get sales. Real CPMs vary by niche, country, and platform, use your own ad manager numbers for the truest read.",
   },
   {
     q: "What if I don't know my exact CTR or conversion rate?",
@@ -231,7 +231,7 @@ export default function Calculator() {
           </h1>
 
           <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-3xl mx-auto mb-8 text-balance">
-            Drop in your numbers. Get instant ROAS, CPA, and revenue — plus 3 tips to improve
+            Drop in your numbers. Get instant ROAS, CPA, and revenue, plus 3 tips to improve
             them. No sign-up, no email required.
           </p>
         </div>
@@ -375,7 +375,7 @@ export default function Calculator() {
                     { label: "Revenue", value: formatMoney(result.revenue, currency), color: "text-emerald-600" },
                     { label: "Profit", value: formatMoney(result.profit, currency), color: result.profit >= 0 ? "text-emerald-600" : "text-red-600" },
                     { label: "CPA", value: formatMoney(result.cpa, currency), color: "text-on-surface" },
-                    { label: "CPC", value: result.cpc > 0 ? formatMoney(result.cpc, currency) : "—", color: "text-on-surface" },
+                    { label: "CPC", value: result.cpc > 0 ? formatMoney(result.cpc, currency) : "-", color: "text-on-surface" },
                   ].map((m) => (
                     <div
                       key={m.label}
@@ -495,7 +495,7 @@ export default function Calculator() {
         </div>
       </section>
 
-      {/* CTA — back to funnels */}
+      {/* CTA, back to funnels */}
       <section className="py-20 px-6 lg:px-16 max-w-[1400px] mx-auto">
         <div className="glass-card rounded-3xl p-10 md:p-14 text-center relative overflow-hidden bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500/30 shadow-xl">
           <div className="relative z-10 max-w-2xl mx-auto">
@@ -503,7 +503,7 @@ export default function Calculator() {
               Want your ads <span className="gradient-text">actually managed?</span>
             </h2>
             <p className="text-on-surface-variant text-base md:text-lg mb-8">
-              I run Google and LinkedIn ad campaigns for creators and brands — creative, targeting,
+              I run Google and LinkedIn ad campaigns for creators and brands, creative, targeting,
               landing pages, and weekly reporting. No long contracts.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

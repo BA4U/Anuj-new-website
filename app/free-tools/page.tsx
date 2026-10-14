@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { EmailCapture } from "@/components/EmailCapture";
 
 export const metadata: Metadata = {
-  title: "Free Tools | Anuj Mishra",
+  title: "Free Tools",
   description: "Three free tools built from real client work: a LinkedIn funnel planner, a reel hook generator, and a YouTube channel audit. No signup, no fluff.",
   alternates: { canonical: "/free-tools" },
   openGraph: {

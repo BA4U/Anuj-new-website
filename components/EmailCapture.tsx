@@ -46,7 +46,7 @@ export function EmailCapture({
         throw new Error(data.error || "Could not subscribe right now.");
       }
       setStatus("success");
-      setMessage("Check your inbox — you are on the list.");
+      setMessage("Check your inbox, you are on the list.");
       setEmail("");
     } catch (err) {
       setStatus("error");

@@ -59,7 +59,7 @@ Return ONLY a valid JSON array with no markdown, no explanation, no code fences:
 Rules:
 - Distribute: 8 Authority, 8 Storytelling, 8 Education, 6 Engagement posts
 - Mix post types: Text Posts, Carousels, Polls, Short Videos, Document Posts
-- Every hook must be unique — no repeated patterns
+- Every hook must be unique, no repeated patterns
 - Posts build progressively over 30 days
 - Return ONLY the JSON array`;
 
@@ -108,7 +108,7 @@ async function sendEmail(
   const resendKey = process.env.RESEND_API_KEY;
 
   if (!resendKey) {
-    // Hard fail — we don't silently skip. The user should know.
+    // Hard fail, we don't silently skip. The user should know.
     throw new Error(
       "EMAIL_NOT_CONFIGURED: Add RESEND_API_KEY to your .env.local file. See .env.local.example for instructions."
     );
@@ -155,14 +155,14 @@ async function sendEmail(
 }
 
 // ─── Storage: Google Sheets via Apps Script Webhook ───────────────────────────
-// No npm package needed — just a URL from your Google Apps Script web app.
+// No npm package needed, just a URL from your Google Apps Script web app.
 // See .env.local.example for setup instructions.
 async function logToGoogleSheets(
   data: RequestBody,
   emailId: string | null
 ): Promise<void> {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (!webhookUrl) return; // Optional — doesn't block email delivery
+  if (!webhookUrl) return; // Optional, doesn't block email delivery
 
   try {
     await fetch(webhookUrl, {
@@ -178,7 +178,7 @@ async function logToGoogleSheets(
     });
     console.log("✅ Logged to Google Sheets");
   } catch (err) {
-    // Non-blocking — log failure but don't crash the request
+    // Non-blocking, log failure but don't crash the request
     console.warn("⚠️  Google Sheets logging failed:", err);
   }
 }
@@ -294,7 +294,7 @@ function buildEmailHtml(
     <!-- Footer CTA -->
     <div style="background:linear-gradient(135deg,#1c1b1c,#2d1e6e);border-radius:16px;padding:32px;text-align:center;margin:24px 0;">
       <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 12px;">Want Help Executing This?</h3>
-      <p style="color:rgba(255,255,255,0.75);font-size:14px;margin:0 0 24px;line-height:1.6;">I personally help creators and founders build their LinkedIn presence — from strategy to content to growth.</p>
+      <p style="color:rgba(255,255,255,0.75);font-size:14px;margin:0 0 24px;line-height:1.6;">I personally help creators and founders build their LinkedIn presence, from strategy to content to growth.</p>
       <a href="https://anuj4u.in/contact" style="display:inline-block;background:#0A66C2;color:white;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none;font-size:15px;">Book a Free Strategy Call →</a>
     </div>
 
@@ -340,7 +340,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Too many requests. Please try again in an hour." }, { status: 429 });
     }
 
-    // ── Generate AI content (if AI is unavailable we never email demo posts — Anuj follows up personally) ──
+    // ── Generate AI content (if AI is unavailable we never email demo posts, Anuj follows up personally) ──
     let content: ContentDay[];
     try {
       content = await generateContent(body);
@@ -348,7 +348,7 @@ export async function POST(req: NextRequest) {
       if (!(e instanceof Error) || e.message !== "AI_UNAVAILABLE") throw e;
       const sheetOk = await logLead({ source: "linkedin-funnel", email: body.email, linkedinUrl: body.linkedinUrl, status: "needs-manual-review" });
       if (!emailConfigured() && !sheetOk) {
-        console.error("[linkedin-funnel] AI + email + sheet all unavailable — lead NOT captured:", body.email, body.linkedinUrl);
+        console.error("[linkedin-funnel] AI + email + sheet all unavailable, lead NOT captured:", body.email, body.linkedinUrl);
         return NextResponse.json(
           { error: "This tool is temporarily unavailable. Please email contact@anuj4u.in and I'll send your plan personally." },
           { status: 503 }
@@ -356,13 +356,13 @@ export async function POST(req: NextRequest) {
       }
       if (emailConfigured()) {
         await notifyAdmin(
-          `New LinkedIn funnel lead — follow up manually`,
+          `New LinkedIn funnel lead, follow up manually`,
           `<p><b>${escapeHtml(body.email)}</b> submitted <b>${escapeHtml(body.linkedinUrl)}</b>. AI generation was unavailable, so no plan was sent.</p>`
         );
         await sendLeadEmail({
           to: [body.email],
-          subject: "Got your profile — your plan is coming",
-          html: `<p style="font-family:Segoe UI,Arial,sans-serif;line-height:1.6">Thanks! I've received <b>${escapeHtml(body.linkedinUrl)}</b> and will send your personal 30-day LinkedIn plan within 24 hours.<br/><br/>— Anuj Mishra · contact@anuj4u.in</p>`,
+          subject: "Got your profile, your plan is coming",
+          html: `<p style="font-family:Segoe UI,Arial,sans-serif;line-height:1.6">Thanks! I've received <b>${escapeHtml(body.linkedinUrl)}</b> and will send your personal 30-day LinkedIn plan within 24 hours.<br/><br/>Anuj Mishra · contact@anuj4u.in</p>`,
         }).catch((err) => console.warn("[linkedin-funnel] review email failed:", err));
       }
       return NextResponse.json({

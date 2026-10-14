@@ -150,7 +150,7 @@ function ContactForm() {
           Let&apos;s work <span className="gradient-text">together.</span>
         </h1>
         <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-xl mx-auto">
-          Whether you need a single video edited or a full content operation running — I&apos;d love to hear about it.
+          Whether you need a single video edited or a full content operation running, I&apos;d love to hear about it.
         </p>
 
         {BOOKING_URL ? (
@@ -204,7 +204,7 @@ function ContactForm() {
               <span className="material-symbols-outlined text-2xl">mail</span>
             </div>
             <h3 className="text-2xl font-bold text-on-surface mb-2">Email me directly</h3>
-            <p className="text-on-surface-variant text-sm mb-4">I aim to respond within 24 hours.</p>
+            <p className="text-on-surface-variant text-sm mb-4">Write to me any time.</p>
             <a
               href="mailto:contact@anuj4u.in"
               className="text-lg font-bold text-primary hover:underline decoration-primary/50 block"

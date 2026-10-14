@@ -11,6 +11,7 @@ const socials: { name: string; href: string; icon: string }[] = [
 const quickLinks = [
   { name: "Services", href: "/services" },
   { name: "Work", href: "/work" },
+  { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
   { name: "Testimonials", href: "/testimonials" },
   { name: "Contact", href: "/contact" },
@@ -18,7 +19,7 @@ const quickLinks = [
 
   const tools = [
     { name: "Free LinkedIn plan", href: "/linkedin-funnel" },
-    { name: "Analyze my YouTube channel", href: "/youtube-funnel" },
+    { name: "Audit my channel", href: "/youtube-funnel" },
     { name: "All free tools", href: "/free-tools" },
   ];
 
@@ -28,7 +29,7 @@ export default function Footer() {
       <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 mb-12">
           {/* Brand */}
-          <div className="md:col-span-5">
+          <div className="md:col-span-5 text-center md:text-left flex flex-col items-center md:items-start">
             <div className="flex items-center gap-2.5 mb-4">
               <span className="w-7 h-7 rounded-[8px] bg-white text-[#0b0b0f] text-[13px] font-semibold flex items-center justify-center">
                 A
@@ -38,7 +39,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-[15px] leading-relaxed text-white/55 max-w-sm mb-6">
-              Videos that hook. Strategy that scales. Real analytics, real clients, one channel at a time.
+              I edit video and manage production end to end, from script to publish.
             </p>
             <a
               href="mailto:contact@anuj4u.in"
@@ -46,19 +47,19 @@ export default function Footer() {
             >
               contact@anuj4u.in
             </a>
-            <div className="mt-8 max-w-sm">
+            <div className="mt-8 max-w-sm w-full text-left">
               <div className="rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-transparent border border-white/10 p-5">
               <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-purple-300/80 mb-2">
-                Free channel audit
+                Lead magnet
               </p>
               <p className="text-[13px] text-white/60 leading-relaxed mb-3">
-                Paste your YouTube channel and get a 30-day plan — hooks, titles, thumbnail direction and the one fix that matters.
+                Paste your YouTube channel and get a 30-day plan with hooks, titles and thumbnail ideas.
               </p>
               <Link
                 href="/youtube-funnel"
                 className="inline-flex items-center gap-1.5 text-[13px] font-medium text-white hover:text-white/80 transition-colors"
               >
-                Analyze my YouTube channel
+                Audit my channel
                 <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
               </Link>
               </div>
@@ -66,7 +67,7 @@ export default function Footer() {
           </div>
 
           {/* Sitemap */}
-          <div className="md:col-span-2 md:col-start-7">
+          <div className="md:col-span-2 md:col-start-7 text-center md:text-left">
             <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
               Explore
             </h4>
@@ -85,7 +86,7 @@ export default function Footer() {
           </div>
 
           {/* Free tools */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 text-center md:text-left">
             <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
               Free tools
             </h4>
@@ -104,12 +105,12 @@ export default function Footer() {
           </div>
 
           {/* Connect */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 text-center md:text-left">
             <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/40 mb-4">
               Connect
             </h4>
             {socials.length > 0 ? (
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-6">
                 {socials.map((social) => (
                   <a
                     key={social.name}
@@ -127,20 +128,14 @@ export default function Footer() {
               </div>
             ) : (
               <p className="text-[14px] text-white/50 mb-6">
-                Prefer email? I reply within 24 hours.
+                Prefer email? Write to contact@anuj4u.in.
               </p>
             )}
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/12 px-3 py-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span className="text-[12px] text-white/60">
-                Open for projects
-              </span>
-            </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3">
           <p className="text-[12px] text-white/40">
             © {new Date().getFullYear()} Anuj Mishra. All rights reserved.
           </p>

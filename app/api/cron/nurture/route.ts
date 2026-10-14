@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { processDueNurture } from "@/lib/nurture";
 
-// Always run fresh — this is a scheduled job, never cache it.
+// Always run fresh, this is a scheduled job, never cache it.
 export const dynamic = "force-dynamic";
 
 /**

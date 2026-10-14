@@ -18,7 +18,7 @@ const HOW_IT_WORKS = [
     step: "01",
     icon: "play_circle",
     title: "Share Your Channel URL",
-    desc: "Paste your YouTube channel link. That's all I need to start — no long forms.",
+    desc: "Paste your YouTube channel link. That's all I need to start, no long forms.",
     color: "from-purple-500/20 to-indigo-500/5",
     iconColor: "text-purple-600",
   },
@@ -34,7 +34,7 @@ const HOW_IT_WORKS = [
     step: "03",
     icon: "mark_email_read",
     title: "Delivered to Your Inbox",
-    desc: "Your complete 30-day YouTube strategy arrives in your inbox — hooks, title ideas, thumbnail direction and the one change that matters most.",
+    desc: "Your complete 30-day YouTube strategy arrives in your inbox, hooks, title ideas, thumbnail direction and the one change that matters most.",
     color: "from-emerald-500/20 to-teal-500/5",
     iconColor: "text-emerald-600",
   },
@@ -57,7 +57,7 @@ const PREVIEW_DAYS = [
     pillar: "Packaging",
     pillarColor: "text-blue-600",
     pillarBg: "bg-blue-50 border-blue-200/60",
-    hook: "3 thumbnail + title pairs built around the same video — pick the one that earns the click.",
+    hook: "3 thumbnail + title pairs built around the same video, pick the one that earns the click.",
     reason: "CTR is the gatekeeper. A stronger thumbnail and tighter title can double impressions without changing the video itself.",
     time: "Video 2 · next week",
   },
@@ -76,15 +76,15 @@ const PREVIEW_DAYS = [
 const FAQS = [
   {
     q: "Does this actually analyze my YouTube channel?",
-    a: "Your plan is built from your channel link and likely niche, using AI plus proven retention and packaging playbooks. It can't see your private YouTube Studio data — reply to the email with a screenshot of your last 90 days and I'll review it personally.",
+    a: "Your plan is built from your channel link and likely niche, using AI plus proven retention and packaging playbooks. It can't see your private YouTube Studio data, reply to the email with a screenshot of your last 90 days and I'll review it personally.",
   },
   {
     q: "What do I get with the free plan?",
-    a: "The free plan includes the full 30-day YouTube strategy: the highest-impact fixes, hook and title ideas, thumbnail direction, and the one change that matters most — delivered to your inbox.",
+    a: "The free plan includes the full 30-day YouTube strategy: the highest-impact fixes, hook and title ideas, thumbnail direction, and the one change that matters most, delivered to your inbox.",
   },
   {
     q: "Is the base plan really free?",
-    a: "Completely free. The 30-day YouTube strategy is yours at no cost. No credit card, no catch.",
+    a: "Yes. The 30-day YouTube strategy is yours at no cost, and I will not ask for payment details.",
   },
 ];
 
@@ -146,7 +146,7 @@ export default function YouTubeFunnelPage() {
       setSentMode(data?.mode === "review" ? "review" : "plan");
       setEmailState("sent");
     } catch {
-      setEmailError("Network problem — please check your connection and try again.");
+      setEmailError("Network problem, please check your connection and try again.");
       setEmailState("idle");
     }
   };
@@ -175,15 +175,15 @@ export default function YouTubeFunnelPage() {
           </h1>
 
           <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-3xl mx-auto mb-8 text-balance">
-            Paste your YouTube channel link and get a 30-day plan — hooks, titles, thumbnail direction and
-            the one change that matters most — straight to your inbox.
+            Paste your YouTube channel link and get a 30-day plan, hooks, titles, thumbnail direction and
+            the one change that matters most, straight to your inbox.
           </p>
 
           <div className="flex flex-wrap justify-center gap-5 text-sm text-on-surface-variant">
             {[
               { icon: "schedule", text: "Ready in ~60 seconds" },
               { icon: "mail", text: "Delivered to inbox" },
-              { icon: "lock", text: "Free · no credit card" },
+              { icon: "lock", text: "A free, personal plan" },
               { icon: "star", text: "Built for your niche" },
             ].map((b) => (
               <div key={b.text} className="flex items-center gap-1.5">
@@ -272,7 +272,7 @@ export default function YouTubeFunnelPage() {
                       <div className="mt-3 p-4 rounded-xl bg-purple-500/5 border border-purple-500/15 space-y-2">
                         {[
                           "Open YouTube and go to your channel.",
-                          "Copy the URL from your browser's address bar — it looks like youtube.com/@yourchannel or youtube.com/channel/UC….",
+                          "Copy the URL from your browser's address bar, it looks like youtube.com/@yourchannel or youtube.com/channel/UC….",
                           "On mobile: tap your channel name → Share → Copy link.",
                           <>It looks like: <code className="bg-surface-container px-1.5 py-0.5 rounded font-mono text-purple-600 text-[11px]">youtube.com/@yourchannel</code></>,
                         ].map((tip, i) => (
@@ -296,7 +296,7 @@ export default function YouTubeFunnelPage() {
                   </button>
 
                   <p className="text-center text-xs text-on-surface-variant/50">
-                    No credit card. No sign-up. Just your channel URL.
+                    Just your channel URL.
                   </p>
                 </form>
               </div>
@@ -395,13 +395,13 @@ export default function YouTubeFunnelPage() {
           <div className="text-center mb-10">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-xs mb-4">
               <span className="material-symbols-outlined text-base">check_circle</span>
-              Almost there — one last step
+              Almost there, one last step
             </div>
             <h2 className="text-2xl md:text-4xl font-bold text-on-surface mb-3">
               Here's what your 30-day plan looks like
             </h2>
             <p className="text-on-surface-variant max-w-lg mx-auto">
-              Enter your email below to receive all 30 days in your inbox — completely free.
+              Enter your email below to receive all 30 days in your inbox, completely free.
             </p>
           </div>
 
@@ -412,7 +412,7 @@ export default function YouTubeFunnelPage() {
                   check_circle
                 </span>
                 <h3 className="font-bold text-on-surface mb-1">
-                  {sentMode === "plan" ? "Check your inbox! 🎉" : "Got it — I'm on it ✅"}
+                  {sentMode === "plan" ? "Check your inbox! 🎉" : "Got it, I'm on it ✅"}
                 </h3>
                 <p className="text-sm text-on-surface-variant">
                   {sentMode === "plan" ? (
@@ -423,7 +423,7 @@ export default function YouTubeFunnelPage() {
                   ) : (
                     <>
                       I&apos;ve received your channel and will email your personal 30-day plan to <strong>{email}</strong>{" "}
-                      within 24 hours.
+                      shortly.
                     </>
                   )}
                 </p>
@@ -490,7 +490,7 @@ export default function YouTubeFunnelPage() {
           </div>
 
           <div className="max-w-3xl mx-auto space-y-5 mb-16">
-            {/* Day 1 — shown in full as the sample */}
+            {/* Day 1, shown in full as the sample */}
             {PREVIEW_DAYS.slice(0, 1).map((day) => (
               <div key={day.day} className="glass-card rounded-3xl p-7 md:p-8 border border-primary/15 shadow-[0_24px_60px_-34px_rgba(73,54,230,0.5)]">
                 <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
@@ -499,7 +499,7 @@ export default function YouTubeFunnelPage() {
                       {day.day}
                     </div>
                     <div>
-                      <p className="font-bold text-on-surface text-sm">Day {day.day} — free sample</p>
+                      <p className="font-bold text-on-surface text-sm">Day {day.day}, free sample</p>
                       <p className="text-xs text-on-surface-variant">{day.time}</p>
                     </div>
                   </div>
@@ -524,7 +524,7 @@ export default function YouTubeFunnelPage() {
               </div>
             ))}
 
-            {/* Other days — title only */}
+            {/* Other days, title only */}
             {PREVIEW_DAYS.slice(1).map((day) => (
               <div key={day.day} className="glass-card rounded-2xl px-5 py-4 flex items-center gap-4">
                 <div className="w-9 h-9 rounded-full bg-purple-100 text-purple-700 font-bold text-sm flex items-center justify-center shrink-0">
@@ -548,7 +548,7 @@ export default function YouTubeFunnelPage() {
                 aria-hidden="true"
               >
                 <p className="mb-3">
-                  The exact hook line, the thumbnail concept, five title options ranked by curiosity, the best posting time and the one metric to watch — for every one of the 30 days.
+                  The exact hook line, the thumbnail concept, five title options ranked by curiosity, the best posting time and the one metric to watch, for every one of the 30 days.
                 </p>
                 <p className="mb-3">
                   Supporting rationale, the audience takeaway, and the follow-up action that compounds the result across the month.
@@ -563,7 +563,7 @@ export default function YouTubeFunnelPage() {
                 <p className="text-sm text-on-surface-variant mb-4">
                   {emailState === "sent"
                     ? "Check your inbox (and spam) in a few minutes."
-                    : "+ 27 more days — enter your email above and it's yours, free."}
+                    : "+ 27 more days, enter your email above and it's yours, free."}
                 </p>
                 {emailState !== "sent" && (
                   <button

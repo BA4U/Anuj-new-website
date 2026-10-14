@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
       firestoreId = docRef.id;
     } catch (err) {
       console.error("Failed to save contact to Firestore:", err);
-      // Continue anyway — we still attempt to send the email
+      // Continue anyway, we still attempt to send the email
     }
 
     // ── Send email notification to admin (Resend) ──
@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
       await sendFunnelEmail({
         to: adminEmail,
         replyTo: body.email,
-        subject: `New Contact: ${body.name} — ${body.subject || "General Inquiry"}`,
+        subject: `New Contact: ${body.name}, ${body.subject || "General Inquiry"}`,
         html: emailHtml,
       });
     } catch (err: unknown) {

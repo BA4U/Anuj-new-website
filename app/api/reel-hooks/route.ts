@@ -40,7 +40,7 @@ Return ONLY a valid JSON array with no markdown, no explanation, no code fences:
 ]
 
 Rules:
-- 30 hooks, every one unique — no repeated structures or openers.
+- 30 hooks, every one unique, no repeated structures or openers.
 - Mix the angle types so the swipe file feels varied.
 - Each hook must work for ${body.niche} specifically, not generic motivational fluff.
 - Front-load the payoff: the first 3-5 words must create curiosity or tension.
@@ -63,13 +63,13 @@ function generateMockContent(body: RequestBody): HookTemplate[] {
   const formats = ["Reel", "Short", "TikTok"];
 
   const templates = [
-    `Stop scrolling — this ${niche} mistake is costing you followers`,
+    `Stop scrolling, this ${niche} mistake is costing you followers`,
     `I tried the worst ${niche} advice on the internet so you don't have to`,
     `Nobody talks about this ${niche} truth (and it changed everything)`,
     `3 ${niche} habits that quietly ruined my growth`,
     `The ${niche} result I got in 30 days will surprise you`,
     `If you do ${niche}, watch this before your next post`,
-    `Everyone gets this ${niche} step wrong — here's the fix`,
+    `Everyone gets this ${niche} step wrong, here's the fix`,
     `Behind the scenes of a ${niche} creator's actual workflow`,
     `This ${niche} myth needs to die today`,
     `The first thing I'd change if I restarted ${niche} from zero`,
@@ -142,7 +142,7 @@ function buildEmailHtml(email: string, niche: string, hooks: HookTemplate[]): st
   <div style="max-width:680px;margin:0 auto;padding:32px 16px 0;">
     <div style="background:white;border-radius:16px;padding:24px;margin-bottom:24px;border:1px solid #e5e7eb;">
       <h2 style="color:#111827;font-size:20px;font-weight:700;margin:0 0 12px;">Hi there! 👋</h2>
-      <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 12px;">Here are <strong>30 scroll-stopping hooks</strong> for <strong>${niche}</strong> — built to lift your hook rate and stop the scroll on Reels &amp; Shorts.</p>
+      <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 12px;">Here are <strong>30 scroll-stopping hooks</strong> for <strong>${niche}</strong>, built to lift your hook rate and stop the scroll on Reels &amp; Shorts.</p>
       <p style="color:#6b7280;font-size:14px;margin:0;">💡 <strong>Tip:</strong> Rotate through the 9 angles so your feed never feels repetitive.</p>
     </div>
 
@@ -150,7 +150,7 @@ function buildEmailHtml(email: string, niche: string, hooks: HookTemplate[]): st
 
     <div style="background:linear-gradient(135deg,#1c1b1c,#2d1e6e);border-radius:16px;padding:32px;text-align:center;margin:24px 0;">
       <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 12px;">Want Hooks That Actually Convert?</h3>
-      <p style="color:rgba(255,255,255,0.75);font-size:14px;margin:0 0 24px;line-height:1.6;">I script and edit short-form content that gets watched, saved, and shared — for creators and brands.</p>
+      <p style="color:rgba(255,255,255,0.75);font-size:14px;margin:0 0 24px;line-height:1.6;">I script and edit short-form content that gets watched, saved, and shared, for creators and brands.</p>
       <a href="https://anuj4u.in/contact" style="display:inline-block;background:#6355ff;color:white;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none;font-size:15px;">Book a Free Strategy Call →</a>
     </div>
 

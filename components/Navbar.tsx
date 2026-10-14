@@ -21,7 +21,7 @@ export default function Navbar() {
     { name: "Work", href: "/work" },
     { name: "Free tools", href: "/free-tools" },
     { name: "About", href: "/about" },
-    { name: "Testimonials", href: "/testimonials" },
+    { name: "Blog", href: "/blog" },
   ];
 
   const isActive = (href: string) =>
@@ -40,7 +40,7 @@ export default function Navbar() {
         <Link
           href="/"
           className="flex items-center gap-2.5 group shrink-0"
-          aria-label="Anuj Mishra — home"
+          aria-label="Anuj Mishra, home"
         >
           <span className="w-7 h-7 rounded-[8px] bg-on-surface text-white text-[13px] font-semibold flex items-center justify-center tracking-tight group-hover:bg-primary transition-colors duration-200">
             A
@@ -83,7 +83,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile drawer — translucent material, fades in */}
+      {/* Mobile drawer, translucent material, fades in */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-black/[0.06] px-5 pb-6 pt-2 space-y-1 animate-fade-in">
           {navLinks.map((link) => (
