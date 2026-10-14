@@ -219,60 +219,62 @@ export default function Home() {
         <div className="aurora aurora-a w-[520px] h-[520px] -top-40 -left-40" />
         <div className="aurora aurora-b w-[460px] h-[460px] top-10 right-[-140px]" />
 
-        <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14 text-center">
-          <ScrollReveal each className="flex flex-col items-center">
-            <p className="reveal eyebrow mb-6">Hi, I am Anuj</p>
-            <h1 className="reveal text-[42px] sm:text-[60px] lg:text-[76px] display text-on-surface mb-6">
-              Videos that hook.
-              <br />
-              <span className="gradient-text-animated">Strategy that scales.</span>
-            </h1>
-            <p className="reveal text-[18px] md:text-[21px] text-on-surface-variant leading-relaxed max-w-2xl mb-8">
-              I edit video and manage production end to end: social media, blog editing, publishing and packaging.
-            </p>
-            <div className="reveal flex flex-wrap items-center justify-center gap-3">
-              <Link href="/youtube-funnel" className="btn btn-glow">
-                Audit my channel free
-                <Arrow />
-              </Link>
-              <Link href={BOOKING_URL} className="btn btn-secondary">
-                <span className="material-symbols-outlined text-[18px]">event</span>
-                Book a call
-              </Link>
-            </div>
-          </ScrollReveal>
+        <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+            <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
+              <p className="reveal eyebrow mb-6">Hi, I am Anuj</p>
+              <h1 className="reveal text-[40px] sm:text-[54px] lg:text-[50px] xl:text-[58px] display text-on-surface mb-6">
+                Videos that hook.
+                <br />
+                <span className="gradient-text-animated">Strategy that scales.</span>
+              </h1>
+              <p className="reveal text-[18px] md:text-[20px] text-on-surface-variant leading-relaxed max-w-lg mb-8">
+                I edit video and manage production end to end: social media, blog editing, publishing and packaging.
+              </p>
+              <div className="reveal flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                <Link href="/youtube-funnel" className="btn btn-glow">
+                  Audit my channel free
+                  <Arrow />
+                </Link>
+                <Link href={BOOKING_URL} className="btn btn-secondary">
+                  <span className="material-symbols-outlined text-[18px]">event</span>
+                  Book a call
+                </Link>
+              </div>
+            </ScrollReveal>
 
-          {/* Portrait with floating chips */}
-          <div className="relative max-w-[560px] mx-auto mt-12 md:mt-16">
-            <div
-              className="absolute -inset-4 rounded-[40px] opacity-80 blur-3xl"
-              style={{
-                background:
-                  "linear-gradient(135deg, rgba(73,54,230,0.55) 0%, rgba(139,92,246,0.4) 55%, rgba(192,132,252,0.15) 100%)",
-              }}
-            />
-            <div data-parallax="0.05" className="parallax">
-              <div className="relative rounded-[28px] overflow-hidden border border-white/60 bg-surface-container-low aspect-[4/3] shadow-[0_2px_6px_rgba(0,0,0,0.05),0_50px_90px_-40px_rgba(73,54,230,0.6)]">
-                <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuApVgUM1CPI-chpiQnnacQOAazwKAIf2X5MgiRD1canwHi3-PNyeCAN1VYG06tYjQXLskeEt_ktPsUvDxxN_L9Ohk4yupNmlg-bnC10qZyeDx8ECQZEKVtWU5uq9eVhCx-qcTE5wosJfkt6NTN6fw9c2ZtGqxAoEYBnAnJcnKUPeyciq0_zM4K1C4Dtx2W0MJQ8MRGsfWMx0jiAQKjKTIiW7Jelor9RbkB7lzUza283dH10yzGnlDwkwt3iQtBL7DGOtn_1Z9OgjKUy2mg"
+            {/* Portrait with floating chips */}
+            <div className="relative w-full max-w-[420px] lg:max-w-[460px] mx-auto lg:ml-auto lg:mr-0">
+              <div
+                className="absolute -inset-4 rounded-[40px] opacity-80 blur-3xl"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(73,54,230,0.55) 0%, rgba(139,92,246,0.4) 55%, rgba(192,132,252,0.15) 100%)",
+                }}
+              />
+              <div data-parallax="0.05" className="parallax">
+                <div className="relative rounded-[28px] overflow-hidden border border-white/60 bg-surface-container-low aspect-[4/5] shadow-[0_2px_6px_rgba(0,0,0,0.05),0_50px_90px_-40px_rgba(73,54,230,0.6)]">
+                  <Image
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuApVgUM1CPI-chpiQnnacQOAazwKAIf2X5MgiRD1canwHi3-PNyeCAN1VYG06tYjQXLskeEt_ktPsUvDxxN_L9Ohk4yupNmlg-bnC10qZyeDx8ECQZEKVtWU5uq9eVhCx-qcTE5wosJfkt6NTN6fw9c2ZtGqxAoEYBnAnJcnKUPeyciq0_zM4K1C4Dtx2W0MJQ8MRGsfWMx0jiAQKjKTIiW7Jelor9RbkB7lzUza283dH10yzGnlDwkwt3iQtBL7DGOtn_1Z9OgjKUy2mg"
                     alt="Portrait of Anuj Mishra"
                     fill
-                    sizes="(max-width: 640px) 100vw, 560px"
-                    className="object-cover object-[50%_18%]"
+                    sizes="(max-width: 1024px) 90vw, 460px"
+                    className="object-cover object-top"
                     priority
                   />
                 </div>
               </div>
-            <div data-parallax="-0.05" className="parallax absolute -left-2 sm:-left-10 top-[20%]">
-              <div className="float-y rounded-2xl bg-white/85 backdrop-blur-xl border border-white shadow-[0_18px_40px_-18px_rgba(73,54,230,0.5)] px-4 py-3 text-left">
-                <p className="text-[22px] font-semibold tracking-tight text-on-surface leading-none">540+</p>
-                <p className="text-[12px] text-on-surface-variant mt-1">videos edited</p>
+              <div data-parallax="-0.05" className="parallax absolute -left-3 sm:-left-8 top-[18%]">
+                <div className="float-y rounded-2xl bg-white/85 backdrop-blur-xl border border-white shadow-[0_18px_40px_-18px_rgba(73,54,230,0.5)] px-4 py-3 text-left">
+                  <p className="text-[22px] font-semibold tracking-tight text-on-surface leading-none">540+</p>
+                  <p className="text-[12px] text-on-surface-variant mt-1">videos edited</p>
+                </div>
               </div>
-            </div>
-            <div data-parallax="0.09" className="parallax absolute -right-2 sm:-right-10 bottom-[14%]">
-              <div className="float-y-delayed rounded-2xl bg-white/85 backdrop-blur-xl border border-white shadow-[0_18px_40px_-18px_rgba(73,54,230,0.5)] px-4 py-3 text-left">
-                <p className="text-[22px] font-semibold tracking-tight gradient-text leading-none">125M+</p>
-                <p className="text-[12px] text-on-surface-variant mt-1">reach generated</p>
+              <div data-parallax="0.09" className="parallax absolute -right-3 sm:-right-6 bottom-[12%]">
+                <div className="float-y-delayed rounded-2xl bg-white/85 backdrop-blur-xl border border-white shadow-[0_18px_40px_-18px_rgba(73,54,230,0.5)] px-4 py-3 text-left">
+                  <p className="text-[22px] font-semibold tracking-tight gradient-text leading-none">125M+</p>
+                  <p className="text-[12px] text-on-surface-variant mt-1">reach generated</p>
+                </div>
               </div>
             </div>
           </div>
