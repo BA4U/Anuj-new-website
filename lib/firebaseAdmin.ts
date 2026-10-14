@@ -19,7 +19,7 @@ export function getAdminDb(): Firestore | null {
 
   if (!projectId || !clientEmail || !privateKey) {
     console.warn(
-      "⚠️  Firebase Admin not configured — nurture queue disabled. Set FIREBASE_ADMIN_* env vars to enable the 3-email welcome sequence."
+      "⚠️  Firebase Admin not configured, nurture queue disabled. Set FIREBASE_ADMIN_* env vars to enable the 3-email welcome sequence."
     );
     return null;
   }

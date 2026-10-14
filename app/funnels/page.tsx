@@ -5,9 +5,9 @@ import { LinkedInLogo } from "@/components/LinkedInLogo";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Free Growth Tools | Anuj Mishra",
+  title: "Free Growth Tools",
   description:
-    "Free, AI-powered growth tools by Anuj Mishra — LinkedIn content calendar, YouTube retention audit, Reel hook swipe file, and an ad creative ROI calculator. Built to turn content into revenue.",
+    "Free, AI-powered growth tools by Anuj Mishra, LinkedIn content calendar, YouTube retention audit, Reel hook swipe file, and an ad creative ROI calculator. Built to turn content into revenue.",
 };
 
 type Tool = {
@@ -30,7 +30,7 @@ const tools: Tool[] = [
     logo: "linkedin",
     tagline: "30 days of personalized LinkedIn posts",
     description:
-      "Paste your LinkedIn URL and get a complete 30-day content calendar — hooks, full post copy, strategic rationale, and optimal posting times — delivered to your inbox for free.",
+      "Paste your LinkedIn URL and get a complete 30-day content calendar, hooks, full post copy, strategic rationale, and optimal posting times, delivered to your inbox for free.",
     href: "/linkedin-funnel",
     badge: "FREE",
     accent: "#0A66C2",
@@ -46,8 +46,8 @@ const tools: Tool[] = [
     icon: "play_circle",
     tagline: "Top-3 fixes to keep viewers watching",
     description:
-      "Drop your YouTube channel URL. Our AI maps your retention drop-offs and emails the three highest-impact fixes you can ship this week — completely free.",
-    href: "/youtube-audit",
+      "Drop your YouTube channel URL. Our AI maps your retention drop-offs and emails the three highest-impact fixes you can ship this week, completely free.",
+    href: "/youtube-funnel",
     badge: "FREE",
     accent: "#FF0000",
     features: [
@@ -62,7 +62,7 @@ const tools: Tool[] = [
     icon: "smart_display",
     tagline: "30 hooks tailored to your niche",
     description:
-      "Tell us your niche. Get 30 copy-paste hooks for Reels, Shorts, and TikTok — each tagged with its angle (curiosity, controversy, story, etc.) and best format.",
+      "Tell us your niche. Get 30 copy-paste hooks for Reels, Shorts, and TikTok, each tagged with its angle (curiosity, controversy, story, etc.) and best format.",
     href: "/reel-hooks",
     badge: "FREE",
     accent: "#6355FF",
@@ -78,7 +78,7 @@ const tools: Tool[] = [
     icon: "calculate",
     tagline: "Know if your ads are profitable in 5 seconds",
     description:
-      "Slide in your spend, CTR, and conversion rate. Instantly see your ROAS, CPA, and revenue — plus 3 tips to improve the numbers. No sign-up.",
+      "Slide in your spend, CTR, and conversion rate. Instantly see your ROAS, CPA, and revenue, plus 3 tips to improve the numbers. No sign-up.",
     href: "/ad-roi-calculator",
     badge: "FREE",
     accent: "#10B981",
@@ -95,12 +95,12 @@ const upcoming = [
   {
     icon: "campaign",
     title: "Email Sequence Builder",
-    desc: "Generate a 5-step welcome sequence for any niche — subject lines, body copy, and timing.",
+    desc: "Generate a 5-step welcome sequence for any niche, subject lines, body copy, and timing.",
   },
   {
     icon: "psychology",
     title: "Hook Headline Lab",
-    desc: "10 YouTube title formulas tested against your topic — pick the one most likely to click.",
+    desc: "10 YouTube title formulas tested against your topic, pick the one most likely to click.",
   },
   {
     icon: "storefront",
@@ -133,7 +133,7 @@ export default function FunnelsPage() {
           Tools that turn <span className="gradient-text">content into revenue</span>
         </h1>
         <p className="text-lg text-on-surface-variant leading-relaxed">
-          No fluff, no templates. Just practical, AI-powered tools I use with my own clients —
+          No fluff, no templates. Just practical, AI-powered tools I use with my own clients,
           now free for you to try.
         </p>
       </section>
@@ -240,7 +240,7 @@ export default function FunnelsPage() {
       <div className="text-center relative z-10 glass-card p-12 rounded-3xl max-w-4xl mx-auto bg-gradient-to-br from-orange-50 via-purple-100 to-purple-500 shadow-2xl">
         <h2 className="text-3xl font-bold text-on-surface mb-4">Need a custom growth plan?</h2>
         <p className="text-on-surface-variant mb-8 max-w-xl mx-auto">
-          These tools are a great start — but if you want hands-on help editing, managing, and
+          These tools are a great start, but if you want hands-on help editing, managing, and
           scaling your content, let&apos;s talk.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

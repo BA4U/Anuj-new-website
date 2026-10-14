@@ -41,7 +41,7 @@ export async function generateWithGemini<T>(
   const apiKey = opts.apiKey ?? process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    console.log("ℹ️  No GEMINI_API_KEY — using fallback content");
+    console.log("ℹ️  No GEMINI_API_KEY, using fallback content");
     return fallback();
   }
 
@@ -97,7 +97,7 @@ export async function sendFunnelEmail(
   const resendKey = process.env.RESEND_API_KEY;
 
   if (!resendKey) {
-    // Hard fail — we don't silently skip. The user should know.
+    // Hard fail, we don't silently skip. The user should know.
     throw new Error(
       "EMAIL_NOT_CONFIGURED: Add RESEND_API_KEY to your environment. See .env.local.example for instructions."
     );
@@ -143,14 +143,14 @@ export async function sendFunnelEmail(
 // ─── Storage: Google Sheets via Apps Script Webhook ───────────────────────────
 /**
  * Append a row to the lead log via a Google Apps Script webhook.
- * No npm package needed — just a URL. Non-blocking: failures are logged but
+ * No npm package needed, just a URL. Non-blocking: failures are logged but
  * never crash the request.
  */
 export async function logToSheets(
   payload: Record<string, unknown>
 ): Promise<void> {
   const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (!webhookUrl) return; // Optional — doesn't block email delivery
+  if (!webhookUrl) return; // Optional, doesn't block email delivery
 
   try {
     await fetch(webhookUrl, {

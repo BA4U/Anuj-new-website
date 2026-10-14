@@ -3,7 +3,6 @@
 import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { LinkedInLogo } from "@/components/LinkedInLogo";
-import { trackEvent } from "@/lib/analytics";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 type PageState = "input" | "analyzing" | "preview";
@@ -24,7 +23,7 @@ const HOW_IT_WORKS = [
     step: "01",
     icon: "person_search",
     title: "Share Your LinkedIn URL",
-    desc: "Just paste your LinkedIn profile URL. We read your profile, industry, and professional context — no extra forms needed.",
+    desc: "Just paste your LinkedIn profile URL. We read your profile, industry, and professional context, no extra forms needed.",
     color: "from-violet-500/20 to-indigo-500/5",
     iconColor: "text-violet-600",
   },
@@ -40,7 +39,7 @@ const HOW_IT_WORKS = [
     step: "03",
     icon: "mark_email_read",
     title: "Delivered to Your Inbox",
-    desc: "Your complete 30-day content calendar arrives in your inbox — ready to copy, customize, and post.",
+    desc: "Your complete 30-day content calendar arrives in your inbox, ready to copy, customize, and post.",
     color: "from-emerald-500/20 to-teal-500/5",
     iconColor: "text-emerald-600",
   },
@@ -54,7 +53,7 @@ const PREVIEW_DAYS = [
     pillarColor: "text-rose-600",
     pillarBg: "bg-rose-50 border-rose-200/60",
     hook: "I failed at LinkedIn for 2 years. One tiny change got me 8,000 followers in 90 days. 👇",
-    why: "Personal failure → transformation arcs generate 3× more comments than any other LinkedIn format. The curiosity hook guarantees readers click 'see more', boosting dwell time — a key signal the algorithm rewards with expanded reach.",
+    why: "Personal failure → transformation arcs generate 3× more comments than any other LinkedIn format. The curiosity hook guarantees readers click 'see more', boosting dwell time, a key signal the algorithm rewards with expanded reach.",
     time: "Tuesday · 8–9 AM",
   },
   {
@@ -82,15 +81,15 @@ const PREVIEW_DAYS = [
 const FAQS = [
   {
     q: "Does this actually analyze my LinkedIn profile?",
-    a: "Yes. Your LinkedIn URL gives us your professional context — industry, role type, and positioning. The AI uses this to generate content that genuinely fits your niche, not generic templates.",
+    a: "Yes. Your LinkedIn URL gives us your professional context, industry, role type, and positioning. The AI uses this to generate content that genuinely fits your niche, not generic templates.",
   },
   {
     q: "What do I get with the free plan?",
-    a: "The free plan includes the full 30-day calendar: hook, complete post copy, strategic rationale, optimal posting times, and hashtags — all delivered to your inbox.",
+    a: "The free plan includes the full 30-day calendar: hook, complete post copy, strategic rationale, optimal posting times, and hashtags, all delivered to your inbox.",
   },
   {
     q: "What's the premium unlock for images and videos?",
-    a: "When you unlock premium, you'll enter your brand colors (primary, accent, background) so every image prompt and video concept is matched to your exact brand identity — not just a generic visual.",
+    a: "When you unlock premium, you'll enter your brand colors (primary, accent, background) so every image prompt and video concept is matched to your exact brand identity, not just a generic visual.",
   },
   {
     q: "What is the LinkedIn banner design?",
@@ -98,89 +97,9 @@ const FAQS = [
   },
   {
     q: "Is the base plan really free?",
-    a: "Completely free. The 30-day content calendar is yours at no cost. Premium unlocks — custom image prompts, video scripts, and the banner design — are optional paid upgrades.",
+    a: "Completely free. The 30-day content calendar is yours at no cost. Premium unlocks, custom image prompts, video scripts, and the banner design, are optional paid upgrades.",
   },
 ];
-
-// ─── Thank You State ──────────────────────────────────────────────────────────
-function ThankYouState({ email }: { email: string }) {
-  return (
-    <div className="glass-card rounded-3xl p-8 md:p-10 text-center border border-emerald-200/60 bg-emerald-50/40 overflow-hidden relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/80 to-transparent pointer-events-none" />
-
-      {/* Success icon */}
-      <div className="relative z-10">
-        <div className="w-20 h-20 rounded-full bg-emerald-500 flex items-center justify-center mx-auto mb-6 shadow-lg shadow-emerald-500/30">
-          <span className="material-symbols-outlined text-white text-4xl">check</span>
-        </div>
-
-        <h3 className="text-2xl font-extrabold text-on-surface mb-3">
-          Your calendar is on its way! 🎉
-        </h3>
-        <p className="text-on-surface-variant text-sm mb-8 max-w-sm mx-auto">
-          Check <strong>{email}</strong> — your full 30-day LinkedIn plan will arrive in the next few minutes.
-        </p>
-
-        {/* Next steps */}
-        <div className="bg-white rounded-2xl p-6 mb-6 border border-emerald-100 text-left">
-          <p className="text-xs font-bold text-emerald-700 uppercase tracking-widest mb-4">
-            While you wait — 3 things to do next
-          </p>
-          <ul className="space-y-3">
-            {[
-              {
-                icon: "inbox",
-                title: "Check your spam folder",
-                desc: "Sometimes the email lands there. Mark it 'Not Spam' so you don't miss future tips.",
-              },
-              {
-                icon: "person_search",
-                title: "Update your LinkedIn banner",
-                desc: "First impressions matter. A clean, professional banner boosts profile visits by up to 40%.",
-              },
-              {
-                icon: "calendar_month",
-                title: "Bookmark this page",
-                desc: "Come back and reference your calendar — you'll get a reminder in your inbox too.",
-              },
-            ].map((step, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-emerald-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
-                  {i + 1}
-                </div>
-                <div>
-                  <p className="font-semibold text-on-surface text-sm flex items-center gap-1.5">
-                    <span className="material-symbols-outlined text-emerald-600 text-base">{step.icon}</span>
-                    {step.title}
-                  </p>
-                  <p className="text-on-surface-variant text-xs leading-relaxed mt-0.5">{step.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Share & explore */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link
-            href="/funnels"
-            className="inline-flex items-center justify-center gap-2 border-2 border-outline-variant text-on-surface font-semibold px-6 py-3 rounded-xl hover:border-emerald-500/50 hover:text-emerald-700 transition-all text-sm"
-          >
-            <span className="material-symbols-outlined text-emerald-600 text-base">bolt</span>
-            Explore more free tools
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 bg-[#0A66C2] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#0A66C2]/90 transition-all text-sm"
-          >
-            <span className="material-symbols-outlined text-white text-base">mail</span>
-            Work with Anuj
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // ─── Page Component ────────────────────────────────────────────────────────────
 export default function LinkedInFunnelPage() {
@@ -192,6 +111,8 @@ export default function LinkedInFunnelPage() {
   const [urlTipOpen, setUrlTipOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState<EmailState>("idle");
+  const [emailError, setEmailError] = useState("");
+  const [sentMode, setSentMode] = useState<"plan" | "review">("plan");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showUnlockModal, setShowUnlockModal] = useState(false);
   const [brandColors, setBrandColors] = useState({
@@ -230,6 +151,7 @@ export default function LinkedInFunnelPage() {
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setEmailError("");
     setEmailState("sending");
     try {
       const res = await fetch("/api/linkedin-funnel", {
@@ -237,13 +159,16 @@ export default function LinkedInFunnelPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ linkedinUrl, email, niche: "auto", goal: "auto" }),
       });
-      if (!res.ok) throw new Error();
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setEmailError(data?.error || "Something went wrong. Please try again.");
+        setEmailState("idle");
+        return;
+      }
+      setSentMode(data?.mode === "review" ? "review" : "plan");
       setEmailState("sent");
-      trackEvent("Funnel Conversion", {
-        source: "linkedin-content-funnel",
-        email_provided: true,
-      });
     } catch {
+      setEmailError("Network problem, please check your connection and try again.");
       setEmailState("idle");
     }
   };
@@ -259,20 +184,20 @@ export default function LinkedInFunnelPage() {
       {/* ══════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════ */}
-      <section className="relative pt-10 pb-10 px-6 lg:px-16 max-w-[1400px] mx-auto">
+      <section className="relative pt-10 pb-10 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Badge — real LinkedIn logo */}
+          {/* Badge, real LinkedIn logo */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0A66C2]/10 border border-[#0A66C2]/20 text-[#0A66C2] font-semibold text-xs tracking-wide uppercase mb-7">
             <LinkedInLogo className="w-3.5 h-3.5" />
             Free LinkedIn Content Engine
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-on-surface leading-[1.2] mb-5 text-balance mx-auto max-w-4xl">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-on-surface leading-[1.2] mb-5 text-balance mx-auto max-w-4xl">
             30 Days of <span className="gradient-text">LinkedIn Content</span> Built for <span className="text-[#0A66C2]">You</span>.
           </h1>
 
           <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-3xl mx-auto mb-8 text-balance">
-            Paste your LinkedIn URL. Our AI analyzes your profile and builds a complete 30-day content calendar — posts, image ideas, and video scripts — sent straight to your inbox for free.
+            Paste your LinkedIn URL. Our AI analyzes your profile and builds a complete 30-day content calendar, posts, image ideas, and video scripts, sent straight to your inbox for free.
           </p>
 
           {/* Trust badges */}
@@ -289,28 +214,13 @@ export default function LinkedInFunnelPage() {
               </div>
             ))}
           </div>
-
-          {/* See a sample */}
-          <div className="mt-8 flex justify-center">
-            <a
-              href="#preview-anchor"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("preview-anchor")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0A66C2] hover:text-[#0A66C2]/80 transition-colors underline decoration-[#0A66C2]/30"
-            >
-              <span className="material-symbols-outlined text-base">visibility</span>
-              See a sample calendar first
-            </a>
-          </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          URL INPUT — BEFORE "HOW IT WORKS"
+          URL INPUT, BEFORE "HOW IT WORKS"
       ══════════════════════════════════════════════════════ */}
-      <section className="px-6 lg:px-16 pb-20 max-w-[1400px] mx-auto">
+      <section className="px-5 sm:px-6 lg:px-10 xl:px-14 pb-20 max-w-[1240px] mx-auto">
         <div className="max-w-2xl mx-auto">
 
           {/* ── Input state ── */}
@@ -340,7 +250,11 @@ export default function LinkedInFunnelPage() {
                     <div className="relative">
                       <LinkedInLogo className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#0A66C2]" />
                       <input
-                        type="url"
+                        type="text"
+                        inputMode="url"
+                        autoCapitalize="none"
+                        autoCorrect="off"
+                        spellCheck={false}
                         required
                         placeholder="https://linkedin.com/in/your-name"
                         value={linkedinUrl}
@@ -359,7 +273,7 @@ export default function LinkedInFunnelPage() {
                       </p>
                     )}
 
-                    {/* Tip toggle — no underlines */}
+                    {/* Tip toggle, no underlines */}
                     <button
                       type="button"
                       onClick={() => setUrlTipOpen((p) => !p)}
@@ -401,7 +315,7 @@ export default function LinkedInFunnelPage() {
                   </button>
 
                   <p className="text-center text-xs text-on-surface-variant/50">
-                    No credit card. No sign-up. Just your LinkedIn URL.
+                    Just your LinkedIn URL.
                   </p>
                 </form>
               </div>
@@ -460,10 +374,10 @@ export default function LinkedInFunnelPage() {
       </section>
 
       {/* ══════════════════════════════════════════════════════
-          HOW IT WORKS — only visible before preview
+          HOW IT WORKS, only visible before preview
       ══════════════════════════════════════════════════════ */}
       {pageState !== "preview" && (
-        <section className="py-20 px-6 lg:px-16 max-w-[1400px] mx-auto">
+        <section className="py-20 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
               The Process
@@ -478,7 +392,7 @@ export default function LinkedInFunnelPage() {
             {HOW_IT_WORKS.map((step, idx) => (
               <div
                 key={idx}
-                className="glass-card rounded-3xl p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 relative group"
+                className="glass-card rounded-3xl p-8 flex flex-col items-center text-center transition-all duration-300 relative group"
               >
                 <div className="absolute -top-4 left-8 bg-surface text-on-surface-variant font-black text-xs tracking-widest px-2 py-1 rounded-full border border-outline-variant/40">
                   {step.step}
@@ -499,80 +413,10 @@ export default function LinkedInFunnelPage() {
       )}
 
       {/* ══════════════════════════════════════════════════════
-          SOCIAL PROOF
-      ══════════════════════════════════════════════════════ */}
-      <section className="py-20 px-6 lg:px-16 max-w-[1400px] mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
-            Trusted by Creators & Founders
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-on-surface">
-            People are already getting results
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              quote:
-                "I used to dread posting on LinkedIn. This calendar gave me a structure I could actually stick to — and I got my first 100+ comment post within 2 weeks.",
-              name: "Priya Nair",
-              title: "Product Manager, Bangalore",
-              initials: "PN",
-              color: "from-violet-500 to-indigo-600",
-            },
-            {
-              quote:
-                "The AI-generated hooks are genuinely good. I&apos;ve been using them verbatim and getting DMs about my posts for the first time in 3 years.",
-              name: "Rahul Mehta",
-              title: "Startup Founder, Mumbai",
-              initials: "RM",
-              color: "from-blue-500 to-cyan-600",
-            },
-            {
-              quote:
-                "Anuj doesn&apos;t just give you a calendar — he gives you the why behind every post. That context changed how I think about LinkedIn entirely.",
-              name: "Sarah Dsouza",
-              title: "Content Strategist, Dubai",
-              initials: "SD",
-              color: "from-emerald-500 to-teal-600",
-            },
-          ].map((t) => (
-            <div
-              key={t.name}
-              className="glass-card rounded-3xl p-7 hover:-translate-y-1 transition-all duration-300 flex flex-col"
-            >
-              <div className="flex gap-1 mb-4">
-                {[1, 2, 3, 4, 5].map((s) => (
-                  <span key={s} className="material-symbols-outlined text-amber-400 text-base">
-                    star
-                  </span>
-                ))}
-              </div>
-              <blockquote className="text-on-surface-variant text-sm leading-relaxed mb-6 flex-1">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <div className="flex items-center gap-3 pt-4 border-t border-outline-variant/30">
-                <div
-                  className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-bold text-sm shrink-0`}
-                >
-                  {t.initials}
-                </div>
-                <div>
-                  <p className="font-bold text-on-surface text-sm">{t.name}</p>
-                  <p className="text-xs text-on-surface-variant">{t.title}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════════
-          PREVIEW — shown after analysis completes
+          PREVIEW, shown after analysis completes
       ══════════════════════════════════════════════════════ */}
       {pageState === "preview" && (
-        <section ref={previewRef} className="py-12 px-6 lg:px-16 max-w-[1400px] mx-auto">
+        <section ref={previewRef} className="py-12 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
 
           {/* Header */}
           <div className="text-center mb-10">
@@ -584,14 +428,34 @@ export default function LinkedInFunnelPage() {
               Here's a Sneak Peek of Your Calendar
             </h2>
             <p className="text-on-surface-variant max-w-lg mx-auto">
-              Enter your email below to receive all 30 days in your inbox — completely free.
+              Enter your email below to receive all 30 days in your inbox, completely free.
             </p>
           </div>
 
           {/* ── Email capture ── */}
           <div className="max-w-xl mx-auto mb-12">
             {emailState === "sent" ? (
-              <ThankYouState email={email} />
+              <div className="glass-card rounded-2xl p-6 text-center border border-emerald-200/60 bg-emerald-50/40">
+                <span className="material-symbols-outlined text-4xl text-emerald-500 mb-3 block">
+                  check_circle
+                </span>
+                <h3 className="font-bold text-on-surface mb-1">
+                  {sentMode === "plan" ? "Check your inbox! 🎉" : "Got it, I'm on it ✅"}
+                </h3>
+                <p className="text-sm text-on-surface-variant">
+                  {sentMode === "plan" ? (
+                    <>
+                      Your 30-day LinkedIn calendar is on its way to <strong>{email}</strong>. If it doesn&apos;t show up
+                      in a few minutes, check spam.
+                    </>
+                  ) : (
+                    <>
+                      I&apos;ve received your profile and will email your personal 30-day plan to <strong>{email}</strong>{" "}
+                      shortly.
+                    </>
+                  )}
+                </p>
+              </div>
             ) : (
               <div className="glass-card rounded-2xl p-6 border-2 border-[#0A66C2]/20 relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#0A66C2]/4 to-primary/4 pointer-events-none" />
@@ -628,6 +492,12 @@ export default function LinkedInFunnelPage() {
                       )}
                     </button>
                   </form>
+                  {emailError && (
+                    <p role="alert" className="text-sm text-red-600 mt-3 flex items-start gap-1.5">
+                      <span className="material-symbols-outlined text-base shrink-0">error</span>
+                      {emailError}
+                    </p>
+                  )}
                   <p className="text-xs text-on-surface-variant/50 mt-2 flex items-center gap-1">
                     <span className="material-symbols-outlined text-sm">lock</span>
                     No spam. We only send your content plan.
@@ -662,7 +532,7 @@ export default function LinkedInFunnelPage() {
                   </div>
                 </div>
 
-                {/* Hook — visible */}
+                {/* Hook, visible */}
                 <div
                   className="rounded-xl p-4 mb-5"
                   style={{ borderLeft: "3px solid #0A66C2", background: "rgba(10,102,194,0.04)" }}
@@ -675,7 +545,7 @@ export default function LinkedInFunnelPage() {
                   </p>
                 </div>
 
-                {/* Full post — blurred */}
+                {/* Full post, blurred */}
                 <div className="relative mb-5">
                   <div
                     className="text-on-surface-variant text-sm leading-relaxed select-none pointer-events-none"
@@ -705,7 +575,7 @@ export default function LinkedInFunnelPage() {
                   </div>
                 </div>
 
-                {/* Why this works — visible */}
+                {/* Why this works, visible */}
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/60 border border-emerald-200/50 mb-5">
                   <span className="material-symbols-outlined text-emerald-500 text-xl shrink-0 mt-0.5">
                     lightbulb
@@ -724,12 +594,12 @@ export default function LinkedInFunnelPage() {
                     {
                       icon: "image",
                       label: "AI Image Prompt",
-                      desc: "Detailed visual generation prompt for Midjourney, DALL·E, or Canva AI — matched to your brand colors",
+                      desc: "Detailed visual generation prompt for Midjourney, DALL·E, or Canva AI, matched to your brand colors",
                     },
                     {
                       icon: "videocam",
                       label: "Video Script Concept",
-                      desc: "30–60 sec script outline for LinkedIn Video or Reels — realistic to film on your phone",
+                      desc: "30–60 sec script outline for LinkedIn Video or Reels, realistic to film on your phone",
                     },
                   ].map((item) => (
                     <div
@@ -748,7 +618,7 @@ export default function LinkedInFunnelPage() {
                           <span className="text-xs font-bold text-on-surface">{item.label}</span>
                         </div>
                         <p className="text-xs text-on-surface-variant leading-relaxed">
-                          {item.desc} — lorem ipsum dolor sit amet consectetur adipiscing elit
+                          {item.desc}, lorem ipsum dolor sit amet consectetur adipiscing elit
                           professional brand visual design concept.
                         </p>
                       </div>
@@ -805,14 +675,14 @@ export default function LinkedInFunnelPage() {
                     Based on your profile analysis, your banner is one of the biggest missed
                     opportunities. A professional, on-brand LinkedIn banner (1584×396px)
                     increases profile visits by up to 40% and builds instant credibility.
-                    We've generated a custom concept tailored to your industry and positioning —
+                    We've generated a custom concept tailored to your industry and positioning,
                     locked below.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Banner preview — blurred */}
+            {/* Banner preview, blurred */}
             <div className="relative w-full" style={{ aspectRatio: "1584/396" }}>
               {/* The blurred banner design */}
               <div
@@ -869,10 +739,10 @@ export default function LinkedInFunnelPage() {
       )}
 
       {/* ══════════════════════════════════════════════════════
-          WHAT'S INCLUDED — always visible
+          WHAT'S INCLUDED, always visible
       ══════════════════════════════════════════════════════ */}
       <section className="py-20 px-6 lg:px-16 bg-surface-container-low/50">
-        <div className="max-w-[1400px] mx-auto">
+        <div className="max-w-[1240px] mx-auto">
           <div className="text-center mb-14">
             <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
               Everything Included
@@ -887,7 +757,7 @@ export default function LinkedInFunnelPage() {
               {
                 icon: "edit_note",
                 title: "Full Post Copy",
-                desc: "Complete, ready-to-post content. Not just a topic — the entire post.",
+                desc: "Complete, ready-to-post content. Not just a topic, the entire post.",
                 color: "text-violet-600",
                 bg: "from-violet-500/15 to-indigo-500/5",
                 tag: "FREE",
@@ -895,7 +765,7 @@ export default function LinkedInFunnelPage() {
               {
                 icon: "lightbulb",
                 title: "Strategic Rationale",
-                desc: "Why each post is designed that way — algorithm logic, psychology, proven tactics.",
+                desc: "Why each post is designed that way, algorithm logic, psychology, proven tactics.",
                 color: "text-emerald-600",
                 bg: "from-emerald-500/15 to-teal-500/5",
                 tag: "FREE",
@@ -911,7 +781,7 @@ export default function LinkedInFunnelPage() {
               {
                 icon: "tag",
                 title: "Hashtag Strategy",
-                desc: "Targeted, curated hashtags per post — not generic spam.",
+                desc: "Targeted, curated hashtags per post, not generic spam.",
                 color: "text-blue-600",
                 bg: "from-blue-500/15 to-cyan-500/5",
                 tag: "FREE",
@@ -919,7 +789,7 @@ export default function LinkedInFunnelPage() {
               {
                 icon: "image",
                 title: "AI Image Prompts",
-                desc: "Detailed prompts for Midjourney, DALL·E, or Canva AI — matched to your brand colors.",
+                desc: "Detailed prompts for Midjourney, DALL·E, or Canva AI, matched to your brand colors.",
                 color: "text-rose-600",
                 bg: "from-rose-500/15 to-pink-500/5",
                 tag: "PREMIUM",
@@ -935,7 +805,7 @@ export default function LinkedInFunnelPage() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="glass-card rounded-2xl p-7 hover:-translate-y-1 transition-all duration-300"
+                className="glass-card rounded-2xl p-7 transition-all duration-300"
               >
                 <div className="flex items-start justify-between mb-5">
                   <div
@@ -966,7 +836,7 @@ export default function LinkedInFunnelPage() {
       {/* ══════════════════════════════════════════════════════
           CONTENT PILLARS
       ══════════════════════════════════════════════════════ */}
-      <section className="py-20 px-6 lg:px-16 max-w-[1400px] mx-auto">
+      <section className="py-20 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
         <div className="text-center mb-14">
           <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
             Content Architecture
@@ -1000,7 +870,7 @@ export default function LinkedInFunnelPage() {
               pillar: "Education",
               icon: "school",
               count: "8 posts",
-              desc: "Teach & get saved — algorithms love it",
+              desc: "Teach & get saved, algorithms love it",
               color: "from-blue-500 to-cyan-600",
               pct: "27%",
             },
@@ -1015,7 +885,7 @@ export default function LinkedInFunnelPage() {
           ].map((p, idx) => (
             <div
               key={idx}
-              className="glass-card rounded-2xl p-6 text-center hover:-translate-y-2 transition-all duration-300 group"
+              className="glass-card rounded-2xl p-6 text-center transition-all duration-300 group"
             >
               <div
                 className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${p.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-lg`}
@@ -1072,7 +942,7 @@ export default function LinkedInFunnelPage() {
       {/* ══════════════════════════════════════════════════════
           FINAL CTA
       ══════════════════════════════════════════════════════ */}
-      <section className="py-24 px-6 lg:px-16 max-w-[1400px] mx-auto">
+      <section className="py-24 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
         <div className="glass-card rounded-3xl p-10 md:p-16 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-[#0A66C2]/8 via-transparent to-primary/8 pointer-events-none" />
           <div className="ambient-glow top-[-60px] right-[-60px] opacity-20 pointer-events-none" />
@@ -1080,13 +950,13 @@ export default function LinkedInFunnelPage() {
             <p className="text-xs font-bold text-[#0A66C2] uppercase tracking-widest mb-4">
               Start Today
             </p>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-on-surface mb-6 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-semibold text-on-surface mb-6 leading-tight">
               Your Best LinkedIn Month{" "}
               <span className="gradient-text">Starts Now</span>
             </h2>
             <p className="text-on-surface-variant text-base md:text-lg max-w-xl mx-auto mb-10">
               Paste your LinkedIn URL. Get 30 days of personalized posts, image prompts,
-              and video concepts — free.
+              and video concepts, free.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -1094,7 +964,7 @@ export default function LinkedInFunnelPage() {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                   setPageState("input");
                 }}
-                className="group inline-flex items-center justify-center gap-2 bg-[#0A66C2] text-white font-bold px-10 py-4 rounded-2xl hover:bg-[#0A66C2]/90 transition-all hover:scale-105 shadow-xl hover:shadow-[#0A66C2]/20 text-lg"
+                className="group inline-flex items-center justify-center gap-2 bg-[#0A66C2] text-white font-bold px-10 py-4 rounded-2xl hover:bg-[#0A66C2]/90 transition-all shadow-xl hover:shadow-[#0A66C2]/20 text-lg"
               >
                 <LinkedInLogo className="w-5 h-5" />
                 Generate My Content Plan

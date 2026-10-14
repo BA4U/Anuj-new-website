@@ -6,9 +6,11 @@ interface ScrollRevealProps {
   children: ReactNode;
   className?: string;
   stagger?: boolean;
+  /** Children carry their own `.reveal` class and animate one after another (wrapper stays static). */
+  each?: boolean;
 }
 
-export default function ScrollReveal({ children, className = "", stagger = false }: ScrollRevealProps) {
+export default function ScrollReveal({ children, className = "", stagger = false, each = false }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function ScrollReveal({ children, className = "", stagger = false
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
     );
 
     observer.observe(el);
@@ -37,7 +39,7 @@ export default function ScrollReveal({ children, className = "", stagger = false
   }, []);
 
   return (
-    <div ref={ref} className={`reveal ${stagger ? "stagger" : ""} ${className}`}>
+    <div ref={ref} className={`${each ? "stagger" : `reveal ${stagger ? "stagger" : ""}`} ${className}`}>
       {children}
     </div>
   );

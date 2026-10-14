@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Calculator from "./Calculator";
 
 export const metadata: Metadata = {
-  title: "Free Ad Creative ROI Calculator | Anuj Mishra",
+  title: "Free Ad Creative ROI Calculator",
   description:
-    "Plug in your ad spend, CTR, and conversion rate. Instantly see your ROAS, CPA, and revenue — plus 3 AI tips to improve the numbers. No sign-up.",
+    "Plug in your ad spend, CTR, and conversion rate. Instantly see your ROAS, CPA, and revenue, plus 3 AI tips to improve the numbers. No sign-up.",
   keywords: [
     "ad creative ROI calculator",
     "ROAS calculator",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Free Ad Creative ROI Calculator",
     description:
-      "Calculate ROAS, CPA, and revenue in seconds — then get 3 AI tips to improve your ad creative.",
+      "Calculate ROAS, CPA, and revenue in seconds, then get 3 AI tips to improve your ad creative.",
     type: "website",
     url: "https://anuj4u.in/ad-roi-calculator",
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Free Ad Creative ROI Calculator",
     description:
-      "Instantly see your ad ROAS, CPA, and revenue — plus 3 tips to improve them.",
+      "Instantly see your ad ROAS, CPA, and revenue, plus 3 tips to improve them.",
   },
   alternates: {
     canonical: "/ad-roi-calculator",

@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Anuj Mishra | Content Operator & Growth Partner",
+  title: "About Anuj, Content Operator & Growth Partner",
   description: "Anuj Mishra runs content operations for coaches, authors, and founders across YouTube and LinkedIn. Founder of Anuj 4u, working with clients worldwide.",
   alternates: { canonical: "/about" },
   openGraph: {
@@ -31,7 +31,7 @@ const story = [
   {
     year: "Where it started",
     title: "I started with a YouTube channel, not a service business.",
-    body: "I launched my first YouTube channel to learn the craft. Editing my own videos, writing my own titles, designing my own thumbnails. I learned what works because the channel would not lie to me — either it grew or it did not.",
+    body: "I launched my first YouTube channel to learn the craft. Editing my own videos, writing my own titles, designing my own thumbnails. I learned what works because the channel would not lie to me, either it grew or it did not.",
   },
   {
     year: "Then",
@@ -41,7 +41,7 @@ const story = [
   {
     year: "Now",
     title: "I run content operations, not just edits.",
-    body: "Today I work with a small group of clients as their content operator. That means strategy, scripts, edits, thumbnails, LinkedIn content, and reporting — all of it. I built the playbook for my own channels and now I apply it to client work, week in and week out.",
+    body: "Today I work with a small group of clients as their content operator. That means strategy, scripts, edits, thumbnails, LinkedIn content, and reporting, all of it. I built the playbook for my own channels and now I apply it to client work, week in and week out.",
   },
 ];
 
@@ -49,17 +49,17 @@ const milestones = [
   {
     year: "Now",
     title: "Content operator & growth partner",
-    desc: "I run end-to-end content operations for a small number of clients — YouTube, LinkedIn, and paid media. The work is the same as what I built for my own channels: a system that ships every week.",
+    desc: "I run end-to-end content operations for a small number of clients, YouTube, LinkedIn, and paid media. The work is the same as what I built for my own channels: a system that ships every week.",
     tag: "Founder, Anuj 4u",
   },
   {
-    year: "2021 — 2023",
+    year: "2021, 2023",
     title: "Built a content operation from my own channels",
-    desc: "Spent two years running my own YouTube channels end to end. That is where the playbook came from — script, edit, publish, measure, repeat. It is what I now apply to every client.",
+    desc: "Spent two years running my own YouTube channels end to end. That is where the playbook came from, script, edit, publish, measure, repeat. It is what I now apply to every client.",
     tag: "Operator",
   },
   {
-    year: "2019 — 2021",
+    year: "2019, 2021",
     title: "Went deep on video editing for creators and brands",
     desc: "Edited long-form YouTube, shorts, VSLs, and podcast episodes for paying clients. Learned what actually moves the needle on retention, and what does not.",
     tag: "Specialist",
@@ -67,9 +67,9 @@ const milestones = [
 ];
 
 const results = [
-  { metric: "+38%", label: "Course signup rate", client: "Victor Chan, Launch Excel" },
-  { metric: "1,200+", label: "Podcast listens in 30 days", client: "Harjeet Dhillon" },
-  { metric: "6 hrs/wk", label: "Production time saved", client: "Blake Reddy" },
+  { metric: "223K", label: "Views in 365 days", client: "Tim Cakir, YouTube channel" },
+  { metric: "13.0%", label: "Thumbnail click rate", client: "Tim Cakir, Connectors Explained" },
+  { metric: "+63%", label: "Views vs the previous 90 days", client: "Tim Cakir, YouTube channel" },
 ];
 
 const trustedBy = [
@@ -86,8 +86,8 @@ export default function AboutPage() {
       <div className="ambient-glow-2 top-1/3 left-0"></div>
 
       {/* Hero */}
-      <section className="flex flex-col lg:flex-row items-center gap-12 mb-16 relative z-10 pt-4">
-        <div className="w-full lg:w-1/2 flex flex-col gap-6">
+      <section className="flex flex-col items-center gap-10 mb-16 relative z-10 pt-4 text-center">
+        <div className="w-full max-w-2xl flex flex-col items-center gap-6">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container text-primary font-semibold text-xs tracking-wide uppercase w-fit">
             About
           </div>
@@ -95,11 +95,11 @@ export default function AboutPage() {
             Hi, I&apos;m <span className="gradient-text">Anuj.</span>
           </h1>
           <p className="text-lg md:text-xl text-on-surface-variant leading-relaxed max-w-xl">
-            I run content operations for coaches, authors, and founders across
-            YouTube and LinkedIn. Strategy, production, and growth, handled.
-            You show up and approve. I ship.
+            I edit video and manage production end to end: social media, blog
+            editing, publishing and packaging. I can also automate a full
+            channel, from script to report.
           </p>
-          <div className="flex flex-wrap gap-2 pt-2">
+          <div className="flex flex-wrap justify-center gap-2 pt-2">
             {["YouTube Operations", "LinkedIn Funnels", "Production Systems", "Paid Media"].map((tag) => (
               <span
                 key={tag}
@@ -111,8 +111,8 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="w-full lg:w-1/2">
-          <div className="relative w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden glass-card p-4 shadow-2xl border border-white/60">
+        <div className="w-full">
+          <div className="relative w-full aspect-square max-w-sm mx-auto rounded-3xl overflow-hidden glass-card p-4 shadow-2xl border border-white/60">
             <div className="relative w-full h-full rounded-2xl overflow-hidden bg-gradient-to-tr from-indigo-100 to-purple-50">
               <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAONq_-LpwLrjyzi_TMnOoIPeIcZ04gIKRPw3fCV_qXZgnCjM4RQf4LG1WlprBdUN2f5R9C4a835k1yK0KWjOE6rB--wLfc277mjI7w2Hc8caPWC5df-o_cL88SOhdo2QCBzsvzUQ3DCgwIPSBk69Ig9xxhJlx0YERJx6KbCY3NICthAi9jb99FKXTxJ6s30R1-GFRfP8dPp2FllUSrzKZO_zEpQfDn2dyXm0_NKNHe0MGlnDZ4i9EwBnW5rw9enozwcNQHwpdEX4Li_N8"
@@ -179,7 +179,7 @@ export default function AboutPage() {
             {
               icon: "smart_display",
               title: "YouTube operations",
-              desc: "Strategy, scripts, edits, thumbnails, SEO, and reporting — every week, without you having to manage it.",
+              desc: "Strategy, scripts, edits, thumbnails, SEO, and reporting, every week, without you having to manage it.",
             },
             {
               icon: "hub",
@@ -270,7 +270,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {results.map((r) => (
             <div
-              key={r.client}
+              key={r.label}
               className="glass-card rounded-2xl p-6 border border-outline-variant/40 text-center"
             >
               <div className="text-3xl md:text-4xl font-extrabold text-primary mb-1">

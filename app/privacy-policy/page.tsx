@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Anuj Mishra",
+  title: "Privacy Policy",
   description:
-    "How Anuj Mishra (anuj4u.in) collects, uses, and protects your data — including contact forms, the LinkedIn content funnel, email communications, and privacy-friendly analytics.",
+    "How Anuj Mishra (anuj4u.in) collects, uses, and protects your data, including contact forms, the LinkedIn content funnel, email communications, and privacy-friendly analytics.",
 };
 
 function Section({
@@ -61,7 +61,7 @@ export default function PrivacyPolicyPage() {
           <ul className="list-disc pl-5 space-y-2">
             <li>
               <strong>Contact form:</strong> name, email address, subject, and
-              message — submitted voluntarily when you reach out.
+              message, submitted voluntarily when you reach out.
             </li>
             <li>
               <strong>LinkedIn content funnel:</strong> your LinkedIn profile
@@ -70,7 +70,7 @@ export default function PrivacyPolicyPage() {
             </li>
             <li>
               <strong>Website analytics:</strong> aggregated, anonymized usage
-              data (pages viewed, referrer, device type) via Plausible — a
+              data (pages viewed, referrer, device type) via Plausible, a
               cookieless, privacy-friendly analytics service. We do{" "}
               <em>not</em> use advertising or cross-site tracking cookies.
             </li>

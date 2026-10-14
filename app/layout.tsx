@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import MotionProvider from "@/components/MotionProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://anuj4u.in"),
@@ -68,7 +69,7 @@ export default function RootLayout({
                 {
                   "@type": "ProfessionalService",
                   "@id": "https://anuj4u.in/#business",
-                  name: "Anuj Mishra — Video Editing & Growth Marketing",
+                  name: "Anuj Mishra, Video Editing & Growth Marketing",
                   url: "https://anuj4u.in",
                   image: "https://anuj4u.in/api/og",
                   email: "contact@anuj4u.in",
@@ -117,8 +118,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col justify-between bg-surface text-on-surface antialiased">
+        <MotionProvider />
         <Navbar />
-        <main className="flex-grow pt-20">{children}</main>
+        <main className="flex-grow pt-14">{children}</main>
         <Footer />
         <CookieConsent />
       </body>

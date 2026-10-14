@@ -73,13 +73,13 @@ export const NURTURE_STEPS: NurtureStep[] = [
         "A free tool to make posting effortless",
         `${CARD(
           "Hey there 👋",
-          `Your 30-day calendar is in your inbox — but a plan is only as good as the day you actually post. So here's a bonus: my <strong>LinkedIn Posting Cheat-Sheet</strong>, the same checklist I use before every post.`
+          `Your 30-day calendar is in your inbox, but a plan is only as good as the day you actually post. So here's a bonus: my <strong>LinkedIn Posting Cheat-Sheet</strong>, the same checklist I use before every post.`
         )}
         ${CARD(
           "The 5-point pre-post checklist",
-          `1. <strong>Hook in the first line</strong> — lead with the payoff, not &ldquo;I wanted to share&rdquo;.<br/>
-           2. <strong>One idea per post</strong> — if it needs two paragraphs of context, it's two posts.<br/>
-           3. <strong>White space</strong> — short lines = more reads on mobile.<br/>
+          `1. <strong>Hook in the first line</strong>, lead with the payoff, not &ldquo;I wanted to share&rdquo;.<br/>
+           2. <strong>One idea per post</strong>, if it needs two paragraphs of context, it's two posts.<br/>
+           3. <strong>White space</strong>, short lines = more reads on mobile.<br/>
            4. <strong>A question or CTA</strong> at the end to spark comments.<br/>
            5. <strong>Post at the time</strong> listed on each day of your calendar.`
         )}
@@ -98,7 +98,7 @@ export const NURTURE_STEPS: NurtureStep[] = [
         "Let's bank your first win",
         `${CARD(
           "Quick check-in",
-          `It's been a few days — have you published your first post from the calendar? If yes, amazing. If not, today's the day. The algorithm rewards consistency, not perfection.`
+          `It's been a few days, have you published your first post from the calendar? If yes, amazing. If not, today's the day. The algorithm rewards consistency, not perfection.`
         )}
         ${CARD(
           "Here's the easy path",
@@ -106,7 +106,7 @@ export const NURTURE_STEPS: NurtureStep[] = [
         )}
         ${CARD(
           "Share your win with me",
-          `Reply to this email and tell me how it performed — impressions, comments, a new connection. I read every reply, and your real data helps me show you what to double down on next.`
+          `Reply to this email and tell me how it performed, impressions, comments, a new connection. I read every reply, and your real data helps me show you what to double down on next.`
         )}`
       ),
   },
@@ -119,7 +119,7 @@ export const NURTURE_STEPS: NurtureStep[] = [
         "Ready to go from plan to results?",
         `${CARD(
           "You've got the map",
-          `By now you've seen how a structured 30-day plan feels. Most founders and creators get 10× further with a strategist in their corner — building the content, the hooks, and the growth engine while you stay focused on your business.`
+          `By now you've seen how a structured 30-day plan feels. Most founders and creators get 10× further with a strategist in their corner, building the content, the hooks, and the growth engine while you stay focused on your business.`
         )}
         ${CARD(
           "What a paid engagement looks like",
@@ -130,7 +130,7 @@ export const NURTURE_STEPS: NurtureStep[] = [
         )}
         ${CARD(
           "Next step",
-          `Book a <strong>paid strategy call</strong> and we'll map exactly where the biggest leverage is for your profile — even if we don't end up working together, you'll leave with a clear plan.`
+          `Book a <strong>paid strategy call</strong> and we'll map exactly where the biggest leverage is for your profile, even if we don't end up working together, you'll leave with a clear plan.`
         )}`
       ),
   },

@@ -105,9 +105,9 @@ export async function POST(req: NextRequest) {
       html: `<!doctype html><html><body style="font-family:Inter,system-ui,-apple-system,sans-serif;background:#fafafa;padding:24px;color:#1a1a1a;">
 <div style="max-width:560px;margin:0 auto;background:#fff;border-radius:16px;padding:32px;border:1px solid #eee;">
   <h1 style="margin:0 0 12px;font-size:22px;">Thanks for subscribing.</h1>
-  <p style="margin:0 0 16px;line-height:1.6;color:#444;">You'll hear from me roughly once a week. Real notes on what is working in content, YouTube, and LinkedIn — no fluff, no spam.</p>
+  <p style="margin:0 0 16px;line-height:1.6;color:#444;">You'll hear from me roughly once a week. Real notes on what is working in content, YouTube, and LinkedIn, no fluff, no spam.</p>
   <p style="margin:0 0 16px;line-height:1.6;color:#444;">If you ever want to skip the email and just book a call, you can do that here: <a href="https://anuj4u.in/contact" style="color:#6355ff;font-weight:600;">anuj4u.in/contact</a>.</p>
-  <p style="margin:24px 0 0;color:#888;font-size:13px;">— Anuj</p>
+  <p style="margin:24px 0 0;color:#888;font-size:13px;">Anuj</p>
 </div>
 </body></html>`,
     });
