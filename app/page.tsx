@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
+import Testimonials from "@/components/Testimonials";
 import CountUp from "@/components/CountUp";
 
 /* ─── Real client work — playable on the page ───────────────────────── */
@@ -116,26 +117,7 @@ const FAQS = [
   },
 ];
 
-const TESTIMONIALS = [
-  {
-    quote:
-      "Anuj has been a game-changer for my video production, handling both long-form YouTube edits and sales-page VSLs with excellent results. His fast, reliable WhatsApp communication saves me days every week.",
-    name: "Victor Chan",
-    role: "YouTuber & Founder, Launch Excel",
-  },
-  {
-    quote:
-      "Anuj has been monumental in creating my podcast. He doesn't stop at editing — he has a vast knowledge of software and has guided me more than I could hope for. Solid work ethic, and awesome at receiving feedback.",
-    name: "Harjeet Dhillon",
-    role: "Actress & Author",
-  },
-  {
-    quote:
-      "The quality of edits and strategic inputs on content packaging have significantly boosted our channel retention. Creative, innovative, and brilliant ideas.",
-    name: "Dr. Maurice Maurer",
-    role: "Science Educator, PhD",
-  },
-];
+
 
 /* ─── Real client proof — actual analytics screenshots ──────────── */
 const PROOF = [
@@ -469,24 +451,8 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          <ScrollReveal each className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t) => (
-              <figure key={t.name} className="reveal card-glow spotlight p-7 flex flex-col">
-                <span className="material-symbols-outlined text-[34px] text-primary/30 mb-3 !font-[800]" aria-hidden="true">format_quote</span>
-                <blockquote className="text-[15.5px] text-on-surface leading-relaxed mb-6 flex-grow">
-                  {t.quote}
-                </blockquote>
-                <figcaption className="flex items-center gap-3 pt-5 border-t border-primary/10">
-                  <span className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 text-white text-[12.5px] font-semibold flex items-center justify-center shrink-0">
-                    {initials(t.name)}
-                  </span>
-                  <span>
-                    <span className="block text-[14px] font-semibold text-on-surface">{t.name}</span>
-                    <span className="block text-[13px] text-on-surface-variant">{t.role}</span>
-                  </span>
-                </figcaption>
-              </figure>
-            ))}
+          <ScrollReveal>
+            <Testimonials />
           </ScrollReveal>
         </div>
       </section>

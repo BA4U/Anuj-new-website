@@ -83,12 +83,8 @@ const FAQS = [
     a: "The free plan includes the full 30-day YouTube strategy: the highest-impact fixes, hook and title ideas, thumbnail direction, and the one change that matters most — delivered to your inbox.",
   },
   {
-    q: "What's the premium unlock?",
-    a: "Premium unlocks a done-with-you thumbnail direction pack, a full title set for your next video, and a prioritized backlog of the next 5 edits — matched to your niche and audience.",
-  },
-  {
     q: "Is the base plan really free?",
-    a: "Completely free. The 30-day YouTube strategy is yours at no cost. Premium unlocks are optional paid upgrades — the base plan is always free.",
+    a: "Completely free. The 30-day YouTube strategy is yours at no cost. No credit card, no catch.",
   },
 ];
 
@@ -455,7 +451,7 @@ export default function YouTubeFunnelPage() {
                       onChange={(e) => setHoney(e.target.value)}
                       className="hidden"
                     />
-                    <input
+                    <input id="plan-email"
                       type="email"
                       required
                       placeholder="your@email.com"
@@ -493,130 +489,107 @@ export default function YouTubeFunnelPage() {
             )}
           </div>
 
-          <div className="space-y-6 mb-16">
-            {PREVIEW_DAYS.map((day) => (
-              <div key={day.day} className="glass-card rounded-3xl p-8 relative overflow-hidden">
+          <div className="max-w-3xl mx-auto space-y-5 mb-16">
+            {/* Day 1 — shown in full as the sample */}
+            {PREVIEW_DAYS.slice(0, 1).map((day) => (
+              <div key={day.day} className="glass-card rounded-3xl p-7 md:p-8 border border-primary/15 shadow-[0_24px_60px_-34px_rgba(73,54,230,0.5)]">
                 <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-purple-600 text-white font-bold text-sm flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 text-white font-bold text-sm flex items-center justify-center shrink-0">
                       {day.day}
                     </div>
                     <div>
-                      <p className="font-bold text-on-surface text-sm">Day {day.day}</p>
+                      <p className="font-bold text-on-surface text-sm">Day {day.day} — free sample</p>
                       <p className="text-xs text-on-surface-variant">{day.time}</p>
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-secondary-fixed text-primary">
-                      {day.type}
-                    </span>
-                    <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${day.pillarBg} ${day.pillarColor}`}>
-                      {day.pillar}
-                    </span>
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-secondary-fixed text-primary">{day.type}</span>
+                    <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${day.pillarBg} ${day.pillarColor}`}>{day.pillar}</span>
                   </div>
                 </div>
 
-                <div
-                  className="rounded-xl p-4 mb-5"
-                  style={{ borderLeft: "3px solid #7c3aed", background: "rgba(124,58,237,0.04)" }}
-                >
-                  <p className="text-[10px] font-bold text-purple-600 uppercase tracking-widest mb-1.5">
-                    What I'd fix first
-                  </p>
-                  <p className="text-on-surface font-semibold text-sm leading-relaxed">
-                    &ldquo;{day.hook}&rdquo;
-                  </p>
+                <div className="rounded-xl p-4 mb-5" style={{ borderLeft: "3px solid #7c3aed", background: "rgba(124,58,237,0.04)" }}>
+                  <p className="text-[10px] font-bold text-purple-600 uppercase tracking-widest mb-1.5">What I&apos;d fix first</p>
+                  <p className="text-on-surface font-semibold text-sm leading-relaxed">&ldquo;{day.hook}&rdquo;</p>
                 </div>
 
-                <div className="relative mb-5">
-                  <div
-                    className="text-on-surface-variant text-sm leading-relaxed select-none pointer-events-none"
-                    style={{ filter: "blur(5px)" }}
-                  >
-                    <p className="mb-2">
-                      Detailed step-by-step plan for this video — retentions targets, the exact hook line, the thumbnail concept,
-                      the title options, the posting time and the one metric to watch. Your emailed plan covers all 30 days.
-                    </p>
-                    <p>
-                      Supporting rationale, the audience takeaway, and the follow-up action that compounds the result over the next 30 days.
-                    </p>
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="glass-card px-4 py-2 rounded-xl flex items-center gap-2 border border-primary/20 shadow-sm">
-                      <span className="material-symbols-outlined text-primary text-base">mail</span>
-                      <span className="text-xs font-bold text-primary">
-                        Full plan unlocked in your inbox
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/60 border border-emerald-200/50 mb-5">
-                  <span className="material-symbols-outlined text-emerald-500 text-xl shrink-0 mt-0.5">
-                    lightbulb
-                  </span>
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50/60 border border-emerald-200/50">
+                  <span className="material-symbols-outlined text-emerald-500 text-xl shrink-0 mt-0.5">lightbulb</span>
                   <div>
-                    <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1">
-                      Why This Will Perform
-                    </p>
+                    <p className="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1">Why this will perform</p>
                     <p className="text-sm text-emerald-800 leading-relaxed">{day.reason}</p>
                   </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {[
-                    {
-                      icon: "image",
-                      label: "Thumbnail Direction",
-                      desc: "Visual direction for your next thumbnail — composition, focal point, and the one detail that earns the click — matched to your audience",
-                    },
-                    {
-                      icon: "title",
-                      label: "Title Set",
-                      desc: "5 title options for the same video, ranked by predicted CTR and curiosity gap — with the reasoning behind each one",
-                    },
-                  ].map((item) => (
-                    <div
-                      key={item.label}
-                      className="relative rounded-xl overflow-hidden border border-outline-variant/30"
-                    >
-                      <div
-                        className="p-4 select-none pointer-events-none bg-surface-container-low"
-                        style={{ filter: "blur(4px)" }}
-                      >
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="material-symbols-outlined text-on-surface-variant text-lg">
-                            {item.icon}
-                          </span>
-                          <span className="text-xs font-bold text-on-surface">{item.label}</span>
-                        </div>
-                        <p className="text-xs text-on-surface-variant leading-relaxed">
-                          {item.desc} — lorem ipsum dolor sit amet consectetur adipiscing elit
-                          professional brand visual design concept.
-                        </p>
-                      </div>
-                      <div className="absolute inset-0 flex items-center justify-center bg-surface/50">
-                        <button
-                          className="flex items-center gap-1.5 bg-on-surface text-surface-container-lowest text-xs font-bold px-4 py-2 rounded-lg hover:bg-on-surface/80 transition-all shadow-md"
-                          onClick={() => {}}
-                        >
-                          <span className="material-symbols-outlined text-sm">lock</span>
-                          Unlock Premium
-                        </button>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
             ))}
 
-            <div className="glass-card rounded-3xl p-6 text-center border-2 border-dashed border-outline-variant/40">
-              <p className="text-on-surface-variant text-sm mb-1">
-                <strong className="text-on-surface">+ 27 more days</strong> of strategy waiting in your inbox
-              </p>
-              <p className="text-xs text-on-surface-variant/60">
-                Each with the fix, the why, the posting time and the metric that tells you it worked
-              </p>
+            {/* Other days — title only */}
+            {PREVIEW_DAYS.slice(1).map((day) => (
+              <div key={day.day} className="glass-card rounded-2xl px-5 py-4 flex items-center gap-4">
+                <div className="w-9 h-9 rounded-full bg-purple-100 text-purple-700 font-bold text-sm flex items-center justify-center shrink-0">
+                  {day.day}
+                </div>
+                <div className="min-w-0 flex-grow">
+                  <p className="text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant mb-0.5">
+                    Day {day.day} · {day.type}
+                  </p>
+                  <p className="text-sm font-semibold text-on-surface leading-snug">&ldquo;{day.hook}&rdquo;</p>
+                </div>
+                <span className="material-symbols-outlined text-on-surface-variant/40 text-xl shrink-0" aria-hidden="true">lock</span>
+              </div>
+            ))}
+
+            {/* One single locked panel */}
+            <div className="relative rounded-3xl overflow-hidden border border-primary/20">
+              <div
+                className="p-7 md:p-8 select-none pointer-events-none text-on-surface-variant text-sm leading-relaxed bg-white"
+                style={{ filter: "blur(6px)" }}
+                aria-hidden="true"
+              >
+                <p className="mb-3">
+                  The exact hook line, the thumbnail concept, five title options ranked by curiosity, the best posting time and the one metric to watch — for every one of the 30 days.
+                </p>
+                <p className="mb-3">
+                  Supporting rationale, the audience takeaway, and the follow-up action that compounds the result across the month.
+                </p>
+                <p>Days 2–30, written for your channel and your niche.</p>
+              </div>
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 bg-white/55 backdrop-blur-[2px]">
+                <span className="material-symbols-outlined text-primary text-3xl mb-2">mail</span>
+                <p className="font-bold text-on-surface text-[17px] mb-1">
+                  {emailState === "sent" ? "Your full 30-day plan is on its way" : "Full plan unlocked in your inbox"}
+                </p>
+                <p className="text-sm text-on-surface-variant mb-4">
+                  {emailState === "sent"
+                    ? "Check your inbox (and spam) in a few minutes."
+                    : "+ 27 more days — enter your email above and it's yours, free."}
+                </p>
+                {emailState !== "sent" && (
+                  <button
+                    type="button"
+                    onClick={() => document.getElementById("plan-email")?.scrollIntoView({ behavior: "smooth", block: "center" })}
+                    className="btn btn-glow btn-sm"
+                  >
+                    Enter my email
+                    <span className="material-symbols-outlined text-[16px]">arrow_upward</span>
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Book a call */}
+            <div className="rounded-3xl p-7 md:p-8 text-center bg-gradient-to-br from-primary to-purple-600 text-white shadow-[0_24px_60px_-30px_rgba(73,54,230,0.7)]">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-white/70 mb-2">Prefer to talk it through?</p>
+              <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-2">Book a free call and we&apos;ll go through your channel live.</h3>
+              <p className="text-white/75 text-sm max-w-md mx-auto mb-5">20 minutes, no pitch deck. I&apos;ll show you what I&apos;d change first and why.</p>
+              <Link
+                href={process.env.NEXT_PUBLIC_BOOKING_URL || "/contact"}
+                className="inline-flex items-center gap-2 rounded-full bg-white text-primary font-semibold text-[15px] px-6 py-3 hover:bg-white/90 transition-colors"
+              >
+                Book a call
+                <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </Link>
             </div>
           </div>
         </section>
