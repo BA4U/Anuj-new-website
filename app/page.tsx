@@ -147,14 +147,23 @@ export default function Home() {
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              <h1 className="reveal text-[40px] sm:text-[54px] lg:text-[50px] xl:text-[58px] display text-on-surface mb-6">
-                Videos that hook.
+              <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj. Here&apos;s what I do</p>
+              <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[56px] display text-on-surface mb-5">
+                I edit your videos
                 <br />
-                <span className="gradient-text-animated">Strategy that scales.</span>
+                <span className="gradient-text-animated">and grow your channel.</span>
               </h1>
-              <p className="reveal text-[18px] md:text-[20px] text-on-surface-variant leading-relaxed max-w-lg mb-8">
-                I edit video and manage production end to end: social media, blog editing, publishing and packaging.
+              <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-5">
+                Video editor and content manager for YouTube creators, coaches and brands. You record. I handle the editing, thumbnails, Shorts and Reels, blog posts and publishing.
               </p>
+              <ul className="reveal flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
+                {["Long-form and Shorts", "Thumbnails", "Publishing and reports"].map((t) => (
+                  <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-white/70 border border-primary/15 px-3 py-1.5 text-[13px] font-medium text-on-surface">
+                    <span className="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
               <div className="reveal flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <Link href="/youtube-funnel" className="btn btn-glow">
                   Audit my channel free
@@ -190,13 +199,13 @@ export default function Home() {
               </div>
               <div data-parallax="-0.05" className="parallax absolute -left-3 sm:-left-8 top-[18%]">
                 <div className="float-y rounded-2xl bg-white/85 backdrop-blur-xl border border-white shadow-[0_18px_40px_-18px_rgba(73,54,230,0.5)] px-4 py-3 text-left">
-                  <p className="text-[22px] font-semibold tracking-tight text-on-surface leading-none">540+</p>
+                  <p className="text-[22px] font-extrabold tracking-tight text-on-surface leading-none">540+</p>
                   <p className="text-[12px] text-on-surface-variant mt-1">videos edited</p>
                 </div>
               </div>
               <div data-parallax="0.09" className="parallax absolute -right-3 sm:-right-6 bottom-[12%]">
                 <div className="float-y-delayed rounded-2xl bg-white/85 backdrop-blur-xl border border-white shadow-[0_18px_40px_-18px_rgba(73,54,230,0.5)] px-4 py-3 text-left">
-                  <p className="text-[22px] font-semibold tracking-tight gradient-text leading-none">125M+</p>
+                  <p className="text-[22px] font-extrabold tracking-tight gradient-text leading-none">125M+</p>
                   <p className="text-[12px] text-on-surface-variant mt-1">reach generated</p>
                 </div>
               </div>
@@ -209,7 +218,7 @@ export default function Home() {
               <div className="card-glow spotlight grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-primary/10">
                 {STATS.map((stat) => (
                   <div key={stat.label} className="px-6 py-6 md:py-8 text-center">
-                    <div className="text-[34px] md:text-[44px] font-semibold tracking-[-0.03em] gradient-text leading-none">
+                    <div className="text-[34px] md:text-[44px] font-extrabold tracking-[-0.03em] gradient-text leading-none">
                       <CountUp value={stat.value} />
                     </div>
                     <div className="text-[13px] text-on-surface-variant mt-2">{stat.label}</div>
