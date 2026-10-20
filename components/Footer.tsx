@@ -6,7 +6,6 @@ const socials: { name: string; href: string; icon: string }[] = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/byanuj4u/", icon: "person" },
   { name: "WhatsApp", href: "https://wa.me/9123997677", icon: "chat" },
   { name: "Telegram", href: "https://t.me/anujmishra4u", icon: "send" },
-  { name: "Skype", href: "https://join.skype.com/invite/yCZ9IhClcTvD", icon: "forum" },
 ];
 
 const quickLinks = [
@@ -40,7 +39,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-[15px] leading-relaxed text-white/55 max-w-sm mb-6">
-              I edit video and manage production end to end, from script to publish.
+              I help creators and brands grow reach and revenue with video, thumbnails and social content.
             </p>
             <a
               href="mailto:contact@anuj4u.in"
@@ -48,23 +47,6 @@ export default function Footer() {
             >
               contact@anuj4u.in
             </a>
-            <div className="mt-8 max-w-sm w-full text-left">
-              <div className="rounded-2xl bg-gradient-to-br from-primary/10 via-purple-500/10 to-transparent border border-white/10 p-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-purple-300/80 mb-2">
-                Lead magnet
-              </p>
-              <p className="text-[13px] text-white/60 leading-relaxed mb-3">
-                Paste your YouTube channel and get a 30-day plan with hooks, titles and thumbnail ideas.
-              </p>
-              <Link
-                href="/youtube-funnel"
-                className="inline-flex items-center gap-1.5 text-[13px] font-medium text-white hover:text-white/80 transition-colors"
-              >
-                Audit my channel
-                <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-              </Link>
-              </div>
-            </div>
           </div>
 
           {/* Sitemap */}

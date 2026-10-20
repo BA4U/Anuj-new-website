@@ -8,14 +8,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/linkedin-funnel-system" },
   openGraph: {
     title: "LinkedIn Funnel System | Anuj Mishra",
-    description: "Turn LinkedIn views into booked calls. A complete system, $800/mo.",
+    description: "Turn LinkedIn views into booked calls. A complete LinkedIn growth system.",
     url: "https://anuj4u.in/linkedin-funnel-system",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "LinkedIn Funnel System | Anuj Mishra",
-    description: "Turn LinkedIn views into booked calls. A complete system, $800/mo.",
+    description: "Turn LinkedIn views into booked calls. A complete LinkedIn growth system.",
   },
 };
 

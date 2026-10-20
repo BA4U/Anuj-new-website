@@ -21,6 +21,34 @@ export const LONG_FORM: Vid[] = [
   { id: "pMU8C1H1nHo", title: "Payroll and Commission Structures for Technicians", client: "Simply Prime CRM" },
 ];
 
+/** Long-form videos grouped by the type of content, podcast first. Videos come from LONG_FORM above. */
+export const CONTENT_TYPES: { key: string; title: string; blurb: string; ids: string[] }[] = [
+  {
+    key: "podcast",
+    title: "Podcast videos",
+    blurb: "Full episodes and interviews, including Circle podcast episodes, with clean audio, layouts and chapters.",
+    ids: ["-SYqXdaZXl8", "izidLZclYZs", "TW3omRuTQA8", "WTD8GMUO_4w"],
+  },
+  {
+    key: "educational",
+    title: "Educational YouTube videos",
+    blurb: "Tutorials and how-to videos paced for retention, with on-screen graphics that keep viewers watching.",
+    ids: ["pcfFzxnhwUE", "SFn5Vf38f8I", "y11b_rVHcyg", "TZvt_fD8VP4"],
+  },
+  {
+    key: "tech",
+    title: "Tech and AI videos",
+    blurb: "Fast-moving AI and software videos where clarity, screen recordings and thumbnails decide the click.",
+    ids: ["mHOLzwe4sMQ", "bejvX2uUTDo", "-DB8-7eLsTY", "68lgEUQDiDQ"],
+  },
+  {
+    key: "explainer",
+    title: "Explainer and product videos",
+    blurb: "Walkthroughs and explainers that show how a product or service works and help a business win customers.",
+    ids: ["1nT4g9VeJDk", "pMU8C1H1nHo", "aWR04f1eYrw", "ciwbmggLd4Y"],
+  },
+];
+
 export const SHORT_FORM: Vid[] = [
   { id: "jDxfq48mOjc", title: "Food & Drink Shows UK at NEC", client: "Lucy Wager" },
   { id: "dD3jLdx2k7A", title: "I Tried ChatGPT for Image Creation", client: "Tim Cakir" },
@@ -75,43 +103,15 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     client: "Tim Cakir",
     role: "AI and tech YouTube channel",
-    videoId: "mHOLzwe4sMQ",
-    did: ["Long-form editing", "Shorts", "Thumbnails", "Channel growth and paid reach"],
-    quote: "One channel across twelve months: editing, packaging and a YouTube Ads test, tracked in YouTube Studio.",
+    did: ["Long-form editing", "Shorts", "Thumbnails and titles", "Channel growth and paid reach"],
+    quote: "I edited and packaged his videos for twelve months. One YouTube client was worth $50,000 to him directly.",
     metrics: [
+      { value: "$50K", label: "client won directly from YouTube" },
+      { value: "12.3K", label: "subscribers when I handed over the channel" },
       { value: "223K", label: "views in 365 days" },
-      { value: "6.9K", label: "new subscribers" },
-      { value: "13.0%", label: "thumbnail click rate on Connectors Explained" },
-      { value: "47.4K", label: "views on that video" },
-      { value: "+63%", label: "views, last 90 days vs previous" },
-      { value: "$0.23", label: "average CPC on a $600 test campaign" },
+      { value: "13–15%", label: "thumbnail click-through rate on key videos" },
+      { value: "+63%", label: "views, last 90 days vs the 90 before" },
+      { value: "6.9K", label: "new subscribers in 365 days" },
     ],
-  },
-  {
-    client: "Victor Chan",
-    role: "YouTuber and founder, Launch Excel",
-    videoId: "pcfFzxnhwUE",
-    did: ["Long-form YouTube edits", "Sales-page VSLs", "Shorts"],
-    quote: "Fast, reliable communication on WhatsApp, and videos that look more professional than ever.",
-  },
-  {
-    client: "Harjeet Dhillon",
-    role: "Canadian actress and author",
-    videoId: "TW3omRuTQA8",
-    did: ["Podcast editing", "Thumbnails", "Descriptions", "Software guidance"],
-    quote: "Anuj has been monumental in creating my podcast.",
-  },
-  {
-    client: "Dr. Maurice Maurer",
-    role: "Computational physics, Training Scientists",
-    videoId: "y11b_rVHcyg",
-    did: ["Video editing", "Graphic design", "Thumbnails"],
-    quote: "He always responds very quickly and produces great results.",
-  },
-  {
-    client: "Blake Reddy",
-    role: "Private client wealth adviser",
-    did: ["Podcast video layouts"],
-    quote: "Layouts that look great, work perfectly and save me so much time.",
   },
 ];

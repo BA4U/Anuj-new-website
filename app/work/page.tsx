@@ -5,6 +5,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import Image from "next/image";
 import YtThumb from "@/components/YtThumb";
 import OwnChannel from "@/components/OwnChannel";
+import { CONTENT_TYPES, LONG_FORM } from "@/lib/work-data";
 
 export const metadata: Metadata = {
   title: "Work | Anuj Mishra",
@@ -24,42 +25,40 @@ export const metadata: Metadata = {
 };
 
 const categories = [
-  { href: "/work/long-form", label: "Long-form edits", desc: "YouTube episodes, tutorials and podcasts.", count: "16 videos", kind: "long" },
+  { href: "/work/long-form", label: "Long-form edits", desc: "Podcasts, tutorials, tech and explainer videos.", count: "16 videos", kind: "long" },
   { href: "/work/short-form", label: "Shorts and Reels", desc: "Vertical clips with a hook in the first second.", count: "10 Shorts", kind: "short" },
   { href: "/work/thumbnails", label: "Thumbnails and graphics", desc: "Thumbnails designed for the click.", count: "25 thumbnails", kind: "thumb" },
-  { href: "/work/case-studies", label: "Case studies", desc: "Client stories with real YouTube Studio numbers.", count: "5 clients", kind: "case" },
+  { href: "/work/case-studies", label: "Case study", desc: "One channel, real YouTube Studio numbers and a $50,000 client.", count: "Tim Cakir", kind: "case" },
+  { href: "/work/testimonial-edits", label: "Testimonial edits", desc: "Client testimonials cut for clarity, pace and trust.", count: "2 edits", kind: "testimonial" },
 ] as const;
 
 function Preview({ kind }: { kind: (typeof categories)[number]["kind"] }) {
-  const box = "relative rounded-lg overflow-hidden shadow-lg bg-surface-container";
   if (kind === "long")
     return (
-      <div className="absolute inset-0 flex items-center justify-center gap-2.5 px-4 bg-gradient-to-br from-[#efe9ff] to-[#dcd0ff]">
-        {["mHOLzwe4sMQ", "pcfFzxnhwUE", "y11b_rVHcyg"].map((id, i) => (
-          <div key={id} className={`${box} aspect-video w-[34%] ${i === 1 ? "scale-110 z-10" : ""}`}>
-            <YtThumb id={id} alt="" className="transition-transform duration-700 group-hover:scale-[1.06]" />
-          </div>
-        ))}
+      <div className="absolute inset-0 bg-surface-container">
+        <YtThumb id="-SYqXdaZXl8" alt="Circle podcast episode" className="transition-transform duration-700 group-hover:scale-[1.05]" />
       </div>
     );
   if (kind === "short")
     return (
-      <div className="absolute inset-0 flex items-center justify-center gap-3 bg-gradient-to-br from-[#2b1a6b] to-[#6d3fe0]">
-        {["dD3jLdx2k7A", "TJR9l12hN0I", "klcoy936_mo"].map((id, i) => (
-          <div key={id} className={`${box} h-[80%] aspect-[9/16] ${i === 1 ? "scale-110 z-10" : ""}`}>
-            <YtThumb id={id} alt="" vertical className="transition-transform duration-700 group-hover:scale-[1.06]" />
-          </div>
-        ))}
+      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#2b1a6b] to-[#6d3fe0]">
+        <div className="relative h-[86%] aspect-[9/16] rounded-lg overflow-hidden shadow-lg bg-surface-container">
+          <YtThumb id="dD3jLdx2k7A" alt="" vertical className="transition-transform duration-700 group-hover:scale-[1.06]" />
+        </div>
       </div>
     );
   if (kind === "thumb")
     return (
-      <div className="absolute inset-0 grid grid-cols-2 gap-1.5 p-1.5 bg-gradient-to-br from-[#efe9ff] to-[#dcd0ff]">
-        {["chatgpt-connectors-explained", "top-5-gpts-worth-50k", "claude-zapier-automate-everything", "custom-gpt-without-coding"].map((slug) => (
-          <div key={slug} className="relative rounded-md overflow-hidden">
-            <Image src={`/thumbnails/${slug}.webp`} alt="" fill sizes="220px" className="object-cover transition-transform duration-700 group-hover:scale-[1.06]" />
-          </div>
-        ))}
+      <div className="absolute inset-0 bg-surface-container">
+        <Image src="/thumbnails/chatgpt-connectors-explained.webp" alt="" fill sizes="520px" className="object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+      </div>
+    );
+  if (kind === "testimonial")
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#241257] to-[#4b2fa3]">
+        <div className="relative h-[86%] aspect-[9/16] rounded-lg overflow-hidden shadow-lg bg-surface-container">
+          <YtThumb id="TVjGyWn4RhM" alt="" vertical className="transition-transform duration-700 group-hover:scale-[1.06]" />
+        </div>
       </div>
     );
   return (
@@ -101,6 +100,38 @@ export default function WorkPage() {
             </Link>
           ))}
         </ScrollReveal>
+
+        {/* Content types: show the range of videos, podcast first */}
+        <section className="mt-16 md:mt-24">
+          <div className="text-center max-w-2xl mx-auto mb-8 flex flex-col items-center">
+            <p className="eyebrow mb-2">Range</p>
+            <h2 className="text-[26px] sm:text-[32px] md:text-[40px] display text-on-surface mb-3">
+              Edited across <span className="gradient-text">many kinds of content.</span>
+            </h2>
+            <p className="text-[16.5px] text-on-surface-variant leading-relaxed">
+              From podcasts to product explainers, each format gets its own pacing, layout and packaging.
+            </p>
+          </div>
+          <ScrollReveal each className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {CONTENT_TYPES.map((t, i) => {
+              const lead = LONG_FORM.find((v) => v.id === t.ids[0]);
+              return (
+                <Link key={t.key} href={`/work/long-form#${t.key}`} className="reveal group card-glow spotlight p-0 text-center">
+                  <div className="relative aspect-video overflow-hidden bg-surface-container">
+                    {lead && <YtThumb id={lead.id} alt={t.title} className="transition-transform duration-700 group-hover:scale-[1.05]" />}
+                    {i === 0 && (
+                      <span className="absolute top-3 left-3 text-[11px] font-semibold rounded-full bg-primary text-white px-2.5 py-1">Featured</span>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-[17px] font-semibold text-on-surface mb-1 group-hover:text-primary transition-colors">{t.title}</h3>
+                    <p className="text-[13.5px] text-on-surface-variant leading-relaxed">{t.blurb}</p>
+                  </div>
+                </Link>
+              );
+            })}
+          </ScrollReveal>
+        </section>
 
         <OwnChannel />
 

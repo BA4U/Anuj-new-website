@@ -10,11 +10,11 @@ import CountUp from "@/components/CountUp";
 
 /* ─── Work formats (categories, not single videos) ─────────────── */
 const FORMATS = [
-  { title: "Long-form YouTube", desc: "Tutorials, interviews and explainers edited for retention.", href: "/work/long-form", count: "16 videos", img: { type: "yt", id: "mHOLzwe4sMQ" }, span: "lg:col-span-2" },
-  { title: "Short-form", desc: "Shorts and Reels cut to hook in the first second.", href: "/work/short-form", count: "10 Shorts", img: { type: "yt-v", id: "dD3jLdx2k7A" }, span: "lg:col-span-2" },
-  { title: "Podcast editing", desc: "Full episodes with clean audio, layouts and chapters.", href: "/work/long-form", count: "Video podcasts", img: { type: "file", src: "/thumbnails/mothers-day-ai-and-humanity.webp" }, span: "lg:col-span-2" },
-  { title: "Thumbnails and graphics", desc: "Packaging designed to win the click.", href: "/work/thumbnails", count: "25 thumbnails", img: { type: "file", src: "/thumbnails/chatgpt-connectors-explained.webp" }, span: "lg:col-span-3" },
-  { title: "Channel growth", desc: "Case studies with real YouTube Studio numbers.", href: "/work/case-studies", count: "5 clients", img: { type: "file", src: "/proof/thumbnail-ctr.png" }, span: "lg:col-span-3" },
+  { title: "Long-form YouTube Videos", desc: "Tutorials, interviews and explainers edited for retention.", href: "/work/long-form", count: "16 videos", img: { type: "yt", id: "mHOLzwe4sMQ" }, span: "lg:col-span-2" },
+  { title: "Short-form Clips", desc: "Shorts and Reels cut to hook in the first second.", href: "/work/short-form", count: "10 Shorts", img: { type: "yt-v", id: "dD3jLdx2k7A" }, span: "lg:col-span-2" },
+  { title: "Podcast Editing", desc: "Full episodes with clean audio, layouts and chapters.", href: "/work/long-form", count: "Video podcasts", img: { type: "file", src: "/thumbnails/mothers-day-ai-and-humanity.webp" }, span: "lg:col-span-2" },
+  { title: "Thumbnails & Graphics", desc: "Packaging designed to win the click.", href: "/work/thumbnails", count: "25 thumbnails", img: { type: "file", src: "/thumbnails/chatgpt-connectors-explained.webp" }, span: "lg:col-span-3" },
+  { title: "Channel Growth", desc: "Case studies with real YouTube Studio numbers.", href: "/work/case-studies", count: "5 clients", img: { type: "file", src: "/proof/thumbnail-ctr.png" }, span: "lg:col-span-3" },
 ] as const;
 
 const STATS = [
@@ -49,19 +49,21 @@ const FAQS = [
     q: "Which niches do you work with?",
     a: "Creators, coaches, course sellers and B2B teams, mostly in finance, education, tech and personal brands.",
   },
-];
-
-/* ─── Real results: Tim Cakir's YouTube Studio and Google Ads screenshots ─── */
+];/* ─── Real results: proven metrics ─── */
+// Trust pillars — proven results every visitor can relate to
 const PROOF = [
-  { src: "/proof/thumbnail-ctr.png", label: "Thumbnail click rate", headline: "Videos people click", stat: "13.0%", statLabel: "click rate on 220K impressions", note: "Titles and thumbnails built to earn the click from the first impression." },
-  { src: "/proof/365-day-analytics.png", label: "365-day analytics", headline: "Views that keep growing", stat: "223K", statLabel: "views in 365 days", note: "Steady uploads, sharper packaging and 6.9K new subscribers over twelve months." },
-  { src: "/proof/90-day-performance.png", label: "90-day performance", headline: "Growth every quarter", stat: "+63%", statLabel: "views vs the previous 90 days", note: "A consistent edit style and posting rhythm lift each quarter above the last." },
-  { src: "/proof/organic-impressions.png", label: "Organic reach", headline: "Found in search", stat: "140K", statLabel: "impressions, 36% from YouTube search", note: "Titles and descriptions that match what viewers actually search for." },
-  { src: "/proof/us-audience.png", label: "Audience", headline: "The right viewers", stat: "23.6%", statLabel: "of views from the US", note: "The audience a channel wants: US, India and UK lead the top geographies." },
-  { src: "/proof/google-ads-growth.png", label: "Google Ads", headline: "Paid reach that pays off", stat: "$0.23", statLabel: "average cost per click", note: "A $600 YouTube campaign tested at a 1.86% view rate." },
-];
+  { src: "/proof/thumbnail-ctr.png", label: "Thumbnail click rate", headline: "Videos people click", stat: "13.0%", statLabel: "click rate on 220K impressions", note: "Good titles and thumbnails earn the click from the first impression." },
+  { src: "/proof/365-day-analytics.png", label: "365-day analytics", headline: "Views that keep growing", stat: "223K", statLabel: "views in 365 days", note: "Steady uploads and sharper packaging grow sustained audience." },
+  { src: "/proof/90-day-performance.png", label: "90-day performance", headline: "Growth every quarter", stat: "+63%", statLabel: "views vs the previous 90 days", note: "A consistent style and posting rhythm lifts each quarter above the last." },
+  { src: "/proof/organic-impressions.png", label: "Organic reach", headline: "Found in search", stat: "140K", statLabel: "impressions, 36% from YouTube search", note: "Titles and descriptions match what viewers search for." },
+  { src: "/proof/us-audience.png", label: "Audience", headline: "The right viewers", stat: "23.6%", statLabel: "of views from the US", note: "Top geographies: US, India and UK." },
+  { src: "/proof/google-ads-growth.png", label: "Google Ads", headline: "Paid reach that pays off", stat: "$0.23", statLabel: "average cost per click", note: "A $600 YouTube campaign at a 1.86% view rate." },];
 
-const PROOF_INTERVAL = 6500;
+// Pinned strongest quote — highest trust signal, shown every time
+const PinnedCallout = "\$50,000 worth of clients from just YouTube — in three months.";
+
+// Pinned heading text
+const PinnedCalloutHeadline = "Real results that convert:";
 
 const STEPS = [
   { n: "01", title: "Audit and goals", body: "I review your last 10 videos and your analytics, then we agree on what success looks like." },
@@ -69,8 +71,7 @@ const STEPS = [
   { n: "03", title: "Set up", body: "We connect your tools, brand kit and shared folders so every handoff is simple." },
   { n: "04", title: "Produce", body: "I script, edit and package each video, then cut Shorts and blog posts from it." },
   { n: "05", title: "Review", body: "You get timestamped drafts. Two rounds of revisions are included with every video." },
-  { n: "06", title: "Publish and report", body: "I upload, schedule and track results, then share a monthly report on what to repeat." },
-];
+  { n: "06", title: "Publish and report", body: "I upload, schedule and track results, then share a monthly report on what to repeat." },];
 
 const HANDLES = [
   { icon: "movie_edit", title: "Video editing", body: "Long-form and short-form cuts with clean pacing, captions and sound." },
@@ -101,7 +102,7 @@ export default function Home() {
   // Proof slides advance by themselves; hovering, focus or the lightbox pauses them.
   useEffect(() => {
     if (proofPaused || zoom || !motionOk) return;
-    const t = setTimeout(() => setProofIdx((i) => (i + 1) % PROOF.length), PROOF_INTERVAL);
+    const t = setTimeout(() => setProofIdx((i) => (i + 1) % PROOF.length), 6500);
     return () => clearTimeout(t);
   }, [proofIdx, proofPaused, zoom, motionOk]);
 
@@ -147,14 +148,23 @@ export default function Home() {
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              <h1 className="reveal text-[40px] sm:text-[54px] lg:text-[50px] xl:text-[58px] display text-on-surface mb-6">
-                Videos that hook.
+              <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj. Here&apos;s how I help</p>
+              <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[56px] display text-on-surface mb-5">
+                I help creators and brands
                 <br />
-                <span className="gradient-text-animated">Strategy that scales.</span>
+                <span className="gradient-text-animated">grow reach and revenue.</span>
               </h1>
-              <p className="reveal text-[18px] md:text-[20px] text-on-surface-variant leading-relaxed max-w-lg mb-8">
-                I edit video and manage production end to end: social media, blog editing, publishing and packaging.
+              <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-5">
+                I turn your videos and social content into a sales funnel. Sharper edits and thumbnails earn more clicks, the right audience finds you, and viewers become leads, clients and revenue.
               </p>
+              <ul className="reveal flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
+                {["More clicks", "The right audience", "Leads and sales"].map((t) => (
+                  <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-white/70 border border-primary/15 px-3 py-1.5 text-[13px] font-medium text-on-surface">
+                    <span className="material-symbols-outlined text-[16px] text-primary">check_circle</span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
               <div className="reveal flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <Link href="/youtube-funnel" className="btn btn-glow">
                   Audit my channel free
@@ -190,13 +200,13 @@ export default function Home() {
               </div>
               <div data-parallax="-0.05" className="parallax absolute -left-3 sm:-left-8 top-[18%]">
                 <div className="float-y rounded-2xl bg-white/85 backdrop-blur-xl border border-white shadow-[0_18px_40px_-18px_rgba(73,54,230,0.5)] px-4 py-3 text-left">
-                  <p className="text-[22px] font-semibold tracking-tight text-on-surface leading-none">540+</p>
+                  <p className="text-[22px] font-extrabold tracking-tight text-on-surface leading-none">540+</p>
                   <p className="text-[12px] text-on-surface-variant mt-1">videos edited</p>
                 </div>
               </div>
               <div data-parallax="0.09" className="parallax absolute -right-3 sm:-right-6 bottom-[12%]">
                 <div className="float-y-delayed rounded-2xl bg-white/85 backdrop-blur-xl border border-white shadow-[0_18px_40px_-18px_rgba(73,54,230,0.5)] px-4 py-3 text-left">
-                  <p className="text-[22px] font-semibold tracking-tight gradient-text leading-none">125M+</p>
+                  <p className="text-[22px] font-extrabold tracking-tight gradient-text leading-none">125M+</p>
                   <p className="text-[12px] text-on-surface-variant mt-1">reach generated</p>
                 </div>
               </div>
@@ -209,7 +219,7 @@ export default function Home() {
               <div className="card-glow spotlight grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-primary/10">
                 {STATS.map((stat) => (
                   <div key={stat.label} className="px-6 py-6 md:py-8 text-center">
-                    <div className="text-[34px] md:text-[44px] font-semibold tracking-[-0.03em] gradient-text leading-none">
+                    <div className="text-[34px] md:text-[44px] font-extrabold tracking-[-0.03em] gradient-text leading-none">
                       <CountUp value={stat.value} />
                     </div>
                     <div className="text-[13px] text-on-surface-variant mt-2">{stat.label}</div>
@@ -270,8 +280,9 @@ export default function Home() {
           <ScrollReveal>
             <div className="text-center max-w-3xl mx-auto mb-10 md:mb-14">
               <p className="eyebrow mb-2">Real results</p>
+              <div className="pinned-callout mb-6">{PinnedCallout}</div>
               <h2 className="text-[34px] md:text-[54px] display text-on-surface">
-                Proof you can <span className="gradient-text-animated">see.</span>
+                {PinnedCalloutHeadline}<span className="gradient-text-animated"> see.</span>
               </h2>
               <p className="text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed mt-4">
                 Views, clicks and the right audience, straight from YouTube Studio.
@@ -337,7 +348,7 @@ export default function Home() {
                     <span
                       key={`${proofIdx}-${proofPaused}`}
                       className="tm-progress absolute inset-0 bg-primary"
-                      style={{ animationDuration: `${PROOF_INTERVAL}ms`, animationPlayState: proofPaused ? "paused" : "running" }}
+                      style={{ animationDuration: `${6500}ms`, animationPlayState: proofPaused ? "paused" : "running" }}
                     />
                   )}
                   {on && !motionOk && <span className="absolute inset-0 bg-primary" />}
