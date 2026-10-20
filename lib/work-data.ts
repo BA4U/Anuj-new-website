@@ -49,17 +49,22 @@ export const CONTENT_TYPES: { key: string; title: string; blurb: string; ids: st
   },
 ];
 
+/** Ordered to lead with the strongest work: Eric Presnall's shorts alternate with the
+ * Rationale Hub channel's own shorts up front, then the rest, with no two videos
+ * from the same client back to back. */
 export const SHORT_FORM: Vid[] = [
-  { id: "jDxfq48mOjc", title: "Food & Drink Shows UK at NEC", client: "Lucy Wager" },
+  { id: "Bp1p4Nqb0CA", title: "Why Brands Sell Stories, Not Products", client: "Eric Presnall, VideoRep" },
+  { id: "KVehhWioXcQ", title: "5 ChatGPT Settings You Should Change Right Now", client: "Rationale Hub" },
+  { id: "BPTOzdksbEs", title: "You Don't Need Thousands of Dollars to Start Content Creation", client: "Eric Presnall, VideoRep" },
+  { id: "7LUG9W9BWXk", title: "The Free AI Tool That Outperforms Big Tech", client: "Rationale Hub" },
+  { id: "uztrtGDjZxE", title: "Humans Build Trust. AI Scales", client: "Eric Presnall, VideoRep" },
   { id: "dD3jLdx2k7A", title: "I Tried ChatGPT for Image Creation", client: "Tim Cakir" },
+  { id: "jDxfq48mOjc", title: "Food & Drink Shows UK at NEC", client: "Lucy Wager" },
   { id: "TJR9l12hN0I", title: "Battle of the AI Titans", client: "Tim Cakir" },
-  { id: "klcoy936_mo", title: "How I Use Notion as My Second Brain Daily", client: "Tim Cakir" },
   { id: "PYfcIJ3TzIk", title: "Giving Selflessly", client: "Harjeet Dhillon" },
+  { id: "klcoy936_mo", title: "How I Use Notion as My Second Brain Daily", client: "Tim Cakir" },
   { id: "gY95ZAAYypg", title: "Family vs. Pro: Who Should You Choose?", client: "Bayswater Wealth Management" },
   { id: "ZWLiTlvN1sQ", title: "Comparing US vs. India Real Estate", client: "Indian Community" },
-  { id: "Bp1p4Nqb0CA", title: "Why Brands Sell Stories, Not Products", client: "Eric Presnall, VideoRep" },
-  { id: "BPTOzdksbEs", title: "You Don't Need Thousands of Dollars to Start Content Creation", client: "Eric Presnall, VideoRep" },
-  { id: "uztrtGDjZxE", title: "Humans Build Trust. AI Scales", client: "Eric Presnall, VideoRep" },
 ];
 
 export const THUMBNAILS: { slug: string; title: string; client: string }[] = [
