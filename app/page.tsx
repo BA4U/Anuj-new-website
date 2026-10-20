@@ -73,13 +73,14 @@ const STEPS = [
   { n: "05", title: "Review", body: "You get timestamped drafts. Two rounds of revisions are included with every video." },
   { n: "06", title: "Publish and report", body: "I upload, schedule and track results, then share a monthly report on what to repeat." },];
 
+// The work as a pipeline: what happens to your channel, in the order it happens.
 const HANDLES = [
-  { icon: "movie_edit", title: "Video editing", body: "Long-form and short-form cuts with clean pacing, captions and sound." },
-  { icon: "imagesmode", title: "Thumbnails and packaging", body: "Titles, thumbnails and hooks built to earn the click." },
-  { icon: "share", title: "Social media", body: "Reels, Shorts and TikTok cut from your long videos and posted on schedule." },
-  { icon: "edit_note", title: "Blog editing", body: "Scripts and videos turned into search-ready posts." },
-  { icon: "publish", title: "Publishing", body: "Uploads, descriptions, chapters and scheduling handled for you." },
-  { icon: "automation", title: "Full automation", body: "Scripting, voiceover, editing, publishing and reporting in one flow." },
+  { n: "01", icon: "manage_search", title: "Audit", body: "I dig into your channel, analytics and last 10 videos to find what is costing you views." },
+  { n: "02", icon: "edit_note", title: "Scripting", body: "Hooks, outlines and scripts built on what the audit found, so every video starts strong." },
+  { n: "03", icon: "movie_edit", title: "Editing", body: "Long-form and short-form cuts with clean pacing, captions and sound." },
+  { n: "04", icon: "imagesmode", title: "Thumbnails and packaging", body: "Titles, thumbnails and hooks built to earn the click." },
+  { n: "05", icon: "publish", title: "Publishing", body: "Uploads, descriptions, chapters and scheduling handled for you." },
+  { n: "06", icon: "insights", title: "Reporting", body: "The numbers in plain English: what worked, what to repeat, what to drop." },
 ];
 
 const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL || "/contact";
@@ -231,26 +232,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 1b · WHAT I TAKE ON */}
+      {/* 1b · THE WORKFLOW */}
       <section className="relative py-16 md:py-24">
         <div className="max-w-[1100px] mx-auto px-5 sm:px-6 lg:px-10">
           <ScrollReveal>
             <div className="text-center max-w-4xl mx-auto mb-10 md:mb-12">
-              <p className="eyebrow mb-2">What I take on</p>
+              <p className="eyebrow mb-2">How I work</p>
               <h2 className="text-[30px] md:text-[48px] display text-on-surface md:whitespace-nowrap">
                 The whole channel, <span className="gradient-text">start to finish.</span>
               </h2>
               <p className="text-[17px] text-on-surface-variant leading-relaxed mt-4">
-                Hand me one video or the full pipeline. I can run it from script to report.
+                Audit, script, edit, package, publish, report. Hand me one video or the full pipeline.
               </p>
             </div>
           </ScrollReveal>
           <ScrollReveal each className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {HANDLES.map((h) => (
-              <div key={h.title} className="reveal card-glow spotlight p-6 text-center flex flex-col items-center">
-                <span className="material-symbols-outlined text-[26px] text-primary mb-3">{h.icon}</span>
+            {HANDLES.map((h, i) => (
+              <div key={h.title} className="reveal card-glow spotlight p-6 text-center flex flex-col items-center relative">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary to-purple-500 text-white flex items-center justify-center mb-4 shadow-[0_14px_30px_-12px_rgba(124,77,240,0.8)]">
+                  <span className="material-symbols-outlined text-[22px]">{h.icon}</span>
+                </div>
+                <span className="absolute top-4 right-4 text-[12px] font-bold tracking-[0.14em] text-primary/50">{h.n}</span>
                 <h3 className="text-[18px] font-semibold text-on-surface mb-1.5">{h.title}</h3>
                 <p className="text-[14.5px] text-on-surface-variant leading-relaxed">{h.body}</p>
+                {/* Arrow linking to the next step; skipped at the end of each desktop row */}
+                {i < HANDLES.length - 1 && (i + 1) % 3 !== 0 && (
+                  <span className="material-symbols-outlined hidden lg:flex absolute -right-[13px] top-1/2 -translate-y-1/2 text-[22px] text-primary/40 bg-[#f7f5ff] w-6 justify-center">
+                    arrow_forward
+                  </span>
+                )}
               </div>
             ))}
           </ScrollReveal>
