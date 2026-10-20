@@ -33,6 +33,7 @@ const nextConfig = {
       { source: "/portfolio/shorts-editing-portfolio", destination: "/work/short-form", permanent: true },
       { source: "/portfolio/graphic-design-portfolio", destination: "/work/thumbnails", permanent: true },
       { source: "/portfolio/youtube-management-portfolio", destination: "/work/case-studies", permanent: true },
+      { source: "/portfolio/testimonial-edits", destination: "/work/testimonial-edits", permanent: true },
       { source: "/portfolio/:path*", destination: "/work", permanent: true },
     ];
   },

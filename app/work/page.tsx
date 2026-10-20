@@ -29,6 +29,7 @@ const categories = [
   { href: "/work/short-form", label: "Shorts and Reels", desc: "Vertical clips with a hook in the first second.", count: "10 Shorts", kind: "short" },
   { href: "/work/thumbnails", label: "Thumbnails and graphics", desc: "Thumbnails designed for the click.", count: "25 thumbnails", kind: "thumb" },
   { href: "/work/case-studies", label: "Case study", desc: "One channel, real YouTube Studio numbers and a $50,000 client.", count: "Tim Cakir", kind: "case" },
+  { href: "/work/testimonial-edits", label: "Testimonial edits", desc: "Client testimonials cut for clarity, pace and trust.", count: "2 edits", kind: "testimonial" },
 ] as const;
 
 function Preview({ kind }: { kind: (typeof categories)[number]["kind"] }) {
@@ -50,6 +51,14 @@ function Preview({ kind }: { kind: (typeof categories)[number]["kind"] }) {
     return (
       <div className="absolute inset-0 bg-surface-container">
         <Image src="/thumbnails/chatgpt-connectors-explained.webp" alt="" fill sizes="520px" className="object-cover transition-transform duration-700 group-hover:scale-[1.05]" />
+      </div>
+    );
+  if (kind === "testimonial")
+    return (
+      <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#241257] to-[#4b2fa3]">
+        <div className="relative h-[86%] aspect-[9/16] rounded-lg overflow-hidden shadow-lg bg-surface-container">
+          <YtThumb id="TVjGyWn4RhM" alt="" vertical className="transition-transform duration-700 group-hover:scale-[1.06]" />
+        </div>
       </div>
     );
   return (
