@@ -113,7 +113,7 @@ export default function TestimonialsPage() {
       <div className="glass-card rounded-3xl p-10 text-center max-w-3xl mx-auto  shadow-2xl">
         <h3 className="text-2xl md:text-3xl font-bold mb-3 text-on-surface">Want to join these success stories?</h3>
         <p className="text-on-surface-variant text-sm md:text-base mb-6">
-          Let&apos;s discuss how we can grow your channel, podcast, or business.
+          Let&apos;s discuss how I can help grow your YouTube channel and content.
         </p>
         <Link
           href="/contact"

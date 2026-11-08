@@ -39,7 +39,7 @@ const TIERS = [
   {
     name: "Content Engine",
     badge: "Most Popular",
-    desc: "Your complete video production and social growth operation on a turnkey monthly retainer.",
+    desc: "Your complete YouTube channel and content operation on a turnkey monthly retainer with direct 1-on-1 access.",
     price: "$2,800",
     cadence: "/ month",
     idealFor: "CEOs, coaches, and creators who need consistent high-retention content without spending 20+ hours a week.",
@@ -49,7 +49,7 @@ const TIERS = [
       "Custom High-CTR Thumbnails (with A/B Variants)",
       "LinkedIn Repurposing: 12-16 Thought Leadership Posts",
       "Title, Hook & SEO Metadata Optimization",
-      "Direct WhatsApp / Slack Pipeline & Priority Slots",
+      "Direct 1-on-1 WhatsApp / Slack Communication",
       "2 Rounds of Timestamped Revisions Included",
       "Monthly Growth & Inbound Lead Report",
     ],
@@ -95,11 +95,11 @@ const PRICING_FAQS = [
   },
   {
     q: "What do you need from me to start?",
-    a: "Just your raw footage (via Google Drive or Frame.io) and an initial 30-minute kickoff call. We handle everything else: scripting hooks, editing, motion graphics, thumbnails, LinkedIn formatting, and scheduling.",
+    a: "Just your raw footage (via Google Drive or Frame.io) and an initial 30-minute kickoff call. I handle everything else: scripting hooks, editing, motion graphics, thumbnails, LinkedIn formatting, and scheduling.",
   },
   {
     q: "Do you offer custom scopes?",
-    a: "Yes. If your team requires specific deliverables (e.g., podcast editing only, ad creative testing batches, or multi-speaker events), book a call and we will tailor an exact scope for your goals.",
+    a: "Yes. If you require specific deliverables (e.g., podcast editing only, ad creative testing batches, or multi-speaker events), book a call and I will tailor an exact scope for your goals.",
   },
 ];
 
@@ -113,14 +113,14 @@ export default function PricingPage() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900/[0.04] border border-neutral-900/[0.08] text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-600 mb-4">
-            Transparent Pricing
+            Transparent Retainers
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-on-surface mb-5">
             Predictable investment. <br className="hidden sm:block" />
-            <span className="gradient-text">Compounding growth.</span>
+            <span className="gradient-text">Compounding channel growth.</span>
           </h1>
           <p className="text-lg md:text-xl text-on-surface-variant leading-relaxed">
-            Choose the level of partnership that fits your growth stage. High-retention video production, LinkedIn authority, and social media distribution under one roof.
+            Work directly with me. Simple, transparent retainers for your YouTube channel and content—with zero junior agency handoffs.
           </p>
         </div>
 

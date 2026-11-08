@@ -25,10 +25,10 @@ export default function VideoTestimonial({
   clientRole = "Founder",
   companyName = "Launch Excel",
   avatarUrl,
-  headline = "How We Scaled Client Pipeline by $50,000 Using YouTube Video & High-Retention Edits",
+  headline = "How Victor Chan Added $50,000 to His Pipeline from YouTube Channel Content",
   metric = "+$50K",
-  metricLabel = "Pipeline Generated in 90 Days",
-  quote = "Anuj has been a game-changer for our video production. Long-form edits and VSLs with crisp pacing helped us turn viewers directly into high-ticket clients.",
+  metricLabel = "Client Pipeline Generated in 90 Days",
+  quote = "Anuj has been a game-changer for my YouTube channel and content. His pacing, high-retention packaging, and reliable turnaround helped turn channel viewers directly into high-ticket clients.",
   duration = "1:45 min",
 }: VideoTestimonialProps) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -109,13 +109,13 @@ export default function VideoTestimonial({
               {/* Key Highlights Pill Row */}
               <div className="flex flex-wrap gap-2 mb-6">
                 <span className="text-[12px] font-medium bg-white/5 border border-white/10 text-neutral-300 px-3 py-1 rounded-lg">
-                  YouTube Long-Form
+                  YouTube Channel Growth
                 </span>
                 <span className="text-[12px] font-medium bg-white/5 border border-white/10 text-neutral-300 px-3 py-1 rounded-lg">
-                  Retention Hooks
+                  Retention Packaging
                 </span>
                 <span className="text-[12px] font-medium bg-white/5 border border-white/10 text-neutral-300 px-3 py-1 rounded-lg">
-                  Funnel VSL
+                  Inbound Funnel
                 </span>
               </div>
             </div>

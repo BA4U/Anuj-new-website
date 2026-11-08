@@ -123,7 +123,7 @@ const servicesFaqs = [
   },
   {
     q: "Do you offer one-off projects?",
-    a: "Yes. If you only need a single VSL, podcast edit, or ad campaign, book a call and we will scope it as a project rather than a monthly plan.",
+    a: "Yes. If you only need a single VSL, podcast edit, or ad campaign, book a call and I will scope it as a project rather than a monthly plan.",
   },
 ];
 
@@ -138,10 +138,10 @@ export default function ServicesPage() {
           Services
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold text-on-surface mb-6 leading-tight">
-          Four ways to <span className="gradient-text">scale your brand</span>
+          Four ways to <span className="gradient-text">scale your YouTube channel & content</span>
         </h1>
         <p className="text-lg text-on-surface-variant leading-relaxed">
-          From high-retention video editing and LinkedIn thought leadership to full-channel production and targeted paid ad amplification. Choose your growth engine.
+          I produce and manage your YouTube channel, high-retention content, and multi-platform distribution end-to-end. You record; I handle everything else.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
           <Link href="/pricing" className="btn btn-dark">View pricing & plans</Link>
@@ -221,7 +221,7 @@ export default function ServicesPage() {
             Process
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-3">
-            How we <span className="gradient-text">work together</span>
+            How I <span className="gradient-text">work with you</span>
           </h2>
           <p className="text-on-surface-variant text-base md:text-lg max-w-2xl mx-auto">
             A simple, predictable engagement, from first call to first deliverable in
@@ -289,8 +289,8 @@ export default function ServicesPage() {
       <section className="cta-card rounded-3xl p-10 text-center max-w-4xl mx-auto relative overflow-hidden ">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-on-surface">Not sure which plan fits?</h2>
         <p className="text-on-surface-variant text-base mb-8 max-w-xl mx-auto">
-          Book a free 20-minute call. We will look at your content and your
-          goals together, and recommend the right starting point.
+          Book a free 20-minute call. I will personally review your YouTube channel, content, and
+          goals, and recommend the highest-impact starting point.
         </p>
         <Link
           href="/contact"

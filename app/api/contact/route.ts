@@ -139,20 +139,20 @@ function buildConfirmationEmailHtml(body: ContactRequestBody): string {
 <body style="margin:0;padding:0;background:#f8f9fa;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#1e293b;">
   <div style="max-width:580px;margin:32px auto;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
     <div style="background:linear-gradient(135deg,#4936e6,#8b5cf6);padding:28px 24px;text-align:center;color:#ffffff;">
-      <h1 style="margin:0;font-size:22px;font-weight:700;">We received your message</h1>
-      <p style="margin:6px 0 0;font-size:13px;opacity:0.9;">Anuj Mishra · Growth Studio</p>
+      <h1 style="margin:0;font-size:22px;font-weight:700;">I received your message</h1>
+      <p style="margin:6px 0 0;font-size:13px;opacity:0.9;">Anuj Mishra · YouTube & Content Partner</p>
     </div>
     <div style="padding:28px 24px;line-height:1.6;font-size:15px;">
       <p style="margin:0 0 16px;">Hi <b>${body.name}</b>,</p>
-      <p style="margin:0 0 16px;">Thanks for reaching out regarding <b>${subject}</b>. I've received your inquiry and will personally review it and get back to you within 24 to 48 hours.</p>
+      <p style="margin:0 0 16px;">Thanks for reaching out regarding <b>${subject}</b>. I've received your note and will personally review it and get back to you within 24 to 48 hours.</p>
       <div style="background:#f1f5f9;border-left:4px solid #4936e6;padding:14px 16px;border-radius:6px;margin:20px 0;font-size:14px;color:#475569;">
         <i>&ldquo;${body.message}&rdquo;</i>
       </div>
-      <p style="margin:0 0 20px;">In the meantime, feel free to check out some of our recent channel case studies and breakdown guides:</p>
+      <p style="margin:0 0 20px;">In the meantime, feel free to check out some of my recent channel case studies and content breakdowns:</p>
       <div style="text-align:center;margin:24px 0;">
         <a href="https://anuj4u.in/work" style="display:inline-block;background:#4936e6;color:#ffffff;font-weight:600;padding:12px 28px;border-radius:9999px;text-decoration:none;font-size:14px;">Explore Recent Work & Case Studies →</a>
       </div>
-      <p style="margin:24px 0 0;font-size:14px;color:#64748b;">Best regards,<br><b style="color:#1e293b;">Anuj Mishra</b><br>Founder & Growth Strategist</p>
+      <p style="margin:24px 0 0;font-size:14px;color:#64748b;">Best regards,<br><b style="color:#1e293b;">Anuj Mishra</b><br>YouTube & Content Growth Specialist</p>
     </div>
     <div style="border-top:1px solid #e2e8f0;padding:16px 24px;text-align:center;font-size:12px;color:#94a3b8;background:#fafafa;">
       <p style="margin:0;">Anuj Mishra · contact@anuj4u.in · <a href="https://anuj4u.in" style="color:#4936e6;text-decoration:none;">anuj4u.in</a></p>

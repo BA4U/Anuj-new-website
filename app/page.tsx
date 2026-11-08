@@ -67,12 +67,13 @@ const PinnedCallout = "\$50,000 worth of clients from just YouTube — in three 
 const PinnedCalloutHeadline = "Real results that convert:";
 
 const STEPS = [
-  { n: "01", title: "Audit and goals", body: "I review your last 10 videos and your analytics, then we agree on what success looks like." },
-  { n: "02", title: "Plan", body: "You get a content plan: topics, titles, thumbnail directions and a posting calendar." },
-  { n: "03", title: "Set up", body: "We connect your tools, brand kit and shared folders so every handoff is simple." },
+  { n: "01", title: "Audit and goals", body: "I review your last 10 videos and your channel analytics, then we agree on what success looks like." },
+  { n: "02", title: "Plan", body: "You get a tailored content plan: topics, titles, thumbnail directions and a posting calendar." },
+  { n: "03", title: "Set up", body: "I organize your shared Google Drive, brand kit and assets so every handoff is effortless." },
   { n: "04", title: "Produce", body: "I script, edit and package each video, then cut Shorts and blog posts from it." },
   { n: "05", title: "Review", body: "You get timestamped drafts. Two rounds of revisions are included with every video." },
-  { n: "06", title: "Publish and report", body: "I upload, schedule and track results, then share a monthly report on what to repeat." },];
+  { n: "06", title: "Publish and report", body: "I upload, schedule and track results, then share a monthly report on what to repeat." },
+];
 
 // The work as a pipeline: what happens to your channel, in the order it happens.
 const HANDLES = [
@@ -150,17 +151,17 @@ export default function Home() {
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              <p className="reveal eyebrow mb-3">Organic Growth & Video Production Studio</p>
+              <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj · YouTube & Content Partner</p>
               <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[56px] display text-on-surface mb-5">
-                We scale creators & brands through
+                I help creators & founders grow their
                 <br />
-                <span className="gradient-text-animated">high-retention video & growth.</span>
+                <span className="gradient-text-animated">YouTube channel & content.</span>
               </h1>
               <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-5">
-                We turn raw footage into an inbound client engine. From retention-engineered YouTube edits and viral Shorts to LinkedIn thought leadership and targeted paid ads.
+                I produce and manage your YouTube channel and content end-to-end. From retention-engineered edits and packaging to viral Shorts, LinkedIn thought leadership, and targeted ads that turn viewers into clients.
               </p>
               <ul className="reveal flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
-                {["High-Retention YouTube", "Viral Shorts & Reels", "LinkedIn Authority", "Targeted Paid Ads"].map((t) => (
+                {["YouTube Channel Growth", "High-Retention Content", "LinkedIn Authority", "Targeted Paid Ads"].map((t) => (
                   <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-white/70 border border-primary/15 px-3 py-1.5 text-[13px] font-medium text-on-surface">
                     <span className="material-symbols-outlined text-[16px] text-primary">check_circle</span>
                     {t}
