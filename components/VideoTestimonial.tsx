@@ -24,7 +24,7 @@ export default function VideoTestimonial({
   clientName = "Victor Chan",
   clientRole = "Founder",
   companyName = "Launch Excel",
-  avatarUrl,
+  avatarUrl = "/testimonials/victor-chan.jpg",
   headline = "How Victor Chan Added $50,000 to His Pipeline from YouTube Channel Content",
   metric = "+$50K",
   metricLabel = "Client Pipeline Generated in 90 Days",
