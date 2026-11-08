@@ -152,22 +152,14 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
               <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj · YouTube & Content Partner</p>
-              <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[56px] display text-on-surface mb-5">
-                I help creators & founders grow their
+              <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[58px] display text-on-surface mb-5 leading-[1.08]">
+                Grow your YouTube channel.
                 <br />
-                <span className="gradient-text-animated">YouTube channel & content.</span>
+                <span className="gradient-text-animated">Without the production burnout.</span>
               </h1>
-              <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-5">
-                I produce and manage your YouTube channel and content end-to-end. From retention-engineered edits and packaging to viral Shorts, LinkedIn thought leadership, and targeted ads that turn viewers into clients.
+              <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-8">
+                High-retention editing, packaging, and multi-platform distribution. You record; I handle everything else.
               </p>
-              <ul className="reveal flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
-                {["YouTube Channel Growth", "High-Retention Content", "LinkedIn Authority", "Targeted Paid Ads"].map((t) => (
-                  <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-white/70 border border-primary/15 px-3 py-1.5 text-[13px] font-medium text-on-surface">
-                    <span className="material-symbols-outlined text-[16px] text-primary">check_circle</span>
-                    {t}
-                  </li>
-                ))}
-              </ul>
               <div className="reveal flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <Link href="/youtube-funnel" className="btn btn-glow">
                   Audit my channel free
