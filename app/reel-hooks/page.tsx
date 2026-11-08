@@ -64,8 +64,13 @@ export default function ReelHooksPage() {
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
     setNicheError("");
-    if (!niche.trim()) {
-      setNicheError("Tell us your niche so we can tailor the hooks.");
+    const trimmed = niche.trim();
+    if (!trimmed || trimmed.length < 3) {
+      setNicheError("Please enter your niche (at least 3 characters) so I can tailor the hooks.");
+      return;
+    }
+    if (/^[0-9\W]+$/.test(trimmed)) {
+      setNicheError("Please enter a valid topic or industry (e.g. AI Tools, Real Estate, Fitness Coaching).");
       return;
     }
     setPageState("generating");
@@ -116,7 +121,7 @@ export default function ReelHooksPage() {
           </h1>
 
           <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-3xl mx-auto mb-8 text-balance">
-            Tell us your niche. Our AI writes 30 copy-paste hooks, each tagged with its angle and
+            Share your niche. I write 30 copy-paste hooks, each tagged with its angle and
             format, so you never stare at a blank script again.
           </p>
 
@@ -151,7 +156,7 @@ export default function ReelHooksPage() {
                   </div>
                   <div>
                     <h2 className="text-lg font-bold text-on-surface leading-tight">What&apos;s your niche?</h2>
-                    <p className="text-sm text-on-surface-variant">We&apos;ll tailor every hook to it</p>
+                    <p className="text-sm text-on-surface-variant">I&apos;ll tailor every hook to your specific audience</p>
                   </div>
                 </div>
 
@@ -284,7 +289,7 @@ export default function ReelHooksPage() {
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="material-symbols-outlined text-primary text-xl">mark_email_read</span>
-                    <p className="font-bold text-on-surface">Where should we send your hooks?</p>
+                    <p className="font-bold text-on-surface">Where should I send your hooks?</p>
                   </div>
                   <form onSubmit={handleEmailSubmit} className="flex gap-3">
                     <input

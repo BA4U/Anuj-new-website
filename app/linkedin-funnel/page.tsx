@@ -4,35 +4,47 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { LinkedInLogo } from "@/components/LinkedInLogo";
 import BrandIcon from "@/components/BrandIcon";
+import { parseLinkedInUrl } from "@/lib/linkedin";
 
 // ─── Types ─────────────────────────────────────────────────────────────────────
 type PageState = "input" | "analyzing" | "preview";
 type EmailState = "idle" | "sending" | "sent";
 
+interface InspectedLinkedInProfile {
+  name: string;
+  headline: string;
+  slug: string;
+  url: string;
+  avatar: string | null;
+  bio: string;
+  detectedIndustry: string;
+  type: "in" | "company";
+}
+
 // ─── Constants ─────────────────────────────────────────────────────────────────
 const ANALYSIS_STEPS = [
-  { label: "Fetching your LinkedIn profile…", icon: "person_search" },
-  { label: "Identifying your industry & niche…", icon: "category" },
-  { label: "Analyzing your content style…", icon: "psychology" },
-  { label: "Building 30-day content strategy…", icon: "calendar_month" },
-  { label: "Generating posts, images & video concepts…", icon: "auto_awesome" },
-  { label: "Finalizing your calendar ✨", icon: "check_circle" },
+  { label: "Verifying LinkedIn profile link…", icon: "person_search" },
+  { label: "Inspecting role, headline & background…", icon: "category" },
+  { label: "Mapping your B2B authority angles…", icon: "psychology" },
+  { label: "Building 30-day thought-leadership strategy…", icon: "calendar_month" },
+  { label: "Crafting bespoke hooks, carousels & video outlines…", icon: "auto_awesome" },
+  { label: "Finalizing your custom calendar ✨", icon: "check_circle" },
 ];
 
 const HOW_IT_WORKS = [
   {
     step: "01",
     icon: "person_search",
-    title: "Share Your LinkedIn URL",
-    desc: "Just paste your LinkedIn profile URL. We read your profile, industry, and professional context, no extra forms needed.",
+    title: "Share Your LinkedIn Profile",
+    desc: "Paste your LinkedIn profile URL. I verify your profile and inspect your industry and positioning in real time.",
     color: "from-blue-500/20 to-indigo-500/5",
     iconColor: "text-blue-600",
   },
   {
     step: "02",
     icon: "psychology",
-    title: "AI Analyzes & Builds",
-    desc: "Our AI understands your niche and crafts 30 unique posts with image concepts, video scripts, and the strategic reason each post will perform.",
+    title: "Bespoke Content Architecture",
+    desc: "I analyze your professional domain and craft 30 unique posts with matching visual concepts, video scripts, and strategic rationale.",
     color: "from-blue-500/20 to-cyan-500/5",
     iconColor: "text-blue-600",
   },
@@ -40,7 +52,7 @@ const HOW_IT_WORKS = [
     step: "03",
     icon: "mark_email_read",
     title: "Delivered to Your Inbox",
-    desc: "Your complete 30-day content calendar arrives in your inbox, ready to copy, customize, and post.",
+    desc: "Your complete 30-day content calendar arrives in your inbox, formatted and ready to copy, customize, and publish.",
     color: "from-emerald-500/20 to-teal-500/5",
     iconColor: "text-emerald-600",
   },
@@ -81,24 +93,24 @@ const PREVIEW_DAYS = [
 
 const FAQS = [
   {
-    q: "Does this actually analyze my LinkedIn profile?",
-    a: "Yes. Your LinkedIn URL gives us your professional context, industry, role type, and positioning. The AI uses this to generate content that genuinely fits your niche, not generic templates.",
+    q: "Does this actually inspect my real LinkedIn profile?",
+    a: "Yes. I inspect your profile link, verified headline, professional context, and detected industry in real time so the strategy reflects your authentic domain expertise, not generic filler.",
   },
   {
-    q: "What do I get with the free plan?",
-    a: "The free plan includes the full 30-day calendar: hook, complete post copy, strategic rationale, optimal posting times, and hashtags, all delivered to your inbox.",
+    q: "What do I get with the free strategy?",
+    a: "The free strategy includes the full 30-day calendar: irresistible hooks, full post copy, strategic rationale, optimal posting times, hashtags, and visual concepts, all sent to your inbox.",
   },
   {
     q: "What's the premium unlock for images and videos?",
-    a: "When you unlock premium, you'll enter your brand colors (primary, accent, background) so every image prompt and video concept is matched to your exact brand identity, not just a generic visual.",
+    a: "When you unlock premium, you'll enter your brand colors (primary, accent, background) so every image prompt and video concept is matched to your exact brand identity.",
   },
   {
     q: "What is the LinkedIn banner design?",
-    a: "Based on your profile analysis, we generate a professional LinkedIn banner (1584×396px) tailored to your industry and personal brand. This is a premium unlock.",
+    a: "Based on your profile analysis, I design a custom high-converting LinkedIn banner (1584×396px) tailored to your industry and personal brand.",
   },
   {
     q: "Is the base plan really free?",
-    a: "Completely free. The 30-day content calendar is yours at no cost. Premium unlocks, custom image prompts, video scripts, and the banner design, are optional paid upgrades.",
+    a: "Completely free. The 30-day content calendar is yours at no cost. Premium unlocks are optional.",
   },
 ];
 
@@ -116,6 +128,7 @@ export default function LinkedInFunnelPage() {
   const [sentMode, setSentMode] = useState<"plan" | "review">("plan");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showUnlockModal, setShowUnlockModal] = useState(false);
+  const [inspectedProfile, setInspectedProfile] = useState<InspectedLinkedInProfile | null>(null);
   const [brandColors, setBrandColors] = useState({
     primary: "#6355FF",
     accent: "#0A66C2",
@@ -128,26 +141,60 @@ export default function LinkedInFunnelPage() {
     e.preventDefault();
     setUrlError("");
 
-    if (!/linkedin\.com\/(in|company)\/.+/i.test(linkedinUrl)) {
-      setUrlError("Please enter a valid LinkedIn profile URL (e.g. linkedin.com/in/your-name)");
+    const parsed = parseLinkedInUrl(linkedinUrl);
+    if (!parsed.ok) {
+      setUrlError(parsed.error);
       return;
     }
+    setLinkedinUrl(parsed.url);
 
     setPageState("analyzing");
     setAnalysisStep(0);
-    setAnalysisProgress(0);
+    setAnalysisProgress(20);
 
-    for (let i = 0; i < ANALYSIS_STEPS.length; i++) {
-      await new Promise((r) => setTimeout(r, 900));
-      setAnalysisStep(i);
-      setAnalysisProgress(Math.round(((i + 1) / ANALYSIS_STEPS.length) * 100));
+    try {
+      const inspectPromise = fetch("/api/linkedin-funnel/inspect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ linkedinUrl: parsed.url }),
+      });
+
+      setAnalysisStep(1);
+      setAnalysisProgress(40);
+      await new Promise((r) => setTimeout(r, 600));
+
+      setAnalysisStep(2);
+      setAnalysisProgress(65);
+
+      const res = await inspectPromise;
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data?.ok) {
+        setPageState("input");
+        setUrlError(
+          data?.error ||
+            "Could not verify this LinkedIn profile. Please ensure the URL is formatted like linkedin.com/in/your-name."
+        );
+        return;
+      }
+
+      setInspectedProfile(data.profile);
+      setAnalysisStep(4);
+      setAnalysisProgress(90);
+
+      await new Promise((r) => setTimeout(r, 600));
+      setAnalysisStep(5);
+      setAnalysisProgress(100);
+
+      await new Promise((r) => setTimeout(r, 400));
+      setPageState("preview");
+      setTimeout(() => {
+        previewRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } catch {
+      setPageState("input");
+      setUrlError("Verification timed out. Please check your connection and try again.");
     }
-
-    await new Promise((r) => setTimeout(r, 400));
-    setPageState("preview");
-    setTimeout(() => {
-      previewRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
   };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
@@ -190,15 +237,15 @@ export default function LinkedInFunnelPage() {
           {/* Badge, real LinkedIn logo */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0A66C2]/10 border border-[#0A66C2]/20 text-[#0A66C2] font-semibold text-xs tracking-wide uppercase mb-7">
             <BrandIcon brand="linkedin" size={16} />
-            Free LinkedIn Content Engine
+            Verified LinkedIn Content Strategy
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-on-surface leading-[1.2] mb-5 text-balance mx-auto max-w-4xl">
-            30 Days of <span className="gradient-text">LinkedIn Content</span> Built for <span className="text-[#0A66C2]">You</span>.
+            30 Days of <span className="gradient-text">LinkedIn Content</span> Built for <span className="text-[#0A66C2]">Your Real Profile</span>.
           </h1>
 
           <p className="text-base md:text-lg text-on-surface-variant leading-relaxed max-w-3xl mx-auto mb-8 text-balance">
-            Paste your LinkedIn URL. Our AI analyzes your profile and builds a complete 30-day content calendar, posts, image ideas, and video scripts, sent straight to your inbox for free.
+            Paste your LinkedIn URL. I inspect your actual profile and build a complete 30-day content calendar, posts, image concepts, and video outlines, sent straight to your inbox.
           </p>
 
           {/* Trust badges */}
@@ -241,7 +288,7 @@ export default function LinkedInFunnelPage() {
                       Enter Your LinkedIn Profile URL
                     </h2>
                     <p className="text-sm text-on-surface-variant">
-                      We'll analyze your profile and build your content plan automatically
+                      I&apos;ll inspect your profile and build your custom content roadmap
                     </p>
                   </div>
                 </div>
@@ -420,18 +467,54 @@ export default function LinkedInFunnelPage() {
         <section ref={previewRef} className="py-12 px-5 sm:px-6 lg:px-10 xl:px-14 max-w-[1240px] mx-auto">
 
           {/* Header */}
-          <div className="text-center mb-10">
+          <div className="text-center mb-8">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-700 font-semibold text-xs mb-4">
-              <span className="material-symbols-outlined text-base">check_circle</span>
-              Your 30-Day Plan Is Ready!
+              <span className="material-symbols-outlined text-base">verified</span>
+              Profile Verified &amp; Inspected
             </div>
             <h2 className="text-2xl md:text-4xl font-bold text-on-surface mb-3">
-              Here's a Sneak Peek of Your Calendar
+              {inspectedProfile ? `30-Day Calendar for ${inspectedProfile.name}` : "Here's a Sneak Peek of Your Calendar"}
             </h2>
-            <p className="text-on-surface-variant max-w-lg mx-auto">
+            <p className="text-on-surface-variant max-w-lg mx-auto text-sm">
               Enter your email below to receive all 30 days in your inbox, completely free.
             </p>
           </div>
+
+          {/* Verified Profile Card */}
+          {inspectedProfile && (
+            <div className="max-w-xl mx-auto mb-8 glass-card rounded-2xl p-5 border border-[#0A66C2]/20 bg-surface-container/60 shadow-md">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-[#0A66C2] text-white flex items-center justify-center font-bold text-xl shrink-0 shadow-sm">
+                  {inspectedProfile.name.slice(0, 2).toUpperCase()}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-bold text-on-surface text-base leading-tight truncate">
+                      {inspectedProfile.name}
+                    </h3>
+                    <span className="material-symbols-outlined text-[#0A66C2] text-sm">verified</span>
+                  </div>
+                  <p className="text-xs text-on-surface-variant line-clamp-1 mt-0.5">
+                    {inspectedProfile.headline}
+                  </p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#0A66C2]/10 text-[#0A66C2]">
+                      {inspectedProfile.detectedIndustry}
+                    </span>
+                    <a
+                      href={inspectedProfile.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-on-surface-variant hover:text-[#0A66C2] flex items-center gap-0.5"
+                    >
+                      View profile
+                      <span className="material-symbols-outlined text-xs">open_in_new</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* ── Email capture ── */}
           <div className="max-w-xl mx-auto mb-12">
@@ -447,7 +530,7 @@ export default function LinkedInFunnelPage() {
                   {sentMode === "plan" ? (
                     <>
                       Your 30-day LinkedIn calendar is on its way to <strong>{email}</strong>. If it doesn&apos;t show up
-                      in a few minutes, check spam.
+                      in a few minutes, check spam or promotions.
                     </>
                   ) : (
                     <>
@@ -466,7 +549,7 @@ export default function LinkedInFunnelPage() {
                       mark_email_read
                     </span>
                     <p className="font-bold text-on-surface">
-                      Where should we send your 30-day plan?
+                      Where should I send your custom 30-day plan?
                     </p>
                   </div>
                   <form onSubmit={handleEmailSubmit} className="flex gap-3">
@@ -501,7 +584,7 @@ export default function LinkedInFunnelPage() {
                   )}
                   <p className="text-xs text-on-surface-variant/50 mt-2 flex items-center gap-1">
                     <span className="material-symbols-outlined text-sm">lock</span>
-                    No spam. We only send your content plan.
+                    No spam. I only send your content plan.
                   </p>
                 </div>
               </div>
@@ -676,7 +759,7 @@ export default function LinkedInFunnelPage() {
                     Based on your profile analysis, your banner is one of the biggest missed
                     opportunities. A professional, on-brand LinkedIn banner (1584×396px)
                     increases profile visits by up to 40% and builds instant credibility.
-                    We've generated a custom concept tailored to your industry and positioning,
+                    I&apos;ve generated a custom concept tailored to your industry and positioning,
                     locked below.
                   </p>
                 </div>

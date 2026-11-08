@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { enqueueNurture } from "@/lib/nurture";
-import { GEMINI_MODEL, emailConfigured, sendEmail as sendLeadEmail, notifyAdmin, logLead, escapeHtml, rateLimited } from "@/lib/leads";
+import { parseLinkedInUrl } from "@/lib/linkedin";
+import { inspectLinkedInProfile, LinkedInProfileData } from "@/lib/linkedin-server";
+import {
+  GEMINI_MODEL,
+  emailConfigured,
+  sendEmail as sendLeadEmail,
+  notifyAdmin,
+  logLead,
+  escapeHtml,
+  rateLimited,
+} from "@/lib/leads";
 
 export const maxDuration = 60;
 
@@ -27,41 +37,47 @@ interface RequestBody {
 }
 
 // ─── AI: Gemini Content Generation ───────────────────────────────────────────
-async function generateContent(body: RequestBody): Promise<ContentDay[]> {
+async function generateContent(body: RequestBody, profile: LinkedInProfileData): Promise<ContentDay[]> {
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
     throw new Error("AI_UNAVAILABLE");
   }
 
-  const prompt = `You are a world-class LinkedIn growth strategist and copywriter.
-Create a highly personalized 30-day LinkedIn content calendar for a professional whose LinkedIn profile is: ${body.linkedinUrl}
+  const prompt = `You are Anuj Mishra, an expert LinkedIn ghostwriter and B2B growth strategist.
+Create a bespoke 30-day LinkedIn content calendar for:
 
-Analyze the URL structure to infer their name and industry. Generate exactly 30 content pieces.
+CREATOR / LEADER PROFILE AUDITED:
+- Name: ${profile.name}
+- Professional Headline / Role: ${profile.headline}
+- Profile URL: ${profile.url}
+- Bio / Context: ${profile.bio || "B2B leader / domain specialist"}
+- Detected Industry & Niche: ${body.niche && body.niche !== "auto" ? body.niche : profile.detectedIndustry}
+- Primary Objective: ${body.goal && body.goal !== "auto" ? body.goal : "Authority, inbound leads, and industry thought leadership"}
+
+CRITICAL RULES:
+1. Speak in ${profile.name}'s authentic voice, matching their exact seniority and subject matter expertise.
+2. DO NOT write generic "7 productivity habits" or generic motivational quotes.
+3. Every hook must be an irresistible first line that stops the professional scroll (max 15 words).
+4. Full post bodies must be 150-300 words, LinkedIn-optimized, using clean line breaks and high-substance insights.
+5. Generate exactly 30 content days.
+
 Return ONLY a valid JSON array with no markdown, no explanation, no code fences:
-
 [
   {
     "day": 1,
     "type": "Text Post | Carousel | Short Video | Poll | Document Post",
-    "hook": "Irresistible opening line that stops the scroll (max 15 words)",
-    "body": "Full post body (150-300 words, LinkedIn-optimized, with line breaks, 1-3 emojis)",
+    "hook": "Irresistible opening line tailored to their industry",
+    "body": "Full post body (150-300 words, high substance, clean formatting)",
     "cta": "Clear call to action",
-    "hashtags": ["#Hashtag1","#Hashtag2","#Hashtag3","#Hashtag4","#Hashtag5"],
-    "image_prompt": "Detailed AI image prompt for Midjourney/DALL-E/Canva AI",
+    "hashtags": ["#Tag1","#Tag2","#Tag3","#Tag4","#Tag5"],
+    "image_prompt": "Specific visual prompt for Midjourney/DALL-E/Canva AI matching their topic",
     "video_concept": "30-60 sec smartphone video script with hook, 3 points, closing CTA",
-    "why_this_works": "Strategic rationale referencing LinkedIn algorithm or psychology (2-3 sentences)",
-    "best_time_to_post": "Tuesday · 8-9 AM IST",
+    "why_this_works": "Strategic rationale referencing LinkedIn algorithm or buyer psychology (2-3 sentences)",
+    "best_time_to_post": "Tuesday · 8-9 AM",
     "content_pillar": "Authority | Storytelling | Education | Engagement"
   }
-]
-
-Rules:
-- Distribute: 8 Authority, 8 Storytelling, 8 Education, 6 Engagement posts
-- Mix post types: Text Posts, Carousels, Polls, Short Videos, Document Posts
-- Every hook must be unique, no repeated patterns
-- Posts build progressively over 30 days
-- Return ONLY the JSON array`;
+]`;
 
   const response = await fetch(
     `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`,
@@ -71,7 +87,7 @@ Rules:
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
-          temperature: 0.8,
+          temperature: 0.75,
           maxOutputTokens: 8192,
           responseMimeType: "application/json",
         },
@@ -102,33 +118,28 @@ Rules:
 // ─── Email: Send via Resend ───────────────────────────────────────────────────
 async function sendEmail(
   toEmail: string,
-  linkedinUrl: string,
+  profile: LinkedInProfileData,
   content: ContentDay[]
 ) {
   const resendKey = process.env.RESEND_API_KEY;
 
   if (!resendKey) {
-    // Hard fail, we don't silently skip. The user should know.
-    throw new Error(
-      "EMAIL_NOT_CONFIGURED: Add RESEND_API_KEY to your .env.local file. See .env.local.example for instructions."
-    );
+    throw new Error("EMAIL_NOT_CONFIGURED");
   }
 
-  const fromAddress =
-    process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+  const fromAddress = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
   const adminBcc = process.env.ADMIN_EMAIL || undefined;
 
-  const emailHtml = buildEmailHtml(toEmail, linkedinUrl, content);
+  const emailHtml = buildEmailHtml(toEmail, profile, content);
 
   const payload: Record<string, unknown> = {
     from: `Anuj Mishra <${fromAddress}>`,
     to: [toEmail],
     reply_to: "contact@anuj4u.in",
-    subject: "🚀 Your 30-Day LinkedIn Content Calendar is Ready!",
+    subject: `🚀 Your 30-Day LinkedIn Content Calendar (${profile.name})`,
     html: emailHtml,
   };
 
-  // BCC Anuj on every submission so he has a full lead log in his inbox
   if (adminBcc && adminBcc !== toEmail) {
     payload.bcc = [adminBcc];
   }
@@ -150,43 +161,13 @@ async function sendEmail(
     throw new Error(`Failed to send email: ${resendMsg}`);
   }
 
-  console.log("✅ Email sent via Resend:", data.id);
   return data;
-}
-
-// ─── Storage: Google Sheets via Apps Script Webhook ───────────────────────────
-// No npm package needed, just a URL from your Google Apps Script web app.
-// See .env.local.example for setup instructions.
-async function logToGoogleSheets(
-  data: RequestBody,
-  emailId: string | null
-): Promise<void> {
-  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL;
-  if (!webhookUrl) return; // Optional, doesn't block email delivery
-
-  try {
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        timestamp: new Date().toISOString(),
-        email: data.email,
-        linkedinUrl: data.linkedinUrl,
-        emailId: emailId || "not_sent",
-        status: emailId ? "sent" : "failed",
-      }),
-    });
-    console.log("✅ Logged to Google Sheets");
-  } catch (err) {
-    // Non-blocking, log failure but don't crash the request
-    console.warn("⚠️  Google Sheets logging failed:", err);
-  }
 }
 
 // ─── Email HTML Template ──────────────────────────────────────────────────────
 function buildEmailHtml(
   email: string,
-  linkedinUrl: string,
+  profile: LinkedInProfileData,
   content: ContentDay[]
 ): string {
   const pillarColors: Record<string, string> = {
@@ -238,17 +219,17 @@ function buildEmailHtml(
         </div>
 
         <div style="background:#faf5ff;border-radius:8px;padding:12px 16px;margin-bottom:8px;">
-          <div style="font-size:11px;font-weight:700;color:#7c3aed;text-transform:uppercase;margin-bottom:4px;">🖼️ Image Prompt (Midjourney / DALL·E / Canva AI)</div>
+          <div style="font-size:11px;font-weight:700;color:#7c3aed;text-transform:uppercase;margin-bottom:4px;">🖼️ Image Concept</div>
           <div style="color:#6d28d9;font-size:13px;font-style:italic;">${escapeHtml(String(day.image_prompt ?? ""))}</div>
         </div>
 
         <div style="background:#eff6ff;border-radius:8px;padding:12px 16px;margin-bottom:8px;">
-          <div style="font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;margin-bottom:4px;">🎬 Video Concept (30–60 sec)</div>
+          <div style="font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;margin-bottom:4px;">🎬 Video Script Outline</div>
           <div style="color:#1e40af;font-size:13px;line-height:1.6;">${escapeHtml(String(day.video_concept ?? ""))}</div>
         </div>
 
         <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px 16px;">
-          <div style="font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;margin-bottom:4px;">💡 Why This Will Perform</div>
+          <div style="font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;margin-bottom:4px;">💡 Strategy &amp; Psychology</div>
           <div style="color:#15803d;font-size:13px;line-height:1.6;">${escapeHtml(String(day.why_this_works ?? ""))}</div>
         </div>
       </div>`;
@@ -262,46 +243,30 @@ function buildEmailHtml(
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your 30-Day LinkedIn Content Calendar</title>
 </head>
-<body style="margin:0;padding:0;background:#f3f4f6;font-family:'Segoe UI',Helvetica,Arial,sans-serif;">
-
-  <!-- Header -->
+<body style="margin:0;padding:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
   <div style="background:linear-gradient(135deg,#0A66C2 0%,#6355FF 100%);padding:40px 24px;text-align:center;">
-    <div style="display:inline-block;background:rgba(255,255,255,0.15);border-radius:12px;padding:8px 20px;margin-bottom:20px;">
-      <span style="color:rgba(255,255,255,0.9);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">LinkedIn Content Engine by Anuj Mishra</span>
-    </div>
-    <h1 style="color:white;font-size:28px;font-weight:800;margin:0 0 12px;line-height:1.2;">🚀 Your 30-Day LinkedIn Content Calendar</h1>
-    <p style="color:rgba(255,255,255,0.85);font-size:14px;margin:0 0 24px;">Profile: ${escapeHtml(linkedinUrl)}</p>
-    <div style="display:inline-flex;gap:24px;background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 24px;">
-      <div style="text-align:center;"><div style="color:white;font-size:22px;font-weight:800;">30</div><div style="color:rgba(255,255,255,0.75);font-size:11px;">Posts</div></div>
-      <div style="color:rgba(255,255,255,0.3);font-size:20px;">|</div>
-      <div style="text-align:center;"><div style="color:white;font-size:22px;font-weight:800;">30</div><div style="color:rgba(255,255,255,0.75);font-size:11px;">Image Prompts</div></div>
-      <div style="color:rgba(255,255,255,0.3);font-size:20px;">|</div>
-      <div style="text-align:center;"><div style="color:white;font-size:22px;font-weight:800;">30</div><div style="color:rgba(255,255,255,0.75);font-size:11px;">Video Concepts</div></div>
-    </div>
+    <h1 style="color:white;font-size:26px;font-weight:800;margin:0 0 8px;line-height:1.2;">🚀 30-Day LinkedIn Content Roadmap</h1>
+    <p style="color:rgba(255,255,255,0.9);font-size:14px;margin:0 0 4px;">Tailored for <b>${escapeHtml(profile.name)}</b></p>
+    <p style="color:rgba(255,255,255,0.75);font-size:12px;margin:0;">${escapeHtml(profile.headline)}</p>
   </div>
 
-  <!-- Body -->
   <div style="max-width:680px;margin:0 auto;padding:32px 16px 0;">
     <div style="background:white;border-radius:16px;padding:24px;margin-bottom:24px;border:1px solid #e5e7eb;">
-      <h2 style="color:#111827;font-size:20px;font-weight:700;margin:0 0 12px;">Hi there! 👋</h2>
-      <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 12px;">Here is your complete <strong>30-day LinkedIn content calendar</strong>, personalized based on your profile at <a href="${escapeHtml(linkedinUrl)}" style="color:#0A66C2;">${escapeHtml(linkedinUrl)}</a>.</p>
-      <p style="color:#374151;font-size:15px;line-height:1.6;margin:0 0 12px;">Each entry includes the full post copy, an AI image generation prompt, a video concept, and the strategic reason why it's built to perform.</p>
-      <p style="color:#6b7280;font-size:14px;margin:0;">💡 <strong>Tip:</strong> Use each post as a starting point. Add your own voice, stories, and data to make it genuinely yours.</p>
+      <h2 style="color:#111827;font-size:18px;font-weight:700;margin:0 0 10px;">Hi ${escapeHtml(profile.name)}! 👋</h2>
+      <p style="color:#374151;font-size:14px;line-height:1.6;margin:0 0 12px;">Here is your structured <strong>30-day LinkedIn thought-leadership calendar</strong>, built specifically for your domain in <b>${escapeHtml(profile.detectedIndustry)}</b>.</p>
+      <p style="color:#374151;font-size:14px;line-height:1.6;margin:0;">Each post includes a tested hook, full post body, hashtags, image/video concepts, and the strategic angle.</p>
     </div>
 
     ${postsHtml}
 
-    <!-- Footer CTA -->
-    <div style="background:linear-gradient(135deg,#1c1b1c,#2d1e6e);border-radius:16px;padding:32px;text-align:center;margin:24px 0;">
-      <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 12px;">Want Help Executing This?</h3>
-      <p style="color:rgba(255,255,255,0.75);font-size:14px;margin:0 0 24px;line-height:1.6;">I personally help creators and founders build their LinkedIn presence, from strategy to content to growth.</p>
-      <a href="https://anuj4u.in/contact" style="display:inline-block;background:#0A66C2;color:white;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none;font-size:15px;">Book a Free Strategy Call →</a>
+    <div style="background:#111827;border-radius:16px;padding:32px;text-align:center;margin:24px 0;color:#fff;">
+      <h3 style="font-size:18px;font-weight:700;margin:0 0 8px;">Want Me to Run Your LinkedIn Growth?</h3>
+      <p style="color:#9ca3af;font-size:13px;margin:0 0 20px;line-height:1.6;">I partner directly with founders and specialists to ghostwrite high-engagement content and scale personal brands.</p>
+      <a href="https://anuj4u.in/contact" style="display:inline-block;background:#0A66C2;color:white;font-weight:600;padding:12px 24px;border-radius:10px;text-decoration:none;font-size:14px;">Schedule Strategy Chat</a>
     </div>
 
-    <!-- Footer -->
     <div style="text-align:center;padding:24px 0 40px;color:#9ca3af;font-size:12px;">
-      <p style="margin:0 0 4px;">Anuj Mishra · contact@anuj4u.in · <a href="https://anuj4u.in" style="color:#6355FF;">anuj4u.in</a></p>
-      <p style="margin:0;">You received this because you requested a LinkedIn content plan from anuj4u.in</p>
+      <p style="margin:0 0 4px;">Anuj Mishra · <a href="mailto:contact@anuj4u.in" style="color:#0A66C2;">contact@anuj4u.in</a> · <a href="https://anuj4u.in" style="color:#0A66C2;">anuj4u.in</a></p>
     </div>
   </div>
 </body>
@@ -313,7 +278,6 @@ export async function POST(req: NextRequest) {
   try {
     const body: RequestBody = await req.json();
 
-    // ── Validate inputs ──
     if (!body.linkedinUrl || !body.email) {
       return NextResponse.json(
         { error: "LinkedIn URL and email are required." },
@@ -321,67 +285,105 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if (!/^(?:https?:\/\/)?(?:[a-z]{2,3}\.)?linkedin\.com\/(in|company)\/[A-Za-z0-9\-_%.]+(?:[/?#][^\s<>"']*)?$/i.test(body.linkedinUrl.trim())) {
-      return NextResponse.json(
-        { error: "Please enter a valid LinkedIn profile URL (e.g. linkedin.com/in/your-name)" },
-        { status: 400 }
-      );
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email)) {
+    const email = body.email.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
         { error: "Please enter a valid email address." },
         { status: 400 }
       );
     }
 
+    // 1) Verify and inspect LinkedIn Profile
+    const inspection = await inspectLinkedInProfile(body.linkedinUrl);
+    if (!inspection.ok) {
+      return NextResponse.json(
+        { error: inspection.error },
+        { status: 400 }
+      );
+    }
+    const profile = inspection.profile;
+
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (rateLimited(ip)) {
+    if (rateLimited(ip, 10, 60 * 60 * 1000)) {
       return NextResponse.json({ error: "Too many requests. Please try again in an hour." }, { status: 429 });
     }
 
-    // ── Generate AI content (if AI is unavailable we never email demo posts, Anuj follows up personally) ──
+    // 2) Generate AI content tailored to this real profile
     let content: ContentDay[];
     try {
-      content = await generateContent(body);
+      content = await generateContent(body, profile);
     } catch (e) {
       if (!(e instanceof Error) || e.message !== "AI_UNAVAILABLE") throw e;
-      const sheetOk = await logLead({ source: "linkedin-funnel", email: body.email, linkedinUrl: body.linkedinUrl, status: "needs-manual-review" });
+      const sheetOk = await logLead({
+        source: "linkedin-funnel",
+        email,
+        linkedinUrl: profile.url,
+        name: profile.name,
+        headline: profile.headline,
+        status: "needs-manual-review",
+      });
+
       if (!emailConfigured() && !sheetOk) {
-        console.error("[linkedin-funnel] AI + email + sheet all unavailable, lead NOT captured:", body.email, body.linkedinUrl);
         return NextResponse.json(
-          { error: "This tool is temporarily unavailable. Please email contact@anuj4u.in and I'll send your plan personally." },
+          { error: "This tool is temporarily unavailable. Please email contact@anuj4u.in directly." },
           { status: 503 }
         );
       }
+
       if (emailConfigured()) {
         await notifyAdmin(
-          `New LinkedIn funnel lead, follow up manually`,
-          `<p><b>${escapeHtml(body.email)}</b> submitted <b>${escapeHtml(body.linkedinUrl)}</b>. AI generation was unavailable, so no plan was sent.</p>`
+          `New LinkedIn Audit Lead: ${profile.name}`,
+          `<p><b>Email:</b> ${escapeHtml(email)}</p>
+           <p><b>Profile:</b> <a href="${escapeHtml(profile.url)}">${escapeHtml(profile.name)}</a></p>
+           <p><b>Headline:</b> ${escapeHtml(profile.headline)}</p>
+           <p>AI generation unavailable, please follow up manually.</p>`
         );
         await sendLeadEmail({
-          to: [body.email],
-          subject: "Got your profile, your plan is coming",
-          html: `<p style="font-family:Segoe UI,Arial,sans-serif;line-height:1.6">Thanks! I've received <b>${escapeHtml(body.linkedinUrl)}</b> and will send your personal 30-day LinkedIn plan within 24 hours.<br/><br/>Anuj Mishra · contact@anuj4u.in</p>`,
+          to: [email],
+          subject: `Got your profile (${profile.name}), your plan is coming`,
+          html: `<p style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif;line-height:1.6">
+            Hi ${escapeHtml(profile.name)},<br/><br/>
+            I received your profile link (<a href="${escapeHtml(profile.url)}">${escapeHtml(profile.url)}</a>). I'm personally putting together your 30-day LinkedIn content plan and will email it within 24 hours.<br/><br/>
+            Best regards,<br/>
+            <b>Anuj Mishra</b><br/>
+            <a href="mailto:contact@anuj4u.in">contact@anuj4u.in</a>
+          </p>`,
         }).catch((err) => console.warn("[linkedin-funnel] review email failed:", err));
       }
+
       return NextResponse.json({
         success: true,
         mode: "review",
-        message: "Got it! I'll email your personal 30-day plan within 24 hours.",
+        message: "I'll review your profile personally and email your 30-day plan within 24 hours.",
+        profile,
       });
     }
-    console.log(`✅ Generated ${content.length} content days for ${body.email}`);
 
-    // ── Send email (hard fail if not configured) ──
-    const emailResult = await sendEmail(body.email, body.linkedinUrl, content);
-    const emailId = emailResult?.id || null;
+    // 3) Send personalized email to user
+    await sendEmail(email, profile, content);
 
-    // ── Log to Google Sheets (non-blocking, optional) ──
-    logToGoogleSheets(body, emailId).catch(() => {}); // fire-and-forget
+    // 4) Log to Sheets
+    await logLead({
+      source: "linkedin-funnel",
+      email,
+      linkedinUrl: profile.url,
+      name: profile.name,
+      headline: profile.headline,
+      industry: profile.detectedIndustry,
+      status: "plan-generated",
+    });
 
-    // ── Enqueue 3-email nurture sequence (no-op if Firebase admin not configured) ──
-    enqueueNurture(body.email, body.linkedinUrl).catch((err) =>
+    // 5) Notify Admin
+    await notifyAdmin(
+      `New LinkedIn Lead: ${profile.name} (${profile.detectedIndustry})`,
+      `<p><b>Email:</b> ${escapeHtml(email)}</p>
+       <p><b>Name:</b> ${escapeHtml(profile.name)}</p>
+       <p><b>Headline:</b> ${escapeHtml(profile.headline)}</p>
+       <p><b>Profile:</b> <a href="${escapeHtml(profile.url)}">${escapeHtml(profile.url)}</a></p>`
+    );
+
+    // 6) Nurture sequence
+    enqueueNurture(email, profile.url).catch((err) =>
       console.warn("Nurture enqueue skipped:", err)
     );
 
@@ -390,18 +392,15 @@ export async function POST(req: NextRequest) {
       mode: "plan",
       message: "Your 30-day content plan is on its way! Check your inbox.",
       daysGenerated: content.length,
+      profile,
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Something went wrong.";
     console.error("LinkedIn Funnel API Error:", message);
 
-    // User-friendly error for email configuration issues
-    if (message.startsWith("EMAIL_NOT_CONFIGURED:")) {
+    if (message.startsWith("EMAIL_NOT_CONFIGURED")) {
       return NextResponse.json(
-        {
-          error:
-            "Email service not set up yet. Please contact Anuj directly at contact@anuj4u.in",
-        },
+        { error: "Email service not configured. Please contact Anuj at contact@anuj4u.in" },
         { status: 503 }
       );
     }

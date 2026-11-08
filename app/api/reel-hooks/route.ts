@@ -168,9 +168,24 @@ export async function POST(req: NextRequest) {
   try {
     const body: RequestBody = await req.json();
 
-    if (!body.niche || !body.email) {
+    const niche = (body.niche || "").trim();
+    if (!niche || niche.length < 3) {
       return NextResponse.json(
-        { error: "Niche and email are required." },
+        { error: "Please enter a valid niche (at least 3 characters)." },
+        { status: 400 }
+      );
+    }
+
+    if (/^[0-9\W]+$/.test(niche)) {
+      return NextResponse.json(
+        { error: "Please provide a descriptive topic or industry (e.g. AI tools, fitness, SaaS founders)." },
+        { status: 400 }
+      );
+    }
+
+    if (!body.email) {
+      return NextResponse.json(
+        { error: "Email address is required." },
         { status: 400 }
       );
     }
