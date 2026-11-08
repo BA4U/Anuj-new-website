@@ -119,7 +119,7 @@ export async function sendFunnelEmail(
     payload.bcc = [adminBcc];
   }
 
-  const res = await fetch("https://api.resend.com/emails", {
+  let res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${resendKey}`,
@@ -128,7 +128,22 @@ export async function sendFunnelEmail(
     body: JSON.stringify(payload),
   });
 
-  const data = await res.json();
+  let data = await res.json().catch(() => ({}));
+
+  // Resend fallback: If custom domain isn't verified yet, fallback to onboarding@resend.dev so admin still receives the email
+  if (!res.ok && data?.message && /not verified/i.test(data.message) && fromAddress !== "onboarding@resend.dev") {
+    console.warn(`⚠️ Custom fromAddress (${fromAddress}) not verified in Resend yet. Retrying via onboarding@resend.dev...`);
+    payload.from = `${params.fromName ?? "Anuj Mishra"} <onboarding@resend.dev>`;
+    res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    data = await res.json().catch(() => ({}));
+  }
 
   if (!res.ok) {
     console.error("Resend API error:", data);
@@ -138,6 +153,38 @@ export async function sendFunnelEmail(
 
   console.log("✅ Email sent via Resend:", data.id);
   return (data.id as string) ?? null;
+}
+
+// ─── Storage: External Form Webhook (Freeform, Formspree, etc.) ──────────────
+/**
+ * Forward submission to an external form webhook (Freeform, Formspree, Web3Forms, etc.)
+ * Configured via FREEFORM_URL, FORMSPREE_URL, or FORM_WEBHOOK_URL environment variables.
+ */
+export async function forwardToFormWebhook(
+  payload: Record<string, unknown>
+): Promise<boolean> {
+  const url =
+    process.env.FREEFORM_URL ||
+    process.env.FORMSPREE_URL ||
+    process.env.FORM_WEBHOOK_URL;
+
+  if (!url) return false;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ timestamp: new Date().toISOString(), ...payload }),
+    });
+    console.log("✅ Forwarded to external form webhook:", url);
+    return res.ok;
+  } catch (err) {
+    console.warn("⚠️ External form webhook failed:", err);
+    return false;
+  }
 }
 
 // ─── Storage: Google Sheets via Apps Script Webhook ───────────────────────────

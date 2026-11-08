@@ -2,25 +2,27 @@
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 
 // Owner must set NEXT_PUBLIC_BOOKING_URL (e.g. a Calendly link) to enable the
 // "Book a call" variant. Until then the A/B test falls back to the form only.
 const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL ?? "";
 
 const SERVICE_MAP: Record<string, string> = {
-  "content-engine": "Video Editing",
+  sprint: "Growth Sprint ($950 One-Time)",
+  engine: "Content Engine Retainer ($2,800/mo)",
+  scale: "Full-Funnel Scale ($5,200/mo)",
+  "content-engine": "YouTube Growth Engine",
   "linkedin-funnel-system": "LinkedIn Growth",
   "production-pod": "Short-form / Reels",
-  "thumbnails": "Thumbnails & Graphics",
+  thumbnails: "Thumbnails & Graphics",
+  "targeted-ads": "Targeted YouTube & Meta Ads",
 };
 
 function ContactForm() {
   const searchParams = useSearchParams();
   const presetService = (() => {
-    const key = searchParams.get("service") ?? "";
-    return SERVICE_MAP[key] ?? "";
+    const key = searchParams.get("tier") || searchParams.get("service") || "";
+    return SERVICE_MAP[key] || (key ? `Interest in: ${key}` : "");
   })();
 
   const [formData, setFormData] = useState({
@@ -50,16 +52,7 @@ function ContactForm() {
     setError("");
 
     try {
-      // Save message to Firebase Firestore
-      await addDoc(collection(db, "contacts"), {
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject || "General Inquiry",
-        message: formData.message,
-        createdAt: serverTimestamp(),
-      });
-
-      // Send email notification to admin via Resend API
+      // Send directly to server-side /api/contact handler
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -68,7 +61,7 @@ function ContactForm() {
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          subject: formData.subject || "",
+          subject: formData.subject || "General Inquiry",
           message: formData.message,
         }),
       });

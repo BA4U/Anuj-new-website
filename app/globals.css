@@ -49,15 +49,16 @@
 }
 
 @layer components {
-  /* ─── Eyebrow / kicker ─────────────────────────────────────────── */
+  /* ─── Eyebrow / kicker: Signature handwritten script accent ──────── */
   .eyebrow {
-    font-family: "Caveat", "Kaushan Script", cursive;
-    font-size: 24px;
+    font-family: "Caveat", cursive;
+    font-size: 26px;
     line-height: 1.1;
-    font-weight: 600;
-    letter-spacing: 0;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     text-transform: none;
     color: #5b3fe0;
+    display: inline-block;
   }
   .label {
     @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant;

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import Testimonials from "@/components/Testimonials";
+import VideoTestimonial from "@/components/VideoTestimonial";
 import YtThumb from "@/components/YtThumb";
 import CountUp from "@/components/CountUp";
 
@@ -57,7 +58,7 @@ const PROOF = [
   { src: "/proof/90-day-performance.png", label: "90-day performance", headline: "Growth every quarter", stat: "+63%", statLabel: "views vs the previous 90 days", note: "A consistent style and posting rhythm lifts each quarter above the last." },
   { src: "/proof/organic-impressions.png", label: "Organic reach", headline: "Found in search", stat: "140K", statLabel: "impressions, 36% from YouTube search", note: "Titles and descriptions match what viewers search for." },
   { src: "/proof/us-audience.png", label: "Audience", headline: "The right viewers", stat: "23.6%", statLabel: "of views from the US", note: "Top geographies: US, India and UK." },
-  { src: "/proof/google-ads-growth.png", label: "Google Ads", headline: "Paid reach that pays off", stat: "$0.23", statLabel: "average cost per click", note: "A $600 YouTube campaign at a 1.86% view rate." },];
+  { src: "/proof/google-ads-growth.png", label: "Google Ads", headline: "Paid reach that pays off", stat: "$0.23", statLabel: "average cost per click", note: "A $600 YouTube campaign at a 1.86% view rate." },];
 
 // Pinned strongest quote — highest trust signal, shown every time
 const PinnedCallout = "\$50,000 worth of clients from just YouTube — in three months.";
@@ -71,7 +72,7 @@ const STEPS = [
   { n: "03", title: "Set up", body: "We connect your tools, brand kit and shared folders so every handoff is simple." },
   { n: "04", title: "Produce", body: "I script, edit and package each video, then cut Shorts and blog posts from it." },
   { n: "05", title: "Review", body: "You get timestamped drafts. Two rounds of revisions are included with every video." },
-  { n: "06", title: "Publish and report", body: "I upload, schedule and track results, then share a monthly report on what to repeat." },];
+  { n: "06", title: "Publish and report", body: "I upload, schedule and track results, then share a monthly report on what to repeat." },];
 
 // The work as a pipeline: what happens to your channel, in the order it happens.
 const HANDLES = [
@@ -149,17 +150,17 @@ export default function Home() {
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj. Here&apos;s how I help</p>
+              <p className="reveal eyebrow mb-3">Organic Growth & Video Production Studio</p>
               <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[56px] display text-on-surface mb-5">
-                I help creators and brands
+                We scale creators & brands through
                 <br />
-                <span className="gradient-text-animated">grow reach and revenue.</span>
+                <span className="gradient-text-animated">high-retention video & growth.</span>
               </h1>
               <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-5">
-                I turn your videos and social content into a sales funnel. Sharper edits and thumbnails earn more clicks, the right audience finds you, and viewers become leads, clients and revenue.
+                We turn raw footage into an inbound client engine. From retention-engineered YouTube edits and viral Shorts to LinkedIn thought leadership and targeted paid ads.
               </p>
               <ul className="reveal flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
-                {["More clicks", "The right audience", "Leads and sales"].map((t) => (
+                {["High-Retention YouTube", "Viral Shorts & Reels", "LinkedIn Authority", "Targeted Paid Ads"].map((t) => (
                   <li key={t} className="inline-flex items-center gap-1.5 rounded-full bg-white/70 border border-primary/15 px-3 py-1.5 text-[13px] font-medium text-on-surface">
                     <span className="material-symbols-outlined text-[16px] text-primary">check_circle</span>
                     {t}
@@ -385,12 +386,20 @@ export default function Home() {
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <ScrollReveal>
             <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
-              <p className="eyebrow mb-3">Happy clients</p>
+              <p className="eyebrow mb-3">Client Stories</p>
               <h2 className="text-[32px] md:text-[52px] display text-on-surface">
-                In their <span className="gradient-text">own words.</span>
+                Real results. <span className="gradient-text">In their own words.</span>
               </h2>
             </div>
           </ScrollReveal>
+
+          {/* Featured Apple-style Video Testimonial */}
+          <div className="mb-14 max-w-4xl mx-auto">
+            <ScrollReveal>
+              <VideoTestimonial />
+            </ScrollReveal>
+          </div>
+
           <ScrollReveal>
             <Testimonials />
           </ScrollReveal>

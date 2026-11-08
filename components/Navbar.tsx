@@ -19,9 +19,9 @@ export default function Navbar() {
   const navLinks = [
     { name: "Services", href: "/services" },
     { name: "Work", href: "/work" },
-    { name: "Free tools", href: "/free-tools" },
-    { name: "About", href: "/about" },
+    { name: "Pricing", href: "/pricing" },
     { name: "Blog", href: "/blog" },
+    { name: "About", href: "/about" },
   ];
 
   const isActive = (href: string) =>

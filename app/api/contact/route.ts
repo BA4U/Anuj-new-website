@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { sendFunnelEmail, isEmailConfigured } from "@/lib/funnel";
+import { sendFunnelEmail, logToSheets, forwardToFormWebhook, isEmailConfigured } from "@/lib/funnel";
 import { db } from "@/lib/firebase";
 
 interface ContactRequestBody {
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ── Save to Firebase ──
+    // ── 1. Save to Firebase Firestore (non-blocking fallback) ──
     let firestoreId: string | null = null;
     try {
       const docRef = await addDoc(collection(db, "contacts"), {
@@ -41,48 +41,125 @@ export async function POST(req: NextRequest) {
       });
       firestoreId = docRef.id;
     } catch (err) {
-      console.error("Failed to save contact to Firestore:", err);
-      // Continue anyway, we still attempt to send the email
+      console.warn("Firestore save skipped/failed (continuing with email/webhook):", err);
     }
 
-    // ── Send email notification to admin (Resend) ──
+    // ── 2. Log to Google Sheets (non-blocking) ──
+    await logToSheets({
+      funnel: "contact-form",
+      source: "website-contact",
+      name: body.name,
+      email: body.email,
+      subject: body.subject || "General Inquiry",
+      message: body.message,
+    });
+
+    // ── 3. Forward to external form webhook (Freeform / Formspree) if configured ──
+    const webhookForwarded = await forwardToFormWebhook({
+      name: body.name,
+      email: body.email,
+      subject: body.subject || "General Inquiry",
+      message: body.message,
+    });
+
+    // ── 4. Send email notification to Admin (Resend) ──
     const emailHtml = buildContactEmailHtml(body);
     const adminEmail = process.env.ADMIN_EMAIL || "contact@anuj4u.in";
+    let emailSent = false;
+    let emailErrorMessage = "";
 
     try {
       await sendFunnelEmail({
         to: adminEmail,
         replyTo: body.email,
-        subject: `New Contact: ${body.name}, ${body.subject || "General Inquiry"}`,
+        subject: `New Inquiry from ${body.name}: ${body.subject || "General Inquiry"}`,
         html: emailHtml,
       });
+      emailSent = true;
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Unknown error";
-      console.error("Failed to send contact email via Resend:", err);
+      emailErrorMessage = err instanceof Error ? err.message : "Unknown email error";
+      console.error("Resend notification error:", emailErrorMessage);
+    }
 
-      // If email isn't configured, return a 503 so the UI can show a friendly message
-      if (message.startsWith("EMAIL_NOT_CONFIGURED:")) {
+    // ── 5. Send automated confirmation receipt to the lead ──
+    if (emailSent) {
+      try {
+        await sendFunnelEmail({
+          to: body.email,
+          replyTo: adminEmail,
+          subject: `Received: Your inquiry with Anuj Mishra`,
+          html: buildConfirmationEmailHtml(body),
+        });
+      } catch (confirmErr) {
+        console.warn("Client auto-confirmation skipped:", confirmErr);
+      }
+    }
+
+    // If neither Resend nor Webhook succeeded and email was not configured, alert user gracefully
+    if (!emailSent && !webhookForwarded && !firestoreId) {
+      if (emailErrorMessage.startsWith("EMAIL_NOT_CONFIGURED:")) {
         return NextResponse.json(
           {
             error:
-              "Email service not set up yet. Please contact Anuj directly at contact@anuj4u.in",
+              "Email service not configured yet. Please email Anuj directly at contact@anuj4u.in",
           },
           { status: 503 }
         );
       }
-      throw err;
+      return NextResponse.json(
+        {
+          error:
+            "Could not deliver message right now. Please email directly at contact@anuj4u.in",
+        },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({
       success: true,
       message: "Your message has been sent. Anuj will get back to you shortly.",
       firestoreId: firestoreId || undefined,
+      emailSent,
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Something went wrong.";
     console.error("Contact API Error:", error);
     return NextResponse.json({ error: message }, { status: 500 });
   }
+}
+
+function buildConfirmationEmailHtml(body: ContactRequestBody): string {
+  const subject = body.subject || "General Inquiry";
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Inquiry Received</title>
+</head>
+<body style="margin:0;padding:0;background:#f8f9fa;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#1e293b;">
+  <div style="max-width:580px;margin:32px auto;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.03);">
+    <div style="background:linear-gradient(135deg,#4936e6,#8b5cf6);padding:28px 24px;text-align:center;color:#ffffff;">
+      <h1 style="margin:0;font-size:22px;font-weight:700;">We received your message</h1>
+      <p style="margin:6px 0 0;font-size:13px;opacity:0.9;">Anuj Mishra · Growth Studio</p>
+    </div>
+    <div style="padding:28px 24px;line-height:1.6;font-size:15px;">
+      <p style="margin:0 0 16px;">Hi <b>${body.name}</b>,</p>
+      <p style="margin:0 0 16px;">Thanks for reaching out regarding <b>${subject}</b>. I've received your inquiry and will personally review it and get back to you within 24 to 48 hours.</p>
+      <div style="background:#f1f5f9;border-left:4px solid #4936e6;padding:14px 16px;border-radius:6px;margin:20px 0;font-size:14px;color:#475569;">
+        <i>&ldquo;${body.message}&rdquo;</i>
+      </div>
+      <p style="margin:0 0 20px;">In the meantime, feel free to check out some of our recent channel case studies and breakdown guides:</p>
+      <div style="text-align:center;margin:24px 0;">
+        <a href="https://anuj4u.in/work" style="display:inline-block;background:#4936e6;color:#ffffff;font-weight:600;padding:12px 28px;border-radius:9999px;text-decoration:none;font-size:14px;">Explore Recent Work & Case Studies →</a>
+      </div>
+      <p style="margin:24px 0 0;font-size:14px;color:#64748b;">Best regards,<br><b style="color:#1e293b;">Anuj Mishra</b><br>Founder & Growth Strategist</p>
+    </div>
+    <div style="border-top:1px solid #e2e8f0;padding:16px 24px;text-align:center;font-size:12px;color:#94a3b8;background:#fafafa;">
+      <p style="margin:0;">Anuj Mishra · contact@anuj4u.in · <a href="https://anuj4u.in" style="color:#4936e6;text-decoration:none;">anuj4u.in</a></p>
+    </div>
+  </div>
+</body>
+</html>`;
 }
 
 function buildContactEmailHtml(body: ContactRequestBody): string {

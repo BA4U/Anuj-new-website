@@ -33,56 +33,74 @@ type Service = {
 
 const services: Service[] = [
   {
-    id: "linkedin-funnel-system",
-    title: "LinkedIn Funnel System",
+    id: "content-engine",
+    title: "YouTube Growth Engine (Flagship)",
     pitch:
-      "The system I built for myself, applied to your LinkedIn. Profile rewrite, content pillars, and a posting rhythm that turns views into booked calls.",
+      "Full turnkey YouTube operation engineered for retention, watch time, and revenue. Strategy, scripting, high-retention editing, packaging, SEO publishing, and Shorts repurposing.",
     deliverables: [
-      "Profile and headline rewrite built for your ICP",
-      "3 content pillars mapped to your offer",
-      "12-16 posts drafted and scheduled per month",
-      "Comment and engagement playbooks",
-      "Monthly lead and engagement report",
+      "4 to 8 high-retention long-form videos edited per month",
+      "12 to 16 viral Shorts and Reels cut with dynamic pacing",
+      "High-CTR thumbnail packaging (with A/B testing concepts)",
+      "Channel audit, content calendar, and 90-day growth strategy",
+      "SEO titles, timestamps, descriptions, and scheduling",
+      "Weekly analytics review and retention drop-off fixes",
     ],
     idealFor:
-      "Consultants, coaches, and B2B founders who want leads from LinkedIn without spending all day on it.",
-    icon: "hub",
-    price: "Custom quote after a short call",
+      "Creators, founders, coaches, and authors who want YouTube to be their primary inbound revenue engine.",
+    icon: "rocket_launch",
+    price: "Custom monthly retainer",
     featured: true,
   },
   {
-    id: "content-engine",
-    title: "Content Engine",
+    id: "linkedin-funnel-system",
+    title: "LinkedIn Authority & Inbound Funnel",
     pitch:
-      "Full YouTube and LinkedIn operation. Strategy, scripts, edits, thumbnails, captions, posting, and reporting, all in one retainer.",
+      "Transform your YouTube video insights and expertise into an executive LinkedIn presence that attracts high-ticket clients, B2B deals, and partnership opportunities.",
     deliverables: [
-      "Up to 8 edited videos per month (long-form and short-form)",
-      "Content calendar and 90-day strategy",
-      "Thumbnails, titles, and SEO descriptions",
-      "Captions and shorts repurposed from long-form",
-      "Weekly performance reporting",
+      "Profile and headline rewrite optimized for your ideal ICP",
+      "12-16 high-impact thought leadership posts & carousels / month",
+      "Lead magnet funnels and comment engagement playbooks",
+      "Repurposing YouTube key insights into native text & PDFs",
+      "Monthly inbound lead and connection growth report",
     ],
     idealFor:
-      "Coaches, authors, and founders who post but are not growing. This is the flagship.",
-    icon: "rocket_launch",
-    price: "Custom quote after a short call",
+      "Consultants, B2B founders, and executives who want high-ticket clients from LinkedIn without writing daily.",
+    icon: "hub",
+    price: "Monthly retainer or add-on",
+  },
+  {
+    id: "targeted-ads-growth",
+    title: "Targeted YouTube Ads & Paid Amplification",
+    pitch:
+      "Accelerate channel growth and client acquisition by putting your top-performing YouTube videos directly in front of your dream buyers using paid Google/YouTube ads.",
+    deliverables: [
+      "Targeted YouTube In-Feed & Discovery Ad campaign setup",
+      "High-converting video hook scripting and ad creative edits",
+      "Audience persona, competitor placement, and search keyword targeting",
+      "Landing page, VSL, and booked call conversion tracking",
+      "Weekly CPA, view-rate, and qualified pipeline reporting",
+    ],
+    idealFor:
+      "Founders and businesses ready to scale beyond organic reach and turn video views into guaranteed pipeline.",
+    icon: "ads_click",
+    price: "Monthly ad management + retainer",
   },
   {
     id: "content-production-system",
-    title: "Content Production System",
+    title: "Content Production System & SOPs",
     pitch:
-      "A reusable video production system: templates, hooks, B-roll libraries, SOPs, and editor training. I build the machine, your team runs it.",
+      "A complete, reusable video production machine for your internal team: templates, hook frameworks, B-roll asset libraries, and editor training.",
     deliverables: [
-      "Production workflow audit and rebuild",
-      "Templates for intros, hooks, CTAs, and B-roll",
-      "Editor training and full SOPs",
-      "Asset library and brand kit",
-      "Monthly workflow reviews",
+      "Production workflow audit and bottleneck elimination",
+      "Custom templates for hooks, intros, CTAs, and motion graphics",
+      "Editor training, video review frameworks, and complete SOPs",
+      "Shared asset library, sound design kit, and brand style guide",
+      "Monthly workflow coaching and quality assurance reviews",
     ],
     idealFor:
-      "Agencies and small teams that need a faster, repeatable content production system without scaling headcount.",
+      "Agencies and internal media teams that want to scale video output with institutional consistency.",
     icon: "movie_edit",
-    price: "Custom quote after a short call",
+    price: "One-time build or quarterly advisory",
   },
 ];
 
@@ -120,15 +138,13 @@ export default function ServicesPage() {
           Services
         </div>
         <h1 className="text-4xl md:text-6xl font-extrabold text-on-surface mb-6 leading-tight">
-          Three ways to <span className="gradient-text">work together</span>
+          Four ways to <span className="gradient-text">scale your brand</span>
         </h1>
         <p className="text-lg text-on-surface-variant leading-relaxed">
-          Pick the plan that matches where you are right now. Every plan is
-          built around your goals, and you can pause or swap anytime. I can also
-          automate a full channel, from scripting to reporting.
+          From high-retention video editing and LinkedIn thought leadership to full-channel production and targeted paid ad amplification. Choose your growth engine.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3 mt-7">
-          <Link href="/youtube-funnel" className="btn btn-glow">Audit my channel</Link>
+          <Link href="/pricing" className="btn btn-dark">View pricing & plans</Link>
           <Link href="/contact" className="btn btn-secondary">Book a call</Link>
         </div>
       </section>

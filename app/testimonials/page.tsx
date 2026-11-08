@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import VideoTestimonial from "@/components/VideoTestimonial";
 
 export const metadata: Metadata = {
   title: "Client Testimonials",
@@ -68,6 +69,11 @@ export default function TestimonialsPage() {
         <p className="text-lg text-on-surface-variant leading-relaxed">
           Don&apos;t just take my word for it. Here is what some of the amazing creators, authors, and professionals I&apos;ve worked with have to say.
         </p>
+      </div>
+
+      {/* Featured Video Testimonial */}
+      <div className="max-w-4xl mx-auto mb-20">
+        <VideoTestimonial />
       </div>
 
       {/* Grid of Testimonials */}
