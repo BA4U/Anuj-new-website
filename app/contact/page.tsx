@@ -8,13 +8,14 @@ import { useSearchParams } from "next/navigation";
 const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL ?? "";
 
 const SERVICE_MAP: Record<string, string> = {
-  sprint: "Growth Sprint ($950 One-Time)",
-  engine: "Content Engine Retainer ($2,800/mo)",
-  scale: "Full-Funnel Scale ($5,200/mo)",
-  "content-engine": "YouTube Growth Engine",
-  "linkedin-funnel-system": "LinkedIn Growth",
-  "production-pod": "Short-form / Reels",
-  thumbnails: "Thumbnails & Graphics",
+  engine: "Growth Engine Retainer ($3,200/mo)",
+  scale: "Authority & Scale Retainer ($5,500/mo)",
+  executive: "Executive Growth Advisory ($8,000/mo)",
+  demo: "Demo & Product Launch Video Project",
+  "content-engine": "YouTube Growth Engine ($3,200/mo)",
+  "linkedin-funnel-system": "LinkedIn Authority & Inbound Funnel",
+  "production-pod": "Short-form / Reels Production",
+  thumbnails: "Thumbnails & Packaging",
   "targeted-ads": "Targeted YouTube & Meta Ads",
 };
 
@@ -157,12 +158,13 @@ function ContactForm() {
                     style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23808080'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 0.75rem center", backgroundSize: "1.5rem" }}
                   >
                     <option value="">Choose one</option>
-                    <option value="Video Editing">Video editing</option>
+                    <option value="YouTube Growth Engine ($3,200/mo)">YouTube Growth Engine ($3,200/mo)</option>
+                    <option value="Authority & Scale Retainer ($5,500/mo)">Authority & Scale Retainer ($5,500/mo)</option>
+                    <option value="Executive Growth Advisory ($8,000/mo)">Executive Growth Advisory ($8,000/mo)</option>
+                    <option value="Demo & Product Launch Video">Demo & Product Launch Video</option>
                     <option value="Short-form / Reels">Shorts and Reels</option>
                     <option value="Thumbnails & Graphics">Thumbnails and graphics</option>
-                    <option value="YouTube Growth">YouTube growth</option>
                     <option value="LinkedIn Growth">LinkedIn growth and management</option>
-                    <option value="Full Automation">Channel automation</option>
                     <option value="General Inquiry">Something else</option>
                   </select>
                 </div>

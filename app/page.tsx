@@ -12,10 +12,11 @@ import CountUp from "@/components/CountUp";
 /* ─── Work formats (categories, not single videos) ─────────────── */
 const FORMATS = [
   { title: "Long-form YouTube Videos", desc: "Tutorials, interviews and explainers edited for retention.", href: "/work/long-form", count: "16 videos", img: { type: "yt", id: "mHOLzwe4sMQ" }, span: "lg:col-span-2" },
-  { title: "Short-form Clips", desc: "Shorts and Reels cut to hook in the first second.", href: "/work/short-form", count: "10 Shorts", img: { type: "yt-v", id: "dD3jLdx2k7A" }, span: "lg:col-span-2" },
-  { title: "Podcast Editing", desc: "Full episodes with clean audio, layouts and chapters.", href: "/work/long-form", count: "Video podcasts", img: { type: "file", src: "/thumbnails/mothers-day-ai-and-humanity.webp" }, span: "lg:col-span-2" },
-  { title: "Thumbnails & Graphics", desc: "Packaging designed to win the click.", href: "/work/thumbnails", count: "25 thumbnails", img: { type: "file", src: "/thumbnails/chatgpt-connectors-explained.webp" }, span: "lg:col-span-3" },
-  { title: "Channel Growth", desc: "Case studies with real YouTube Studio numbers.", href: "/work/case-studies", count: "5 clients", img: { type: "file", src: "/proof/thumbnail-ctr.png" }, span: "lg:col-span-3" },
+  { title: "Demo & Product Launch", desc: "SaaS walkthroughs, feature tours and product launch videos.", href: "/work/demo-videos", count: "Launch Videos", img: { type: "yt", id: "1nT4g9VeJDk" }, span: "lg:col-span-2" },
+  { title: "Short-form Clips", desc: "Shorts and Reels cut to hook in the first second.", href: "/work/short-form", count: "12 Shorts", img: { type: "yt-v", id: "dD3jLdx2k7A" }, span: "lg:col-span-2" },
+  { title: "Podcast Editing", desc: "Full episodes with clean audio, layouts and chapters.", href: "/work/long-form#podcast", count: "Video podcasts", img: { type: "file", src: "/thumbnails/mothers-day-ai-and-humanity.webp" }, span: "lg:col-span-2" },
+  { title: "Thumbnails & Graphics", desc: "Packaging designed to win the click.", href: "/work/thumbnails", count: "25 thumbnails", img: { type: "file", src: "/thumbnails/chatgpt-connectors-explained.webp" }, span: "lg:col-span-2" },
+  { title: "Channel Growth", desc: "Case studies with real YouTube Studio numbers.", href: "/work/case-studies", count: "5 clients", img: { type: "file", src: "/proof/thumbnail-ctr.png" }, span: "lg:col-span-2" },
 ] as const;
 
 const STATS = [

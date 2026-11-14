@@ -26,7 +26,8 @@ export const metadata: Metadata = {
 
 const categories = [
   { href: "/work/long-form", label: "Long-form edits", desc: "Podcasts, tutorials, tech and explainer videos.", count: "16 videos", kind: "long" },
-  { href: "/work/short-form", label: "Shorts and Reels", desc: "Vertical clips with a hook in the first second.", count: "10 Shorts", kind: "short" },
+  { href: "/work/demo-videos", label: "Demo & Product Launch", desc: "SaaS walkthroughs, feature demos and launch videos.", count: "SaaS Demos", kind: "demo" },
+  { href: "/work/short-form", label: "Shorts and Reels", desc: "Vertical clips with a hook in the first second.", count: "12 Shorts", kind: "short" },
   { href: "/work/thumbnails", label: "Thumbnails and graphics", desc: "Thumbnails designed for the click.", count: "25 thumbnails", kind: "thumb" },
   { href: "/work/case-studies", label: "Case study", desc: "One channel, real YouTube Studio numbers and a $50,000 client.", count: "Tim Cakir", kind: "case" },
 ] as const;
@@ -36,6 +37,12 @@ function Preview({ kind }: { kind: (typeof categories)[number]["kind"] }) {
     return (
       <div className="absolute inset-0 bg-surface-container">
         <YtThumb id="-SYqXdaZXl8" alt="Circle podcast episode" className="transition-transform duration-700 group-hover:scale-[1.05]" />
+      </div>
+    );
+  if (kind === "demo")
+    return (
+      <div className="absolute inset-0 bg-surface-container">
+        <YtThumb id="1nT4g9VeJDk" alt="Simply Prime CRM App Demo" className="transition-transform duration-700 group-hover:scale-[1.05]" />
       </div>
     );
   if (kind === "short")

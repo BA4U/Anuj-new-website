@@ -8,11 +8,15 @@ export default function VideoTile({
   id,
   title,
   client,
+  niche,
+  tag,
   vertical = false,
 }: {
   id: string;
   title: string;
   client: string;
+  niche?: string;
+  tag?: string;
   vertical?: boolean;
 }) {
   const [open, setOpen] = useState(false);
@@ -27,6 +31,11 @@ export default function VideoTile({
         <div className={`relative w-full overflow-hidden bg-surface-container ${vertical ? "aspect-[9/16]" : "aspect-video"}`}>
           <YtThumb id={id} alt={title} vertical={vertical} className="transition-transform duration-700 ease-out group-hover:scale-[1.05]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1a1060]/55 via-transparent to-transparent" />
+          {(tag || niche) && (
+            <span className="absolute top-2.5 left-2.5 z-10 text-[10px] font-semibold bg-black/70 backdrop-blur-md text-white/95 px-2 py-0.5 rounded-full border border-white/15 shadow-sm">
+              {tag || niche}
+            </span>
+          )}
           <span className="absolute inset-0 m-auto w-12 h-12 rounded-full bg-white/90 text-on-surface flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
             <span className="material-symbols-outlined text-[26px] ml-0.5">play_arrow</span>
           </span>

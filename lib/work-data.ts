@@ -1,70 +1,120 @@
-/** Verified work data. Every video ID below is taken from anuj4u.in and checked on YouTube. */
+/** Verified work data. Every video ID below is checked on YouTube and format-audited. */
 
-export type Vid = { id: string; title: string; client: string };
+export type Vid = {
+  id: string;
+  title: string;
+  client: string;
+  niche?: string;
+  tag?: string;
+  duration?: string;
+  format?: "vertical" | "horizontal";
+  isPlaceholder?: boolean;
+};
 
 export const LONG_FORM: Vid[] = [
-  { id: "mHOLzwe4sMQ", title: "ChatGPT Connectors Explained", client: "Tim Cakir" },
-  { id: "bejvX2uUTDo", title: "Gemini 3, AI Studio and Antigravity", client: "Tim Cakir" },
-  { id: "pcfFzxnhwUE", title: "How Smart Excel Users Rename 100s of Files", client: "Victor Chan" },
-  { id: "SFn5Vf38f8I", title: "How Smart Excel Users Delete Data But Keep Formulas", client: "Victor Chan" },
-  { id: "y11b_rVHcyg", title: "ChatGPT o1 vs Claude 3.5: Coding Battle", client: "Training Scientists" },
-  { id: "TZvt_fD8VP4", title: "Transform 2D Irregular Grid Data into Visualizations", client: "Training Scientists" },
-  { id: "TW3omRuTQA8", title: "Life Changing Secrets to Manifesting Positivity", client: "Harjeet Dhillon" },
-  { id: "WTD8GMUO_4w", title: "The Surprising Truth About Your Giving Habits", client: "Harjeet Dhillon" },
-  { id: "-SYqXdaZXl8", title: "Dan Koe's Playbook for Financial Freedom", client: "Circle" },
-  { id: "izidLZclYZs", title: "From Broke to YouTube Millionaire: Sean Cannell", client: "Circle" },
-  { id: "-DB8-7eLsTY", title: "Can AI Video Avatars Replace Human Presenters?", client: "Eric Presnall, VideoRep" },
-  { id: "68lgEUQDiDQ", title: "Copy My Secret AI Prompt to Rank on YouTube", client: "Eric Presnall, VideoRep" },
-  { id: "aWR04f1eYrw", title: "Big Picture Medicare", client: "Medicare-You" },
-  { id: "ciwbmggLd4Y", title: "New PreChallenge", client: "Medicare-You" },
-  { id: "1nT4g9VeJDk", title: "Mobile App Overview", client: "Simply Prime CRM" },
-  { id: "pMU8C1H1nHo", title: "Payroll and Commission Structures for Technicians", client: "Simply Prime CRM" },
+  { id: "mHOLzwe4sMQ", title: "ChatGPT Connectors Explained", client: "Tim Cakir", niche: "Tech & AI", tag: "AI Walkthrough" },
+  { id: "bejvX2uUTDo", title: "Gemini 3, AI Studio and Antigravity", client: "Tim Cakir", niche: "Tech & AI", tag: "Developer Tour" },
+  { id: "pcfFzxnhwUE", title: "How Smart Excel Users Rename 100s of Files", client: "Victor Chan", niche: "Educational & Tutorials", tag: "Productivity" },
+  { id: "SFn5Vf38f8I", title: "How Smart Excel Users Delete Data But Keep Formulas", client: "Victor Chan", niche: "Educational & Tutorials", tag: "Excel Mastery" },
+  { id: "y11b_rVHcyg", title: "ChatGPT o1 vs Claude 3.5: Coding Battle", client: "Training Scientists", niche: "Tech & AI", tag: "AI Benchmark" },
+  { id: "TZvt_fD8VP4", title: "Transform 2D Irregular Grid Data into Visualizations", client: "Training Scientists", niche: "Educational & Tutorials", tag: "Data Science" },
+  { id: "TW3omRuTQA8", title: "Life Changing Secrets to Manifesting Positivity", client: "Harjeet Dhillon", niche: "Podcasts & Interviews", tag: "Mindset & Growth" },
+  { id: "WTD8GMUO_4w", title: "The Surprising Truth About Your Giving Habits", client: "Harjeet Dhillon", niche: "Podcasts & Interviews", tag: "Human Psychology" },
+  { id: "-SYqXdaZXl8", title: "Dan Koe's Playbook for Financial Freedom", client: "Circle", niche: "Podcasts & Interviews", tag: "Finance & Creator" },
+  { id: "izidLZclYZs", title: "From Broke to YouTube Millionaire: Sean Cannell", client: "Circle", niche: "Podcasts & Interviews", tag: "Creator Economy" },
+  { id: "-DB8-7eLsTY", title: "Can AI Video Avatars Replace Human Presenters?", client: "Eric Presnall, VideoRep", niche: "Tech & AI", tag: "AI & Media" },
+  { id: "68lgEUQDiDQ", title: "Copy My Secret AI Prompt to Rank on YouTube", client: "Eric Presnall, VideoRep", niche: "Tech & AI", tag: "SEO & Growth" },
+  { id: "1nT4g9VeJDk", title: "Simply Prime CRM Mobile App Overview", client: "Simply Prime CRM", niche: "Demo & Product Launch", tag: "SaaS App Demo" },
+  { id: "pMU8C1H1nHo", title: "Payroll and Commission Structures for Technicians", client: "Simply Prime CRM", niche: "Demo & Product Launch", tag: "Feature Deep-Dive" },
+  { id: "aWR04f1eYrw", title: "Big Picture Medicare", client: "Medicare-You", niche: "Educational & Tutorials", tag: "Healthcare Explainer" },
+  { id: "ciwbmggLd4Y", title: "New PreChallenge", client: "Medicare-You", niche: "Educational & Tutorials", tag: "Course Intro" },
 ];
 
-/** Long-form videos grouped by the type of content, podcast first. Videos come from LONG_FORM above. */
+/** Dedicated Product Launch and SaaS Demo Videos */
+export const DEMO_LAUNCH_VIDEOS: Vid[] = [
+  {
+    id: "1nT4g9VeJDk",
+    title: "Simply Prime CRM: Mobile App Overview & Live Demo",
+    client: "Simply Prime CRM",
+    niche: "SaaS Product Demo",
+    tag: "Mobile App Walkthrough",
+    duration: "4:32",
+    format: "horizontal",
+  },
+  {
+    id: "pMU8C1H1nHo",
+    title: "Payroll and Commission Automation Workflow",
+    client: "Simply Prime CRM",
+    niche: "B2B SaaS Feature Demo",
+    tag: "Workflow Breakdown",
+    duration: "5:18",
+    format: "horizontal",
+  },
+  {
+    id: "mHOLzwe4sMQ",
+    title: "ChatGPT Connectors: Interactive Live Walkthrough",
+    client: "Tim Cakir",
+    niche: "AI Tool Demo",
+    tag: "Feature Walkthrough",
+    duration: "6:14",
+    format: "horizontal",
+  },
+  {
+    id: "bejvX2uUTDo",
+    title: "Gemini 3, AI Studio & Developer Launch Tour",
+    client: "Tim Cakir",
+    niche: "Developer Platform Tour",
+    tag: "Product Tour",
+    duration: "8:05",
+    format: "horizontal",
+  },
+];
+
+/** Long-form videos grouped by category and niche */
 export const CONTENT_TYPES: { key: string; title: string; blurb: string; ids: string[] }[] = [
   {
     key: "podcast",
-    title: "Podcast videos",
-    blurb: "Full episodes and interviews, including Circle podcast episodes, with clean audio, layouts and chapters.",
+    title: "Podcast & Interview Videos",
+    blurb: "Full studio episodes, remote multi-cam interviews, and creator dialogues with crisp audio, custom lower thirds, and chapter bookmarks.",
     ids: ["-SYqXdaZXl8", "izidLZclYZs", "TW3omRuTQA8", "WTD8GMUO_4w"],
   },
   {
-    key: "educational",
-    title: "Educational YouTube videos",
-    blurb: "Tutorials and how-to videos paced for retention, with on-screen graphics that keep viewers watching.",
-    ids: ["pcfFzxnhwUE", "SFn5Vf38f8I", "y11b_rVHcyg", "TZvt_fD8VP4"],
+    key: "demo-launch",
+    title: "Demo & Product Launch Videos",
+    blurb: "SaaS walkthroughs, interactive feature demos, and product launch assets engineered to turn viewers into active users and paid subscribers.",
+    ids: ["1nT4g9VeJDk", "pMU8C1H1nHo", "mHOLzwe4sMQ", "bejvX2uUTDo"],
   },
   {
     key: "tech",
-    title: "Tech and AI videos",
-    blurb: "Fast-moving AI and software videos where clarity, screen recordings and thumbnails decide the click.",
-    ids: ["mHOLzwe4sMQ", "bejvX2uUTDo", "-DB8-7eLsTY", "68lgEUQDiDQ"],
+    title: "Tech & AI Product Breakdowns",
+    blurb: "Fast-moving AI software breakdowns, workflow tutorials, and coding benchmarks where visual clarity and snappy pacing decide retention.",
+    ids: ["mHOLzwe4sMQ", "bejvX2uUTDo", "y11b_rVHcyg", "-DB8-7eLsTY", "68lgEUQDiDQ"],
   },
   {
-    key: "explainer",
-    title: "Explainer and product videos",
-    blurb: "Walkthroughs and explainers that show how a product or service works and help a business win customers.",
-    ids: ["1nT4g9VeJDk", "pMU8C1H1nHo", "aWR04f1eYrw", "ciwbmggLd4Y"],
+    key: "educational",
+    title: "Educational & High-Retention Tutorials",
+    blurb: "Step-by-step masterclasses and how-to guides packed with custom animations, zoom dynamics, and on-screen graphics that keep watch time high.",
+    ids: ["pcfFzxnhwUE", "SFn5Vf38f8I", "TZvt_fD8VP4", "aWR04f1eYrw", "ciwbmggLd4Y"],
   },
 ];
 
-/** Ordered to lead with the strongest work: Eric Presnall's shorts alternate with the
- * Rationale Hub channel's own shorts up front, then the rest, with no two videos
- * from the same client back to back. */
+/**
+ * Verified vertical Shorts and Reels (9:16 aspect ratio).
+ * Formatted and tagged by niche for instant filtering.
+ */
 export const SHORT_FORM: Vid[] = [
-  { id: "Bp1p4Nqb0CA", title: "Why Brands Sell Stories, Not Products", client: "Eric Presnall, VideoRep" },
-  { id: "KVehhWioXcQ", title: "5 ChatGPT Settings You Should Change Right Now", client: "Rationale Hub" },
-  { id: "BPTOzdksbEs", title: "You Don't Need Thousands of Dollars to Start Content Creation", client: "Eric Presnall, VideoRep" },
-  { id: "7LUG9W9BWXk", title: "The Free AI Tool That Outperforms Big Tech", client: "Rationale Hub" },
-  { id: "uztrtGDjZxE", title: "Humans Build Trust. AI Scales", client: "Eric Presnall, VideoRep" },
-  { id: "dD3jLdx2k7A", title: "I Tried ChatGPT for Image Creation", client: "Tim Cakir" },
-  { id: "jDxfq48mOjc", title: "Food & Drink Shows UK at NEC", client: "Lucy Wager" },
-  { id: "TJR9l12hN0I", title: "Battle of the AI Titans", client: "Tim Cakir" },
-  { id: "PYfcIJ3TzIk", title: "Giving Selflessly", client: "Harjeet Dhillon" },
-  { id: "klcoy936_mo", title: "How I Use Notion as My Second Brain Daily", client: "Tim Cakir" },
-  { id: "gY95ZAAYypg", title: "Family vs. Pro: Who Should You Choose?", client: "Bayswater Wealth Management" },
-  { id: "ZWLiTlvN1sQ", title: "Comparing US vs. India Real Estate", client: "Indian Community" },
+  { id: "Bp1p4Nqb0CA", title: "Why Brands Sell Stories, Not Products", client: "Eric Presnall, VideoRep", niche: "Branding & Strategy", tag: "Brand Storytelling", format: "vertical" },
+  { id: "KVehhWioXcQ", title: "5 ChatGPT Settings You Should Change Right Now", client: "Rationale Hub", niche: "Tech & AI", tag: "AI Hacks", format: "vertical" },
+  { id: "BPTOzdksbEs", title: "You Don't Need Thousands of Dollars to Start Content Creation", client: "Eric Presnall, VideoRep", niche: "Creators & Media", tag: "Creator Economy", format: "vertical" },
+  { id: "7LUG9W9BWXk", title: "The Free AI Tool That Outperforms Big Tech", client: "Rationale Hub", niche: "Tech & AI", tag: "AI Productivity", format: "vertical" },
+  { id: "uztrtGDjZxE", title: "Humans Build Trust. AI Scales", client: "Eric Presnall, VideoRep", niche: "Branding & Strategy", tag: "Founders & Trust", format: "vertical" },
+  { id: "dD3jLdx2k7A", title: "I Tried ChatGPT for Image Creation", client: "Tim Cakir", niche: "Tech & AI", tag: "Generative AI", format: "vertical" },
+  { id: "jDxfq48mOjc", title: "Food & Drink Shows UK at NEC", client: "Lucy Wager", niche: "Lifestyle & Events", tag: "Event Highlights", format: "vertical" },
+  { id: "TJR9l12hN0I", title: "Battle of the AI Titans", client: "Tim Cakir", niche: "Tech & AI", tag: "AI Comparison", format: "vertical" },
+  { id: "PYfcIJ3TzIk", title: "Giving Selflessly", client: "Harjeet Dhillon", niche: "Mindset & Growth", tag: "Life Philosophy", format: "vertical" },
+  { id: "klcoy936_mo", title: "How I Use Notion as My Second Brain Daily", client: "Tim Cakir", niche: "Productivity & SaaS", tag: "SaaS Workflow", format: "vertical" },
+  { id: "gY95ZAAYypg", title: "Family vs. Pro: Who Should You Choose?", client: "Bayswater Wealth Management", niche: "Finance & Wealth", tag: "Wealth Advisory", format: "vertical" },
+  { id: "ZWLiTlvN1sQ", title: "Comparing US vs. India Real Estate", client: "Indian Community", niche: "Finance & Wealth", tag: "Real Estate & ROI", format: "vertical" },
 ];
 
 export const THUMBNAILS: { slug: string; title: string; client: string }[] = [

@@ -69,6 +69,24 @@ const services: Service[] = [
     price: "Monthly retainer or add-on",
   },
   {
+    id: "demo-launch-videos",
+    title: "Demo & Product Launch Videos",
+    pitch:
+      "High-converting SaaS walkthroughs, product launch videos, and interactive feature tours. Designed with sleek motion graphics, zoom dynamics, and crisp pacing to turn curious viewers into paid subscribers and product evangelists.",
+    deliverables: [
+      "End-to-end launch video concept, script, and storyboard",
+      "Sleek UI animations, zooms, cursor smoothing, and mockups",
+      "Product Hunt, Twitter/X, and website hero cut variations",
+      "Sound design, custom audio mixing, and pro voiceover syncing",
+      "60-second teaser cuts formatted for vertical Shorts/Reels",
+      "Figma / high-res screen recording capture guidelines",
+    ],
+    idealFor:
+      "SaaS founders, product teams, and tech startups preparing for a major feature launch or conversion overhaul.",
+    icon: "play_circle",
+    price: "Project-based or included in Scale retainers",
+  },
+  {
     id: "targeted-ads-growth",
     title: "Targeted YouTube Ads & Paid Amplification",
     pitch:
@@ -107,7 +125,7 @@ const services: Service[] = [
 const servicesFaqs = [
   {
     q: "How does pricing work?",
-    a: "Plans are billed monthly. After a short intro call I send a quote that matches your goals and budget, with no upsells or hidden costs.",
+    a: "Monthly retainers range between $3,000 to $8,000 per month depending on video cadence, omnichannel repurposing, and whether product launch videos or paid ad amplification are included. All retainers are month-to-month with direct 1-on-1 partner access.",
   },
   {
     q: "Can I switch plans later?",
