@@ -6,28 +6,37 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Anuj Mishra | Solo YouTube Growth Partner & Video Editor",
   description:
-    "Learn about Anuj Mishra's 5+ year journey scaling YouTube channels, video retention, and content operations for creators and founders worldwide.",
+    "Discover how Anuj Mishra helps founders, creators, and B2B leaders scale YouTube channels with high-retention video editing, thumbnail packaging, and growth systems.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About Anuj Mishra | Solo YouTube Growth Partner & Video Editor",
     description:
-      "5+ years mastering YouTube retention, video editing, and content operations for creators and founders.",
+      "5+ years scaling YouTube channels, video retention, and content operations for founders and creators worldwide.",
     url: "https://anuj4u.in/about",
-    type: "website",
+    type: "profile",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Anuj Mishra - Solo YouTube Growth Partner",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "About Anuj Mishra | Solo YouTube Growth Partner & Video Editor",
     description:
-      "5+ years mastering YouTube retention, video editing, and content operations for creators and founders.",
+      "5+ years scaling YouTube channels, video retention, and content operations for founders and creators worldwide.",
+    images: ["/api/og"],
   },
 };
 
 const STATS = [
-  { value: "50+", label: "Channels & projects scaled" },
-  { value: "5+", label: "Years mastering video & growth" },
+  { value: "540+", label: "Videos produced & edited" },
   { value: "10M+", label: "Views generated across clients" },
-  { value: "100%", label: "Direct solo communication" },
+  { value: "5+", label: "Years in video & growth" },
+  { value: "100%", label: "Direct solo accountability" },
 ];
 
 interface TimelineEvent {
@@ -45,8 +54,8 @@ const TIMELINE: TimelineEvent[] = [
     role: "Solo YouTube Growth Partner & Content Operator",
     highlight: "+$50K Client Pipeline & End-to-End Retention Systems",
     description:
-      "Partnering directly with selected creators, educators, and B2B founders to run their entire video growth engine. Managing script hook frameworks, retention-first editing, high-CTR thumbnail packaging, and LinkedIn thought-leadership. Generated over $50,000 in client pipeline for Launch Excel (Victor Chan) and scaled high-retention technical education channels.",
-    tags: ["Channel Management", "Retention Pacing", "VSL Production", "Thumbnail A/B Testing"],
+      "Partnering directly with selected creators, educators, and B2B founders to run their entire video growth engine. Managing script hook frameworks, retention-first editing, high-CTR thumbnail packaging, SaaS demo walkthroughs, and LinkedIn thought-leadership. Generated over $50,000 in client pipeline for Launch Excel (Victor Chan) and scaled high-retention technical education channels.",
+    tags: ["Channel Management", "Retention Pacing", "SaaS Demos", "Thumbnail A/B Testing"],
     icon: "trending_up",
   },
   {
@@ -54,7 +63,7 @@ const TIMELINE: TimelineEvent[] = [
     role: "High-Retention Video Editor & Podcast Producer",
     highlight: "Automated Production Pipelines & Full Podcast Launches",
     description:
-      "Engineered full video podcast architectures and production workflows for international creators and professionals (including Harjeet Dhillon and Blake Reddy). Designed custom multi-camera visual layouts, audio mastering chains, and retention-first pacing that reduced client production overhead by over 80%.",
+      "Engineered full video podcast architectures and production workflows for international creators and professionals (including Harjeet Dhillon, Blake Reddy, and Tim Cakir). Designed custom multi-camera visual layouts, audio mastering chains, and retention-first pacing that reduced client production overhead by over 80%.",
     tags: ["Video Podcasts", "DaVinci Resolve", "Descript", "Audio Engineering"],
     icon: "mic",
   },
@@ -78,6 +87,45 @@ const TIMELINE: TimelineEvent[] = [
   },
 ];
 
+const TOOLKIT = [
+  {
+    name: "DaVinci Resolve Studio",
+    category: "Color & High-End Assembly",
+    desc: "Used for seamless multi-camera sync, color grading, tactile motion curves, and precision retention pacing.",
+    icon: "video_settings",
+  },
+  {
+    name: "Descript",
+    category: "Speech Editing & Text Sync",
+    desc: "Rapid speech cleanup, removing filler words, and synchronizing dynamic kinetic captions.",
+    icon: "record_voice_over",
+  },
+  {
+    name: "Premiere Pro & After Effects",
+    category: "Motion & UI Animation",
+    desc: "Custom title cards, UI zooms, cursor smoothing, and 3D mockups for SaaS product walkthroughs.",
+    icon: "animation",
+  },
+  {
+    name: "Photoshop & Canva Pro",
+    category: "Thumbnail Packaging",
+    desc: "Crafting high-contrast visual hooks, facial cutouts, and readable typography that boost CTR by 13-15%.",
+    icon: "brush",
+  },
+  {
+    name: "YouTube Studio & Retention AI",
+    category: "Analytics & Drop-Off Diagnostics",
+    desc: "Analyzing second-by-second audience retention curves to eliminate drop-off points before the next upload.",
+    icon: "insights",
+  },
+  {
+    name: "Frame.io & Notion",
+    category: "Frictionless Client Workspace",
+    desc: "Timestamped video reviews and editorial calendars so handoffs take minutes, not back-and-forth emails.",
+    icon: "fact_check",
+  },
+];
+
 const PRINCIPLES = [
   {
     title: "Retention Over Fluff",
@@ -90,15 +138,54 @@ const PRINCIPLES = [
     desc: "A brilliant video that nobody clicks is a wasted upload. I develop the title and thumbnail concepts before the edit begins, anchoring viewer curiosity and driving CTR.",
   },
   {
-    title: "Zero Agency Layers",
+    title: "100% Solo Accountability",
     icon: "person_check",
     desc: "No account managers, no outsourced junior editors, and no broken communication. You work and communicate directly with me via WhatsApp or Slack every single week.",
   },
 ];
 
 export default function AboutPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    mainEntity: {
+      "@type": "Person",
+      name: "Anuj Mishra",
+      url: "https://anuj4u.in/about",
+      image:
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuAONq_-LpwLrjyzi_TMnOoIPeIcZ04gIKRPw3fCV_qXZgnCjM4RQf4LG1WlprBdUN2f5R9C4a835k1yK0KWjOE6rB--wLfc277mjI7w2Hc8caPWC5df-o_cL88SOhdo2QCBzsvzUQ3DCgwIPSBk69Ig9xxhJlx0YERJx6KbCY3NICthAi9jb99FKXTxJ6s30R1-GFRfP8dPp2FllUSrzKZO_zEpQfDn2dyXm0_NKNHe0MGlnDZ4i9EwBnW5rw9enozwcNQHwpdEX4Li_N8",
+      jobTitle: "Solo YouTube Growth Partner & Video Editor",
+      description:
+        "5+ years scaling YouTube channels, video retention, and content operations for creators and founders worldwide.",
+      knowsAbout: [
+        "YouTube Channel Management",
+        "Video Editing",
+        "Viewer Retention Pacing",
+        "Thumbnail Design & A/B Testing",
+        "SaaS Product Demo Videos",
+        "LinkedIn Thought Leadership",
+        "DaVinci Resolve",
+        "Descript",
+      ],
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "YouTube Growth Strategist & Video Producer",
+        occupationLocation: {
+          "@type": "Country",
+          name: "Worldwide",
+        },
+      },
+    },
+  };
+
   return (
     <div className="relative overflow-hidden min-h-screen">
+      {/* Schema Injection */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Ambient background glows */}
       <div className="ambient-glow top-[-80px] left-[-80px] opacity-40 pointer-events-none" />
       <div className="ambient-glow-2 top-1/2 right-[-100px] opacity-35 pointer-events-none" />
@@ -107,18 +194,20 @@ export default function AboutPage() {
         {/* HERO SECTION */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center mb-16 md:mb-20">
           <div className="md:col-span-7 text-center md:text-left flex flex-col items-center md:items-start order-2 md:order-1">
-            <p className="eyebrow mb-3">About Me</p>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+              Solo Growth Partner
+            </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-on-surface mb-5 leading-[1.15]">
               Hi, I&apos;m <span className="gradient-text">Anuj Mishra.</span>
             </h1>
             <p className="text-base sm:text-lg text-on-surface-variant leading-relaxed mb-4 max-w-xl">
-              I am an independent YouTube growth strategist and video editor. Over the past 5+ years,
+              I am an independent YouTube growth strategist, video editor, and content operator. Over the past 5+ years,
               I&apos;ve helped creators, educators, and B2B founders turn raw video footage into
-              high-retention content systems that generate real views and revenue.
+              high-retention content systems that generate predictable views and inbound revenue.
             </p>
             <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed mb-8 max-w-xl">
               I don&apos;t run a bloated agency with junior handoffs. When you partner with me, I personally
-              handle your channel audit, video pacing, thumbnail packaging, and multi-platform distribution.
+              handle your channel audit, hook scripting, video pacing, thumbnail packaging, and multi-platform distribution.
             </p>
 
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
@@ -147,15 +236,15 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] rounded-[28px] overflow-hidden border border-white/60 bg-surface-container shadow-[0_30px_70px_-25px_rgba(73,54,230,0.45)]">
               <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAONq_-LpwLrjyzi_TMnOoIPeIcZ04gIKRPw3fCV_qXZgnCjM4RQf4LG1WlprBdUN2f5R9C4a835k1yK0KWjOE6rB--wLfc277mjI7w2Hc8caPWC5df-o_cL88SOhdo2QCBzsvzUQ3DCgwIPSBk69Ig9xxhJlx0YERJx6KbCY3NICthAi9jb99FKXTxJ6s30R1-GFRfP8dPp2FllUSrzKZO_zEpQfDn2dyXm0_NKNHe0MGlnDZ4i9EwBnW5rw9enozwcNQHwpdEX4Li_N8"
-                alt="Anuj Mishra - Video Editor & Growth Partner"
+                alt="Anuj Mishra - Solo YouTube Growth Partner & High-Retention Video Editor"
                 fill
                 sizes="(max-width: 768px) 80vw, 340px"
                 className="object-cover object-top"
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 right-4 text-center bg-black/60 backdrop-blur-md rounded-xl py-2 px-3 border border-white/10">
-                <p className="text-white font-bold text-xs">Anuj Mishra</p>
+              <div className="absolute bottom-4 left-4 right-4 text-center bg-black/60 backdrop-blur-md rounded-xl py-2.5 px-3 border border-white/10">
+                <p className="text-white font-bold text-xs sm:text-sm">Anuj Mishra</p>
                 <p className="text-[11px] text-purple-200">YouTube Growth Partner &amp; Editor</p>
               </div>
             </div>
@@ -178,7 +267,51 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* EXPERIENCE TIMELINE (Requested Feature) */}
+        {/* VERIFIED CLIENT IMPACT SPOTLIGHT */}
+        <section className="mb-24">
+          <div className="rounded-3xl bg-gradient-to-br from-primary/[0.06] via-purple-500/[0.03] to-transparent border border-primary/20 p-8 md:p-10 relative overflow-hidden">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="max-w-xl">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full mb-3 inline-block">
+                  Verified Client Impact
+                </span>
+                <blockquote className="text-lg md:text-xl font-medium text-on-surface leading-snug mb-4">
+                  &ldquo;I edited and packaged videos for twelve months. One single YouTube client was worth <span className="font-bold text-primary">$50,000</span> to him directly.&rdquo;
+                </blockquote>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">
+                    TC
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-on-surface">Tim Cakir</p>
+                    <p className="text-xs text-on-surface-variant">AI &amp; Tech Creator | Growth Partner Client</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 shrink-0 w-full md:w-auto">
+                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.06] text-center">
+                  <p className="text-2xl font-bold gradient-text">$50K</p>
+                  <p className="text-[11px] text-on-surface-variant">Client pipeline generated</p>
+                </div>
+                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.06] text-center">
+                  <p className="text-2xl font-bold gradient-text">13–15%</p>
+                  <p className="text-[11px] text-on-surface-variant">Peak thumbnail CTR</p>
+                </div>
+                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.06] text-center">
+                  <p className="text-2xl font-bold gradient-text">223K</p>
+                  <p className="text-[11px] text-on-surface-variant">Views in 365 days</p>
+                </div>
+                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.06] text-center">
+                  <p className="text-2xl font-bold gradient-text">+63%</p>
+                  <p className="text-[11px] text-on-surface-variant">Views quarter-over-quarter</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* EXPERIENCE TIMELINE */}
         <section className="mb-24">
           <div className="text-center max-w-xl mx-auto mb-14">
             <p className="eyebrow mb-2">My Journey</p>
@@ -187,7 +320,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-sm md:text-base text-on-surface-variant leading-relaxed">
               How I evolved from running personal YouTube channels to orchestrating high-retention content
-              systems for international creators.
+              systems for international creators and B2B leaders.
             </p>
           </div>
 
@@ -196,7 +329,7 @@ export default function AboutPage() {
             <div className="absolute left-4 md:left-8 top-3 bottom-3 w-0.5 bg-gradient-to-b from-primary via-purple-400 to-primary/20 pointer-events-none" />
 
             <div className="space-y-10">
-              {TIMELINE.map((item, index) => (
+              {TIMELINE.map((item) => (
                 <div key={item.period} className="relative flex items-start gap-5 md:gap-8 group">
                   {/* Glowing Node Dot */}
                   <div className="relative z-10 w-9 h-9 md:w-11 md:h-11 rounded-2xl bg-white border-2 border-primary text-primary flex items-center justify-center shrink-0 shadow-md group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
@@ -238,6 +371,37 @@ export default function AboutPage() {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* CREATIVE TOOLKIT & PRODUCTION STACK */}
+        <section className="mb-24">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <p className="eyebrow mb-2">Production Toolkit</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-3">
+              Tools I Build &amp; Edit In
+            </h2>
+            <p className="text-sm md:text-base text-on-surface-variant leading-relaxed">
+              Institutional-grade production software, analytics diagnostics, and client review systems.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {TOOLKIT.map((tool) => (
+              <div
+                key={tool.name}
+                className="glass-card rounded-2xl p-6 border border-outline-variant/40 hover:border-primary/30 transition-all"
+              >
+                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                  <span className="material-symbols-outlined text-2xl">{tool.icon}</span>
+                </div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-primary block mb-1">
+                  {tool.category}
+                </span>
+                <h3 className="text-base font-bold text-on-surface mb-2">{tool.name}</h3>
+                <p className="text-xs text-on-surface-variant leading-relaxed">{tool.desc}</p>
+              </div>
+            ))}
           </div>
         </section>
 
