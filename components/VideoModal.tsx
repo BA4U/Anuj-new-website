@@ -25,6 +25,11 @@ export default function VideoModal({
     };
   }, [onClose]);
 
+  const isDirectVideo =
+    id.startsWith("http") &&
+    (id.endsWith(".mp4") || id.endsWith(".webm") || id.includes("blob.vercel-storage.com")) ||
+    id.startsWith("/");
+
   return (
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-fade-in"
@@ -46,13 +51,23 @@ export default function VideoModal({
         >
           <span className="material-symbols-outlined text-[20px]">close</span>
         </button>
-        <iframe
-          src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
-          title={title}
-          className="w-full h-full border-0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
+        {isDirectVideo ? (
+          <video
+            src={id}
+            controls
+            autoPlay
+            playsInline
+            className="w-full h-full object-contain"
+          />
+        ) : (
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
+            title={title}
+            className="w-full h-full border-0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        )}
       </div>
     </div>
   );

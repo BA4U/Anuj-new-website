@@ -29,19 +29,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ── 1. Save to Firebase Firestore (non-blocking fallback) ──
+    // ── 1. Save to Firebase Firestore (non-blocking fallback with strict timeout) ──
     let firestoreId: string | null = null;
-    try {
-      const docRef = await addDoc(collection(db, "contacts"), {
-        name: body.name,
-        email: body.email,
-        subject: body.subject || "General Inquiry",
-        message: body.message,
-        createdAt: serverTimestamp(),
-      });
-      firestoreId = docRef.id;
-    } catch (err) {
-      console.warn("Firestore save skipped/failed (continuing with email/webhook):", err);
+    const hasRealFirebase =
+      process.env.NEXT_PUBLIC_FIREBASE_API_KEY &&
+      process.env.NEXT_PUBLIC_FIREBASE_API_KEY !== "demo-key" &&
+      process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID &&
+      process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID !== "anuj4u-portfolio";
+
+    if (hasRealFirebase) {
+      try {
+        const firestorePromise = addDoc(collection(db, "contacts"), {
+          name: body.name,
+          email: body.email,
+          subject: body.subject || "General Inquiry",
+          message: body.message,
+          createdAt: serverTimestamp(),
+        });
+        const timeoutPromise = new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error("Firestore timeout")), 2500)
+        );
+        const docRef = await Promise.race([firestorePromise, timeoutPromise]);
+        firestoreId = docRef.id;
+      } catch (err) {
+        console.warn("Firestore save skipped/failed (continuing with email/webhook):", err);
+      }
     }
 
     // ── 2. Log to Google Sheets (non-blocking) ──
