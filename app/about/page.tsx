@@ -186,15 +186,16 @@ export default function AboutPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Ambient background glows */}
-      <div className="ambient-glow top-[-80px] left-[-80px] opacity-40 pointer-events-none" />
-      <div className="ambient-glow-2 top-1/2 right-[-100px] opacity-35 pointer-events-none" />
+      {/* Signature Ambient Auroras & Background Glows */}
+      <div className="aurora aurora-a w-[560px] h-[560px] -top-32 -left-32 opacity-45 pointer-events-none" />
+      <div className="aurora aurora-b w-[500px] h-[500px] top-1/3 -right-36 opacity-35 pointer-events-none" />
+      <div className="aurora aurora-a w-[480px] h-[480px] bottom-20 left-10 opacity-30 pointer-events-none" />
 
       <div className="max-w-[1140px] mx-auto px-5 sm:px-6 lg:px-10 pt-10 md:pt-16 pb-20 relative z-10">
         {/* HERO SECTION */}
         <section className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center mb-16 md:mb-20">
           <div className="md:col-span-7 text-center md:text-left flex flex-col items-center md:items-start order-2 md:order-1">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4 border border-primary/20 shadow-sm">
               Solo Growth Partner
             </span>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-on-surface mb-5 leading-[1.15]">
@@ -213,27 +214,27 @@ export default function AboutPage() {
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
               <Link
                 href="/contact"
-                className="bg-primary hover:bg-primary/90 text-white font-medium px-6 py-3 rounded-full text-sm transition-all shadow-md inline-flex items-center gap-1.5"
+                className="btn btn-glow font-medium px-6 py-3 rounded-full text-sm inline-flex items-center gap-1.5 shadow-lg"
               >
                 Work with Me Directly
                 <span className="material-symbols-outlined text-base">arrow_forward</span>
               </Link>
               <Link
                 href="/work"
-                className="glass-card hover:bg-surface-container text-on-surface font-medium px-6 py-3 rounded-full text-sm border border-outline-variant/40 transition-all"
+                className="btn btn-secondary text-on-surface font-medium px-6 py-3 rounded-full text-sm"
               >
                 Explore My Work
               </Link>
             </div>
           </div>
 
-          {/* Profile Photo with Apple-style framing */}
+          {/* Profile Photo with Apple-style framing & glow */}
           <div className="md:col-span-5 relative max-w-[340px] w-full mx-auto order-1 md:order-2">
             <div
-              className="absolute -inset-3 rounded-[36px] opacity-60 blur-2xl pointer-events-none"
-              style={{ background: "linear-gradient(135deg, rgba(73,54,230,0.5), rgba(168,85,247,0.3))" }}
+              className="absolute -inset-4 rounded-[40px] opacity-70 blur-2xl pointer-events-none"
+              style={{ background: "linear-gradient(135deg, rgba(73,54,230,0.55), rgba(168,85,247,0.4))" }}
             />
-            <div className="relative aspect-[4/5] rounded-[28px] overflow-hidden border border-white/60 bg-surface-container shadow-[0_30px_70px_-25px_rgba(73,54,230,0.45)]">
+            <div className="relative aspect-[4/5] rounded-[30px] overflow-hidden border border-white/70 bg-surface-container shadow-[0_30px_70px_-20px_rgba(73,54,230,0.5)]">
               <Image
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuAONq_-LpwLrjyzi_TMnOoIPeIcZ04gIKRPw3fCV_qXZgnCjM4RQf4LG1WlprBdUN2f5R9C4a835k1yK0KWjOE6rB--wLfc277mjI7w2Hc8caPWC5df-o_cL88SOhdo2QCBzsvzUQ3DCgwIPSBk69Ig9xxhJlx0YERJx6KbCY3NICthAi9jb99FKXTxJ6s30R1-GFRfP8dPp2FllUSrzKZO_zEpQfDn2dyXm0_NKNHe0MGlnDZ4i9EwBnW5rw9enozwcNQHwpdEX4Li_N8"
                 alt="Anuj Mishra - Solo YouTube Growth Partner & High-Retention Video Editor"
@@ -242,8 +243,8 @@ export default function AboutPage() {
                 className="object-cover object-top"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 right-4 text-center bg-black/60 backdrop-blur-md rounded-xl py-2.5 px-3 border border-white/10">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 right-4 text-center bg-black/60 backdrop-blur-md rounded-2xl py-2.5 px-3 border border-white/15 shadow-xl">
                 <p className="text-white font-bold text-xs sm:text-sm">Anuj Mishra</p>
                 <p className="text-[11px] text-purple-200">YouTube Growth Partner &amp; Editor</p>
               </div>
@@ -251,11 +252,11 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* STATS BAR */}
+        {/* STATS BAR - UPGRADED TO CARD-GLOW SPOTLIGHT */}
         <section className="mb-20">
-          <div className="glass-card rounded-2xl grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-outline-variant/30 border border-outline-variant/40 shadow-sm">
+          <div className="card-glow spotlight rounded-[28px] grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-outline-variant/30 shadow-[0_20px_50px_-20px_rgba(73,54,230,0.25)] border border-white/60">
             {STATS.map((stat) => (
-              <div key={stat.label} className="p-6 text-center">
+              <div key={stat.label} className="p-6 sm:p-7 text-center">
                 <div className="text-3xl md:text-4xl font-extrabold gradient-text leading-tight mb-1">
                   {stat.value}
                 </div>
@@ -267,19 +268,19 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* VERIFIED CLIENT IMPACT SPOTLIGHT */}
+        {/* VERIFIED CLIENT IMPACT SPOTLIGHT - UPGRADED TO CARD-GLOW SPOTLIGHT */}
         <section className="mb-24">
-          <div className="rounded-3xl bg-gradient-to-br from-primary/[0.06] via-purple-500/[0.03] to-transparent border border-primary/20 p-8 md:p-10 relative overflow-hidden">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="card-glow spotlight rounded-[32px] p-8 md:p-12 relative overflow-hidden border border-primary/25 shadow-[0_25px_65px_-20px_rgba(73,54,230,0.3)]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
               <div className="max-w-xl">
-                <span className="text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full mb-3 inline-block">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full mb-3 inline-block">
                   Verified Client Impact
                 </span>
                 <blockquote className="text-lg md:text-xl font-medium text-on-surface leading-snug mb-4">
                   &ldquo;I edited and packaged videos for twelve months. One single YouTube client was worth <span className="font-bold text-primary">$50,000</span> to him directly.&rdquo;
                 </blockquote>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-purple-500 text-white flex items-center justify-center font-bold text-sm shadow-md">
                     TC
                   </div>
                   <div>
@@ -289,29 +290,29 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 shrink-0 w-full md:w-auto">
-                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.06] text-center">
+              <div className="grid grid-cols-2 gap-3.5 shrink-0 w-full md:w-auto">
+                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.08] text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
                   <p className="text-2xl font-bold gradient-text">$50K</p>
-                  <p className="text-[11px] text-on-surface-variant">Client pipeline generated</p>
+                  <p className="text-[11px] text-on-surface-variant mt-0.5">Client pipeline won</p>
                 </div>
-                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.06] text-center">
+                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.08] text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
                   <p className="text-2xl font-bold gradient-text">13–15%</p>
-                  <p className="text-[11px] text-on-surface-variant">Peak thumbnail CTR</p>
+                  <p className="text-[11px] text-on-surface-variant mt-0.5">Peak thumbnail CTR</p>
                 </div>
-                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.06] text-center">
+                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.08] text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
                   <p className="text-2xl font-bold gradient-text">223K</p>
-                  <p className="text-[11px] text-on-surface-variant">Views in 365 days</p>
+                  <p className="text-[11px] text-on-surface-variant mt-0.5">Views in 365 days</p>
                 </div>
-                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.06] text-center">
+                <div className="bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md rounded-2xl p-4 border border-black/[0.08] text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all">
                   <p className="text-2xl font-bold gradient-text">+63%</p>
-                  <p className="text-[11px] text-on-surface-variant">Views quarter-over-quarter</p>
+                  <p className="text-[11px] text-on-surface-variant mt-0.5">Views QoQ growth</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* EXPERIENCE TIMELINE */}
+        {/* EXPERIENCE TIMELINE - UPGRADED CARDS & CONNECTOR */}
         <section className="mb-24">
           <div className="text-center max-w-xl mx-auto mb-14">
             <p className="eyebrow mb-2">My Journey</p>
@@ -325,26 +326,26 @@ export default function AboutPage() {
           </div>
 
           <div className="relative max-w-3xl mx-auto">
-            {/* Vertical connector line */}
-            <div className="absolute left-4 md:left-8 top-3 bottom-3 w-0.5 bg-gradient-to-b from-primary via-purple-400 to-primary/20 pointer-events-none" />
+            {/* Vertical glowing connector line */}
+            <div className="absolute left-4 md:left-8 top-4 bottom-4 w-1 bg-gradient-to-b from-primary via-purple-400 to-primary/20 rounded-full shadow-[0_0_12px_rgba(73,54,230,0.5)] pointer-events-none" />
 
             <div className="space-y-10">
               {TIMELINE.map((item) => (
                 <div key={item.period} className="relative flex items-start gap-5 md:gap-8 group">
                   {/* Glowing Node Dot */}
-                  <div className="relative z-10 w-9 h-9 md:w-11 md:h-11 rounded-2xl bg-white border-2 border-primary text-primary flex items-center justify-center shrink-0 shadow-md group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                  <div className="relative z-10 w-9 h-9 md:w-11 md:h-11 rounded-2xl bg-white border-2 border-primary text-primary flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(73,54,230,0.35)] group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                     <span className="material-symbols-outlined text-lg md:text-xl">
                       {item.icon}
                     </span>
                   </div>
 
-                  {/* Milestone Card */}
-                  <div className="flex-1 glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 border border-outline-variant/40 hover:border-primary/30 transition-all duration-300 shadow-sm group-hover:shadow-md">
+                  {/* Milestone Card - UPGRADED TO CARD-GLOW SPOTLIGHT */}
+                  <div className="flex-1 card-glow spotlight rounded-[26px] p-6 md:p-8 border border-white/70 shadow-[0_15px_40px_-15px_rgba(73,54,230,0.22)] group-hover:shadow-[0_25px_60px_-18px_rgba(73,54,230,0.4)] transition-all duration-300">
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs tracking-wide">
+                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs tracking-wide border border-primary/15">
                         {item.period}
                       </span>
-                      <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60">
+                      <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60 shadow-sm">
                         {item.highlight}
                       </span>
                     </div>
@@ -357,11 +358,11 @@ export default function AboutPage() {
                       {item.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-outline-variant/30">
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-black/[0.06]">
                       {item.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant"
+                          className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant border border-black/[0.04]"
                         >
                           {tag}
                         </span>
@@ -374,7 +375,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CREATIVE TOOLKIT & PRODUCTION STACK */}
+        {/* CREATIVE TOOLKIT & PRODUCTION STACK - UPGRADED TO CARD-GLOW */}
         <section className="mb-24">
           <div className="text-center max-w-xl mx-auto mb-12">
             <p className="eyebrow mb-2">Production Toolkit</p>
@@ -390,12 +391,12 @@ export default function AboutPage() {
             {TOOLKIT.map((tool) => (
               <div
                 key={tool.name}
-                className="glass-card rounded-2xl p-6 border border-outline-variant/40 hover:border-primary/30 transition-all"
+                className="card-glow spotlight rounded-2xl p-6 border border-white/60 shadow-sm hover:shadow-[0_20px_45px_-15px_rgba(73,54,230,0.3)] transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4">
+                <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-primary/15 to-primary/5 text-primary flex items-center justify-center mb-4 shadow-sm">
                   <span className="material-symbols-outlined text-2xl">{tool.icon}</span>
                 </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-primary block mb-1">
+                <span className="text-[10.5px] font-bold uppercase tracking-wider text-primary block mb-1">
                   {tool.category}
                 </span>
                 <h3 className="text-base font-bold text-on-surface mb-2">{tool.name}</h3>
@@ -405,7 +406,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* HOW I WORK / CORE PRINCIPLES */}
+        {/* HOW I WORK / CORE PRINCIPLES - UPGRADED TO CARD-GLOW */}
         <section className="mb-24">
           <div className="text-center max-w-xl mx-auto mb-12">
             <p className="eyebrow mb-2">Guiding Standards</p>
@@ -421,10 +422,10 @@ export default function AboutPage() {
             {PRINCIPLES.map((p) => (
               <div
                 key={p.title}
-                className="glass-card rounded-2xl p-7 flex flex-col justify-between border border-outline-variant/40 hover:border-primary/30 transition-all"
+                className="card-glow spotlight rounded-2xl p-7 flex flex-col justify-between border border-white/60 shadow-sm hover:shadow-[0_22px_50px_-18px_rgba(73,54,230,0.32)] transition-all duration-300"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-primary/20 to-purple-500/10 text-primary flex items-center justify-center mb-5 shadow-sm">
                     <span className="material-symbols-outlined text-2xl">{p.icon}</span>
                   </div>
                   <h3 className="font-bold text-on-surface text-lg mb-2">{p.title}</h3>
@@ -435,8 +436,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CTA SECTION */}
-        <section className="glass-card rounded-3xl p-10 md:p-14 text-center max-w-3xl mx-auto border border-primary/20 shadow-2xl relative">
+        {/* CTA SECTION - UPGRADED GLOW */}
+        <section className="card-glow spotlight rounded-3xl p-10 md:p-14 text-center max-w-3xl mx-auto border border-primary/30 shadow-[0_30px_70px_-20px_rgba(73,54,230,0.4)] relative">
           <p className="eyebrow mb-2">Let&apos;s Connect</p>
           <h2 className="text-2xl md:text-4xl font-bold text-on-surface mb-4">
             Ready to scale your YouTube channel?
@@ -447,14 +448,14 @@ export default function AboutPage() {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/youtube-funnel"
-              className="bg-primary hover:bg-primary/90 text-white font-bold px-7 py-3.5 rounded-full text-sm transition-all shadow-md inline-flex items-center gap-2"
+              className="btn btn-glow font-bold px-7 py-3.5 rounded-full text-sm shadow-lg inline-flex items-center gap-2"
             >
               Audit My Channel
               <span className="material-symbols-outlined text-base">auto_awesome</span>
             </Link>
             <Link
               href="/contact"
-              className="glass-card hover:bg-surface-container text-on-surface font-semibold px-7 py-3.5 rounded-full text-sm border border-outline-variant/40 transition-all"
+              className="btn btn-secondary font-semibold px-7 py-3.5 rounded-full text-sm"
             >
               Book a Strategy Call
             </Link>

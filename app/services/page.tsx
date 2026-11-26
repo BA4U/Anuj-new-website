@@ -1,146 +1,136 @@
-import React from "react";
+"use client";
+
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
+import Image from "next/image";
 import FAQAccordion from "@/components/FAQAccordion";
 
-export const metadata: Metadata = {
-  title: "YouTube & Video Production Growth Services | Anuj Mishra",
-  description:
-    "High-retention YouTube channel management, SaaS demo videos, LinkedIn inbound authority, and targeted ad amplification for founders and creators.",
-  alternates: { canonical: "/services" },
-  openGraph: {
-    title: "YouTube & Video Production Growth Services | Anuj Mishra",
-    description:
-      "High-retention YouTube channel management, SaaS product demo videos, and omnichannel content distribution.",
-    url: "https://anuj4u.in/services",
-    type: "website",
-    images: [
-      {
-        url: "/api/og",
-        width: 1200,
-        height: 630,
-        alt: "Anuj Mishra - Video Growth Services",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "YouTube & Video Production Growth Services | Anuj Mishra",
-    description:
-      "High-retention YouTube channel management, SaaS product demo videos, and omnichannel content distribution.",
-    images: ["/api/og"],
-  },
-};
+type CategoryKey = "all" | "video" | "demo" | "linkedin" | "ads";
 
 type Service = {
   id: string;
+  category: CategoryKey;
   title: string;
-  pitch: string;
-  deliverables: string[];
+  badge?: string;
+  oneLiner: string;
+  visualImg: string;
+  visualBadge: string;
+  visualMetric?: string;
+  deliverables: { icon: string; text: string }[];
   idealFor: string;
-  icon: string;
   price: string;
-  proofLink?: { text: string; href: string };
+  proofLink: { text: string; href: string };
   featured?: boolean;
 };
 
-const services: Service[] = [
+const SERVICES: Service[] = [
   {
     id: "content-engine",
-    title: "YouTube Growth Engine (Flagship)",
-    pitch:
-      "Full turnkey YouTube operation engineered for viewer retention, algorithmic watch time, and revenue. End-to-end scripting frameworks, high-retention video editing, click-worthy packaging, and Shorts repurposing.",
+    category: "video",
+    title: "YouTube Growth Engine",
+    badge: "Flagship Retainer",
+    oneLiner: "Your complete turnkey YouTube operation: high-retention editing, CTR-focused packaging, and viral Shorts repurposing.",
+    visualImg: "/thumbnails/chatgpt-connectors-explained.webp",
+    visualBadge: "13.0% Peak CTR",
+    visualMetric: "4–8 Long-Form + 16 Shorts / mo",
     deliverables: [
-      "4 to 8 high-retention long-form videos edited per month",
-      "12 to 16 viral Shorts and Reels cut with dynamic 9:16 pacing",
-      "High-CTR thumbnail packaging (with A/B testing concepts)",
-      "Channel audit, content calendar, and 90-day growth strategy",
-      "SEO titles, timestamps, descriptions, and scheduling",
-      "Weekly analytics review and retention drop-off diagnostics",
+      { icon: "schedule", text: "3–5 Day predictable turnaround" },
+      { icon: "brush", text: "Custom thumbnails with A/B variants" },
+      { icon: "smartphone", text: "Platform-native 9:16 Shorts & Reels" },
+      { icon: "forum", text: "Direct 1-on-1 Slack & WhatsApp access" },
     ],
-    idealFor:
-      "Creators, founders, coaches, and authors who want YouTube to be their primary inbound revenue engine.",
-    icon: "rocket_launch",
+    idealFor: "Founders, creators & coaches who want consistent watch time without 20+ editing hours.",
     price: "From $3,200 / month",
     proofLink: { text: "Watch Long-Form Edits", href: "/work/long-form" },
     featured: true,
   },
   {
     id: "demo-launch-videos",
+    category: "demo",
     title: "Demo & Product Launch Videos",
-    pitch:
-      "High-converting SaaS walkthroughs, product launch videos, and interactive feature tours. Designed with sleek motion graphics, UI zoom physics, and crisp pacing to turn curious viewers into paid subscribers and product evangelists.",
+    badge: "SaaS & Feature Launches",
+    oneLiner: "Sleek UI walkthroughs, feature demos, and product launch films engineered to drive user signups and demo bookings.",
+    visualImg: "/thumbnails/top-5-gpts-worth-50k.webp",
+    visualBadge: "Product Hunt & Hero Ready",
+    visualMetric: "16:9 Web + 9:16 Mobile Cuts",
     deliverables: [
-      "End-to-end launch video concept, script, and storyboard",
-      "Sleek UI animations, zooms, cursor smoothing, and mockups",
-      "Product Hunt, Twitter/X, and website hero cut variations",
-      "Sound design, custom audio mixing, and pro voiceover syncing",
-      "60-second teaser cuts formatted for vertical Shorts/Reels",
-      "Figma / high-res screen recording capture guidelines",
+      { icon: "animation", text: "Dynamic UI zoom physics & mockups" },
+      { icon: "timer", text: "5-Second friction-free hook formula" },
+      { icon: "volume_up", text: "Tactile UI sound design & audio mixing" },
+      { icon: "aspect_ratio", text: "Multi-platform cuts (16:9, 9:16, 1:1)" },
     ],
-    idealFor:
-      "SaaS founders, product teams, and tech startups preparing for a major feature launch or conversion overhaul.",
-    icon: "play_circle",
-    price: "Project-based or included in Scale retainers",
+    idealFor: "SaaS founders and product teams preparing for a major launch, feature release, or VSL update.",
+    price: "Project-based or in Scale tier",
     proofLink: { text: "Explore Live SaaS Demos", href: "/work/demo-videos" },
   },
   {
     id: "linkedin-funnel-system",
+    category: "linkedin",
     title: "LinkedIn Authority & Inbound Funnel",
-    pitch:
-      "Transform your video insights and founder expertise into an executive LinkedIn presence that attracts high-ticket clients, B2B enterprise deals, and partnership opportunities.",
+    badge: "B2B Executive Inbound",
+    oneLiner: "Repurposing your video insights and founder expertise into high-impact thought leadership that attracts B2B pipeline.",
+    visualImg: "/thumbnails/mastering-google-workspace-flows.webp",
+    visualBadge: "+$50K Inbound Pipeline",
+    visualMetric: "12–16 Executive Posts & PDFs / mo",
     deliverables: [
-      "Profile and headline rewrite optimized for your ideal customer persona",
-      "12-16 high-impact thought leadership posts & carousels / month",
-      "Lead magnet funnels and comment engagement playbooks",
-      "Repurposing YouTube key insights into native text & PDFs",
-      "Monthly inbound lead and connection growth report",
+      { icon: "badge", text: "Complete profile & headline optimization" },
+      { icon: "auto_stories", text: "High-retention carousels & text posts" },
+      { icon: "filter_alt", text: "Lead magnet funnels & engagement playbooks" },
+      { icon: "insights", text: "Monthly connection & lead report" },
     ],
-    idealFor:
-      "Consultants, B2B founders, and executives who want high-ticket clients from LinkedIn without writing daily.",
-    icon: "hub",
+    idealFor: "B2B consultants, CEOs, and advisors who want inbound leads without daily writing.",
     price: "Monthly retainer or growth add-on",
     proofLink: { text: "Test Free LinkedIn Funnel Tool", href: "/linkedin-funnel" },
   },
   {
     id: "targeted-ads-growth",
-    title: "Targeted YouTube Ads & Paid Amplification",
-    pitch:
-      "Accelerate channel growth and client acquisition by putting your top-performing YouTube videos directly in front of your dream buyers using targeted Google and YouTube ad campaigns.",
+    category: "ads",
+    title: "Targeted YouTube Ads & Amplification",
+    badge: "Paid Acquisition Engine",
+    oneLiner: "Putting your highest-converting video content in front of high-intent buyers with targeted YouTube In-Feed and Google Ads.",
+    visualImg: "/proof/google-ads-growth.png",
+    visualBadge: "$0.23 Average CPC",
+    visualMetric: "Guaranteed Targeted Pipeline",
     deliverables: [
-      "Targeted YouTube In-Feed & Discovery Ad campaign setup",
-      "High-converting video hook scripting and ad creative edits",
-      "Audience persona, competitor placement, and search keyword targeting",
-      "Landing page, VSL, and booked call conversion tracking",
-      "Weekly CPA, view-rate, and qualified pipeline reporting",
+      { icon: "ads_click", text: "YouTube In-Feed & Discovery setup" },
+      { icon: "movie_filter", text: "Ad creative scripting & hook edits" },
+      { icon: "target", text: "Competitor channel & keyword targeting" },
+      { icon: "analytics", text: "Weekly CPA & view-rate reporting" },
     ],
-    idealFor:
-      "Founders and businesses ready to scale beyond organic reach and turn video views into guaranteed pipeline.",
-    icon: "ads_click",
+    idealFor: "Businesses ready to scale beyond organic reach and turn video views into booked calls.",
     price: "Monthly ad management + retainer",
     proofLink: { text: "Calculate Your Paid Ad ROI", href: "/ad-roi-calculator" },
   },
   {
     id: "content-production-system",
-    title: "Content Production System & SOPs",
-    pitch:
-      "A complete, reusable video production machine for your internal media team: custom templates, hook frameworks, B-roll asset libraries, and hands-on editor training.",
+    category: "video",
+    title: "Production System & SOPs",
+    badge: "Internal Team Scale",
+    oneLiner: "A complete, institutional video production machine for your internal team: templates, hook frameworks, and editor SOPs.",
+    visualImg: "/thumbnails/claude-zapier-automate-everything.webp",
+    visualBadge: "Descript + DaVinci SOPs",
+    visualMetric: "Institutional Consistency",
     deliverables: [
-      "Production workflow audit and bottleneck elimination",
-      "Custom templates for hooks, intros, CTAs, and motion graphics",
-      "Editor training, video review frameworks, and complete SOPs",
-      "Shared asset library, sound design kit, and brand style guide",
-      "Monthly workflow coaching and quality assurance reviews",
+      { icon: "alt_route", text: "Workflow audit & bottleneck removal" },
+      { icon: "view_quilt", text: "Custom intro, CTA & motion templates" },
+      { icon: "school", text: "Editor review frameworks & QA SOPs" },
+      { icon: "library_books", text: "Shared sound kit & brand asset vault" },
     ],
-    idealFor:
-      "Agencies and internal media teams that want to scale video output with institutional consistency.",
-    icon: "movie_edit",
+    idealFor: "Agencies and internal media teams that want to scale video output without quality loss.",
     price: "One-time build or quarterly advisory",
     proofLink: { text: "Read Tim Cakir Case Study", href: "/work/case-studies" },
   },
 ];
 
-const servicesFaqs = [
+const CATEGORIES = [
+  { key: "all", label: "All Services" },
+  { key: "video", label: "YouTube & Video" },
+  { key: "demo", label: "Product Demos" },
+  { key: "linkedin", label: "LinkedIn Authority" },
+  { key: "ads", label: "Paid Ads & Systems" },
+] as const;
+
+const SERVICES_FAQS = [
   {
     q: "How does pricing work?",
     a: "Monthly retainers range between $3,000 to $8,000 per month depending on video cadence, omnichannel repurposing, and whether product launch videos or paid ad amplification are included. All retainers are month-to-month with direct 1-on-1 partner access.",
@@ -164,182 +154,173 @@ const servicesFaqs = [
 ];
 
 export default function ServicesPage() {
-  const serviceSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: services.map((s, idx) => ({
-      "@type": "ListItem",
-      position: idx + 1,
-      item: {
-        "@type": "Service",
-        name: s.title,
-        description: s.pitch,
-        provider: {
-          "@type": "Person",
-          name: "Anuj Mishra",
-          url: "https://anuj4u.in",
-        },
-        offers: {
-          "@type": "Offer",
-          priceCurrency: "USD",
-          priceSpecification: {
-            "@type": "PriceSpecification",
-            price: "3000-8000",
-          },
-        },
-      },
-    })),
-  };
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>("all");
 
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: servicesFaqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.q,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.a,
-      },
-    })),
-  };
+  const filteredServices = useMemo(() => {
+    if (activeCategory === "all") return SERVICES;
+    return SERVICES.filter((s) => s.category === activeCategory);
+  }, [activeCategory]);
 
   return (
-    <div className="py-12 px-5 sm:px-6 lg:px-16 max-w-[1400px] mx-auto relative overflow-hidden">
-      {/* Schema Injection */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+    <div className="py-12 px-5 sm:px-6 lg:px-12 xl:px-16 max-w-[1340px] mx-auto relative overflow-hidden min-h-screen">
+      {/* Signature Ambient Auroras */}
+      <div className="aurora aurora-a w-[580px] h-[580px] -top-32 -left-32 opacity-45 pointer-events-none" />
+      <div className="aurora aurora-b w-[520px] h-[520px] top-1/3 -right-36 opacity-35 pointer-events-none" />
+      <div className="aurora aurora-a w-[480px] h-[480px] bottom-20 left-10 opacity-30 pointer-events-none" />
 
-      <div className="ambient-glow top-12 left-1/4"></div>
-
-      {/* Hero */}
-      <section className="mb-16 md:mb-20 text-center max-w-3xl mx-auto pt-6">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs tracking-wider uppercase mb-5">
-          Turnkey Production &amp; Growth
+      {/* Hero Header */}
+      <section className="mb-14 md:mb-16 text-center max-w-3xl mx-auto pt-6 relative z-10">
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs tracking-wider uppercase mb-5 border border-primary/20 shadow-sm">
+          Visual-First Production
         </span>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-on-surface mb-5 leading-tight tracking-tight">
           Services built to turn views into <span className="gradient-text">compounding revenue.</span>
         </h1>
         <p className="text-base sm:text-lg text-on-surface-variant leading-relaxed max-w-2xl mx-auto mb-8">
-          I produce and manage your YouTube channel, high-retention video content, and omnichannel distribution end-to-end. You record; I handle the editing, packaging, and growth.
+          Turnkey YouTube channel management, high-converting product launch videos, and omnichannel distribution. You record; I handle the editing, packaging, and growth.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <Link href="/pricing" className="btn btn-dark">
-            View Pricing &amp; Retainers ($3K – $8K)
-          </Link>
-          <Link href="/work" className="btn btn-secondary">
-            Explore Portfolio Samples
-          </Link>
-          <Link href="/contact" className="btn btn-primary">
-            Book a Strategy Call
-          </Link>
+
+        {/* Quick-Nav Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-neutral-900/[0.04] backdrop-blur-md rounded-full border border-black/[0.06] max-w-fit mx-auto shadow-sm">
+          {CATEGORIES.map((cat) => {
+            const isActive = activeCategory === cat.key;
+            return (
+              <button
+                key={cat.key}
+                type="button"
+                onClick={() => setActiveCategory(cat.key as CategoryKey)}
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
+                  isActive
+                    ? "bg-primary text-white shadow-md shadow-primary/30 scale-[1.02]"
+                    : "text-neutral-600 hover:text-neutral-900 hover:bg-white/60"
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
         </div>
       </section>
 
-      {/* Services List, Vertical Stacked Cards */}
-      <section className="mb-24 space-y-6">
-        {services.map((service) => (
+      {/* Visual-First Services Grid */}
+      <section className="mb-24 space-y-7 relative z-10">
+        {filteredServices.map((service) => (
           <article
             key={service.id}
             id={service.id}
-            className={`group glass-card rounded-3xl p-7 sm:p-9 md:p-10 flex flex-col md:flex-row gap-8 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ${
+            className={`card-glow spotlight rounded-[32px] p-6 sm:p-8 md:p-9 transition-all duration-300 relative border ${
               service.featured
-                ? "border-2 border-primary shadow-xl bg-gradient-to-br from-primary/[0.03] to-transparent"
-                : "border border-outline-variant/50"
+                ? "border-primary/50 shadow-[0_25px_70px_-20px_rgba(73,54,230,0.38)] bg-gradient-to-br from-primary/[0.04] to-transparent"
+                : "border-white/70 shadow-[0_15px_40px_-15px_rgba(73,54,230,0.18)]"
             }`}
           >
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                  <span className="material-symbols-outlined text-2xl">
-                    {service.icon}
-                  </span>
-                </div>
-                {service.featured && (
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-white bg-primary px-3 py-1 rounded-full shadow-sm">
-                    Most Popular Retainer
-                  </span>
-                )}
-              </div>
-              <h2 className="text-2xl md:text-3xl font-bold text-on-surface mb-2">
-                {service.title}
-              </h2>
-              <p className="text-sm font-semibold text-primary mb-3">
-                {service.price}
-              </p>
-              <p className="text-on-surface-variant text-base leading-relaxed mb-6">
-                {service.pitch}
-              </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 md:gap-9 items-center">
+              {/* Left Column: Rich Visual Asset & Mockup Frame (5 cols) */}
+              <div className="lg:col-span-5 relative">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-neutral-950 border border-black/10 shadow-lg group/media">
+                  <Image
+                    src={service.visualImg}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 480px"
+                    className="object-cover group-hover/media:scale-105 transition-transform duration-700 opacity-90 group-hover/media:opacity-100"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
 
-              <p className="text-xs font-bold text-primary uppercase tracking-wider mb-3">
-                What is included:
-              </p>
-              <ul className="space-y-2 mb-6">
-                {service.deliverables.map((d, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-sm text-on-surface">
-                    <span
-                      className="material-symbols-outlined text-primary text-base shrink-0 mt-0.5"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      check_circle
+                  {/* Top-left chip */}
+                  <div className="absolute top-3 left-3 z-10">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-black/60 backdrop-blur-md text-white border border-white/15 shadow-sm">
+                      {service.visualBadge}
                     </span>
-                    <span>{d}</span>
-                  </li>
-                ))}
-              </ul>
+                  </div>
 
-              <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-outline-variant/30">
-                <p className="text-xs text-on-surface-variant italic border-l-2 border-primary/40 pl-3">
-                  Best for: {service.idealFor}
-                </p>
-                {service.proofLink && (
+                  {/* Bottom Metric Tag */}
+                  {service.visualMetric && (
+                    <div className="absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between">
+                      <span className="px-3 py-1 rounded-xl text-xs font-semibold bg-white/90 text-neutral-900 backdrop-blur-md shadow-md">
+                        {service.visualMetric}
+                      </span>
+                      <span className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center border border-white/30">
+                        <span className="material-symbols-outlined text-[18px]">play_arrow</span>
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Column: Super Punchy, Scannable Text & Actions (7 cols) */}
+              <div className="lg:col-span-7 flex flex-col justify-between">
+                <div>
+                  <div className="flex flex-wrap items-center gap-2.5 mb-2.5">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
+                      {service.badge}
+                    </span>
+                    <span className="text-xs font-bold text-neutral-700 bg-neutral-100 px-3 py-1 rounded-full">
+                      {service.price}
+                    </span>
+                  </div>
+
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-on-surface tracking-tight mb-2">
+                    {service.title}
+                  </h2>
+                  <p className="text-sm sm:text-base text-on-surface-variant leading-relaxed mb-5">
+                    {service.oneLiner}
+                  </p>
+
+                  {/* Visual 4-Pill Deliverable Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5">
+                    {service.deliverables.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/70 dark:bg-neutral-900/60 border border-black/[0.05] shadow-xs text-xs sm:text-sm font-medium text-neutral-800"
+                      >
+                        <span className="material-symbols-outlined text-primary text-[18px] shrink-0">
+                          {item.icon}
+                        </span>
+                        <span className="truncate">{item.text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <p className="text-xs text-on-surface-variant italic mb-6">
+                    <span className="font-semibold text-neutral-700">Best For:</span> {service.idealFor}
+                  </p>
+                </div>
+
+                {/* Action Bar */}
+                <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-black/[0.06]">
+                  <Link
+                    href={`/contact?service=${service.id}`}
+                    className="btn btn-primary text-xs sm:text-sm px-6 py-2.5 rounded-full font-bold shadow-md hover:scale-105 transition-transform"
+                  >
+                    Get Started
+                    <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+                  </Link>
+
                   <Link
                     href={service.proofLink.href}
-                    className="text-xs font-semibold text-primary inline-flex items-center gap-1 hover:underline ml-auto"
+                    className="btn btn-secondary text-xs sm:text-sm px-5 py-2.5 rounded-full font-semibold"
                   >
                     {service.proofLink.text}
-                    <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                    <span className="material-symbols-outlined text-[15px]">open_in_new</span>
                   </Link>
-                )}
+                </div>
               </div>
-            </div>
-
-            <div className="md:w-64 flex md:flex-col items-center md:items-end justify-between md:justify-center gap-4 shrink-0 border-t md:border-t-0 md:border-l border-outline-variant/30 pt-4 md:pt-0 md:pl-8">
-              <div className="text-left md:text-right hidden sm:block">
-                <p className="text-xs text-neutral-500 font-medium">Turnaround</p>
-                <p className="text-sm font-bold text-on-surface">3 to 5 business days</p>
-                <p className="text-xs text-neutral-500 font-medium mt-2">Communication</p>
-                <p className="text-sm font-bold text-on-surface">Direct 1-on-1 Slack/WhatsApp</p>
-              </div>
-
-              <Link
-                href={`/contact?service=${service.id}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-primary text-white font-bold px-7 py-3.5 rounded-full shadow-md hover:scale-105 transition-transform hover:bg-primary/90 text-sm"
-              >
-                Get Started
-                <span className="material-symbols-outlined text-base">arrow_forward</span>
-              </Link>
             </div>
           </article>
         ))}
       </section>
 
       {/* Retainer Pricing Tier Bridge Banner */}
-      <section className="mb-24 rounded-3xl bg-neutral-950 text-white p-8 md:p-12 relative overflow-hidden shadow-2xl">
+      <section className="mb-24 rounded-[32px] bg-neutral-950 text-white p-8 md:p-12 relative overflow-hidden shadow-2xl">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="relative z-10 max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-purple-300 bg-white/10 px-3 py-1 rounded-full mb-3 inline-block">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-purple-300 bg-white/10 px-3.5 py-1 rounded-full mb-3 inline-block border border-white/10">
               Predictable Retainers
             </span>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
               Transparent investment. High-expert partner access.
             </h3>
             <p className="text-sm sm:text-base text-neutral-300 max-w-xl mx-auto leading-relaxed">
@@ -380,18 +361,13 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* How I Work Process */}
+      {/* Visual 4-Step Process */}
       <section className="mb-24">
         <div className="text-center mb-12">
-          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">
-            Predictable Process
-          </p>
+          <p className="eyebrow mb-2">Predictable Workflow</p>
           <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-3">
-            How I <span className="gradient-text">work with you</span>
+            From raw footage to published asset in 7 days.
           </h2>
-          <p className="text-on-surface-variant text-base md:text-lg max-w-2xl mx-auto">
-            From your raw footage to a published, high-retention asset in under 7 business days.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -399,42 +375,42 @@ export default function ServicesPage() {
             {
               step: "01",
               title: "Strategy Kickoff (Day 1)",
-              desc: "A focused intro call to audit your channel, target ICP, review retention drop-offs, and establish benchmarks.",
+              desc: "Channel audit, ICP review, retention drop-off diagnosis, and benchmark alignment.",
               icon: "call",
             },
             {
               step: "02",
               title: "Roadmap & Hooks (Days 2–3)",
-              desc: "I script high-CTR title formulas, hook variations, and create custom thumbnail concepts before editing begins.",
+              desc: "Scripting high-CTR title formulas, hook variations, and custom thumbnail concepts.",
               icon: "description",
             },
             {
               step: "03",
               title: "Pacing & Assembly (Days 4–6)",
-              desc: "Precision editing in DaVinci Resolve: cutting dead air, dynamic zoom physics, sound design, and on-screen graphics.",
+              desc: "DaVinci Resolve precision editing: cutting dead air, zoom physics, and sound design.",
               icon: "movie_filter",
             },
             {
               step: "04",
               title: "Ship & Iterate (Weekly)",
-              desc: "Timestamped review in Frame.io, publishing on schedule, and weekly retention analytics to continually raise watch time.",
+              desc: "Timestamped Frame.io review, scheduled uploads, and weekly retention analytics.",
               icon: "rocket_launch",
             },
           ].map((s) => (
             <div
               key={s.step}
-              className="glass-card rounded-2xl p-6 hover:-translate-y-1 transition-all"
+              className="card-glow spotlight rounded-2xl p-6 border border-white/60 shadow-sm hover:-translate-y-1 transition-all"
             >
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-xs font-black text-primary bg-primary/10 px-2.5 py-1 rounded-full">
+                <span className="text-xs font-black text-primary bg-primary/10 px-2.5 py-1 rounded-full border border-primary/15">
                   {s.step}
                 </span>
                 <span className="material-symbols-outlined text-primary text-xl">
                   {s.icon}
                 </span>
               </div>
-              <h3 className="text-base font-bold text-on-surface mb-2">{s.title}</h3>
-              <p className="text-sm text-on-surface-variant leading-relaxed">
+              <h3 className="text-base font-bold text-on-surface mb-1.5">{s.title}</h3>
+              <p className="text-xs sm:text-sm text-on-surface-variant leading-relaxed">
                 {s.desc}
               </p>
             </div>
@@ -445,26 +421,25 @@ export default function ServicesPage() {
       {/* FAQ */}
       <section className="mb-24 max-w-3xl mx-auto">
         <div className="text-center mb-12">
-          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-3">FAQ</p>
+          <p className="eyebrow mb-2">Clear Answers</p>
           <h2 className="text-3xl md:text-4xl font-bold text-on-surface">Frequently Asked Questions</h2>
-          <p className="text-sm text-on-surface-variant mt-2">Clear answers on deliverables, turnaround times, and communication.</p>
         </div>
-        <FAQAccordion items={servicesFaqs} />
+        <FAQAccordion items={SERVICES_FAQS} />
       </section>
 
-      {/* Final CTA */}
-      <section className="cta-card rounded-3xl p-10 text-center max-w-4xl mx-auto relative overflow-hidden">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-on-surface">Not sure which service fits best?</h2>
-        <p className="text-on-surface-variant text-base mb-8 max-w-xl mx-auto">
+      {/* Final Call to Action */}
+      <section className="card-glow spotlight rounded-3xl p-10 md:p-14 text-center max-w-4xl mx-auto relative overflow-hidden border border-primary/30 shadow-[0_30px_70px_-20px_rgba(73,54,230,0.35)]">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-4 text-on-surface">Not sure which service fits best?</h2>
+        <p className="text-on-surface-variant text-base mb-8 max-w-xl mx-auto leading-relaxed">
           Book a free 20-minute call. I will personally review your YouTube channel, raw footage, and
           growth goals, and recommend the highest-impact starting point.
         </p>
         <Link
           href="/contact"
-          className="inline-flex items-center gap-2 bg-primary text-white font-bold px-8 py-3.5 rounded-full hover:bg-primary-container transition-all shadow-lg hover:scale-105"
+          className="btn btn-glow font-bold px-8 py-3.5 rounded-full shadow-lg inline-flex items-center gap-2"
         >
           Book a strategy call
-          <span className="material-symbols-outlined">event</span>
+          <span className="material-symbols-outlined text-base">event</span>
         </Link>
       </section>
     </div>
