@@ -17,24 +17,6 @@ export const metadata: Metadata = {
   },
 };
 
-const POST_METADATA_MAP: Record<string, { cover: string; category: string; readTime: string }> = {
-  "linkedin-growth-guide-2025": {
-    cover: "/thumbnails/mastering-google-workspace-flows.webp",
-    category: "LinkedIn Authority",
-    readTime: "6 min read",
-  },
-  "youtube-growth-playbook-2025": {
-    cover: "/thumbnails/chatgpt-o1-vs-claude-coding-battle.webp",
-    category: "YouTube Growth",
-    readTime: "8 min read",
-  },
-  "linkedin-growth-blueprint": {
-    cover: "/thumbnails/top-5-gpts-worth-50k.webp",
-    category: "Inbound Funnels",
-    readTime: "5 min read",
-  },
-};
-
 const fmt = (d: string) =>
   new Date(d + "T00:00:00Z").toLocaleDateString("en-US", {
     year: "numeric",
@@ -67,11 +49,9 @@ export default function BlogIndex() {
         {/* Visual-First Blog Card Grid */}
         <ScrollReveal each className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-8 mb-20">
           {POSTS.map((p) => {
-            const meta = POST_METADATA_MAP[p.slug] || {
-              cover: "/thumbnails/chatgpt-connectors-explained.webp",
-              category: "Content Strategy",
-              readTime: "5 min read",
-            };
+            const cover = p.cover || "/blog/claude-ai-video-editing.jpg";
+            const category = p.category || "Growth Playbook";
+            const readTime = p.readTime || "7 min read";
 
             return (
               <article key={p.slug} className="flex flex-col h-full">
@@ -82,7 +62,7 @@ export default function BlogIndex() {
                   {/* Visual Cover Frame */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-950">
                     <Image
-                      src={meta.cover}
+                      src={cover}
                       alt={p.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -92,12 +72,12 @@ export default function BlogIndex() {
 
                     {/* Category pill */}
                     <span className="absolute top-3.5 left-3.5 z-10 px-3 py-1 rounded-full text-[10.5px] font-bold uppercase tracking-wider bg-black/60 backdrop-blur-md text-white border border-white/15 shadow-sm">
-                      {meta.category}
+                      {category}
                     </span>
 
                     {/* Reading time */}
                     <span className="absolute bottom-3 right-3 z-10 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-black/60 backdrop-blur-md text-white/90 border border-white/10">
-                      {meta.readTime}
+                      {readTime}
                     </span>
                   </div>
 

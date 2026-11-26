@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import WorkShell from "@/components/WorkShell";
 import VideoTile from "@/components/VideoTile";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -52,6 +53,38 @@ export default function DemoVideosPage() {
       ctaTitle="Launching a product or major feature?"
       ctaText="Let's build a launch video that turns your software into an irresistible experience."
     >
+      {/* Visual Hero Showcase Card */}
+      <div className="relative aspect-[16/8] sm:aspect-[21/9] rounded-[28px] overflow-hidden mb-16 border border-white/70 shadow-[0_25px_60px_-15px_rgba(73,54,230,0.35)] group bg-neutral-950">
+        <Image
+          src="/brand/saas-demo-showcase.jpg"
+          alt="SaaS Product Demo and Launch Film Production"
+          fill
+          priority
+          sizes="(max-width: 1200px) 100vw, 1200px"
+          className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+        <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 z-10">
+          <div>
+            <span className="px-3 py-1 rounded-full text-[10.5px] font-bold uppercase tracking-wider bg-primary/80 backdrop-blur-md text-white border border-white/20 inline-block mb-2 shadow-sm">
+              Product Hunt &amp; Website Hero Ready
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              Dynamic UI Zoom Physics &amp; Launch Films
+            </h3>
+            <p className="text-xs sm:text-sm text-neutral-300 max-w-lg mt-1">
+              Converting complex software features into cinematic, high-retention product walkthroughs.
+            </p>
+          </div>
+          <Link
+            href="/contact?intent=demo"
+            className="btn btn-primary self-start sm:self-auto px-5 py-2.5 rounded-full text-xs font-semibold whitespace-nowrap shadow-lg shadow-primary/30"
+          >
+            Request a Demo Video
+          </Link>
+        </div>
+      </div>
+
       {/* Featured Video Showcase */}
       <section className="mb-16 md:mb-24">
         <div className="text-center max-w-2xl mx-auto mb-8 md:mb-12">

@@ -26,24 +26,6 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-const POST_METADATA_MAP: Record<string, { cover: string; category: string; readTime: string }> = {
-  "linkedin-growth-guide-2025": {
-    cover: "/thumbnails/mastering-google-workspace-flows.webp",
-    category: "LinkedIn Authority",
-    readTime: "6 min read",
-  },
-  "youtube-growth-playbook-2025": {
-    cover: "/thumbnails/chatgpt-o1-vs-claude-coding-battle.webp",
-    category: "YouTube Growth",
-    readTime: "8 min read",
-  },
-  "linkedin-growth-blueprint": {
-    cover: "/thumbnails/top-5-gpts-worth-50k.webp",
-    category: "Inbound Funnels",
-    readTime: "5 min read",
-  },
-};
-
 const fmt = (d: string) =>
   new Date(d + "T00:00:00Z").toLocaleDateString("en-US", {
     year: "numeric",
@@ -56,10 +38,10 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
   const post = POSTS.find((p) => p.slug === params.slug);
   if (!post) notFound();
 
-  const meta = POST_METADATA_MAP[post.slug] || {
-    cover: "/thumbnails/chatgpt-connectors-explained.webp",
-    category: "Growth Strategy",
-    readTime: "6 min read",
+  const meta = {
+    cover: post.cover || "/blog/claude-ai-video-editing.jpg",
+    category: post.category || "Growth Playbook",
+    readTime: post.readTime || "7 min read",
   };
 
   const otherPosts = POSTS.filter((p) => p.slug !== post.slug).slice(0, 2);
@@ -262,11 +244,9 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {otherPosts.map((p) => {
-                const otherMeta = POST_METADATA_MAP[p.slug] || {
-                  cover: "/thumbnails/chatgpt-connectors-explained.webp",
-                  category: "Strategy",
-                  readTime: "5 min read",
-                };
+                const otherCover = p.cover || "/blog/claude-ai-video-editing.jpg";
+                const otherCategory = p.category || "Strategy";
+                const otherReadTime = p.readTime || "5 min read";
 
                 return (
                   <Link
@@ -276,7 +256,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                   >
                     <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-3 bg-neutral-900">
                       <Image
-                        src={otherMeta.cover}
+                        src={otherCover}
                         alt={p.title}
                         fill
                         sizes="380px"
@@ -284,7 +264,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                       />
                     </div>
                     <span className="text-[10px] font-bold uppercase tracking-wider text-primary block mb-1">
-                      {otherMeta.category} • {otherMeta.readTime}
+                      {otherCategory} • {otherReadTime}
                     </span>
                     <h4 className="font-bold text-sm text-on-surface line-clamp-2 group-hover:text-primary transition-colors">
                       {p.title}

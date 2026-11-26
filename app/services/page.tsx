@@ -50,7 +50,7 @@ const SERVICES: Service[] = [
     title: "Demo & Product Launch Videos",
     badge: "SaaS & Feature Launches",
     oneLiner: "Sleek UI walkthroughs, feature demos, and product launch films engineered to drive user signups and demo bookings.",
-    visualImg: "/thumbnails/top-5-gpts-worth-50k.webp",
+    visualImg: "/brand/saas-demo-showcase.jpg",
     visualBadge: "Product Hunt & Hero Ready",
     visualMetric: "16:9 Web + 9:16 Mobile Cuts",
     deliverables: [
@@ -69,7 +69,7 @@ const SERVICES: Service[] = [
     title: "LinkedIn Authority & Inbound Funnel",
     badge: "B2B Executive Inbound",
     oneLiner: "Repurposing your video insights and founder expertise into high-impact thought leadership that attracts B2B pipeline.",
-    visualImg: "/thumbnails/mastering-google-workspace-flows.webp",
+    visualImg: "/brand/b2b-linkedin-funnel.jpg",
     visualBadge: "+$50K Inbound Pipeline",
     visualMetric: "12–16 Executive Posts & PDFs / mo",
     deliverables: [
@@ -107,7 +107,7 @@ const SERVICES: Service[] = [
     title: "Production System & SOPs",
     badge: "Internal Team Scale",
     oneLiner: "A complete, institutional video production machine for your internal team: templates, hook frameworks, and editor SOPs.",
-    visualImg: "/thumbnails/claude-zapier-automate-everything.webp",
+    visualImg: "/blog/claude-ai-video-editing.jpg",
     visualBadge: "Descript + DaVinci SOPs",
     visualMetric: "Institutional Consistency",
     deliverables: [
