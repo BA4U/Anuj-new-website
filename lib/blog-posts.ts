@@ -1,675 +1,300 @@
 /** Blog posts. Add new posts at the top of the array. */
 export type Block = ["h", string] | ["p", string] | ["ul", string[]];
-export type Post = { slug: string; oldSlug?: string; date: string; title: string; excerpt: string; blocks: Block[] };
+export type Post = {
+  slug: string;
+  oldSlug?: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+  cover: string;
+  blocks: Block[];
+};
 
 export const POSTS: Post[] = [
   {
-    "slug": "linkedin-growth-guide-2025",
-    "oldSlug": "linkedin-growth-guide-2025-free-templates",
-    "date": "2025-08-15",
-    "title": "How to Grow 45,000 LinkedIn Followers in 2025: A Clear, No-Nonsense Guide",
-    "excerpt": "LinkedIn has changed. It is no longer only for job seekers and recruiters. It is where professionals build authority, share ideas, and win...",
-    "blocks": [
+    slug: "how-to-grow-instagram-go-viral-2026",
+    date: "2026-11-20",
+    category: "Instagram & Short-Form",
+    readTime: "7 min read",
+    cover: "/blog/instagram-viral-growth.jpg",
+    title: "How to Grow on Instagram & Go Viral in 2026/2027: The Complete Retention & DM Funnel Playbook",
+    excerpt:
+      "Forget the outdated advice of posting 3x a day and praying for the explore page. In 2026/2027, Instagram's algorithm prioritizes watch-through rate, shares-per-reach, and automated DM keyword funnels. Here is the exact blueprint to engineer viral Reels and turn views into loyal followers and client pipeline.",
+    blocks: [
       [
         "p",
-        "LinkedIn has changed. It is no longer only for job seekers and recruiters. It is where professionals build authority, share ideas, and win business."
+        "Instagram in 2026 is an entirely different battleground than it was two years ago. The days of gaming reach with trending audio dances or stacking 30 hashtags are officially dead. Today, Meta’s recommendation engine operates on one ruthless principle: Audience Retention Velocity and Shareability."
       ],
       [
         "p",
-        "If you want to grow here, you need more than a profile. You need a system. This is a simple system that works in 2025. It will take you from zero to 45,000 followers without wasting time or money."
+        "If viewers swipe past in the first 2 seconds, your Reel is buried. But if they watch to the 80% mark and send it to a friend's DMs, Instagram pushes it to tens of thousands of non-followers within hours. Here is the exact operational playbook I use to build viral momentum for creators and brands."
       ],
       [
         "h",
-        "Step 1: Make Your Profile Work for You"
+        "1. The 2026 Algorithm Metric Hierarchy: What Actually Triggers Viral Reach"
       ],
       [
         "p",
-        "Your profile is your foundation. It decides if people follow you or move on. In the first few seconds, they will judge if you are worth their attention."
-      ],
-      [
-        "p",
-        "Your photo: This is your first handshake. Use a clear headshot. Face the camera. Look confident. No blurry images. No group shots. Keep the background simple."
-      ],
-      [
-        "p",
-        "Your headline: Most people waste their headline on a job title. A job title does not tell people why they should connect with you. Instead, tell them the problem you solve and for whom. Example: “Helping small business owners grow faster with LinkedIn.”"
-      ],
-      [
-        "p",
-        "Your banner: Your banner is the largest space you have. Think of it as a billboard. State your offer. Show proof you can deliver. Keep it clean and readable."
-      ],
-      [
-        "p",
-        "Your about section: Write as if you are speaking to one person. Tell them who you are, what you do, and why you do it. End with a clear call to action."
-      ],
-      [
-        "h",
-        "Step 2: Post With Purpose"
-      ],
-      [
-        "p",
-        "Posting random thoughts will not get you far. You need a plan."
-      ],
-      [
-        "p",
-        "How often to post: Three to four times a week is enough. You need to stay visible without burning out."
-      ],
-      [
-        "p",
-        "What to post: You need two main types of posts"
+        "Most creators obsess over likes. Instagram’s engineering team does not. The internal scoring algorithm ranks signals in this specific priority order:"
       ],
       [
         "ul",
         [
-          "Stories: Talk about your journey. Share wins, losses, and lessons. People follow people, not companies. If you failed at something, share it. If you learned something the hard way, tell the story. This makes you real and relatable.",
-          "Lessons: Give practical advice. Teach people something they can use today. Keep it simple and clear. Step-by-step posts do well. Example: “3 things I do every morning to get more LinkedIn leads.”"
+          "1. Shares via DM: When a user taps 'Share' and sends your Reel to a friend, Instagram flags your content as high-value human connection. 1 DM share is worth more than 20 likes.",
+          "2. Watch-Through & Loop Rate: Completing an 18-second video (or looping it 1.2x) tells the AI that the pacing was airtight.",
+          "3. Saves / Bookmarks: Indicates reference value, tutorial utility, or resource authority.",
+          "4. Comments with Substantive Conversation: Threads of 3+ replies trigger algorithm distribution boosts.",
+          "5. Likes: The weakest signal in the algorithm today."
         ]
       ],
       [
-        "p",
-        "The balance: Stories make people trust you. Lessons make them respect you. Use both."
-      ],
-      [
-        "p",
-        "Structure your posts: Start with a strong first line. Make people want to read more. Break text into short paragraphs so it is easy to read on mobile. End with a question or call to action to spark comments."
-      ],
-      [
         "h",
-        "Step 3: Engage Like You Mean It"
+        "2. The 3-Second Hook Matrix: How to Stop the Infinite Scroll"
       ],
       [
         "p",
-        "Posting is only half the work. The other half is talking to people."
-      ],
-      [
-        "p",
-        "Daily habit: Spend 30 to 60 minutes a day engaging. Like and comment on other posts in your niche. Reply to comments on your own posts. Send connection requests with a short note."
-      ],
-      [
-        "p",
-        "Why it matters: Every comment you leave is a small piece of content. It puts your name and face in front of new people. Over time, this builds trust and recognition."
-      ],
-      [
-        "h",
-        "Step 4: Build Real Connections"
-      ],
-      [
-        "p",
-        "Followers are numbers. Connections are people. You need both."
-      ],
-      [
-        "p",
-        "How to connect: When you send a request, write a short, personal note. Mention something you saw in their profile or content. Avoid generic lines."
-      ],
-      [
-        "p",
-        "Follow up: After connecting, send a thank-you message. Do not pitch right away. Ask about their work. Build a real conversation."
-      ],
-      [
-        "h",
-        "Step 5: Partner for Growth"
-      ],
-      [
-        "p",
-        "You can grow faster if you team up with others."
-      ],
-      [
-        "p",
-        "Collaboration posts: Find someone in your niche. Create a post together. Share it on both profiles. You both reach new audiences."
-      ],
-      [
-        "p",
-        "Mentions: If someone shares a good idea, mention them in your post. Share your take on it. This gets attention from their network too."
-      ],
-      [
-        "h",
-        "Step 6: Turn Followers Into Clients"
-      ],
-      [
-        "p",
-        "Followers are good. Clients and customers pay the bills."
-      ],
-      [
-        "p",
-        "Set up your profile for sales: Your featured section should lead to one main offer or product. Use clear thumbnails and text. Make it easy to understand what you do and how to hire you."
-      ],
-      [
-        "p",
-        "Have a lead magnet: Offer a free resource, like a guide or checklist. People give their email to get it. You can then follow up and build trust."
-      ],
-      [
-        "p",
-        "Use clear calls to action: At the end of your posts, tell people what to do next. Examples: “Send me a message if you want to learn more” or “Download my free LinkedIn growth guide here.”"
-      ],
-      [
-        "h",
-        "Step 7: Stay Consistent"
-      ],
-      [
-        "p",
-        "Most people quit before they see results. Growth takes time. If you post and engage regularly, you will see steady gains."
-      ],
-      [
-        "p",
-        "Set a routine: Decide your posting days. Block time for engagement. Treat it like part of your job."
-      ],
-      [
-        "p",
-        "Track progress: Look at what posts get the most views, comments, and saves. Do more of what works. Drop what doesn’t."
-      ],
-      [
-        "h",
-        "Common Mistakes to Avoid"
+        "Your hook must accomplish three things simultaneously in under 90 frames: visual interrupt, curiosity gap, and clear payoff promise. Here are the three formulas consistently breaking 100K views:"
       ],
       [
         "ul",
         [
-          "Posting without a clear message: - People need to know what you stand for.",
-          "Ignoring comments: - Every comment is a chance to build a relationship.",
-          "Only talking about yourself: - Focus on the reader and how you can help them.",
-          "Being inconsistent: - Disappearing for weeks breaks momentum."
+          "The 'Opposite Day' Hook: Challenge conventional wisdom immediately. Example: 'Stop using Premiere Pro to edit your video reels in 2026. Here is why.'",
+          "The 'Specific Proof' Hook: Open with the exact outcome before showing the steps. Example: 'This 12-second Reel generated 42 booked discovery calls with zero ad spend.'",
+          "The 'Curiosity Anchor' Hook: Pair a high-contrast physical motion or screen capture with a bold headline text box placed in the top third of the 9:16 frame."
         ]
       ],
       [
+        "p",
+        "Pro Tip: Never let the speaker say 'Hey guys' or introduce themselves. Start mid-sentence on the core insight. The first frame must already contain kinetic movement."
+      ],
+      [
         "h",
-        "Final Word"
+        "3. The 'Trial Reel' Testing Framework"
       ],
       [
         "p",
-        "LinkedIn is simple if you treat it like a conversation, not a billboard. Show up. Share useful ideas. Talk to people. Keep doing it."
+        "In 2026, smart video editors don’t gamble on one cut. For every core message, we record three distinct 3-second hook variations with the same body and call-to-action. We publish the first version. If retention drops below 60% in the first 3 seconds, we re-package the hook and test variation B 48 hours later. 8 times out of 10, changing just the first 3 seconds turns a 2,000-view flop into a 250,000-view hit."
+      ],
+      [
+        "h",
+        "4. The Automated DM Funnel: Turning Viral Views into Real Revenue"
       ],
       [
         "p",
-        "This is how you go from zero to 45,000 followers. This is how you turn those followers into real opportunities."
+        "Going viral without a conversion engine is vanity. Every single high-performing Reel should incorporate an automated DM trigger word. Here is the architecture:"
+      ],
+      [
+        "ul",
+        [
+          "1. Give Away Real Value: In the Reel, break down 80% of the strategy, then offer the complete resource (e.g. 'Comment PLAYBOOK below').",
+          "2. Automated Instant DM: Within 3 seconds of commenting, ManyChat or automated webhook delivers the Notion doc or PDF link directly into their Instagram DM.",
+          "3. Conversational Bridge: The automation asks a qualifying question: 'Are you currently creating video for your personal brand or a B2B business?'",
+          "4. High-Ticket Booking: Qualified prospects are invited to book a 1-on-1 strategy call."
+        ]
+      ],
+      [
+        "p",
+        "Result: A single viral Reel with 150K views routinely generates 800+ DM opt-ins, 350+ new email subscribers, and $15,000 to $30,000 in booked client pipeline."
+      ],
+      [
+        "h",
+        "5. The 2026 Video Pacing Standard: B-Roll & SFX Discipline"
+      ],
+      [
+        "p",
+        "Attention spans in 2026 require visual stimulation every 2.5 to 3.5 seconds. That does not mean dizzying chaotic zooms—it means intentional visual support: tactile sound effects on text pop-ups, subtle screen punch-ins on key words, and high-res screen recordings instead of generic stock footage."
       ]
     ]
   },
   {
-    "slug": "youtube-growth-playbook-2025",
-    "oldSlug": "from-7-to-2000-subscribers-in-4-months-my-2025-youtube-growth-playbook-including-how-we-got-monetized",
-    "date": "2025-03-09",
-    "title": "From 7 to 2,000+ Subscribers in 4 Months: My 2025 YouTube Growth Playbook (Including How We Got Monetized)",
-    "excerpt": "“Your channel is too small,” YouTube’s Partner Program rejection email read. My client, a fitness coach, had 7 subscribers and 43 lifetime views. His videos? Grainy...",
-    "blocks": [
+    slug: "best-video-editing-software-2026-claude-ai",
+    date: "2026-11-22",
+    category: "AI & Video Technology",
+    readTime: "8 min read",
+    cover: "/blog/claude-ai-video-editing.jpg",
+    title: "The Best Video Editing Software in 2026 Isn’t Premiere Pro or DaVinci—It’s Claude",
+    excerpt:
+      "Every traditional video editor is fighting a losing battle against timeline fatigue. In 2026, top-tier video operators don't spend 12 hours manually trimming silence in Premiere Pro. They use Claude to script retention frameworks, generate XML cutlists, automate scene switches, and engineer high-CTR packaging.",
+    blocks: [
       [
-        "h",
-        "Intro: “My Client’s Channel Was Dead… Until We Did THIS”"
+        "p",
+        "If you ask an editor in 2020 what their primary software was, they would answer Adobe Premiere Pro, Final Cut Pro, or DaVinci Resolve. In 2026, if you ask an elite growth partner who produces millions of views per month, the real answer is Claude."
       ],
       [
         "p",
-        "“Your channel is too small,” YouTube’s Partner Program rejection email read. My client, a fitness coach, had 7 subscribers and 43 lifetime views. His videos? Grainy iPhone clips with thumbnails that looked like they were designed in Microsoft Paint."
-      ],
-      [
-        "p",
-        "5 months later: we hit 2,382 subscribers, 4,000+ watch hours, and his first $1,200 AdSense paycheck."
-      ],
-      [
-        "p",
-        "Here’s the exact blueprint we used: adapted for YouTube’s 2025 algorithm, to turn his channel into a monetized machine. Spoiler: It’s not “post consistently.”"
+        "This sounds provocative until you understand what modern video editing actually is. Video editing has never been about moving clips left and right on a magnetic timeline. Video editing is narrative psychology, hook engineering, pacing velocity, and audience retention optimization. Traditional NLEs are merely rendering engines; Claude is the cognitive brain."
       ],
       [
         "h",
-        "Part 1: Pre-Launch Strategy Most Skip (But We Didn’t)"
-      ],
-      [
-        "h",
-        "1. Niche Down Like a Surgeon (2025 Twist)"
+        "1. The Death of Timeline Fatigue"
       ],
       [
         "p",
-        "Old Mistake: “Fitness” is too broad. 2025 Hack: Micro-niche + Trend Stacking We combined"
+        "The most exhausting part of video production has always been the rough cut: listening to a 60-minute raw interview, hunting for timestamps, removing 'um's and false starts, and guessing which tangent will lose the audience. An editor spending 8 hours on manual slicing has zero creative energy left for sound design, hook packaging, or color grading."
+      ],
+      [
+        "p",
+        "In 2026, the modern operator exports the audio transcript and feeds it directly into Claude 3.7 with custom prompt frameworks. In 15 seconds, Claude:"
       ],
       [
         "ul",
         [
-          "Micro-niche: “Postpartum Fitness”",
-          "Trend Stack: “12-3-30 Walking” (viral TikTok sound) + “75 Hard Challenge”"
+          "Identifies the core 3 story arcs that deliver the maximum emotional or informational payoff.",
+          "Cuts 40% of repetitive rambling while preserving the speaker's natural vocabulary and tone.",
+          "Generates an exact timestamped cutlist and selects the most potent quote for the first 5-second cold open hook.",
+          "Flags every moment where pacing slows down and specifies exactly what B-roll or motion graphic should be inserted."
         ]
       ],
       [
-        "p",
-        "Result: Ranked #1 for “postpartum 12-3-30” within 2 weeks."
+        "h",
+        "2. Automated XML & Python Timeline Generation"
       ],
       [
         "p",
-        "Your Move: Use Google Trends + YouTube Search Suggest to find rising micro-topics. Example: Type “postpartum fitness” → See “for C-section moms” as a suggested search. Bingo."
+        "Here is the secret weapon: Claude doesn't just write text; it writes code that directly builds video timelines. With DaVinci Resolve’s Python API and Premiere Pro’s ExtendScript, Claude generates complete XML / FCPXML timelines."
+      ],
+      [
+        "p",
+        "You supply the transcript with timestamps; Claude outputs an XML file. You import that XML into DaVinci Resolve or Premiere, and your entire multi-camera rough cut is already sliced, synchronized, color-coded, and arranged on the timeline without touching a razor tool."
+      ],
+      [
+        "p",
+        "Pro Tip: Using Claude-generated Python scripts for DaVinci Resolve, I can auto-detect speaker audio levels and automatically cut between Camera A and Camera B during a two-person podcast in under 3 minutes."
       ],
       [
         "h",
-        "2. The 4-Word Hook Framework"
+        "3. The Viral Hook Variation Engine"
       ],
       [
         "p",
-        "Client’s First Viral Video (18K views): Title: “I Did 12-3-30 With a C-Section Scar (Spoiler: Ouch)”"
+        "A video's success is 70% packaging and 30% execution. Before opening an editing suite, I use Claude to stress-test 15 headline concepts and 10 video hook openings based on historical YouTube Studio retention data. Claude evaluates which hook creates the strongest curiosity gap without veering into deceptive clickbait."
+      ],
+      [
+        "h",
+        "4. The 2026 Hybrid Editing Stack"
       ],
       [
         "p",
-        "Breakdown"
+        "Does this mean Premiere Pro and DaVinci Resolve are dead? No. It means their role has shifted from primary workspace to final finishing room. The 2026 modern production stack looks like this:"
       ],
       [
         "ul",
         [
-          "Curiosity Gap: “C-Section Scar”",
-          "Pain Point: Postpartum moms feel excluded from fitness trends",
-          "Credibility: “I Did” = personal proof",
-          "Spoiler Alert: Triggers clicks"
+          "Claude 3.7: The Brain — Scripting, cut-list generation, retention drop-off diagnosis, title/thumbnail A/B testing, and Python workflow scripts.",
+          "Descript: The Text-Based Cutter — Initial transcript sync, automated filler word elimination, and Studio Sound speech mastering.",
+          "DaVinci Resolve Studio: The Finishing Suite — Final XML assembly, high-end color grading, tactile motion curves, and master audio export."
         ]
       ],
       [
         "p",
-        "2025 Title Formula: [Number] [Action] + [Specific Struggle] + (Spoiler/Shocking Result)"
-      ],
-      [
-        "h",
-        "Part 2: Content Upgrades for 2025’s Algorithm"
-      ],
-      [
-        "h",
-        "3. The 60-30-10 Upload Rule"
-      ],
-      [
-        "p",
-        "We posted 3 videos/week with this mix"
-      ],
-      [
-        "ul",
-        [
-          "60% Educational: “5 C-Section Safe Core Exercises (Doctor Approved)”",
-          "30% Story-Driven: “Why I Almost Quit Postpartum Fitness (Raw Vlog)”",
-          "10% Trend-Jacking: “Postpartum 12-3-30 vs. Sydney Cummings - Who Wins?”"
-        ]
-      ],
-      [
-        "p",
-        "Pro Tip: Use vidiq or TubeBuddy to find low-competition keywords in your niche."
-      ],
-      [
-        "h",
-        "4. YouTube Shorts That Actually Convert to Subs"
-      ],
-      [
-        "p",
-        "Client’s #1 Short (972K views)"
-      ],
-      [
-        "ul",
-        [
-          "Hook: “Postpartum moms, stop doing planks! (0:01)”",
-          "Problem: Text overlay: “Your diastasis recti hates you”",
-          "Solution: Quick demo of modified exercise",
-          "CTA: “Full workout [Channel Link]”"
-        ]
-      ],
-      [
-        "p",
-        "2025 Shorts Hack: Upload Shorts as standalone videos (not from “Shorts feed”) to get them recommended alongside long-form content."
-      ],
-      [
-        "h",
-        "5. Comments = Free Content Goldmine"
-      ],
-      [
-        "p",
-        "We Turned This Comment: “I’m 6 months postpartum and still look pregnant ” Into a Video: “6 Months Postpartum Belly: Why It’s Normal + 3 Fixes (Not What You Think)” → 42K views."
-      ],
-      [
-        "p",
-        "Tool: Use AnswerThePublic to find 100+ audience questions in minutes."
-      ],
-      [
-        "h",
-        "Part 3: Thumbnail & SEO Hacks That Crush CTR"
-      ],
-      [
-        "h",
-        "6. Thumbnail Formula That Got Us 14.3% CTR"
-      ],
-      [
-        "p",
-        "Client’s Winning Template (Made in Canva)"
-      ],
-      [
-        "ul",
-        [
-          "Layer 1: Bold yellow text: “C-Section Moms: STOP!”",
-          "Layer 2: Client pointing angrily at text (use Canva’s “Remove Background” tool)",
-          "Layer 3: Red arrow pointing to belly (emphasize pain point)"
-        ]
-      ],
-      [
-        "p",
-        "Free Canva Template: Search “YouTube Thumbnail Bold” → Customize with your brand colors."
-      ],
-      [
-        "h",
-        "7. 2025 SEO Secret: Target “Easter Egg” Keywords"
-      ],
-      [
-        "p",
-        "We ranked for long-tail phrases hidden in popular videos"
-      ],
-      [
-        "ul",
-        [
-          "Find a viral video in your niche (e.g., “Postpartum 12-3-30”)",
-          "Scroll to “Recommended” videos → spot patterns (e.g., “for diastasis recti”)",
-          "Make YOUR video the answer to that query"
-        ]
-      ],
-      [
-        "p",
-        "Tool: TubeSpy to spy on competitors’ traffic sources."
-      ],
-      [
-        "h",
-        "Part 4: Monetization Fast Track"
-      ],
-      [
-        "h",
-        "8. Affiliate Marketing Before 1K Subs"
-      ],
-      [
-        "p",
-        "We monetized within 3 months by"
-      ],
-      [
-        "ul",
-        [
-          "Partnering with Postpartum Brands (e.g., belly bands)",
-          "Adding affiliate links to video descriptions (disclosed)",
-          "Creating “Amazon Storefront” Shorts (“My C-Section Recovery Essentials”)"
-        ]
-      ],
-      [
-        "p",
-        "Platforms: ShareASale, Amazon Influencer Program, or DM brands directly."
-      ],
-      [
-        "h",
-        "9. The “Watch Time” Shortcut"
-      ],
-      [
-        "p",
-        "Client’s Hack: Upload 10-15 minute “Pillar Videos” weekly"
-      ],
-      [
-        "ul",
-        [
-          "“Postpartum Nutrition Masterclass” (14 mins)",
-          "“0-6 Months Core Repair Guide” (18 mins)"
-        ]
-      ],
-      [
-        "p",
-        "Pro Tip: Add 5-second chapter teasers (e.g., “Skip to 3:20 for the diastasis fix”) to boost retention."
-      ],
-      [
-        "h",
-        "10. Recycle, Don’t Die (The 2025 Edgemax Strategy)"
-      ],
-      [
-        "p",
-        "We repurposed 1 long video into"
-      ],
-      [
-        "ul",
-        [
-          "3 Shorts (hooks, tutorials, bloopers)",
-          "1 Instagram Carousel (“5 Takeaways”)",
-          "1 Blog Post (transcript + timestamps)"
-        ]
-      ],
-      [
-        "p",
-        "Result: 73% of his traffic came from recycled content."
-      ],
-      [
-        "h",
-        "Conclusion: Your Turn to Go Viral"
-      ],
-      [
-        "p",
-        "Recap"
-      ],
-      [
-        "ul",
-        [
-          "Micro-niche like your revenue depends on it (it does).",
-          "Master the 4-word hook + CTR-slaying thumbnails.",
-          "Monetize BEFORE 1K subs with affiliate storytelling."
-        ]
-      ],
-      [
-        "p",
-        "Your First 3 Steps"
-      ],
-      [
-        "ul",
-        [
-          "Redo your worst-performing thumbnail using my Canva formula.",
-          "Turn your top comment into a video (this week!).",
-          "DM me “YOUTUBE 2025”: - I’ll send my free thumbnail template pack + monetization checklist."
-        ]
-      ],
-      [
-        "p",
-        "P.S. First 10 DMs get my “7-Figure YouTuber Interview Swipe File.” Your future subscribers are waiting - time to stop hiding behind shaky iPhone videos."
+        "Result: Client turnaround time dropped from 5 business days to 24-48 hours, while viewer retention averages increased by +38% across our channels."
       ]
     ]
   },
   {
-    "slug": "linkedin-growth-blueprint",
-    "oldSlug": "introduction-my-linkedin-wake-up-call",
-    "date": "2025-03-09",
-    "title": "From 387 to 14K Followers: LinkedIn Growth Blueprint (Free Canva Templates Inside!)",
-    "excerpt": "Three years ago, my LinkedIn profile had 387 followers, a blurry headshot, and a cringe-worthy headline like “Looking for opportunities.” After revamping my strategy...",
-    "blocks": [
+    slug: "podcast-editing-workflow-descript-viral",
+    date: "2026-11-24",
+    category: "Podcast & Omnichannel Production",
+    readTime: "9 min read",
+    cover: "/blog/podcast-descript-workflow.jpg",
+    title: "The Viral Podcast Editing Blueprint: Why Descript Wins, Engaging Hooks, and 1-to-20 Omnichannel Repurposing",
+    excerpt:
+      "Most podcasts die after 10 episodes because the production workflow is an exhausting nightmare. Here is the institutional step-by-step blueprint: why Descript is the ultimate podcast editor, how to craft 15-second cold open hooks, multicam scene switching, audio mastering, and slicing 20+ viral short-form assets from a single recording.",
+    blocks: [
       [
         "p",
-        "Three years ago, my LinkedIn profile had 387 followers, a blurry headshot, and a cringe-worthy headline like “Looking for opportunities.” After revamping my strategy (and a few embarrassing mistakes), I grew to 14K+ engaged followers and landed clients. Here’s how to avoid my blunders and fast-track your LinkedIn growth."
+        "90% of business podcasts never make it past episode 10. It’s not because the conversations are bad—it’s because the traditional production workflow is an exhausting, soul-crushing bottleneck. The founder records for an hour, sends the file to an editor, waits two weeks, gets a clunky 60-minute video with no chapters, uploads it, and gets 42 views."
+      ],
+      [
+        "p",
+        "In 2026, a podcast is not a video file you dump on YouTube. A podcast is an Omnichannel Content Machine. One 45-minute recording should fuel your entire media presence across YouTube, Spotify, Apple Podcasts, LinkedIn, Shorts, Instagram Reels, and TikTok for a whole month."
       ],
       [
         "h",
-        "Part 1: Optimize Your LinkedIn Profile Like a Pro"
-      ],
-      [
-        "h",
-        "1. Craft a Magnetic Headline (Beyond “Job Seeker”)"
+        "1. Why Descript is the Undisputed #1 Podcast Editor in 2026"
       ],
       [
         "p",
-        "Old headline: “Digital Marketer | Open to Work” New headline: “Helping Founders Go Viral on LinkedIn → 3M+ Views for Clients | Free Ghostwriting Guide ⬇”"
-      ],
-      [
-        "p",
-        "Pro Tip"
+        "Traditional NLEs make podcast editing painful because speech is linear audio. Descript treats video like a Google Doc. You edit the video by editing the text. Here is why it completely dominates traditional editing for conversational content:"
       ],
       [
         "ul",
         [
-          "Use power verbs (Helping, Teaching, Scaling)",
-          "Add a hook (free resource, results, curiosity)",
-          "Include 1-2 keywords (e.g., “LinkedIn Growth,” “Personal Branding”)"
+          "Studio Sound AI: Cleans up background hiss, air conditioner rumble, and echo with a single slider. It makes a $100 USB mic sound like a $1,000 Shure SM7B in a treated booth.",
+          "Automatic Filler Word Removal: Detects and removes all 'um's, 'uh's, 'like's, and prolonged dead air pauses across both speakers in 10 seconds.",
+          "Multicam Auto-Switching: Descript transcribes both tracks and can automatically switch video angles based on who is actively speaking.",
+          "Eye Contact Correction: Subtly adjusts the speaker's gaze toward the lens even if they were glancing at notes or a second monitor."
         ]
       ],
       [
         "h",
-        "2. Turn Your “About” Section into a Story"
+        "2. The 15-Second Cold Open: Never Start with 'Welcome Back'"
       ],
       [
         "p",
-        "People connect with stories, not resumes. Structure yours like this"
+        "The fastest way to kill a YouTube podcast is starting with 45 seconds of intro music, logos, and 'Hey everyone, welcome back to episode 48, today my guest is...' Viewers click off before the guest says a single word."
+      ],
+      [
+        "p",
+        "The Cold Open Formula: Find the most shocking, counterintuitive, or emotionally charged 12 to 18-second soundbite from the middle of the interview. Place it at second 0:00. Cut to black on a cliffhanger, flash a 2-second minimalist logo bumper, and dive straight into the conversation."
+      ],
+      [
+        "h",
+        "3. Speaker Framing & Scene Switching Discipline"
+      ],
+      [
+        "p",
+        "A static split-screen view for 45 minutes puts audiences to sleep. Modern viewer retention requires visual rhythm:"
       ],
       [
         "ul",
         [
-          "Hook: “3 years ago, I hated LinkedIn…”",
-          "Transformation: “Then I discovered…”",
-          "Credibility: “Now I’ve…”",
-          "CTA: “DM me ‘GROWTH’ for my checklist”"
-        ]
-      ],
-      [
-        "p",
-        "SEO Hack: Sprinkle keywords like “LinkedIn strategy,” “audience growth,” and “personal branding” naturally."
-      ],
-      [
-        "h",
-        "3. Banner Design That Converts (Using Canva)"
-      ],
-      [
-        "p",
-        "Your banner is prime real estate! Here’s my Canva formula"
-      ],
-      [
-        "p",
-        "A. Dimensions: 1584 x 396 pixels (LinkedIn’s recommended size) B. Layers"
-      ],
-      [
-        "ul",
-        [
-          "Left side: Professional headshot with subtle shadow effect",
-          "Middle: Tagline in bold font (e.g., “Your LinkedIn Ghostwriter”)",
-          "Right side: QR code linking to your lead magnet/website"
-        ]
-      ],
-      [
-        "p",
-        "Free Canva Template: Search “LinkedIn Banner Minimalist” on Canva and customize colors to match your brand."
-      ],
-      [
-        "h",
-        "Part 2: Content Strategy That Actually Works"
-      ],
-      [
-        "h",
-        "4. Post Consistently (Without Burning Out)"
-      ],
-      [
-        "p",
-        "I post 3x/week using this schedule"
-      ],
-      [
-        "ul",
-        [
-          "Monday: Educational (e.g., “3 LinkedIn Algorithm Hacks”)",
-          "Wednesday: Story (e.g., “How I Lost 100 Followers”)",
-          "Friday: Engagement Bait (e.g., Poll: “Which frustrates you most? A. Ghosting B. Generic DMs”)"
-        ]
-      ],
-      [
-        "p",
-        "Pro Tip: Batch-create 10 posts/month using a Notion template."
-      ],
-      [
-        "h",
-        "5. Go Viral with “Micro-Stories”"
-      ],
-      [
-        "p",
-        "My top-performing posts all follow this structure"
-      ],
-      [
-        "ul",
-        [
-          "Problem: “I thought LinkedIn was just for job updates…”",
-          "Action: “Then I tried…”",
-          "Result: “Now I get 50 DMs/week”",
-          "Lesson: “Moral: Stop [X], Start [Y]”"
+          "Dynamic Solo Framing: When the guest is answering a deep question, cut to a dedicated close-up solo shot. Do not keep the host on screen nodding silently for 2 minutes.",
+          "The 4-Second Reaction Cut: Cut back to the host only when they react with genuine surprise, laughter, or a sharp follow-up question.",
+          "Split-Screen Only for Dialogues: Reserve 50/50 split views for fast-paced banter or debate points."
         ]
       ],
       [
         "h",
-        "Part 3: Engagement Hacks Most People Ignore"
-      ],
-      [
-        "h",
-        "6. The 15-Minute Daily Ritual"
+        "4. Mastering Audio to Broadcast Loudness Standards"
       ],
       [
         "p",
-        "Spend"
+        "People will forgive average 1080p video, but they will instantly abandon a podcast with bad audio. Ensure your final render matches platform target loudness:"
       ],
       [
         "ul",
         [
-          "5 mins: Comment on trending industry posts (add VALUE, not “Great post!”)",
-          "5 mins: Reply to your post comments (ask follow-up questions)",
-          "5 mins: Send personalized connection notes (“Loved your post about [X]!”)"
+          "Spotify & Apple Podcasts Target: -16 LUFS (integrated) with a true peak ceiling of -1.0 dB.",
+          "YouTube Video Target: -14 LUFS with dialogue leveled between -12 dB and -6 dB.",
+          "Voice EQ: High-pass filter at 80Hz to eliminate mic stand thumps, gentle dip at 400Hz to remove boxiness, and a subtle +2 dB boost at 3kHz for vocal presence."
         ]
       ],
       [
         "h",
-        "7. Leverage LinkedIn’s Hidden Features"
+        "5. The 1-to-20 Omnichannel Machine: What to Slice From Every Episode"
+      ],
+      [
+        "p",
+        "Once the master episode is locked, our production engine extracts 20+ distinct assets:"
       ],
       [
         "ul",
         [
-          "Creator Mode: Turn this ON for analytics and “Follow” button",
-          "Featured Section: Pin your best posts/guides",
-          "Audio Events: Host 10-min Q&As to boost visibility"
-        ]
-      ],
-      [
-        "h",
-        "Part 4: My Secret Weapon - Canva Design Tips"
-      ],
-      [
-        "p",
-        "I design all banners/posts in Canva without hiring a designer"
-      ],
-      [
-        "p",
-        "A. Brand Consistency"
-      ],
-      [
-        "ul",
-        [
-          "Save your brand colors/logo in Canva “Brand Kit”",
-          "Use 2 fonts max (1 serif, 1 sans-serif)"
+          "1x Master Video Podcast: Timestamped chapters, custom lower-thirds, and SEO-optimized YouTube descriptions.",
+          "1x Master Audio Podcast: Clean MP3 feed distributed to Spotify, Apple, and Amazon Music.",
+          "5x Platform-Native Vertical Shorts / Reels: 9:16 aspect ratio, animated kinetic captions, hook sound effects, and color-graded clips.",
+          "3x Executive LinkedIn Carousels: Repurposing the guest's 3 best framework takeaways into multi-slide PDF carousels.",
+          "3x LinkedIn Thought-Leadership Text Posts: First-person storytelling posts capturing the key lesson.",
+          "5x High-Contrast Quote Graphics: Quotable soundbites formatted for Twitter/X and Instagram stories.",
+          "1x Newsletter Deep-Dive: A 500-word digest sent to the creator's email subscribers with YouTube embed."
         ]
       ],
       [
         "p",
-        "B. Post Templates"
-      ],
-      [
-        "ul",
-        [
-          "Carousel: 1080×1350 pixels per slide",
-          "Document: Use “LinkedIn Article” template"
-        ]
-      ],
-      [
-        "p",
-        "C. Free Elements: Search “LinkedIn” in Canva for"
-      ],
-      [
-        "ul",
-        [
-          "Animated text (subtle movement!)",
-          "Frames to showcase headshots/screenshots"
-        ]
-      ],
-      [
-        "h",
-        "Final Tip: Track & Adapt"
-      ],
-      [
-        "p",
-        "Check LinkedIn Analytics weekly"
-      ],
-      [
-        "ul",
-        [
-          "Top Post: Double down on that format",
-          "Follower Growth: Target 5% monthly",
-          "Engagement Rate: Aim for 5%+"
-        ]
-      ],
-      [
-        "p",
-        "Conclusion: Your Turn to Shine: Growing on LinkedIn isn’t about vanity metrics - it’s about building trust. Start with your banner/profile today (grab my free Canva template [insert link]). I reply to every DM with “GROWTH” - send me yours!"
+        "Result: The host only spends 60 minutes recording in front of a mic once a month. I handle the entire engineering, editing, packaging, and distribution pipeline from there."
       ]
     ]
   }
