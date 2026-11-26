@@ -20,7 +20,7 @@ interface VideoTestimonialProps {
 
 export default function VideoTestimonial({
   videoId = "", // Plug in YouTube ID or client video ID when ready
-  thumbnailUrl = "/thumbnails/mothers-day-ai-and-humanity.webp",
+  thumbnailUrl = "/brand/victor-chan-testimonial.jpg",
   clientName = "Victor Chan",
   clientRole = "Founder",
   companyName = "Launch Excel",

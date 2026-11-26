@@ -30,7 +30,7 @@ const SERVICES: Service[] = [
     title: "YouTube Growth Engine",
     badge: "Flagship Retainer",
     oneLiner: "Your complete turnkey YouTube operation: high-retention editing, CTR-focused packaging, and viral Shorts repurposing.",
-    visualImg: "/thumbnails/chatgpt-connectors-explained.webp",
+    visualImg: "/brand/youtube-growth-engine.jpg",
     visualBadge: "13.0% Peak CTR",
     visualMetric: "4–8 Long-Form + 16 Shorts / mo",
     deliverables: [
@@ -107,7 +107,7 @@ const SERVICES: Service[] = [
     title: "Production System & SOPs",
     badge: "Internal Team Scale",
     oneLiner: "A complete, institutional video production machine for your internal team: templates, hook frameworks, and editor SOPs.",
-    visualImg: "/blog/claude-ai-video-editing.jpg",
+    visualImg: "/brand/production-system-sops.jpg",
     visualBadge: "Descript + DaVinci SOPs",
     visualMetric: "Institutional Consistency",
     deliverables: [
