@@ -154,9 +154,9 @@ export default function Home() {
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
               <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj · YouTube & Content Partner</p>
               <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[58px] display text-on-surface mb-5 leading-[1.08]">
-                Your YouTube &amp; social growth expert.
+                Scale your YouTube &amp; socials.
                 <br />
-                <span className="gradient-text-animated">Built to scale your brand end-to-end.</span>
+                <span className="gradient-text-animated">Done-for-you, end to end.</span>
               </h1>
               <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-8">
                 Strategy, high-retention editing, packaging, and multi-platform distribution—even if you never step in front of a camera.
@@ -227,7 +227,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 1b · THE WORKFLOW */}
+      {/* 1b · WHAT CLIENTS SAY ABOUT ME (Placed before How I Work for immediate credibility) */}
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        <div className="aurora aurora-b w-[420px] h-[420px] top-0 right-[-120px] opacity-30" />
+        <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
+          <ScrollReveal>
+            <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
+              <p className="eyebrow mb-3">What Clients Say About Me</p>
+              <h2 className="text-[32px] md:text-[52px] display text-on-surface">
+                Real results. <span className="gradient-text">In their own words.</span>
+              </h2>
+            </div>
+          </ScrollReveal>
+
+          {/* Featured Inline Video Testimonials */}
+          <div className="mb-14 max-w-5xl mx-auto space-y-8">
+            <ScrollReveal>
+              <VideoTestimonial
+                videoId="TbP5kY8BXUI"
+                clientName="YouTube Growth Client"
+                clientRole="AI & Tutorial Creator"
+                headline="Client Testimonial — $50,000 from YouTube"
+                quote="Consistent editing and packaging turned my YouTube videos directly into $50,000 in client deals."
+              />
+            </ScrollReveal>
+            <ScrollReveal>
+              <VideoTestimonial
+                videoId="IYphbtdwb5M"
+                clientName="Cosmo Taylor"
+                clientRole="Business Owner & Author"
+                headline="Cosmo Taylor — Full Podcast Production"
+                quote="Anuj managed my entire podcast production across YouTube, Spotify, Apple Podcasts, and LinkedIn."
+              />
+            </ScrollReveal>
+          </div>
+
+          <ScrollReveal>
+            <Testimonials />
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 2 · THE WORKFLOW */}
       <section className="relative py-16 md:py-24">
         <div className="max-w-[1100px] mx-auto px-5 sm:px-6 lg:px-10">
           <ScrollReveal>
@@ -267,55 +308,6 @@ export default function Home() {
               Book a call
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* 2 · CLIENTS (Placed right after How I Work & before Analytics Screenshots for instant credibility) */}
-      <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="aurora aurora-b w-[420px] h-[420px] top-0 right-[-120px] opacity-30" />
-        <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
-          <ScrollReveal>
-            <div className="text-center max-w-2xl mx-auto mb-10 md:mb-12">
-              <p className="eyebrow mb-3">Client Stories</p>
-              <h2 className="text-[32px] md:text-[52px] display text-on-surface">
-                Real results. <span className="gradient-text">In their own words.</span>
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          {/* Featured Inline Video Testimonials */}
-          <div className="mb-14 max-w-5xl mx-auto space-y-8">
-            <ScrollReveal>
-              <VideoTestimonial
-                videoId="TbP5kY8BXUI"
-                categoryLabel="YouTube Tutorials & AI Case Study"
-                clientName="YouTube Growth Client"
-                clientRole="AI & Tutorial Creator"
-                companyName="YouTube Channel"
-                headline="Got $50,000 Client Deals Directly from YouTube"
-                metric="+$50,000"
-                quote="Consistent editing, clear packaging, and retention-focused storytelling turned educational AI and tutorial videos directly into $50,000 in inbound client deals."
-                tags={["YouTube Tutorials & AI", "Thumbnail Packaging", "+$50K Client Deals"]}
-              />
-            </ScrollReveal>
-            <ScrollReveal>
-              <VideoTestimonial
-                videoId="IYphbtdwb5M"
-                categoryLabel="Podcast & Omnichannel Production"
-                clientName="Cosmo Taylor"
-                clientRole="Business Owner & Author"
-                companyName="Podcast & Multi-Platform Brand"
-                headline="Full Podcast Production Across YouTube, Spotify, Apple & LinkedIn"
-                metric="Full-Stack"
-                quote="Anuj managed my entire podcast production pipeline—from full-episode editing and audio mastering to YouTube, Spotify, Apple Podcasts, LinkedIn posts, and book-launch content."
-                tags={["YouTube, Spotify & Apple", "LinkedIn Authority", "Book & Brand Growth"]}
-              />
-            </ScrollReveal>
-          </div>
-
-          <ScrollReveal>
-            <Testimonials />
-          </ScrollReveal>
         </div>
       </section>
 

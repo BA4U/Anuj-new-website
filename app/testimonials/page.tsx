@@ -187,25 +187,17 @@ export default function TestimonialsPage() {
       <section className="max-w-5xl mx-auto mb-20 relative z-10 space-y-8">
         <VideoTestimonial
           videoId="TbP5kY8BXUI"
-          categoryLabel="YouTube Tutorials & AI Case Study"
           clientName="YouTube Growth Client"
           clientRole="AI & Tutorial Creator"
-          companyName="YouTube Channel"
-          headline="Got $50,000 Client Deals Directly from YouTube"
-          metric="+$50,000"
-          quote="Consistent editing, clear packaging, and retention-focused storytelling turned educational AI and tutorial videos directly into $50,000 in inbound client deals."
-          tags={["YouTube Tutorials & AI", "Thumbnail Packaging", "+$50K Client Deals"]}
+          headline="Client Testimonial — $50,000 from YouTube"
+          quote="Consistent editing and packaging turned my YouTube videos directly into $50,000 in client deals."
         />
         <VideoTestimonial
           videoId="IYphbtdwb5M"
-          categoryLabel="Podcast & Omnichannel Production"
           clientName="Cosmo Taylor"
           clientRole="Business Owner & Author"
-          companyName="Podcast & Multi-Platform Brand"
-          headline="Full Podcast Production Across YouTube, Spotify, Apple & LinkedIn"
-          metric="Full-Stack"
-          quote="Anuj managed my entire podcast production pipeline—from full-episode editing and audio mastering to YouTube, Spotify, Apple Podcasts, LinkedIn posts, and book-launch content."
-          tags={["YouTube, Spotify & Apple", "LinkedIn Authority", "Book & Brand Growth"]}
+          headline="Cosmo Taylor — Full Podcast Production"
+          quote="Anuj managed my entire podcast production across YouTube, Spotify, Apple Podcasts, and LinkedIn."
         />
       </section>
 

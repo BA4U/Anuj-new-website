@@ -23,14 +23,12 @@ interface VideoTestimonialProps {
 export default function VideoTestimonial({
   videoId = "TbP5kY8BXUI",
   thumbnailUrl,
-  clientName = "Client Case Study",
-  clientRole = "Founder & YouTube Creator",
-  companyName = "AI & Tutorial Channel",
+  clientName = "YouTube Client",
+  clientRole = "AI & Tutorial Creator",
+  companyName = "",
   avatarUrl = "",
-  headline = "Got $50,000 Client Deals Directly from YouTube",
-  quote = "Consistent editing, clear packaging, and retention-focused storytelling turned educational AI and tutorial videos into $50,000 in inbound client deals.",
-  tags = ["YouTube Tutorials & AI", "Thumbnail Packaging", "+$50K Inbound Deals"],
-  categoryLabel = "YouTube Tutorial & AI Case Study",
+  headline = "Client Testimonial",
+  quote = "Consistent editing and packaging turned my YouTube channel into $50K in client deals.",
 }: VideoTestimonialProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const activeVideoId = videoId || "TbP5kY8BXUI";
@@ -43,7 +41,7 @@ export default function VideoTestimonial({
 
       <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-0 items-stretch">
         {/* Video Preview / Inline Player column (7 cols) */}
-        <div className="lg:col-span-7 relative aspect-video lg:aspect-auto lg:min-h-[420px] bg-black overflow-hidden flex items-center justify-center">
+        <div className="lg:col-span-7 relative aspect-video lg:aspect-auto lg:min-h-[380px] bg-black overflow-hidden flex items-center justify-center">
           {isPlaying ? (
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${activeVideoId}?autoplay=1&rel=0`}
@@ -57,7 +55,7 @@ export default function VideoTestimonial({
               type="button"
               onClick={() => setIsPlaying(true)}
               className="relative w-full h-full flex items-center justify-center cursor-pointer group/btn focus:outline-none"
-              aria-label={`Play client testimonial: ${headline}`}
+              aria-label={`Play client testimonial: ${clientName}`}
             >
               {thumbnailUrl ? (
                 <Image
@@ -91,64 +89,32 @@ export default function VideoTestimonial({
           )}
         </div>
 
-        {/* Testimonial Story & Impact Column (5 cols) */}
-        <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between relative z-10 bg-[#0e0e16]/85 backdrop-blur-md border-t lg:border-t-0 lg:border-l border-white/10">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-[11px] font-semibold uppercase tracking-[0.16em] text-purple-300 mb-4">
-              {categoryLabel}
-            </div>
-
-            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-snug mb-4">
-              {headline}
-            </h3>
-
-            <div className="relative mb-6">
-              <p className="text-neutral-300 text-[14.5px] sm:text-[15.5px] leading-relaxed italic">
-                &ldquo;{quote}&rdquo;
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-2 mb-6">
-              {tags.map((tag) => (
-                <span key={tag} className="text-[12px] font-medium bg-white/5 border border-white/10 text-neutral-300 px-3 py-1 rounded-lg">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+        {/* Minimal 1-2 Line Quote & Author Column (5 cols) */}
+        <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center gap-6 relative z-10 bg-[#0e0e16]/85 backdrop-blur-md border-t lg:border-t-0 lg:border-l border-white/10">
+          <p className="text-neutral-100 text-[16px] sm:text-[18px] leading-relaxed font-medium">
+            &ldquo;{quote}&rdquo;
+          </p>
 
           {/* Author Footer */}
-          <div className="pt-5 border-t border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full bg-gradient-to-br from-primary to-purple-500 text-white font-bold flex items-center justify-center text-sm shadow-md ring-2 ring-white/10 overflow-hidden">
-                {avatarUrl ? (
-                  <Image src={avatarUrl} alt={clientName} width={44} height={44} className="object-cover" />
-                ) : (
-                  clientName
-                    .split(" ")
-                    .map((n) => n[0])
-                    .slice(0, 2)
-                    .join("")
-                )}
-              </div>
-              <div>
-                <h4 className="text-sm font-bold text-white tracking-tight">{clientName}</h4>
-                <p className="text-xs text-neutral-400">
-                  {clientRole}, <span className="text-white/80">{companyName}</span>
-                </p>
-              </div>
+          <div className="pt-5 border-t border-white/10 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-purple-500 text-white font-bold flex items-center justify-center text-xs shadow-md ring-2 ring-white/10 overflow-hidden shrink-0">
+              {avatarUrl ? (
+                <Image src={avatarUrl} alt={clientName} width={40} height={40} className="object-cover" />
+              ) : (
+                clientName
+                  .split(" ")
+                  .map((n) => n[0])
+                  .slice(0, 2)
+                  .join("")
+              )}
             </div>
-
-            {!isPlaying && (
-              <button
-                type="button"
-                onClick={() => setIsPlaying(true)}
-                className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-purple-300 hover:text-white transition-colors"
-              >
-                Play video
-                <span className="material-symbols-outlined text-[16px]">play_arrow</span>
-              </button>
-            )}
+            <div>
+              <h4 className="text-sm font-bold text-white tracking-tight">{clientName}</h4>
+              <p className="text-xs text-neutral-400">
+                {clientRole}
+                {companyName ? `, ${companyName}` : ""}
+              </p>
+            </div>
           </div>
         </div>
       </div>
