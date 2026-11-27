@@ -152,11 +152,11 @@ export default function Home() {
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj · YouTube & Content Partner</p>
+              <p className="reveal eyebrow mb-3">YouTube &amp; Social Media Specialist</p>
               <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[58px] display text-on-surface mb-5 leading-[1.08]">
-                Scale your YouTube &amp; socials.
+                Hi, I am Anuj.
                 <br />
-                <span className="gradient-text-animated">Done-for-you, end to end.</span>
+                <span className="gradient-text-animated">I help creators and brands grow with video.</span>
               </h1>
               <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-8">
                 Strategy, high-retention editing, packaging, and multi-platform distribution—even if you never step in front of a camera.
