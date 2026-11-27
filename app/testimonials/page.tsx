@@ -10,6 +10,7 @@ interface Testimonial {
   role: string;
   niche: string;
   platform: string;
+  channelUrl?: string;
   photo: string;
   quote: string;
   outcome: string;
@@ -22,11 +23,12 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Victor Chan",
     role: "YouTuber & Founder, Launch Excel",
     niche: "Spreadsheet & Productivity Training",
-    platform: "YouTube (@LaunchExcel)",
+    platform: "YouTube Channel · @launchexcel",
+    channelUrl: "https://www.youtube.com/@launchexcel",
     photo: "victor-chan",
     quote:
       "Anuj has been a game-changer for my video production, handling both long-form YouTube edits and sales-page VSLs with excellent results. His fast, reliable WhatsApp communication saves me days every week while making my videos look more professional than ever.",
-    outcome: "+$50,000 Client Pipeline",
+    outcome: "Long-Term YouTube Partner",
     deliverables: ["Long-form YouTube Edits", "Sales VSL Production", "Thumbnail Packaging"],
     fallbackPhoto:
       "https://yt3.googleusercontent.com/kYYcUQ3rCa-g8_1k1tvnrnf9AVAU1upq2EK-6j8q1U0JD54XjQ7STYeMAa1W6i_YBkoZwNXSMAQ=s900-c-k-c0x00ffffff-no-rj",
@@ -48,7 +50,8 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Dr. Maurice Maurer",
     role: "PhD in Computational Physics · Founder, Training Scientists",
     niche: "STEM & Machine Learning Education",
-    platform: "YouTube (@trainingscientists)",
+    platform: "YouTube Channel · @TrainingScientists",
+    channelUrl: "https://www.youtube.com/@TrainingScientists",
     photo: "maurice-maurer",
     quote:
       "I hired Anuj to do video editing and graphic design work for my YouTube channel. He did an excellent job, always responds very quickly and produces great results. I am very happy working with him and will continue to do so in the future.",
@@ -69,30 +72,6 @@ const TESTIMONIALS: Testimonial[] = [
     deliverables: ["Custom Layout Templates", "Audio & Visual Master", "Brand Cohesion"],
     fallbackPhoto:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAcV5YGRB486ybQ9zwbwu0Ihd1rDTcA1kf0hwynkmwEXSqTX_79g7gIDH2nZ8y2C5BQz8-bmX9SUCHmwklbnNosL59RHW49XgZpUMfaw7lthcJ4jGoOCpOker1OCanqdNjv7CyOaM_PJ4IxgIsk9uAXdxu0A6MrrK5NhtnhOj6BGFYv5NDx0iIr3LJ4dapkVvKiPUUFDWo9323rCyOH5QneWioGae6YJMew3Ch6Dw0DebyQ3i7jed8hrQ",
-  },
-  {
-    name: "Tim Cakir",
-    role: "Growth Consultant & AI Tech Creator",
-    niche: "AI Tools, Automation & Notion",
-    platform: "YouTube (@timcakir)",
-    photo: "tim-cakir",
-    quote:
-      "Anuj understands YouTube retention better than most editors. He doesn't just cut clips, he structures the video so viewers stay hooked all the way through. Fast turnaround and zero back-and-forth.",
-    outcome: "Tech & AI Channel Scaling",
-    deliverables: ["Retention Pacing", "On-Screen Graphics", "CTR Thumbnail Testing"],
-    fallbackPhoto: "",
-  },
-  {
-    name: "Eric Presnall",
-    role: "Founder, VideoRep · On-Camera Host",
-    niche: "Video Creation & Creator Brand Building",
-    platform: "Short-Form (Reels & Shorts)",
-    photo: "eric-presnall",
-    quote:
-      "The first 3 seconds of short-form decide everything. Anuj knows how to craft visual hooks, dynamic pacing, and crisp sound effects that stop people from scrolling past.",
-    outcome: "High-Retention Short-Form",
-    deliverables: ["Scroll-Stopping Hooks", "Fast-Cut Pacing", "Engaging Captions"],
-    fallbackPhoto: "",
   },
 ];
 
@@ -139,7 +118,7 @@ function ClientAvatar({ item }: { item: Testimonial }) {
 
   if (hasError || !src) {
     return (
-      <span className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-purple-600 text-white font-bold text-lg flex items-center justify-center shrink-0 shadow-md">
+      <span className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-purple-600 text-white font-bold text-lg flex items-center justify-center shrink-0 shadow-md">
         {initials(item.name)}
       </span>
     );
@@ -150,7 +129,7 @@ function ClientAvatar({ item }: { item: Testimonial }) {
     <img
       src={src}
       alt={item.name}
-      className="w-14 h-14 rounded-2xl object-cover shrink-0 border border-primary/20 shadow-md bg-surface-container"
+      className="w-14 h-14 rounded-full object-cover shrink-0 border border-primary/20 shadow-md bg-surface-container"
       onError={() => {
         if (item.fallbackPhoto && src !== item.fallbackPhoto) {
           setSrc(item.fallbackPhoto);
@@ -279,7 +258,19 @@ export default function TestimonialsPage() {
                   </span>
                 </div>
                 <p className="text-xs text-on-surface-variant font-medium truncate">{t.role}</p>
-                <p className="text-[11px] font-semibold text-primary mt-0.5 truncate">{t.platform}</p>
+                {t.channelUrl ? (
+                  <a
+                    href={t.channelUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary hover:underline mt-0.5 truncate"
+                  >
+                    {t.platform}
+                    <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+                  </a>
+                ) : (
+                  <p className="text-[11px] font-semibold text-primary mt-0.5 truncate">{t.platform}</p>
+                )}
               </div>
             </div>
           </article>

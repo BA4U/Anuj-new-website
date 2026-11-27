@@ -10,6 +10,7 @@ export interface TestimonialItem {
   quote: string;
   outcome: string;
   tag: string;
+  channelUrl?: string;
   fallback: string;
 }
 
@@ -20,8 +21,9 @@ const ITEMS: TestimonialItem[] = [
     photo: "victor-chan",
     quote:
       "Anuj has been a game-changer for my video production, handling both long-form YouTube edits and sales-page VSLs with excellent results. His fast, reliable WhatsApp communication saves me days every week while making my videos look more professional than ever.",
-    outcome: "+$50,000 Client Pipeline",
+    outcome: "Long-Term YouTube Partner",
     tag: "YouTube & VSLs",
+    channelUrl: "https://www.youtube.com/@launchexcel",
     fallback:
       "https://yt3.googleusercontent.com/kYYcUQ3rCa-g8_1k1tvnrnf9AVAU1upq2EK-6j8q1U0JD54XjQ7STYeMAa1W6i_YBkoZwNXSMAQ=s900-c-k-c0x00ffffff-no-rj",
   },
@@ -44,6 +46,7 @@ const ITEMS: TestimonialItem[] = [
       "I hired Anuj to do video editing and graphic design work for my YouTube channel. He did an excellent job, always responds very quickly and produces great results. I am very happy working with him and will continue to do so in the future.",
     outcome: "High-Retention Technical Edits",
     tag: "Educational Channel",
+    channelUrl: "https://www.youtube.com/@TrainingScientists",
     fallback:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuBDZ6INETUPr4mfcMG6fzakgmVe5e0s0KvLX5o9-bovSubFnxmIk9lm30G7Ll4D6BdJK7ytOohIo7vBYXU2GMvrqiEEmvbG2xvd4HAv2BiMhpjz3Gh-edOo3E3tJgdnPaFhtPMXA3hqMQ6HJM_Dj0YDOq517NWpHXYbHIQ7cNvICkULHA7Y1P5DdAK24q-lcIRCF2yHsMw0clQk7pKVik8UrA0Kp4AEBB7E9l-mmVaAzSsasp7CGmeZDg",
   },
@@ -57,26 +60,6 @@ const ITEMS: TestimonialItem[] = [
     tag: "Podcast Branding",
     fallback:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAcV5YGRB486ybQ9zwbwu0Ihd1rDTcA1kf0hwynkmwEXSqTX_79g7gIDH2nZ8y2C5BQz8-bmX9SUCHmwklbnNosL59RHW49XgZpUMfaw7lthcJ4jGoOCpOker1OCanqdNjv7CyOaM_PJ4IxgIsk9uAXdxu0A6MrrK5NhtnhOj6BGFYv5NDx0iIr3LJ4dapkVvKiPUUFDWo9323rCyOH5QneWioGae6YJMew3Ch6Dw0DebyQ3i7jed8hrQ",
-  },
-  {
-    name: "Tim Cakir",
-    role: "Growth Consultant & AI Tech Creator",
-    photo: "tim-cakir",
-    quote:
-      "Anuj understands YouTube retention better than most editors. He doesn't just cut clips, he structures the video so viewers stay hooked all the way through. Fast turnaround and zero back-and-forth.",
-    outcome: "Tech & AI Channel Scaling",
-    tag: "AI & Tech Videos",
-    fallback: "",
-  },
-  {
-    name: "Eric Presnall",
-    role: "Founder, VideoRep · On-Camera Host",
-    photo: "eric-presnall",
-    quote:
-      "The first 3 seconds of short-form decide everything. Anuj knows how to craft visual hooks, dynamic pacing, and crisp sound effects that stop people from scrolling past.",
-    outcome: "High-Retention Short-Form",
-    tag: "Shorts & Reels",
-    fallback: "",
   },
 ];
 
@@ -211,6 +194,17 @@ export default function Testimonials() {
                     <span className="material-symbols-outlined text-primary text-[17px]">verified</span>
                   </div>
                   <span className="block text-[14px] text-on-surface-variant">{cur.role}</span>
+                  {cur.channelUrl && (
+                    <a
+                      href={cur.channelUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[12px] font-semibold text-primary hover:underline mt-0.5"
+                    >
+                      Visit YouTube Channel
+                      <span className="material-symbols-outlined text-[13px]">open_in_new</span>
+                    </a>
+                  )}
                 </div>
               </figcaption>
             </div>
