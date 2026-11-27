@@ -247,8 +247,8 @@ export default function Home() {
                 videoId="TbP5kY8BXUI"
                 clientName="YouTube Growth Client"
                 clientRole="AI & Tutorial Creator"
-                headline="Client Testimonial — $50,000 from YouTube"
-                quote="Consistent editing and packaging turned my YouTube videos directly into $50,000 in client deals."
+                headline="Client Testimonial"
+                quote="Consistent editing and packaging turned my YouTube channel into real client deals."
               />
             </ScrollReveal>
             <ScrollReveal>
@@ -256,8 +256,8 @@ export default function Home() {
                 videoId="IYphbtdwb5M"
                 clientName="Cosmo Taylor"
                 clientRole="Business Owner & Author"
-                headline="Cosmo Taylor — Full Podcast Production"
-                quote="Anuj managed my entire podcast production across YouTube, Spotify, Apple Podcasts, and LinkedIn."
+                headline="Cosmo Taylor — Podcast Production"
+                quote="Anuj manages the entire podcast pipeline—from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
               />
             </ScrollReveal>
           </div>
