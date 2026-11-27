@@ -8,11 +8,11 @@ import OwnChannel from "@/components/OwnChannel";
 import { CONTENT_TYPES, LONG_FORM } from "@/lib/work-data";
 
 export const metadata: Metadata = {
-  title: "Work | Anuj Mishra",
+  title: "Portfolio | Anuj Mishra",
   description: "Long-form edits, short-form reels, thumbnails, and channel case studies by Anuj Mishra.",
   alternates: { canonical: "/work" },
   openGraph: {
-    title: "Work | Anuj Mishra",
+    title: "Portfolio | Anuj Mishra",
     description: "Long-form edits, short-form reels, thumbnails, and channel case studies.",
     url: "https://anuj4u.in/work",
     type: "website",
@@ -72,9 +72,9 @@ export default function WorkPage() {
       <div className="aurora aurora-a w-[480px] h-[480px] -top-40 -left-40 opacity-50" />
       <div className="max-w-[1100px] mx-auto px-5 sm:px-6 lg:px-10 pt-12 md:pt-20 pb-16 md:pb-24 relative">
         <header className="text-center max-w-2xl mx-auto mb-10 md:mb-14 flex flex-col items-center">
-          <p className="eyebrow mb-2">Work</p>
+          <p className="eyebrow mb-2">Portfolio</p>
           <h1 className="text-[38px] sm:text-[52px] md:text-[64px] display text-on-surface mb-4">
-            Work you can <span className="gradient-text">watch.</span>
+            Portfolio you can <span className="gradient-text">watch.</span>
           </h1>
           <p className="text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed">
             Real videos, thumbnails and results from creators and teams I work with.

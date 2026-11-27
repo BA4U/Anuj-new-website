@@ -3,6 +3,7 @@ import Link from "next/link";
 import WorkShell from "@/components/WorkShell";
 import ScrollReveal from "@/components/ScrollReveal";
 import CaseShots from "@/components/CaseShots";
+import VideoTestimonial from "@/components/VideoTestimonial";
 import { CASE_STUDIES } from "@/lib/work-data";
 
 export const metadata: Metadata = {
@@ -23,6 +24,31 @@ export default function CaseStudiesPage() {
       ctaTitle="Your channel could be next."
       ctaText="Start with an audit of your last 10 videos."
     >
+      <ScrollReveal className="mb-14 md:mb-20">
+        <div className="text-center mb-8">
+          <p className="eyebrow mb-2">Client Videos</p>
+          <h2 className="text-[26px] md:text-[36px] display text-on-surface">
+            Hear it directly from <span className="gradient-text">clients.</span>
+          </h2>
+        </div>
+        <div className="max-w-5xl mx-auto space-y-8">
+          <VideoTestimonial
+            videoId="TbP5kY8BXUI"
+            clientName="YouTube Growth Client"
+            clientRole="AI & Tutorial Creator"
+            headline="Client Testimonial"
+            quote="Consistent editing and packaging turned my YouTube channel into real client deals."
+          />
+          <VideoTestimonial
+            videoId="IYphbtdwb5M"
+            clientName="Cosmo Taylor"
+            clientRole="Business Owner & Author"
+            headline="Cosmo Taylor — Podcast Production"
+            quote="Anuj manages the entire podcast pipeline—from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
+          />
+        </div>
+      </ScrollReveal>
+
       <ScrollReveal>
         <article className="card-glow p-6 md:p-10 text-center max-w-5xl mx-auto">
           <p className="eyebrow mb-2">{study.role}</p>

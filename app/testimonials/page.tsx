@@ -393,10 +393,10 @@ export default function TestimonialsPage() {
             <span className="material-symbols-outlined text-base">arrow_forward</span>
           </Link>
           <Link
-            href="/pricing"
+            href="/services#pricing"
             className="glass-card hover:bg-surface-container text-on-surface font-semibold px-6 py-3.5 rounded-full border border-outline-variant/40 transition-all text-sm"
           >
-            View Transparent Pricing
+            View Services &amp; Pricing
           </Link>
         </div>
       </section>

@@ -70,10 +70,10 @@ export default function ReelsPage() {
               Get Short-Form Content
             </Link>
             <Link
-              href="/pricing"
+              href="/services#pricing"
               className="btn btn-secondary"
             >
-              View Pricing Tiers
+              View Services &amp; Pricing
             </Link>
           </div>
         </div>

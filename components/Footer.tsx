@@ -10,7 +10,7 @@ const socials: { name: string; href: string; icon: string }[] = [
 
 const quickLinks = [
   { name: "Services", href: "/services" },
-  { name: "Work", href: "/work" },
+  { name: "Portfolio", href: "/work" },
   { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
   { name: "Testimonials", href: "/testimonials" },

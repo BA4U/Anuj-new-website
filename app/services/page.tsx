@@ -312,7 +312,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Retainer Pricing Tier Bridge Banner */}
-      <section className="mb-24 rounded-[32px] bg-neutral-950 text-white p-8 md:p-12 relative overflow-hidden shadow-2xl">
+      <section id="pricing" className="mb-24 rounded-[32px] bg-neutral-950 text-white p-8 md:p-12 relative overflow-hidden shadow-2xl scroll-mt-24">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/20 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="relative z-10 max-w-4xl mx-auto">
@@ -351,10 +351,10 @@ export default function ServicesPage() {
 
           <div className="text-center">
             <Link
-              href="/pricing"
+              href="/contact"
               className="inline-flex items-center gap-2 bg-white text-neutral-950 font-bold px-8 py-3.5 rounded-full hover:bg-neutral-200 transition-all text-sm shadow-md"
             >
-              Compare All Retainer Inclusions
+              Book a 1-on-1 Strategy Call
               <span className="material-symbols-outlined text-base">arrow_forward</span>
             </Link>
           </div>

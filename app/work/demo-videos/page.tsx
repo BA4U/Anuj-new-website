@@ -153,8 +153,8 @@ export default function DemoVideosPage() {
           <Link href="/contact?service=demo" className="btn btn-primary">
             Request Demo Video Scope
           </Link>
-          <Link href="/pricing" className="btn btn-secondary">
-            View Pricing & Plans
+          <Link href="/services#pricing" className="btn btn-secondary">
+            View Services &amp; Pricing
           </Link>
         </div>
       </section>
