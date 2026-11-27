@@ -75,7 +75,7 @@ export const POSTS: Post[] = [
       ],
       [
         "p",
-        "In 2026, smart video editors don’t gamble on one cut. For every core message, we record three distinct 3-second hook variations with the same body and call-to-action. We publish the first version. If retention drops below 60% in the first 3 seconds, we re-package the hook and test variation B 48 hours later. 8 times out of 10, changing just the first 3 seconds turns a 2,000-view flop into a 250,000-view hit."
+        "In 2026, smart video editors don’t gamble on one cut. For every core message, I test three distinct 3-second hook variations with the same body and call-to-action. I publish the first version. If retention drops below 60% in the first 3 seconds, I re-package the hook and test variation B 48 hours later. 8 times out of 10, changing just the first 3 seconds turns a 2,000-view flop into a 250,000-view hit."
       ],
       [
         "h",
@@ -189,7 +189,7 @@ export const POSTS: Post[] = [
       ],
       [
         "p",
-        "Result: Client turnaround time dropped from 5 business days to 24-48 hours, while viewer retention averages increased by +38% across our channels."
+        "Result: Client turnaround time dropped from 5 business days to 24-48 hours, while viewer retention averages increased by +38% across client channels."
       ]
     ]
   },
@@ -278,7 +278,7 @@ export const POSTS: Post[] = [
       ],
       [
         "p",
-        "Once the master episode is locked, our production engine extracts 20+ distinct assets:"
+        "Once the master episode is locked, my production engine extracts 20+ distinct assets:"
       ],
       [
         "ul",

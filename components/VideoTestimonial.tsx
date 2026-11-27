@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import VideoModal from "@/components/VideoModal";
+import YtThumb from "@/components/YtThumb";
 
 interface VideoTestimonialProps {
   videoId?: string;
@@ -16,20 +17,24 @@ interface VideoTestimonialProps {
   metricLabel?: string;
   quote?: string;
   duration?: string;
+  tags?: string[];
+  categoryLabel?: string;
 }
 
 export default function VideoTestimonial({
-  videoId = "", // Plug in YouTube ID or client video ID when ready
-  thumbnailUrl = "/brand/victor-chan-testimonial.jpg",
-  clientName = "Victor Chan",
-  clientRole = "Founder",
-  companyName = "Launch Excel",
-  avatarUrl = "/testimonials/victor-chan.jpg",
-  headline = "How Victor Chan Added $50,000 to His Pipeline from YouTube Channel Content",
-  metric = "+$50K",
-  metricLabel = "Client Pipeline Generated in 90 Days",
-  quote = "Anuj has been a game-changer for my YouTube channel and content. His pacing, high-retention packaging, and reliable turnaround helped turn channel viewers directly into high-ticket clients.",
-  duration = "1:45 min",
+  videoId = "TbP5kY8BXUI",
+  thumbnailUrl,
+  clientName = "Client Case Study",
+  clientRole = "Founder & YouTube Creator",
+  companyName = "AI & Tutorial Channel",
+  avatarUrl = "",
+  headline = "Got $50,000 Client Deals Directly from YouTube Videos",
+  metric = "+$50,000",
+  metricLabel = "Client Deals Closed from YouTube",
+  quote = "Consistent editing, clear packaging, and retention-focused storytelling turned educational AI and tutorial videos into $50,000 in inbound client deals.",
+  duration = "Watch Testimonial",
+  tags = ["YouTube Tutorials & AI", "Thumbnail Packaging", "+$50K Inbound Deals"],
+  categoryLabel = "YouTube Tutorial & AI Case Study",
 }: VideoTestimonialProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -49,7 +54,13 @@ export default function VideoTestimonial({
                 alt={headline}
                 fill
                 sizes="(max-width: 1024px) 100vw, 680px"
-                className="object-cover object-center opacity-70 group-hover:opacity-85 group-hover:scale-105 transition-all duration-700"
+                className="object-cover object-center opacity-75 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
+              />
+            ) : videoId ? (
+              <YtThumb
+                id={videoId}
+                alt={headline}
+                className="opacity-80 group-hover:opacity-95 group-hover:scale-105 transition-all duration-700"
               />
             ) : (
               <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-black" />
@@ -93,7 +104,7 @@ export default function VideoTestimonial({
             <div>
               {/* Apple-style pill kicker */}
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-[11px] font-semibold uppercase tracking-[0.16em] text-purple-300 mb-4">
-                Client Case Study
+                {categoryLabel}
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white leading-snug mb-4">
@@ -108,15 +119,11 @@ export default function VideoTestimonial({
 
               {/* Key Highlights Pill Row */}
               <div className="flex flex-wrap gap-2 mb-6">
-                <span className="text-[12px] font-medium bg-white/5 border border-white/10 text-neutral-300 px-3 py-1 rounded-lg">
-                  YouTube Channel Growth
-                </span>
-                <span className="text-[12px] font-medium bg-white/5 border border-white/10 text-neutral-300 px-3 py-1 rounded-lg">
-                  Retention Packaging
-                </span>
-                <span className="text-[12px] font-medium bg-white/5 border border-white/10 text-neutral-300 px-3 py-1 rounded-lg">
-                  Inbound Funnel
-                </span>
+                {tags.map((tag) => (
+                  <span key={tag} className="text-[12px] font-medium bg-white/5 border border-white/10 text-neutral-300 px-3 py-1 rounded-lg">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -158,8 +165,8 @@ export default function VideoTestimonial({
       {/* Video Modal Player */}
       {isPlaying && (
         <VideoModal
-          id={videoId || "mHOLzwe4sMQ"} // Defaults to client video sample if videoId is pending
-          title={`${clientName} Case Study Video`}
+          id={videoId || "TbP5kY8BXUI"}
+          title={`${clientName} — ${headline}`}
           onClose={() => setIsPlaying(false)}
         />
       )}

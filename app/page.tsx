@@ -154,12 +154,12 @@ export default function Home() {
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
               <p className="reveal eyebrow mb-3">Hi, I&apos;m Anuj · YouTube & Content Partner</p>
               <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[58px] display text-on-surface mb-5 leading-[1.08]">
-                Grow your YouTube channel.
+                You hit record.
                 <br />
-                <span className="gradient-text-animated">Without the production burnout.</span>
+                <span className="gradient-text-animated">I handle everything else.</span>
               </h1>
               <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-8">
-                High-retention editing, packaging, and multi-platform distribution. You record; I handle everything else.
+                High-retention editing, packaging, and channel growth—all handled 1-on-1 for founders and creators.
               </p>
               <div className="reveal flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <Link href="/youtube-funnel" className="btn btn-glow">
@@ -387,10 +387,33 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          {/* Featured Apple-style Video Testimonial */}
-          <div className="mb-14 max-w-4xl mx-auto">
+          {/* Featured Apple-style Video Testimonials */}
+          <div className="mb-14 max-w-5xl mx-auto space-y-8">
             <ScrollReveal>
-              <VideoTestimonial />
+              <VideoTestimonial
+                videoId="TbP5kY8BXUI"
+                categoryLabel="YouTube Tutorials & AI Case Study"
+                clientName="YouTube Growth Client"
+                clientRole="AI & Tutorial Creator"
+                companyName="YouTube Channel"
+                headline="Got $50,000 Client Deals Directly from YouTube"
+                metric="+$50,000"
+                quote="Consistent editing, clear packaging, and retention-focused storytelling turned educational AI and tutorial videos directly into $50,000 in inbound client deals."
+                tags={["YouTube Tutorials & AI", "Thumbnail Packaging", "+$50K Client Deals"]}
+              />
+            </ScrollReveal>
+            <ScrollReveal>
+              <VideoTestimonial
+                videoId="IYphbtdwb5M"
+                categoryLabel="Podcast & Omnichannel Production"
+                clientName="Cosmo Taylor"
+                clientRole="Business Owner & Author"
+                companyName="Podcast & Multi-Platform Brand"
+                headline="Full Podcast Production Across YouTube, Spotify, Apple & LinkedIn"
+                metric="Full-Stack"
+                quote="Anuj managed my entire podcast production pipeline—from full-episode editing and audio mastering to YouTube, Spotify, Apple Podcasts, LinkedIn posts, and book-launch content."
+                tags={["YouTube, Spotify & Apple", "LinkedIn Authority", "Book & Brand Growth"]}
+              />
             </ScrollReveal>
           </div>
 

@@ -62,7 +62,7 @@ const tools: Tool[] = [
     icon: "smart_display",
     tagline: "30 hooks tailored to your niche",
     description:
-      "Tell us your niche. Get 30 copy-paste hooks for Reels, Shorts, and TikTok, each tagged with its angle (curiosity, controversy, story, etc.) and best format.",
+      "Tell me your niche. Get 30 copy-paste hooks for Reels, Shorts, and TikTok, each tagged with its angle (curiosity, controversy, story, etc.) and best format.",
     href: "/reel-hooks",
     badge: "FREE",
     accent: "#6355FF",
