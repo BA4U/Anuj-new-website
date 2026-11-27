@@ -63,7 +63,7 @@ const ITEMS: TestimonialItem[] = [
     role: "Growth Consultant & AI Tech Creator",
     photo: "tim-cakir",
     quote:
-      "Anuj understands YouTube retention better than most editors. He doesn't just cut clips—he structures the video so viewers stay hooked all the way through. Fast turnaround and zero back-and-forth.",
+      "Anuj understands YouTube retention better than most editors. He doesn't just cut clips, he structures the video so viewers stay hooked all the way through. Fast turnaround and zero back-and-forth.",
     outcome: "Tech & AI Channel Scaling",
     tag: "AI & Tech Videos",
     fallback: "",

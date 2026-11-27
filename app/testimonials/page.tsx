@@ -77,7 +77,7 @@ const TESTIMONIALS: Testimonial[] = [
     platform: "YouTube (@timcakir)",
     photo: "tim-cakir",
     quote:
-      "Anuj understands YouTube retention better than most editors. He doesn't just cut clips—he structures the video so viewers stay hooked all the way through. Fast turnaround and zero back-and-forth.",
+      "Anuj understands YouTube retention better than most editors. He doesn't just cut clips, he structures the video so viewers stay hooked all the way through. Fast turnaround and zero back-and-forth.",
     outcome: "Tech & AI Channel Scaling",
     deliverables: ["Retention Pacing", "On-Screen Graphics", "CTR Thumbnail Testing"],
     fallbackPhoto: "",
@@ -196,8 +196,8 @@ export default function TestimonialsPage() {
           videoId="IYphbtdwb5M"
           clientName="Cosmo Taylor"
           clientRole="Business Owner & Author"
-          headline="Cosmo Taylor — Podcast Production"
-          quote="Anuj manages the entire podcast pipeline—from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
+          headline="Cosmo Taylor: Podcast Production"
+          quote="Anuj manages the entire podcast pipeline, from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
         />
       </section>
 

@@ -43,8 +43,8 @@ export default function CaseStudiesPage() {
             videoId="IYphbtdwb5M"
             clientName="Cosmo Taylor"
             clientRole="Business Owner & Author"
-            headline="Cosmo Taylor — Podcast Production"
-            quote="Anuj manages the entire podcast pipeline—from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
+            headline="Cosmo Taylor: Podcast Production"
+            quote="Anuj manages the entire podcast pipeline, from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
           />
         </div>
       </ScrollReveal>

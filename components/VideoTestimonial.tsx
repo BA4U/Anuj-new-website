@@ -45,7 +45,7 @@ export default function VideoTestimonial({
           {isPlaying ? (
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${activeVideoId}?autoplay=1&rel=0`}
-              title={`${clientName} — ${headline}`}
+              title={`${clientName}: ${headline}`}
               className="absolute inset-0 w-full h-full border-0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen

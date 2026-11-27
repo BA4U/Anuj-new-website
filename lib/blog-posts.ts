@@ -104,7 +104,7 @@ export const POSTS: Post[] = [
       ],
       [
         "p",
-        "Attention spans in 2026 require visual stimulation every 2.5 to 3.5 seconds. That does not mean dizzying chaotic zooms—it means intentional visual support: tactile sound effects on text pop-ups, subtle screen punch-ins on key words, and high-res screen recordings instead of generic stock footage."
+        "Attention spans in 2026 require visual stimulation every 2.5 to 3.5 seconds. That does not mean dizzying chaotic zooms, it means intentional visual support: tactile sound effects on text pop-ups, subtle screen punch-ins on key words, and high-res screen recordings instead of generic stock footage."
       ]
     ]
   },
@@ -114,7 +114,7 @@ export const POSTS: Post[] = [
     category: "AI & Video Technology",
     readTime: "8 min read",
     cover: "/blog/claude-ai-video-editing.jpg",
-    title: "The Best Video Editing Software in 2026 Isn’t Premiere Pro or DaVinci—It’s Claude",
+    title: "The Best Video Editing Software in 2026 Isn’t Premiere Pro or DaVinci: It’s Claude",
     excerpt:
       "Every traditional video editor is fighting a losing battle against timeline fatigue. In 2026, top-tier video operators don't spend 12 hours manually trimming silence in Premiere Pro. They use Claude to script retention frameworks, generate XML cutlists, automate scene switches, and engineer high-CTR packaging.",
     blocks: [
@@ -182,9 +182,9 @@ export const POSTS: Post[] = [
       [
         "ul",
         [
-          "Claude 3.7: The Brain — Scripting, cut-list generation, retention drop-off diagnosis, title/thumbnail A/B testing, and Python workflow scripts.",
-          "Descript: The Text-Based Cutter — Initial transcript sync, automated filler word elimination, and Studio Sound speech mastering.",
-          "DaVinci Resolve Studio: The Finishing Suite — Final XML assembly, high-end color grading, tactile motion curves, and master audio export."
+          "Claude 3.7 (The Brain): Scripting, cut-list generation, retention drop-off diagnosis, title/thumbnail A/B testing, and Python workflow scripts.",
+          "Descript (The Text-Based Cutter): Initial transcript sync, automated filler word elimination, and Studio Sound speech mastering.",
+          "DaVinci Resolve Studio (The Finishing Suite): Final XML assembly, high-end color grading, tactile motion curves, and master audio export."
         ]
       ],
       [
@@ -205,7 +205,7 @@ export const POSTS: Post[] = [
     blocks: [
       [
         "p",
-        "90% of business podcasts never make it past episode 10. It’s not because the conversations are bad—it’s because the traditional production workflow is an exhausting, soul-crushing bottleneck. The founder records for an hour, sends the file to an editor, waits two weeks, gets a clunky 60-minute video with no chapters, uploads it, and gets 42 views."
+        "90% of business podcasts never make it past episode 10. It’s not because the conversations are bad, it’s because the traditional production workflow is an exhausting, soul-crushing bottleneck. The founder records for an hour, sends the file to an editor, waits two weeks, gets a clunky 60-minute video with no chapters, uploads it, and gets 42 views."
       ],
       [
         "p",

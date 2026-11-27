@@ -25,6 +25,8 @@ interface PlanDay {
 }
 
 interface StrategyResponse {
+  whatsWorking?: string[];
+  problemsFound?: string[];
   auditSummary: string;
   plan: PlanDay[];
 }
@@ -33,33 +35,60 @@ function buildPrompt(channel: YouTubeChannelData, channelUrl: string) {
   const recentTitlesFormatted =
     channel.recentVideos.length > 0
       ? channel.recentVideos
-          .slice(0, 8)
-          .map((v, i) => `${i + 1}. "${v.title}" (${v.published?.slice(0, 10)})`)
+          .slice(0, 10)
+          .map(
+            (v, i) =>
+              `${i + 1}. "${v.title}" (${v.published?.slice(0, 10)}${
+                typeof v.views === "number" ? ` · ${v.views.toLocaleString()} views` : ""
+              })`
+          )
           .join("\n")
       : "No public recent uploads found in RSS feed.";
 
-  return `You are Anuj Mishra, an expert YouTube growth partner and retention strategist.
-Perform a genuine, custom 30-day YouTube growth plan and audit for this specific creator.
+  const factorLines = channel.factors
+    .map((f) => `- ${f.label}: ${f.score}/100 (${f.metric}) — ${f.insight}`)
+    .join("\n");
+
+  return `You are Anuj Mishra, an expert YouTube growth partner, thumbnail/packaging strategist, and retention editor.
+Perform an HONEST, grounded, custom 30-day YouTube growth audit and plan for this specific creator.
 
 CHANNEL METADATA AUDITED:
 - Channel Name: ${channel.name}
 - Channel Handle: ${channel.handle}
 - Channel URL: ${channelUrl}
+- Subscribers: ${channel.subscriberCount || "Unknown"} · Total Videos: ${channel.totalVideos || "Unknown"}
+- Overall Channel Health Score: ${channel.overallScore}/100
 - Channel Bio / About: ${channel.description || "No bio provided."}
 - Detected Topics: ${channel.detectedTopics.join(", ") || "General"}
-- Real Recent Uploads (${channel.recentVideos.length} scanned):
-${recentTitlesFormatted}
-- Packaging Observations: ${channel.packagingNotes.join("; ")}
+- Top Outlier Video: ${channel.topVideo ? `"${channel.topVideo.title}" (${channel.topVideo.views.toLocaleString()} views)` : "N/A"}
 
-CRITICAL VALUE RULES:
-1. Ground the advice in their ACTUAL niche and recent video titles. Do NOT produce generic, boilerplate creator tips.
-2. Critique what works and what's missing in their actual packaging (e.g. title curiosity, topic selection, mobile truncation).
-3. Every single day of the 30-day plan must be a concrete, bespoke action tailored to their subject matter.
-4. Provide original title ideas and thumbnail concepts specifically designed for this channel's audience.
+MULTI-FACTOR DIAGNOSTICS:
+${factorLines}
+
+RECENT UPLOADS (${channel.recentVideos.length} scanned):
+${recentTitlesFormatted}
+
+CRITICAL VALUE & HONESTY RULES:
+1. BE HONEST AND NICHE-AWARE: If something is genuinely strong for their niche (e.g., consistent cadence, punchy title length, strong outlier format, good CTA links), explicitly appreciate and credit it in "whatsWorking". Do NOT invent fake flaws.
+2. PINPOINT REAL PROBLEMS: In "problemsFound", call out the real bottlenecks holding back clicks and watch time — specifically across:
+   - Titles (e.g., mobile truncation, missing curiosity gap/open loop, overly descriptive phrasing)
+   - Thumbnails & visual packaging (contrast, focal point, text-to-title complementarity — and note where professional thumbnail design can lift CTR)
+   - Intros & first 30 seconds (slow warmups/preambles vs immediate payoff & curiosity tension)
+   - Cadence, chapters, or topic positioning gaps
+3. Ground every day of the 30-day plan in their ACTUAL niche, recent video titles, view outliers, and weakest factor scores.
+4. Provide original title ideas and concrete thumbnail directions specifically designed for this channel's audience.
 5. Return ONLY a valid JSON object matching this schema, no markdown or extra commentary:
 
 {
-  "auditSummary": "2-3 sentences critiquing their current upload packaging, what specific content angle is under-exploited in their niche, and their primary growth lever.",
+  "whatsWorking": [
+    "Specific strength observed from their real channel/niche/metrics",
+    "Another genuine strength worth doubling down on"
+  ],
+  "problemsFound": [
+    "Specific title/thumbnail/intro/retention problem observed from their channel data",
+    "Another concrete bottleneck and how fixing it (or delegating thumbnail design / retention editing) unlocks growth"
+  ],
+  "auditSummary": "2-3 sentences summarizing the honest verdict: what they are doing right for their niche, the #1 packaging/intro/retention bottleneck, and their highest-leverage growth move.",
   "plan": [
     {
       "day": 1,
@@ -77,7 +106,14 @@ CRITICAL VALUE RULES:
 Ensure the "plan" array contains exactly 30 unique, progressively structured days.`;
 }
 
-function planEmailHtml(channel: YouTubeChannelData, channelUrl: string, auditSummary: string, plan: PlanDay[]) {
+function planEmailHtml(
+  channel: YouTubeChannelData,
+  channelUrl: string,
+  auditSummary: string,
+  plan: PlanDay[],
+  whatsWorking: string[] = [],
+  problemsFound: string[] = []
+) {
   const rows = plan
     .map(
       (d) => `
@@ -96,28 +132,50 @@ function planEmailHtml(channel: YouTubeChannelData, channelUrl: string, auditSum
     ? `<img src="${escapeHtml(channel.avatar)}" alt="${escapeHtml(channel.name)}" style="width:64px;height:64px;border-radius:50%;border:2px solid #fff;margin-bottom:12px;display:inline-block;" />`
     : "";
 
+  const strengthsHtml =
+    whatsWorking.length > 0
+      ? `<div style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;padding:16px;margin-bottom:14px;">
+          <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#047857;text-transform:uppercase;letter-spacing:1px;">What's Already Working Well</p>
+          <ul style="margin:0;padding-left:18px;font-size:13px;color:#065f46;line-height:1.6;">
+            ${whatsWorking.map((w) => `<li>${escapeHtml(w)}</li>`).join("")}
+          </ul>
+        </div>`
+      : "";
+
+  const problemsHtml =
+    problemsFound.length > 0
+      ? `<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:16px;margin-bottom:20px;">
+          <p style="margin:0 0 8px;font-size:11px;font-weight:700;color:#b91c1c;text-transform:uppercase;letter-spacing:1px;">Key Bottlenecks Found (Titles, Thumbnails &amp; Intros)</p>
+          <ul style="margin:0;padding-left:18px;font-size:13px;color:#7f1d1d;line-height:1.6;">
+            ${problemsFound.map((p) => `<li>${escapeHtml(p)}</li>`).join("")}
+          </ul>
+        </div>`
+      : "";
+
   return `<!DOCTYPE html><html><body style="margin:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;">
   <div style="background:linear-gradient(135deg,#111827,#1f2937);padding:40px 24px;text-align:center;color:#fff;">
     ${avatarSnippet}
     <h1 style="margin:0 0 6px;font-size:24px;font-weight:700;">Custom 30-Day Growth Plan</h1>
-    <p style="margin:0;font-size:14px;color:#9ca3af;">Audited for <b>${escapeHtml(channel.name)}</b> (${escapeHtml(channel.handle)})</p>
+    <p style="margin:0;font-size:14px;color:#9ca3af;">Audited for <b>${escapeHtml(channel.name)}</b> (${escapeHtml(channel.handle)}) · Score: ${channel.overallScore}/100</p>
   </div>
   <div style="max-width:640px;margin:0 auto;padding:24px;">
     ${
       auditSummary
-        ? `<div style="background:#fff;border-left:4px solid #4936e6;border-radius:12px;padding:18px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
-        <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#4936e6;text-transform:uppercase;letter-spacing:1px;">Channel Audit Findings</p>
+        ? `<div style="background:#fff;border-left:4px solid #4936e6;border-radius:12px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#4936e6;text-transform:uppercase;letter-spacing:1px;">Channel Audit Verdict</p>
         <p style="margin:0;font-size:14px;color:#1f2937;line-height:1.6;">${escapeHtml(auditSummary)}</p>
       </div>`
         : ""
     }
+    ${strengthsHtml}
+    ${problemsHtml}
     <p style="font-size:14px;color:#374151;line-height:1.6;margin-bottom:20px;">
-      I personally reviewed your channel layout and recent upload topics. Here is your structured 30-day roadmap. If you want me to analyze your private retention graphs, reply to this email with a screenshot of your last 90 days from YouTube Studio.
+      I reviewed your channel layout, title/thumbnail packaging, intro pacing opportunities, and recent upload performance. Here is your structured 30-day roadmap. Want a deeper, personalized walkthrough of your channel or help with thumbnail design and retention editing? <a href="https://anuj4u.in/contact" style="color:#4936e6;font-weight:600;">Book a 1-on-1 call with Anuj</a>.
     </p>
     ${rows}
     <div style="background:#fff;border-radius:14px;padding:20px;margin-top:24px;text-align:center;border:1px solid #e5e7eb;">
-      <p style="font-size:15px;font-weight:700;color:#111827;margin:0 0 6px;">Want me to manage or edit your channel full-time?</p>
-      <p style="font-size:13px;color:#6b7280;margin:0 0 14px;">I partner 1-on-1 with selected creators to scale retention, packaging, and views.</p>
+      <p style="font-size:15px;font-weight:700;color:#111827;margin:0 0 6px;">Want me to design your thumbnails or manage your channel?</p>
+      <p style="font-size:13px;color:#6b7280;margin:0 0 14px;">I partner 1-on-1 with selected creators to scale CTR, retention, and views.</p>
       <a href="https://anuj4u.in/contact" style="display:inline-block;background:#4936e6;color:#fff;text-decoration:none;font-weight:600;font-size:13px;padding:10px 20px;border-radius:8px;">Schedule Strategy Call</a>
     </div>
     <p style="font-size:13px;color:#6b7280;margin-top:24px;text-align:center;">Anuj Mishra · Solo Growth Partner · <a href="mailto:contact@anuj4u.in" style="color:#4936e6;">contact@anuj4u.in</a></p>
@@ -129,7 +187,10 @@ function reviewEmailHtml(channel: YouTubeChannelData, channelUrl: string) {
   <h2 style="color:#4936e6;margin-bottom:12px;">Auditing Your Channel: ${escapeHtml(channel.name)} ✅</h2>
   <p>Thanks for sharing your channel! I received <b>${escapeHtml(channel.name)}</b> (${escapeHtml(channelUrl)}).</p>
   <p>I'm reviewing your recent uploads and will send your full 30-day strategy within 24 hours.</p>
-  <p>If you'd like even sharper retention advice, reply with a screenshot of your last 90 days from YouTube Studio.</p>
+  <p>Want a more personalized breakdown of your titles, thumbnails, and video intros? <a href="https://anuj4u.in/contact" style="color:#4936e6;font-weight:600;">Book a 1-on-1 call with Anuj</a>.</p>
+  <p style="margin:20px 0;">
+    <a href="https://anuj4u.in/contact" style="display:inline-block;background:#4936e6;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:12px 22px;border-radius:8px;">Book a Call with Anuj</a>
+  </p>
   <p style="margin-top:24px;">Best regards,<br/><b>Anuj Mishra</b><br/><a href="mailto:contact@anuj4u.in" style="color:#4936e6;">contact@anuj4u.in</a></p></body></html>`;
 }
 
@@ -165,12 +226,16 @@ export async function POST(request: NextRequest) {
     const aiResponse = await geminiJson<StrategyResponse | PlanDay[]>(buildPrompt(channel, parsed.url));
     let plan: PlanDay[] = [];
     let auditSummary = "";
+    let whatsWorking: string[] = [];
+    let problemsFound: string[] = [];
 
     if (Array.isArray(aiResponse)) {
       plan = aiResponse;
     } else if (aiResponse && typeof aiResponse === "object") {
       plan = Array.isArray(aiResponse.plan) ? aiResponse.plan : [];
       auditSummary = typeof aiResponse.auditSummary === "string" ? aiResponse.auditSummary : "";
+      whatsWorking = Array.isArray(aiResponse.whatsWorking) ? aiResponse.whatsWorking : [];
+      problemsFound = Array.isArray(aiResponse.problemsFound) ? aiResponse.problemsFound : [];
     }
 
     const hasPlan = Array.isArray(plan) && plan.length >= 7;
@@ -215,7 +280,7 @@ export async function POST(request: NextRequest) {
           ? `Your 30-Day YouTube Growth Plan for ${channel.name}`
           : `Auditing ${channel.name}: Your YouTube Plan is Coming`,
         html: hasPlan
-          ? planEmailHtml(channel, parsed.url, auditSummary, plan)
+          ? planEmailHtml(channel, parsed.url, auditSummary, plan, whatsWorking, problemsFound)
           : reviewEmailHtml(channel, parsed.url),
       });
     } catch (e) {

@@ -6,13 +6,27 @@ import Image from "next/image";
 import { parseChannelUrl } from "@/lib/youtube";
 import BrandIcon from "@/components/BrandIcon";
 
+interface ChannelFactor {
+  id: "packaging" | "outliers" | "cadence" | "hygiene" | "niche";
+  label: string;
+  score: number;
+  status: "strong" | "warning" | "critical";
+  metric: string;
+  insight: string;
+}
+
 interface InspectedChannel {
   name: string;
   handle: string;
   avatar: string | null;
   description: string;
   channelId: string | null;
-  recentVideos: Array<{ title: string; published: string }>;
+  subscriberCount?: string | null;
+  totalVideos?: string | null;
+  overallScore?: number;
+  factors?: ChannelFactor[];
+  topVideo?: { title: string; views: number; published: string } | null;
+  recentVideos: Array<{ title: string; published: string; views?: number }>;
   detectedTopics: string[];
   packagingNotes: string[];
 }
@@ -443,14 +457,23 @@ export default function YouTubeFunnelPage() {
                   </div>
                 )}
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-bold text-on-surface text-lg leading-tight truncate">
-                      {inspectedChannel.name}
-                    </h3>
-                    <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <h3 className="font-bold text-on-surface text-lg leading-tight truncate">
+                        {inspectedChannel.name}
+                      </h3>
+                      <span className="material-symbols-outlined text-primary text-base">check_circle</span>
+                    </div>
+                    {typeof inspectedChannel.overallScore === "number" && (
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold shrink-0">
+                        <span>Channel Score: {inspectedChannel.overallScore}/100</span>
+                      </div>
+                    )}
                   </div>
                   <p className="text-xs text-on-surface-variant font-mono mt-0.5">
                     {inspectedChannel.handle}
+                    {inspectedChannel.subscriberCount ? ` · ${inspectedChannel.subscriberCount}` : ""}
+                    {inspectedChannel.totalVideos ? ` · ${inspectedChannel.totalVideos}` : ""}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mt-2.5">
                     <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-red-500/10 text-red-600 border border-red-500/20">
@@ -468,20 +491,78 @@ export default function YouTubeFunnelPage() {
                 </div>
               </div>
 
-              {inspectedChannel.packagingNotes.length > 0 && (
-                <div className="mt-4 pt-4 border-t border-outline-variant/30 text-xs text-on-surface-variant space-y-1">
-                  <p className="font-semibold text-on-surface text-[11px] uppercase tracking-wider text-primary">
-                    Packaging Diagnostics:
-                  </p>
-                  {inspectedChannel.packagingNotes.map((note, idx) => (
-                    <p key={idx} className="flex items-start gap-1.5 leading-relaxed">
-                      <span className="material-symbols-outlined text-xs text-primary shrink-0 mt-0.5">
-                        arrow_right
-                      </span>
-                      {note}
+              {inspectedChannel.topVideo && (
+                <div className="mt-4 p-3.5 rounded-xl bg-emerald-500/5 border border-emerald-500/20 flex items-center justify-between gap-3 flex-wrap">
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-700">
+                      Top Recent Outlier Video
                     </p>
-                  ))}
+                    <p className="text-xs font-semibold text-on-surface truncate">
+                      &ldquo;{inspectedChannel.topVideo.title}&rdquo;
+                    </p>
+                  </div>
+                  <span className="text-xs font-bold text-emerald-700 bg-emerald-500/10 px-2.5 py-1 rounded-full shrink-0">
+                    {inspectedChannel.topVideo.views.toLocaleString()} views
+                  </span>
                 </div>
+              )}
+
+              {inspectedChannel.factors && inspectedChannel.factors.length > 0 ? (
+                <div className="mt-5 pt-4 border-t border-outline-variant/30 space-y-3">
+                  <p className="font-semibold text-[11px] uppercase tracking-wider text-primary">
+                    5-Factor Channel Audit Breakdown:
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {inspectedChannel.factors.map((f) => {
+                      const badgeColor =
+                        f.status === "strong"
+                          ? "bg-emerald-500/10 text-emerald-700 border-emerald-500/20"
+                          : f.status === "warning"
+                          ? "bg-amber-500/10 text-amber-700 border-amber-500/20"
+                          : "bg-red-500/10 text-red-700 border-red-500/20";
+                      const barColor =
+                        f.status === "strong"
+                          ? "bg-emerald-500"
+                          : f.status === "warning"
+                          ? "bg-amber-500"
+                          : "bg-red-500";
+                      return (
+                        <div
+                          key={f.id}
+                          className="p-3.5 rounded-xl bg-surface-container/70 border border-outline-variant/30 space-y-1.5"
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-xs font-bold text-on-surface">{f.label}</span>
+                            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full border ${badgeColor}`}>
+                              {f.score}/100
+                            </span>
+                          </div>
+                          <div className="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+                            <div className={`h-full rounded-full ${barColor}`} style={{ width: `${f.score}%` }} />
+                          </div>
+                          <p className="text-[11px] font-mono text-on-surface-variant/80">{f.metric}</p>
+                          <p className="text-xs text-on-surface-variant leading-relaxed">{f.insight}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                inspectedChannel.packagingNotes.length > 0 && (
+                  <div className="mt-4 pt-4 border-t border-outline-variant/30 text-xs text-on-surface-variant space-y-1">
+                    <p className="font-semibold text-[11px] uppercase tracking-wider text-primary">
+                      Packaging Diagnostics:
+                    </p>
+                    {inspectedChannel.packagingNotes.map((note, idx) => (
+                      <p key={idx} className="flex items-start gap-1.5 leading-relaxed">
+                        <span className="material-symbols-outlined text-xs text-primary shrink-0 mt-0.5">
+                          arrow_right
+                        </span>
+                        {note}
+                      </p>
+                    ))}
+                  </div>
+                )
               )}
             </div>
           )}

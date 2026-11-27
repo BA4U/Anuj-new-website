@@ -81,7 +81,7 @@ const TIMELINE: TimelineEvent[] = [
     role: "Where It Started: First Personal YouTube Channel",
     highlight: "The Groundwork: Scripting, Pacing & Algorithm Dynamics",
     description:
-      "Launched my first personal YouTube channel to learn the craft from scratch. Edited my own footage, tested titles, designed thumbnails, and studied retention drop-offs frame by frame. Established my core philosophy early: the YouTube Studio data doesn't lie—content either earns attention, or it doesn't.",
+      "Launched my first personal YouTube channel to learn the craft from scratch. Edited my own footage, tested titles, designed thumbnails, and studied retention drop-offs frame by frame. Established my core philosophy early: the YouTube Studio data doesn't lie, content either earns attention or it doesn't.",
     tags: ["Channel Launch", "Self-Taught Craft", "YouTube Studio", "Data-First"],
     icon: "lightbulb",
   },

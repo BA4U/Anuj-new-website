@@ -62,7 +62,7 @@ const PROOF = [
   { src: "/proof/google-ads-growth.png", label: "Google Ads", headline: "Paid reach that pays off", stat: "$0.23", statLabel: "average cost per click", note: "A $600 YouTube campaign at a 1.86% view rate." },];
 
 // Pinned strongest quote — highest trust signal, shown every time
-const PinnedCallout = "\$50,000 worth of clients from just YouTube — in three months.";
+const PinnedCallout = "\$50,000 worth of clients from just YouTube in three months.";
 
 // Pinned heading text
 const PinnedCalloutHeadline = "Real results that convert:";
@@ -152,14 +152,12 @@ export default function Home() {
         <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 xl:px-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
             <ScrollReveal each className="flex flex-col items-center lg:items-start text-center lg:text-left">
-              <p className="reveal eyebrow mb-3">YouTube &amp; Social Media Specialist</p>
+              <p className="reveal eyebrow mb-3">Hi, I am Anuj</p>
               <h1 className="reveal text-[38px] sm:text-[52px] lg:text-[48px] xl:text-[58px] display text-on-surface mb-5 leading-[1.08]">
-                Hi, I am Anuj.
-                <br />
-                <span className="gradient-text-animated">I help creators and brands grow with video.</span>
+                I help creators and brands <span className="gradient-text-animated">grow with video.</span>
               </h1>
               <p className="reveal text-[17px] md:text-[19px] text-on-surface-variant leading-relaxed max-w-lg mb-8">
-                Strategy, high-retention editing, packaging, and multi-platform distribution—even if you never step in front of a camera.
+                Strategy, high-retention editing, packaging, and multi-platform distribution, even if you never step in front of a camera.
               </p>
               <div className="reveal flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <Link href="/youtube-funnel" className="btn btn-glow">
@@ -256,8 +254,8 @@ export default function Home() {
                 videoId="IYphbtdwb5M"
                 clientName="Cosmo Taylor"
                 clientRole="Business Owner & Author"
-                headline="Cosmo Taylor — Podcast Production"
-                quote="Anuj manages the entire podcast pipeline—from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
+                headline="Cosmo Taylor: Podcast Production"
+                quote="Anuj manages the entire podcast pipeline, from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
               />
             </ScrollReveal>
           </div>
