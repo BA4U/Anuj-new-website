@@ -76,6 +76,81 @@ function PlatformLogo({ id, className = "w-full h-full" }: { id: string; classNa
   );
 }
 
+/* ─── VideoCard component ────────────────────────────────────── */
+type ClientVideo = {
+  id: string;
+  title: string;
+  channel: string;
+  channelAvatar: string;
+  channelUrl: string;
+};
+
+function VideoCard({ video }: { video: ClientVideo }) {
+  const [playing, setPlaying] = useState(false);
+  return (
+    <div className="shrink-0 w-[82vw] sm:w-[340px] md:w-[380px] snap-center group">
+      {/* Thumbnail / Player */}
+      <div className="glass-card rounded-[18px] p-1 shadow-[0_12px_40px_-16px_rgba(73,54,230,0.22)] overflow-hidden">
+        <div className="relative aspect-video rounded-[13px] overflow-hidden bg-neutral-950">
+          {playing ? (
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0`}
+              title={video.title}
+              className="absolute inset-0 w-full h-full border-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setPlaying(true)}
+              className="group/btn relative w-full h-full flex items-center justify-center cursor-pointer focus:outline-none"
+              aria-label={`Play ${video.title}`}
+            >
+              <YtThumb
+                id={video.id}
+                alt={video.title}
+                className="group-hover/btn:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-black/25 group-hover/btn:bg-black/15 transition-colors" />
+              <div className="relative z-10 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/20 backdrop-blur-xl border border-white/50 flex items-center justify-center text-white shadow-xl group-hover/btn:scale-110 group-hover/btn:bg-white group-hover/btn:text-black transition-all">
+                <span className="material-symbols-outlined text-[26px] sm:text-[30px] translate-x-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  play_arrow
+                </span>
+              </div>
+            </button>
+          )}
+        </div>
+      </div>
+      {/* Channel name + Video title — YouTube-style */}
+      <div className="flex items-start gap-2.5 mt-3 px-1">
+        <a href={video.channelUrl} target="_blank" rel="noopener noreferrer" className="shrink-0 mt-0.5">
+          <Image
+            src={video.channelAvatar}
+            alt={video.channel}
+            width={36}
+            height={36}
+            className="w-9 h-9 rounded-full object-cover ring-2 ring-white shadow-sm"
+          />
+        </a>
+        <div className="min-w-0">
+          <p className="text-[13.5px] font-semibold text-on-surface leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+            {video.title}
+          </p>
+          <a
+            href={video.channelUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[12px] text-on-surface-variant hover:text-primary transition-colors mt-0.5 inline-block"
+          >
+            {video.channel}
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Real Client Data (No subscriber counts, no arrows) ────────── */
 const HERO_AVATARS = [
   { src: "/testimonials/victor-chan.jpg", name: "Victor Chan" },
@@ -118,6 +193,46 @@ const CLIENT_CARDS = [
     badge: "Podcast Branding",
     quote:
       "Anuj helped create video layouts for my podcast which look great and work perfectly whilst saving me so much time. Generous with his time and would highly recommend.",
+  },
+];
+
+
+/* ─── Client Video Showcase (horizontal scroll) ──────────────── */
+const CLIENT_VIDEOS = [
+  {
+    id: "mHOLzwe4sMQ",
+    title: "How I Built a $50K/Month Business from YouTube",
+    channel: "Launch Excel",
+    channelAvatar: "/testimonials/victor-chan.jpg",
+    channelUrl: "https://www.youtube.com/@launchexcel",
+  },
+  {
+    id: "1nT4g9VeJDk",
+    title: "The Science of Muscle Growth Explained",
+    channel: "Training Scientists",
+    channelAvatar: "/testimonials/maurice-maurer.jpg",
+    channelUrl: "https://www.youtube.com/@TrainingScientists",
+  },
+  {
+    id: "TbP5kY8BXUI",
+    title: "My Honest Experience Working With Anuj",
+    channel: "Tim Cakir",
+    channelAvatar: "/testimonials/victor-chan.jpg",
+    channelUrl: "https://www.youtube.com/@timcakir",
+  },
+  {
+    id: "IYphbtdwb5M",
+    title: "Podcast Production & Business Growth",
+    channel: "Cosmo Taylor",
+    channelAvatar: "/testimonials/blake-reddy.jpg",
+    channelUrl: "https://www.youtube.com/@cosmotaylor",
+  },
+  {
+    id: "dD3jLdx2k7A",
+    title: "Short-Form Content Strategy That Works",
+    channel: "Launch Excel",
+    channelAvatar: "/testimonials/victor-chan.jpg",
+    channelUrl: "https://www.youtube.com/@launchexcel",
   },
 ];
 
@@ -354,6 +469,29 @@ export default function Home() {
             <Link href="/services" className="btn btn-secondary">
               View Services
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 1b · WORK SHOWCASE: Horizontal Scrollable Video Rail */}
+      <section className="pb-10 md:pb-14 overflow-hidden">
+        <div className="max-w-[1140px] mx-auto px-5 sm:px-6 lg:px-10 mb-6">
+          <p className="eyebrow">Work Showcase</p>
+        </div>
+        <div
+          className="relative"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 60px, black calc(100% - 60px), transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 60px, black calc(100% - 60px), transparent)",
+          }}
+        >
+          <div
+            className="flex gap-4 overflow-x-auto pb-3 pl-[max(20px,calc((100vw-1140px)/2+20px))] pr-[max(20px,calc((100vw-1140px)/2+20px))] snap-x snap-mandatory scroll-smooth"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {CLIENT_VIDEOS.map((v) => (
+              <VideoCard key={v.id} video={v} />
+            ))}
           </div>
         </div>
       </section>
