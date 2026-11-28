@@ -297,7 +297,7 @@ export default function Home() {
             <div className="flex items-center gap-1.5 text-xs">
               <span className="text-amber-400 tracking-tight">★★★★★</span>
               <span className="font-bold text-on-surface">5.0</span>
-              <span className="text-on-surface-variant">Trusted by 50+ creators &amp; brands</span>
+              <span className="text-on-surface-variant">Worked With 50+ Creators &amp; Brands</span>
             </div>
           </div>
 
@@ -404,16 +404,21 @@ export default function Home() {
         <div className="max-w-[1140px] mx-auto px-5 sm:px-6 lg:px-10">
           <ScrollReveal>
             <div className="text-center max-w-2xl mx-auto mb-10">
-              <p className="eyebrow mb-2">Clients I Work With</p>
-              <h2 className="text-[30px] md:text-[44px] display text-on-surface">
-                Real Creators. <span className="gradient-text">Real Feedback.</span>
-              </h2>
+                <p className="eyebrow mb-2">Clients</p>
+                <h2 className="text-[30px] md:text-[44px] display text-on-surface">
+                  Worked With <span className="gradient-text">50+ Creators</span> and Brands
+                </h2>
+
             </div>
           </ScrollReveal>
 
-          <ScrollReveal each className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div
+            className="relative"
+            style={{ maskImage: "linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)" }}
+          >
+            <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
             {CLIENT_CARDS.map((c) => (
-              <article key={c.name} className="reveal card-glow spotlight rounded-[24px] p-6 sm:p-7 flex flex-col justify-between gap-5">
+              <article key={c.name} className="card-glow spotlight rounded-[24px] p-6 sm:p-7 flex flex-col justify-between gap-5 shrink-0 w-[85vw] sm:w-[420px] snap-center">
                 <p className="text-[15px] text-on-surface-variant leading-relaxed">
                   &ldquo;{c.quote}&rdquo;
                 </p>
@@ -449,7 +454,8 @@ export default function Home() {
                 </div>
               </article>
             ))}
-          </ScrollReveal>
+            </div>
+          </div>
         </div>
       </section>
 
