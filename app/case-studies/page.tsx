@@ -15,7 +15,6 @@ const CLIENT_FEEDBACKS = [
     platform: "YouTube · @launchexcel",
     channelUrl: "https://www.youtube.com/@launchexcel",
     photo: "/testimonials/victor-chan.jpg",
-    outcome: "Long-Term YouTube Partner",
     quote:
       "Anuj has been a game-changer for my video production, handling both long-form YouTube edits and sales-page VSLs with excellent results. His fast, reliable WhatsApp communication saves me days every week while making my videos look more professional than ever.",
     deliverables: ["Long-form YouTube Edits", "Sales VSL Production", "Thumbnail Packaging"],
@@ -26,7 +25,6 @@ const CLIENT_FEEDBACKS = [
     platform: "YouTube · @TrainingScientists",
     channelUrl: "https://www.youtube.com/@TrainingScientists",
     photo: "/testimonials/maurice-maurer.jpg",
-    outcome: "High-Retention Technical Edits",
     quote:
       "I hired Anuj to do video editing and graphic design work for my YouTube channel. He did an excellent job, always responds very quickly and produces great results. I am very happy working with him and will continue to do so in the future.",
     deliverables: ["Complex Python Code Edits", "2D Data Visualizations", "Thumbnail Design"],
@@ -36,7 +34,6 @@ const CLIENT_FEEDBACKS = [
     role: "Canadian Actress, Author & Podcast Host",
     platform: "Video Podcast & YouTube",
     photo: "/testimonials/harjeet-dhillon.jpg",
-    outcome: "Complete Podcast Launch",
     quote:
       "Anuj has been monumental in creating my podcast. While he creates thumbnails, edits content and can create descriptions too, he doesn't stop there. He has a vast knowledge of software and has guided me more than I could ever hope for with setting up my podcast. He has a solid work ethic and is awesome at receiving feedback.",
     deliverables: ["Podcast Architecture", "Dynamic Video Editing", "High-Contrast Thumbnails"],
@@ -46,7 +43,6 @@ const CLIENT_FEEDBACKS = [
     role: "Private Client Wealth Adviser",
     platform: "Executive Video Podcast",
     photo: "/testimonials/blake-reddy.jpg",
-    outcome: "Automated Production System",
     quote:
       "Anuj helped create video layouts for my podcast which look great and work perfectly whilst saving me so much time. Generous with his time and would highly recommend. Thank you Anuj!",
     deliverables: ["Custom Layout Templates", "Audio & Visual Master", "Brand Cohesion"],
@@ -56,7 +52,6 @@ const CLIENT_FEEDBACKS = [
     role: "Founder, Descript Mastery",
     platform: "Descript Mastery",
     photo: "/testimonials/ross-zeiger.jpg",
-    outcome: "Fast, Reliable Editing",
     quote:
       "Anuj is great! Professional, fast, and easy to work with.",
     deliverables: ["Descript Editing", "Long-Form YouTube", "Quick Turnaround"],
@@ -75,22 +70,15 @@ export default function CaseStudiesAndTestimonialsPage() {
       <section className="text-center mb-14 md:mb-18 max-w-3xl mx-auto pt-4 relative z-10">
         <p className="eyebrow mb-3">Case Studies &amp; Testimonials</p>
         <h1 className="text-[34px] sm:text-[48px] md:text-[56px] font-extrabold tracking-[-0.03em] leading-[1.1] text-on-surface mb-5">
-          Real creators. <span className="gradient-text">Real results.</span>
+          Hear it directly from <span className="gradient-text">clients.</span>
         </h1>
         <p className="text-[16px] md:text-[18px] text-on-surface-variant leading-relaxed max-w-2xl mx-auto">
           Video testimonials, YouTube Studio numbers, and feedback from the creators, founders, and brands I partner with.
         </p>
       </section>
 
-      {/* 1. Two Featured Video Testimonials */}
-      <section className="max-w-5xl mx-auto mb-20 relative z-10 space-y-8">
-        <div className="text-center mb-6">
-          <p className="eyebrow mb-1.5">Video Testimonials</p>
-          <h2 className="text-[26px] md:text-[36px] display text-on-surface">
-            Hear it directly from <span className="gradient-text">clients.</span>
-          </h2>
-        </div>
-
+      {/* 1. Tim Cakir Video Testimonial */}
+      <section className="max-w-5xl mx-auto mb-16 relative z-10">
         <VideoTestimonial
           videoId="TbP5kY8BXUI"
           clientName="Tim Cakir"
@@ -100,17 +88,36 @@ export default function CaseStudiesAndTestimonialsPage() {
           quote="Consistent editing and packaging turned my YouTube channel into $50,000 in client deals."
         />
 
-        <VideoTestimonial
-          videoId="IYphbtdwb5M"
-          clientName="Cosmo Taylor"
-          clientRole="Business Owner & Author"
-          headline="Cosmo Taylor: Podcast Production"
-          quote="Anuj manages the entire podcast pipeline, from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
-        />
+        {/* Tim Cakir channel info */}
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <Image
+            src="/avatars/tim-cakir.jpg"
+            alt="Tim Cakir YouTube Channel"
+            width={48}
+            height={48}
+            className="w-12 h-12 rounded-full object-cover ring-2 ring-white shadow-sm"
+          />
+          <div>
+            <p className="text-[15px] font-bold text-on-surface">Tim Cakir</p>
+            <p className="text-[13px] text-on-surface-variant">12.3K subscribers</p>
+          </div>
+          <a
+            href="https://www.youtube.com/@timcakir"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[13px] font-semibold text-white bg-red-600 hover:bg-red-700 transition-colors shadow-sm"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814Z" />
+              <path d="m9.545 15.568 6.273-3.568-6.273-3.568v7.136Z" fill="#fff" />
+            </svg>
+            Visit Channel
+          </a>
+        </div>
       </section>
 
-      {/* 2. Featured Case Study (Tim Cakir) */}
-      <section className="mb-20 relative z-10">
+      {/* 2. Featured Case Study (Tim Cakir) — immediately after his testimonial */}
+      <section className="mb-16 relative z-10">
         <ScrollReveal>
           <article className="card-glow spotlight rounded-[28px] p-6 sm:p-10 text-center max-w-5xl mx-auto">
             <p className="eyebrow mb-2">Featured Case Study · {study.role}</p>
@@ -147,10 +154,32 @@ export default function CaseStudiesAndTestimonialsPage() {
             </h3>
           </div>
           <CaseShots />
+          <div className="text-center mt-6">
+            <a
+              href="https://www.youtube.com/@timcakir"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[14px] font-semibold text-primary hover:underline inline-flex items-center gap-1"
+            >
+              View Tim&apos;s YouTube Channel
+              <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+            </a>
+          </div>
         </ScrollReveal>
       </section>
 
-      {/* 3. All Written Client Feedbacks */}
+      {/* 3. Cosmo Taylor Video Testimonial — after the case study proof */}
+      <section className="max-w-5xl mx-auto mb-20 relative z-10">
+        <VideoTestimonial
+          videoId="IYphbtdwb5M"
+          clientName="Cosmo Taylor"
+          clientRole="Business Owner & Author"
+          headline="Cosmo Taylor: Podcast Production"
+          quote="Anuj manages the entire podcast pipeline, from full-episode editing and Spotify publishing to Instagram, Facebook & LinkedIn clips, carousels, and my book release video funnel."
+        />
+      </section>
+
+      {/* 4. All Written Client Feedbacks — no outcome badges */}
       <section className="mb-20 relative z-10">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <p className="eyebrow mb-2">Client Feedback</p>
@@ -166,22 +195,16 @@ export default function CaseStudiesAndTestimonialsPage() {
               className="glass-card rounded-[26px] p-7 sm:p-8 relative overflow-hidden border border-white/80 flex flex-col justify-between gap-6 hover:shadow-[0_20px_50px_-20px_rgba(73,54,230,0.2)] transition-all duration-300"
             >
               <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                  <div className="flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <span
-                        key={i}
-                        className="material-symbols-outlined text-[18px]"
-                        style={{ fontVariationSettings: "'FILL' 1" }}
-                      >
-                        star
-                      </span>
-                    ))}
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                    {t.outcome}
-                  </span>
+                <div className="flex items-center gap-1 text-amber-400 mb-4" aria-label="5 out of 5 stars">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span
+                      key={i}
+                      className="material-symbols-outlined text-[18px]"
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      star
+                    </span>
+                  ))}
                 </div>
 
                 <blockquote className="text-on-surface text-[15.5px] leading-relaxed mb-5">
@@ -241,8 +264,7 @@ export default function CaseStudiesAndTestimonialsPage() {
         <div className="flex flex-wrap items-center justify-center gap-3.5">
           <Link
             href="/contact"
-            className="px-7 py-3.5 rounded-full text-white text-[15px] font-semibold shadow-[0_14px_32px_-10px_rgba(73,54,230,0.55)] hover:brightness-105 transition-all inline-flex items-center gap-2"
-            style={{ background: "linear-gradient(135deg, #4936e6 0%, #6366f1 52%, #2563eb 100%)" }}
+            className="btn btn-glow inline-flex items-center gap-2"
           >
             Book Free Strategy Call
             <span className="material-symbols-outlined text-[18px]">arrow_forward</span>

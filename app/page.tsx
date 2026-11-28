@@ -490,8 +490,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-3.5">
             <Link
               href={BOOKING_URL}
-              className="px-7 py-3.5 rounded-full text-white text-[15px] font-semibold shadow-[0_14px_32px_-10px_rgba(73,54,230,0.55)] hover:brightness-105 hover:-translate-y-0.5 transition-all inline-flex items-center gap-2"
-              style={{ background: "linear-gradient(135deg, #4936e6 0%, #6366f1 52%, #2563eb 100%)" }}
+              className="btn btn-glow inline-flex items-center gap-2"
             >
               Book Free Strategy Call
               <Arrow />
