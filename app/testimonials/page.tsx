@@ -73,6 +73,19 @@ const TESTIMONIALS: Testimonial[] = [
     fallbackPhoto:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAcV5YGRB486ybQ9zwbwu0Ihd1rDTcA1kf0hwynkmwEXSqTX_79g7gIDH2nZ8y2C5BQz8-bmX9SUCHmwklbnNosL59RHW49XgZpUMfaw7lthcJ4jGoOCpOker1OCanqdNjv7CyOaM_PJ4IxgIsk9uAXdxu0A6MrrK5NhtnhOj6BGFYv5NDx0iIr3LJ4dapkVvKiPUUFDWo9323rCyOH5QneWioGae6YJMew3Ch6Dw0DebyQ3i7jed8hrQ",
   },
+  {
+    name: "Ross Zeiger",
+    role: "Founder, Descript Mastery",
+    niche: "Descript & Video Education",
+    platform: "Descript Mastery",
+    photo: "ross-zeiger",
+    quote:
+      "Anuj is great! Professional, fast, and easy to work with.",
+    outcome: "Fast, Reliable Editing",
+    deliverables: ["Descript Editing", "Long-Form YouTube", "Quick Turnaround"],
+    fallbackPhoto:
+      "https://anuj4u.in/wp-content/uploads/2025/03/ross.jpeg",
+  },
 ];
 
 const PROOF_SHOTS = [

@@ -517,8 +517,9 @@
   100% { left: 140%; }
 }
 
-/* Marquee track for the trust strip */
-.marquee-track { display: flex; width: max-content; animation: marquee-x 38s linear infinite; }
+/* Marquee track for the trust strip & video showcase */
+.marquee-track { display: flex; width: max-content; animation: marquee-x 55s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
 @keyframes marquee-x { to { transform: translateX(-50%); } }
 
 /* ─── Reduced motion: feedback without vestibular movement ────────── */

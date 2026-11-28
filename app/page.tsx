@@ -157,6 +157,7 @@ const HERO_AVATARS = [
   { src: "/testimonials/harjeet-dhillon.jpg", name: "Harjeet Dhillon" },
   { src: "/testimonials/maurice-maurer.jpg", name: "Dr. Maurice Maurer" },
   { src: "/testimonials/blake-reddy.jpg", name: "Blake Reddy" },
+  { src: "/testimonials/ross-zeiger.jpg", name: "Ross Zeiger" },
 ];
 
 const CLIENT_CARDS = [
@@ -194,54 +195,74 @@ const CLIENT_CARDS = [
     quote:
       "Anuj helped create video layouts for my podcast which look great and work perfectly whilst saving me so much time. Generous with his time and would highly recommend.",
   },
+  {
+    name: "Ross Zeiger",
+    role: "Founder, Descript Mastery",
+    photo: "/testimonials/ross-zeiger.jpg",
+    badge: "Descript Mastery",
+    quote:
+      "Anuj is great! Professional, fast, and easy to work with.",
+  },
 ];
 
 
-/* ─── Client Video Showcase (horizontal scroll) ──────────────── */
-// All video IDs confirmed. channelAvatar uses local photos where available;
-// Tim Cakir uses a YouTube-hosted avatar URL rendered via next/image (domain added in next.config).
+/* ─── Client Video Showcase (horizontal scroll, client work only) ─── */
 const CLIENT_VIDEOS = [
   {
-    id: "mHOLzwe4sMQ",
-    title: "ChatGPT Connectors EXPLAINED: 5 Best Use Cases and Limitations Revealed!",
-    channel: "Tim Cakir",
-    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
-    channelUrl: "https://www.youtube.com/@timcakir",
+    id: "-DB8-7eLsTY",
+    title: "Can AI Video Avatars REALLY Replace Human Presenters?",
+    channel: "Eric Presnall - VideoRep",
+    channelAvatar: "/avatars/eric-presnall.jpg",
+    channelUrl: "https://www.youtube.com/@VideoRepMarketing",
   },
   {
-    id: "dD3jLdx2k7A",
-    title: "I Tried ChatGPT for Image Creation and Here's What Happened",
-    channel: "Tim Cakir",
-    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
-    channelUrl: "https://www.youtube.com/@timcakir",
-  },
-  {
-    id: "TbP5kY8BXUI",
-    title: "Working with Anuj — My Honest Testimonial",
-    channel: "Tim Cakir",
-    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
-    channelUrl: "https://www.youtube.com/@timcakir",
-  },
-  {
-    id: "IYphbtdwb5M",
-    title: "Podcast Production, Business Growth & Building an Audience",
-    channel: "Cosmo Taylor",
-    channelAvatar: "/testimonials/blake-reddy.jpg",
-    channelUrl: "https://www.youtube.com/@cosmotaylorofficial",
+    id: "-SYqXdaZXl8",
+    title: "Dan Koe’s Playbook for Financial Freedom and Fulfillment",
+    channel: "Circle",
+    channelAvatar: "/avatars/circle.jpg",
+    channelUrl: "https://www.youtube.com/@circleapp",
   },
   {
     id: "mHOLzwe4sMQ",
     title: "ChatGPT Connectors EXPLAINED: 5 Best Use Cases and Limitations Revealed!",
     channel: "Tim Cakir",
-    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
+    channelAvatar: "/avatars/tim-cakir.jpg",
     channelUrl: "https://www.youtube.com/@timcakir",
   },
   {
-    id: "dD3jLdx2k7A",
-    title: "I Tried ChatGPT for Image Creation and Here's What Happened",
-    channel: "Tim Cakir",
-    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
-    channelUrl: "https://www.youtube.com/@timcakir",
+    id: "pcfFzxnhwUE",
+    title: "How Smart Excel Users Rename 100s of Files",
+    channel: "Victor Chan",
+    channelAvatar: "/avatars/victor-chan.jpg",
+    channelUrl: "https://www.youtube.com/@launchexcel",
+  },
+  {
+    id: "y11b_rVHcyg",
+    title: "ChatGPT o1 vs Claude 3.5: Coding Battle - Create a Snake Game & an Electron Cloud Simulation",
+    channel: "Training Scientists",
+    channelAvatar: "/avatars/training-scientists.jpg",
+    channelUrl: "https://www.youtube.com/@TrainingScientists",
+  },
+  {
+    id: "TW3omRuTQA8",
+    title: "Life Changing Secrets to Manifesting Positivity!",
+    channel: "Harjeet Dhillon",
+    channelAvatar: "/avatars/harjeet-dhillon.jpg",
+    channelUrl: "https://www.youtube.com/@harjeetd111",
+  },
+  {
+    id: "izidLZclYZs",
+    title: "From Broke to YouTube Millionaire: The Making of Sean Cannell",
+    channel: "Circle",
+    channelAvatar: "/avatars/circle.jpg",
+    channelUrl: "https://www.youtube.com/@circleapp",
+  },
+  {
+    id: "68lgEUQDiDQ",
+    title: "Copy My SECRET AI Prompt to Rank on YouTube & AI Search",
+    channel: "Eric Presnall - VideoRep",
+    channelAvatar: "/avatars/eric-presnall.jpg",
+    channelUrl: "https://www.youtube.com/@VideoRepMarketing",
   },
 ];
 
@@ -483,8 +504,11 @@ export default function Home() {
       </section>
 
       {/* 2 · TIM CAKIR TESTIMONIAL VIDEO (Thin Apple-glass border) */}
-      <section className="pb-14 md:pb-20">
+      <section className="pb-12 md:pb-16">
         <div className="max-w-[920px] mx-auto px-5 sm:px-6 lg:px-10">
+          <div className="text-center mb-4">
+            <p className="eyebrow">Client Feedback</p>
+          </div>
           <div className="glass-card rounded-[22px] p-1.5 shadow-[0_24px_60px_-24px_rgba(73,54,230,0.22)]">
             <div className="relative aspect-video rounded-[16px] overflow-hidden bg-neutral-950 flex items-center justify-center">
               {timPlaying ? (
@@ -513,13 +537,13 @@ export default function Home() {
                       play_arrow
                     </span>
                   </div>
-                  <span className="absolute bottom-3.5 left-3.5 z-10 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-white text-xs font-medium border border-white/15">
-                    Tim Cakir · Client Testimonial
-                  </span>
                 </button>
               )}
             </div>
           </div>
+          <p className="text-center text-xs sm:text-[13px] text-on-surface-variant font-medium mt-3">
+            Tim Cakir · AI Operator &amp; Creator
+          </p>
         </div>
       </section>
 
