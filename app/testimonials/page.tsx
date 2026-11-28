@@ -263,10 +263,9 @@ export default function TestimonialsPage() {
                     href={t.channelUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary hover:underline mt-0.5 truncate"
+                    className="inline-block text-[11px] font-semibold text-primary hover:underline mt-0.5 truncate"
                   >
                     {t.platform}
-                    <span className="material-symbols-outlined text-[13px]">open_in_new</span>
                   </a>
                 ) : (
                   <p className="text-[11px] font-semibold text-primary mt-0.5 truncate">{t.platform}</p>

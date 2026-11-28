@@ -199,10 +199,9 @@ export default function Testimonials() {
                       href={cur.channelUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[12px] font-semibold text-primary hover:underline mt-0.5"
+                      className="inline-block text-[12px] font-semibold text-primary hover:underline mt-0.5"
                     >
                       Visit YouTube Channel
-                      <span className="material-symbols-outlined text-[13px]">open_in_new</span>
                     </a>
                   )}
                 </div>
