@@ -16,10 +16,10 @@ type PlatformItem = {
 };
 
 const PLATFORMS: PlatformItem[] = [
-  { id: "youtube", label: "YouTube Channel", gradient: "linear-gradient(135deg, #ef4444, #7c3aed)" },
+  { id: "youtube", label: "YouTube", gradient: "linear-gradient(135deg, #ef4444, #7c3aed)" },
   { id: "instagram", label: "Instagram", gradient: "linear-gradient(135deg, #ec4899, #f97316)" },
   { id: "linkedin", label: "LinkedIn", gradient: "linear-gradient(135deg, #0a66c2, #2563eb)" },
-  { id: "spotify", label: "Podcast", gradient: "linear-gradient(135deg, #1db954, #0d9488)" },
+  { id: "spotify", label: "Podcasts", gradient: "linear-gradient(135deg, #1db954, #0d9488)" },
 ];
 
 function PlatformLogo({ id, className = "w-full h-full" }: { id: string; className?: string }) {
@@ -448,8 +448,9 @@ export default function Home() {
 
           {/* 2-Line Center-Aligned Headline with Official Brand Logos */}
           <h1 className="text-[34px] sm:text-[50px] md:text-[60px] font-extrabold tracking-[-0.03em] leading-[1.14] max-w-4xl mb-5 text-on-surface flex flex-col items-center">
+            <span>I Build Your Presence</span>
             <span className="inline-flex flex-wrap items-center justify-center gap-x-[0.26em]">
-              <span>Turn Your</span>
+              <span>&amp; Authority on</span>
               <span
                 className="inline-block h-[1.2em] overflow-hidden align-middle transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
                 style={{ width: wordWidth ? `${wordWidth}px` : "auto" }}
@@ -478,7 +479,6 @@ export default function Home() {
                 </span>
               </span>
             </span>
-            <span>Into a Growth Engine</span>
           </h1>
 
           {/* Personalized "I" Description (Zero em-dashes) */}
