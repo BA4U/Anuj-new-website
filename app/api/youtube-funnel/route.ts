@@ -114,6 +114,9 @@ function planEmailHtml(
   whatsWorking: string[] = [],
   problemsFound: string[] = []
 ) {
+  const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || "https://anuj4u.in/contact?service=content-engine";
+  const weakestFactorLabel =
+    [...channel.factors].sort((a, b) => a.score - b.score)[0]?.label || "Title & Packaging CTR";
   const rows = plan
     .map(
       (d) => `
@@ -170,28 +173,159 @@ function planEmailHtml(
     ${strengthsHtml}
     ${problemsHtml}
     <p style="font-size:14px;color:#374151;line-height:1.6;margin-bottom:20px;">
-      I reviewed your channel layout, title/thumbnail packaging, intro pacing opportunities, and recent upload performance. Here is your structured 30-day roadmap. Want a deeper, personalized walkthrough of your channel or help with thumbnail design and retention editing? <a href="https://anuj4u.in/contact" style="color:#4936e6;font-weight:600;">Book a 1-on-1 call with Anuj</a>.
+      I reviewed your channel layout, title/thumbnail packaging, intro pacing opportunities, and recent upload performance. Here is your structured 30-day roadmap. Want me to walk through your channel 1-on-1 and show you how we'd redesign your thumbnails and first-30-second hooks? <a href="${escapeHtml(bookingUrl)}" style="color:#4936e6;font-weight:600;">Book a free 15-min Channel Teardown with Anuj →</a>
     </p>
     ${rows}
-    <div style="background:#fff;border-radius:14px;padding:20px;margin-top:24px;text-align:center;border:1px solid #e5e7eb;">
-      <p style="font-size:15px;font-weight:700;color:#111827;margin:0 0 6px;">Want me to design your thumbnails or manage your channel?</p>
-      <p style="font-size:13px;color:#6b7280;margin:0 0 14px;">I partner 1-on-1 with selected creators to scale CTR, retention, and views.</p>
-      <a href="https://anuj4u.in/contact" style="display:inline-block;background:#4936e6;color:#fff;text-decoration:none;font-weight:600;font-size:13px;padding:10px 20px;border-radius:8px;">Schedule Strategy Call</a>
+    <div style="background:linear-gradient(135deg,#111827,#1f2937);border-radius:16px;padding:26px;margin-top:24px;text-align:center;color:#fff;">
+      <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#a5b4fc;margin:0 0 6px;">1-on-1 Channel Teardown</p>
+      <p style="font-size:18px;font-weight:700;color:#fff;margin:0 0 8px;">Want us to fix your thumbnails, titles &amp; retention for you?</p>
+      <p style="font-size:13px;color:#d1d5db;margin:0 0 18px;line-height:1.6;">I partner 1-on-1 with selected creators to handle packaging, thumbnail design, and retention editing. Grab a 15-minute slot on my calendar and we&apos;ll map out your next 4 videos together.</p>
+      <a href="${escapeHtml(bookingUrl)}" style="display:inline-block;background:#4936e6;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 26px;border-radius:10px;">Book Your Free 15-Min Strategy Call →</a>
     </div>
-    <p style="font-size:13px;color:#6b7280;margin-top:24px;text-align:center;">Anuj Mishra · Solo Growth Partner · <a href="mailto:contact@anuj4u.in" style="color:#4936e6;">contact@anuj4u.in</a></p>
+    <p style="font-size:13px;color:#374151;margin-top:18px;line-height:1.6;">
+      <b>P.S.</b> Even fixing just your #1 bottleneck (${escapeHtml(weakestFactorLabel)}) on your next 3 uploads can noticeably lift browse CTR. If you want my eyes on your next title &amp; thumbnail before you hit publish, <a href="${escapeHtml(bookingUrl)}" style="color:#4936e6;font-weight:600;">grab a time on my calendar here</a>.
+    </p>
+    <p style="font-size:13px;color:#6b7280;margin-top:20px;text-align:center;">Anuj Mishra · Solo Growth Partner · <a href="mailto:contact@anuj4u.in" style="color:#4936e6;">contact@anuj4u.in</a></p>
   </div></body></html>`;
 }
 
+interface TitleIdea {
+  original: string;
+  suggestion: string;
+  why: string;
+}
+
+function buildTitleSuggestions(channel: YouTubeChannelData): TitleIdea[] {
+  const videos = channel.recentVideos.slice(0, 6);
+  const ideas: TitleIdea[] = [];
+  const niche = channel.detectedTopics[0] && channel.detectedTopics[0] !== "General Content"
+    ? channel.detectedTopics[0]
+    : "your niche";
+
+  for (const v of videos) {
+    if (ideas.length >= 2) break;
+    const t = v.title.trim();
+    if (!t) continue;
+
+    if (t.length > 56) {
+      const shortened = t.split(/[:|\-–—]/)[0].trim();
+      const base = shortened.length >= 18 && shortened.length <= 46 ? shortened : t.slice(0, 44).trim();
+      ideas.push({
+        original: t,
+        suggestion: `${base} (What Actually Happened)`,
+        why: `Your original is ${t.length} chars and gets cut off on mobile browse feeds. Trimming under 52 chars + adding an open loop preserves the core payoff.`,
+      });
+    } else if (!t.includes("?") && !/\b(why|how|secret|truth|mistake|never|stop|tested|worth|actually|vs)\b/i.test(t)) {
+      const isFirstPerson = /^(I'm|I |My |We )/i.test(t);
+      const hasColon = t.includes(":");
+      const suggestion = isFirstPerson
+        ? `${t} (What Nobody Tells You)`
+        : hasColon
+        ? `${t.split(":")[0].trim()}: What Actually Matters`
+        : `Why ${t} Matters More Than You Think`;
+      ideas.push({
+        original: t,
+        suggestion,
+        why: "The current title is clear and mobile-safe, which is great—testing a curiosity/stakes angle like this gives casual browse viewers a stronger reason to click.",
+      });
+    }
+  }
+
+  if (ideas.length === 0 && videos[0]) {
+    ideas.push({
+      original: videos[0].title,
+      suggestion: `The Honest Truth About ${videos[0].title.slice(0, 36).trim()}…`,
+      why: "Your recent titles already have solid punchy length for mobile. If you want to push CTR further, try A/B testing a direct, opinionated hook against your usual framing.",
+    });
+  }
+
+  return ideas;
+}
+
 function reviewEmailHtml(channel: YouTubeChannelData, channelUrl: string) {
-  return `<!DOCTYPE html><html><body style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;color:#111827;line-height:1.6;max-width:560px;margin:0 auto;padding:24px;">
-  <h2 style="color:#4936e6;margin-bottom:12px;">Auditing Your Channel: ${escapeHtml(channel.name)} ✅</h2>
-  <p>Thanks for sharing your channel! I received <b>${escapeHtml(channel.name)}</b> (${escapeHtml(channelUrl)}).</p>
-  <p>I'm reviewing your recent uploads and will send your full 30-day strategy within 24 hours.</p>
-  <p>Want a more personalized breakdown of your titles, thumbnails, and video intros? <a href="https://anuj4u.in/contact" style="color:#4936e6;font-weight:600;">Book a 1-on-1 call with Anuj</a>.</p>
-  <p style="margin:20px 0;">
-    <a href="https://anuj4u.in/contact" style="display:inline-block;background:#4936e6;color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:12px 22px;border-radius:8px;">Book a Call with Anuj</a>
-  </p>
-  <p style="margin-top:24px;">Best regards,<br/><b>Anuj Mishra</b><br/><a href="mailto:contact@anuj4u.in" style="color:#4936e6;">contact@anuj4u.in</a></p></body></html>`;
+  const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || "https://anuj4u.in/contact?service=content-engine";
+  const sortedFactors = [...channel.factors].sort((a, b) => a.score - b.score);
+  const weakest = sortedFactors[0];
+  const strongFactors = channel.factors.filter((f) => f.score >= 75);
+  const titleIdeas = buildTitleSuggestions(channel);
+  const nicheLabel = channel.detectedTopics.slice(0, 2).join(" & ") || "your niche";
+
+  const factorRows = channel.factors
+    .map((f) => {
+      const badgeBg = f.status === "strong" ? "#ecfdf5" : f.status === "warning" ? "#fffbeb" : "#fef2f2";
+      const badgeText = f.status === "strong" ? "#047857" : f.status === "warning" ? "#b45309" : "#b91c1c";
+      return `<div style="background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;margin-bottom:10px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+          <b style="font-size:13px;color:#111827;">${escapeHtml(f.label)}</b>
+          <span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:${badgeBg};color:${badgeText};">${f.score}/100</span>
+        </div>
+        <div style="font-size:11px;color:#6b7280;font-family:monospace;margin-bottom:4px;">${escapeHtml(f.metric)}</div>
+        <div style="font-size:13px;color:#374151;line-height:1.5;">${escapeHtml(f.insight)}</div>
+      </div>`;
+    })
+    .join("");
+
+  const titleIdeasHtml =
+    titleIdeas.length > 0
+      ? `<div style="background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px;margin:18px 0;">
+          <p style="margin:0 0 10px;font-size:11px;font-weight:700;color:#4936e6;text-transform:uppercase;letter-spacing:0.8px;">Title Ideas You Can Try Next</p>
+          ${titleIdeas
+            .map(
+              (idea) => `<div style="padding:10px 0;border-top:1px solid #f3f4f6;">
+                <p style="margin:0 0 4px;font-size:12px;color:#6b7280;"><b>Current:</b> &ldquo;${escapeHtml(idea.original)}&rdquo;</p>
+                <p style="margin:0 0 4px;font-size:13px;color:#111827;"><b>Try Instead:</b> <span style="color:#4936e6;font-weight:700;">&ldquo;${escapeHtml(idea.suggestion)}&rdquo;</span></p>
+                <p style="margin:0;font-size:12px;color:#4b5563;line-height:1.5;">${escapeHtml(idea.why)}</p>
+              </div>`
+            )
+            .join("")}
+        </div>`
+      : "";
+
+  return `<!DOCTYPE html><html><body style="margin:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;color:#111827;">
+  <div style="background:linear-gradient(135deg,#111827,#1f2937);padding:34px 24px;text-align:center;color:#fff;">
+    <p style="margin:0 0 6px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#a5b4fc;">Honest Channel Audit</p>
+    <h1 style="margin:0 0 6px;font-size:22px;font-weight:700;">${escapeHtml(channel.name)} (${escapeHtml(channel.handle)})</h1>
+    <p style="margin:0;font-size:14px;color:#d1d5db;">Overall Channel Score: <b>${channel.overallScore}/100</b>${channel.subscriberCount ? ` · ${escapeHtml(channel.subscriberCount)}` : ""}</p>
+  </div>
+  <div style="max-width:600px;margin:0 auto;padding:24px;">
+    <p style="font-size:14px;color:#374151;line-height:1.65;margin-top:0;">
+      Hey! I ran an honest, multi-factor audit on <b>${escapeHtml(channel.name)}</b> (<a href="${escapeHtml(channelUrl)}" style="color:#4936e6;">${escapeHtml(channel.handle)}</a>) across ${channel.recentVideos.length} recent uploads in <b>${escapeHtml(nicheLabel)}</b>. Here is what&apos;s genuinely working, where you&apos;re leaving views on the table, and a few concrete tweaks you can try on your next upload:
+    </p>
+    ${
+      strongFactors.length > 0
+        ? `<div style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;padding:15px 16px;margin-bottom:12px;">
+            <p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#047857;text-transform:uppercase;letter-spacing:0.6px;">What's Already Working Well (Keep Doing This)</p>
+            <ul style="margin:0;padding-left:18px;font-size:13px;color:#065f46;line-height:1.6;">
+              ${strongFactors.map((f) => `<li><b>${escapeHtml(f.label)} (${f.score}/100):</b> ${escapeHtml(f.insight)}</li>`).join("")}
+            </ul>
+          </div>`
+        : ""
+    }
+    ${
+      weakest
+        ? `<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:15px 16px;margin-bottom:16px;">
+            <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#b91c1c;text-transform:uppercase;letter-spacing:0.6px;">#1 Opportunity to Unlock More Views (${weakest.score}/100)</p>
+            <p style="margin:0;font-size:13px;color:#7f1d1d;line-height:1.55;"><b>${escapeHtml(weakest.label)}:</b> ${escapeHtml(weakest.insight)}</p>
+          </div>`
+        : ""
+    }
+    ${titleIdeasHtml}
+    <div style="background:#fff;border-left:4px solid #4936e6;border-radius:12px;padding:14px 16px;margin-bottom:18px;">
+      <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:#4936e6;text-transform:uppercase;letter-spacing:0.6px;">Quick Intro &amp; Retention Tip</p>
+      <p style="margin:0;font-size:13px;color:#374151;line-height:1.55;">On your next video, skip any channel greeting or setup preamble—open in the first 8 seconds by confirming the exact promise of your title/thumbnail, then introduce one curiosity loop before the 30-second mark.</p>
+    </div>
+    ${factorRows}
+    <div style="background:linear-gradient(135deg,#111827,#1f2937);border-radius:16px;padding:24px;margin-top:20px;text-align:center;color:#fff;">
+      <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#a5b4fc;margin:0 0 6px;">Personalized Walkthrough</p>
+      <h2 style="font-size:18px;font-weight:700;margin:0 0 8px;color:#fff;">Want a custom teardown of your titles, thumbnails &amp; intros?</h2>
+      <p style="font-size:13px;color:#d1d5db;margin:0 0 18px;line-height:1.6;">Book a free 15-minute call with me. We&apos;ll review your packaging live and map out the exact thumbnail &amp; hook changes to scale your next uploads.</p>
+      <a href="${escapeHtml(bookingUrl)}" style="display:inline-block;background:#4936e6;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 26px;border-radius:10px;">Book a 1-on-1 Call with Anuj →</a>
+    </div>
+    <p style="font-size:13px;color:#374151;margin-top:18px;line-height:1.6;">
+      <b>P.S.</b> If you&apos;d like us to handle your thumbnail design, title packaging, or retention editing so you can focus purely on filming, <a href="${escapeHtml(bookingUrl)}" style="color:#4936e6;font-weight:600;">grab a quick slot on my calendar here</a>.
+    </p>
+    <p style="margin-top:20px;font-size:13px;color:#6b7280;text-align:center;">Anuj Mishra · Solo Growth Partner · <a href="mailto:contact@anuj4u.in" style="color:#4936e6;">contact@anuj4u.in</a></p>
+  </div></body></html>`;
 }
 
 export async function POST(request: NextRequest) {

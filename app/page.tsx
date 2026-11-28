@@ -198,41 +198,50 @@ const CLIENT_CARDS = [
 
 
 /* ─── Client Video Showcase (horizontal scroll) ──────────────── */
+// All video IDs confirmed. channelAvatar uses local photos where available;
+// Tim Cakir uses a YouTube-hosted avatar URL rendered via next/image (domain added in next.config).
 const CLIENT_VIDEOS = [
   {
     id: "mHOLzwe4sMQ",
-    title: "How I Built a $50K/Month Business from YouTube",
-    channel: "Launch Excel",
-    channelAvatar: "/testimonials/victor-chan.jpg",
-    channelUrl: "https://www.youtube.com/@launchexcel",
+    title: "ChatGPT Connectors EXPLAINED: 5 Best Use Cases and Limitations Revealed!",
+    channel: "Tim Cakir",
+    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
+    channelUrl: "https://www.youtube.com/@timcakir",
   },
   {
-    id: "1nT4g9VeJDk",
-    title: "The Science of Muscle Growth Explained",
-    channel: "Training Scientists",
-    channelAvatar: "/testimonials/maurice-maurer.jpg",
-    channelUrl: "https://www.youtube.com/@TrainingScientists",
+    id: "dD3jLdx2k7A",
+    title: "I Tried ChatGPT for Image Creation and Here's What Happened",
+    channel: "Tim Cakir",
+    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
+    channelUrl: "https://www.youtube.com/@timcakir",
   },
   {
     id: "TbP5kY8BXUI",
-    title: "My Honest Experience Working With Anuj",
+    title: "Working with Anuj — My Honest Testimonial",
     channel: "Tim Cakir",
-    channelAvatar: "/testimonials/victor-chan.jpg",
+    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
     channelUrl: "https://www.youtube.com/@timcakir",
   },
   {
     id: "IYphbtdwb5M",
-    title: "Podcast Production & Business Growth",
+    title: "Podcast Production, Business Growth & Building an Audience",
     channel: "Cosmo Taylor",
     channelAvatar: "/testimonials/blake-reddy.jpg",
-    channelUrl: "https://www.youtube.com/@cosmotaylor",
+    channelUrl: "https://www.youtube.com/@cosmotaylorofficial",
+  },
+  {
+    id: "mHOLzwe4sMQ",
+    title: "ChatGPT Connectors EXPLAINED: 5 Best Use Cases and Limitations Revealed!",
+    channel: "Tim Cakir",
+    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
+    channelUrl: "https://www.youtube.com/@timcakir",
   },
   {
     id: "dD3jLdx2k7A",
-    title: "Short-Form Content Strategy That Works",
-    channel: "Launch Excel",
-    channelAvatar: "/testimonials/victor-chan.jpg",
-    channelUrl: "https://www.youtube.com/@launchexcel",
+    title: "I Tried ChatGPT for Image Creation and Here's What Happened",
+    channel: "Tim Cakir",
+    channelAvatar: "https://yt3.googleusercontent.com/ytc/AIdro_m6yQpqp1Gx2i4VIpTaWFLmH5QvzXWnQ8XfZkMhqQ=s88-c-k-c0x00ffffff-no-rj",
+    channelUrl: "https://www.youtube.com/@timcakir",
   },
 ];
 
@@ -473,29 +482,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 1b · WORK SHOWCASE: Horizontal Scrollable Video Rail */}
-      <section className="pb-10 md:pb-14 overflow-hidden">
-        <div className="max-w-[1140px] mx-auto px-5 sm:px-6 lg:px-10 mb-6">
-          <p className="eyebrow">Work Showcase</p>
-        </div>
-        <div
-          className="relative"
-          style={{
-            maskImage: "linear-gradient(to right, transparent, black 60px, black calc(100% - 60px), transparent)",
-            WebkitMaskImage: "linear-gradient(to right, transparent, black 60px, black calc(100% - 60px), transparent)",
-          }}
-        >
-          <div
-            className="flex gap-4 overflow-x-auto pb-3 pl-[max(20px,calc((100vw-1140px)/2+20px))] pr-[max(20px,calc((100vw-1140px)/2+20px))] snap-x snap-mandatory scroll-smooth"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {CLIENT_VIDEOS.map((v) => (
-              <VideoCard key={v.id} video={v} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 2 · TIM CAKIR TESTIMONIAL VIDEO (Thin Apple-glass border) */}
       <section className="pb-14 md:pb-20">
         <div className="max-w-[920px] mx-auto px-5 sm:px-6 lg:px-10">
@@ -536,6 +522,31 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 2b · WORK SHOWCASE: Horizontal Scrollable Video Rail */}
+      <section className="pb-10 md:pb-14 overflow-hidden">
+        <div className="max-w-[1140px] mx-auto px-5 sm:px-6 lg:px-10 mb-6">
+          <p className="eyebrow">Work Showcase</p>
+        </div>
+        <div
+          className="relative"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 60px, black calc(100% - 60px), transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 60px, black calc(100% - 60px), transparent)",
+          }}
+        >
+          <div className="flex gap-4 marquee-track pl-[max(20px,calc((100vw-1140px)/2+20px))]">
+            {CLIENT_VIDEOS.map((v, i) => (
+              <VideoCard key={`${v.id}-${i}`} video={v} />
+            ))}
+            {/* Duplicate set for seamless marquee loop */}
+            {CLIENT_VIDEOS.map((v, i) => (
+              <VideoCard key={`${v.id}-dup-${i}`} video={v} />
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* 3 · CLIENTS I WORK WITH (Real circular photos, quotes, channel links; no subscriber counts or arrows) */}
       <section className="py-12 md:py-16">

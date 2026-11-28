@@ -182,9 +182,12 @@ export default function YouTubeFunnelPage() {
     }
   };
 
-  // Derive dynamic preview based on actual channel uploads
+  // Derive dynamic preview based on actual channel uploads & weakest factor
   const latestUploadTitle = inspectedChannel?.recentVideos?.[0]?.title;
   const secondUploadTitle = inspectedChannel?.recentVideos?.[1]?.title;
+  const weakestFactor = inspectedChannel?.factors?.length
+    ? [...inspectedChannel.factors].sort((a, b) => a.score - b.score)[0]
+    : null;
 
   return (
     <div className="min-h-screen bg-surface overflow-x-hidden">
@@ -679,12 +682,16 @@ export default function YouTubeFunnelPage() {
 
               <div className="rounded-xl p-4 mb-5" style={{ borderLeft: "3px solid #7c3aed", background: "rgba(124,58,237,0.04)" }}>
                 <p className="text-[10px] font-bold text-primary uppercase tracking-widest mb-1.5">
-                  {latestUploadTitle
+                  {weakestFactor
+                    ? `Priority #1 Fix · ${weakestFactor.label} (${weakestFactor.score}/100)`
+                    : latestUploadTitle
                     ? `Audit observation on latest upload: "${latestUploadTitle.slice(0, 50)}..."`
                     : "What I'd optimize first on your channel"}
                 </p>
                 <p className="text-on-surface font-semibold text-sm leading-relaxed">
-                  {latestUploadTitle
+                  {weakestFactor
+                    ? weakestFactor.insight
+                    : latestUploadTitle
                     ? `Eliminate the 15-second preamble. Open with the exact core payoff of the title and introduce immediate curiosity tension before the 30-second drop-off.`
                     : "The first 30 seconds of your videos must state the payoff immediately. Avoid slow greeting warmups that trigger early drop-off."}
                 </p>

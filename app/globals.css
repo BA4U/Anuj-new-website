@@ -48,6 +48,76 @@
   }
 }
 
+/* ─── Taffy × Youflow Editorial Studio Utilities ─────────────────── */
+.font-serif-accent {
+  font-family: "Instrument Serif", Georgia, serif;
+}
+
+.taffy-haze {
+  background:
+    radial-gradient(circle at 18% 28%, rgba(207, 232, 218, 0.85) 0%, transparent 52%),
+    radial-gradient(circle at 82% 24%, rgba(249, 220, 196, 0.85) 0%, transparent 52%),
+    radial-gradient(circle at 72% 78%, rgba(220, 214, 244, 0.8) 0%, transparent 54%),
+    radial-gradient(circle at 26% 80%, rgba(211, 231, 242, 0.8) 0%, transparent 52%);
+}
+
+.taffy-haze-soft {
+  background:
+    linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0) 22%, rgba(255, 255, 255, 0) 78%, #ffffff 100%),
+    radial-gradient(circle at 16% 35%, rgba(207, 232, 218, 0.72) 0%, transparent 50%),
+    radial-gradient(circle at 84% 30%, rgba(249, 220, 196, 0.72) 0%, transparent 50%),
+    radial-gradient(circle at 70% 75%, rgba(220, 214, 244, 0.65) 0%, transparent 52%),
+    radial-gradient(circle at 28% 72%, rgba(211, 231, 242, 0.68) 0%, transparent 50%);
+}
+
+.taffy-card {
+  background: #ffffff;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 28px;
+  box-shadow: 0 1px 2px rgba(17, 17, 17, 0.04), 0 12px 32px -8px rgba(17, 17, 17, 0.08);
+}
+
+.taffy-btn-dark {
+  background: #1e1e1e;
+  color: #ffffff;
+  border-radius: 100px;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.16),
+    0 1px 2px rgba(0, 0, 0, 0.25),
+    0 8px 16px -8px rgba(0, 0, 0, 0.4);
+  transition: transform 150ms ease, box-shadow 200ms ease, background-color 150ms ease;
+}
+.taffy-btn-dark:hover {
+  background: #111111;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.2),
+    0 16px 32px -10px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.taffy-pill-pearl {
+  background: #ffffff;
+  color: #111111;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 100px;
+  box-shadow:
+    inset 0 1px #ffffff,
+    inset 0 -1px rgba(17, 17, 17, 0.05),
+    0 1px 2px rgba(17, 17, 17, 0.08),
+    0 8px 16px -8px rgba(17, 17, 17, 0.14);
+}
+
+.taffy-pill-sage {
+  background: linear-gradient(180deg, #cfe7b8 0%, #afd293 100%);
+  color: #1f3311;
+  border-radius: 100px;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.7),
+    inset 0 -1px rgba(52, 84, 28, 0.12),
+    0 1px 2px rgba(52, 84, 28, 0.14),
+    0 6px 12px -6px rgba(52, 84, 28, 0.25);
+}
+
 @layer components {
   /* ─── Eyebrow / kicker: Signature handwritten script accent ──────── */
   .eyebrow {

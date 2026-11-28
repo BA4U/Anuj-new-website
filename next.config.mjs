@@ -22,6 +22,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'anuj4u.in',
       },
+      {
+        protocol: 'https',
+        hostname: 'yt3.googleusercontent.com',
+      },
     ],
   },
   async redirects() {

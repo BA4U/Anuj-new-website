@@ -447,7 +447,9 @@ export async function inspectYouTubeChannel(input: string): Promise<ChannelInspe
         metric: count ? `${chaptersRate}% chapters · ${linksRate}% links/CTAs` : "No uploads",
         insight:
           chaptersRate < 30
-            ? `Only ${chaptersRate}% of scanned videos include timestamps/chapters, missing Google search key-moments & retention boosts.`
+            ? linksRate >= 60
+              ? `Strong outbound links/CTAs (${linksRate}% of uploads), though only ${chaptersRate}% include timestamps/chapters for Google key-moments.`
+              : `Only ${chaptersRate}% of scanned videos include timestamps/chapters, missing Google search key-moments & retention boosts.`
             : `Strong metadata hygiene (${chaptersRate}% with chapters, ${linksRate}% with outbound CTAs/links).`,
       },
       {
