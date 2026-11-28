@@ -12,15 +12,18 @@ import CountUp from "@/components/CountUp";
 type PlatformItem = {
   id: string;
   label: string;
-  gradient: string;
+  gradient?: string;
+  color?: string;
 };
 
 const PLATFORMS: PlatformItem[] = [
-  { id: "youtube", label: "YouTube", gradient: "linear-gradient(135deg, #ef4444, #7c3aed)" },
+  { id: "youtube", label: "YouTube", color: "#FF0000" },
   { id: "instagram", label: "Instagram", gradient: "linear-gradient(135deg, #ec4899, #f97316)" },
   { id: "linkedin", label: "LinkedIn", gradient: "linear-gradient(135deg, #0a66c2, #2563eb)" },
   { id: "spotify", label: "Podcasts", gradient: "linear-gradient(135deg, #1db954, #0d9488)" },
 ];
+
+const LOOP_PLATFORMS: PlatformItem[] = [...PLATFORMS, PLATFORMS[0]];
 
 function PlatformLogo({ id, className = "w-full h-full" }: { id: string; className?: string }) {
   if (id === "youtube") {
@@ -314,6 +317,7 @@ const Arrow = () => <span className="material-symbols-outlined text-[18px]">arro
 
 export default function Home() {
   const [platformIdx, setPlatformIdx] = useState(0);
+  const [noTransition, setNoTransition] = useState(false);
   const [morphing, setMorphing] = useState(false);
   const [wordWidth, setWordWidth] = useState<number | undefined>(undefined);
   const itemRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -326,16 +330,16 @@ export default function Home() {
   const [motionOk, setMotionOk] = useState(true);
 
   const active = PROOF[proofIdx];
-  const currentPlatform = PLATFORMS[platformIdx];
+  const currentPlatform = PLATFORMS[platformIdx % PLATFORMS.length];
 
   useEffect(() => {
     setMotionOk(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
-  // Measure active rotating platform item width so spacing after "Turn Your" stays exact
+  // Measure active rotating platform item width so spacing stays exact
   useEffect(() => {
     const measure = () => {
-      const el = itemRefs.current[platformIdx];
+      const el = itemRefs.current[platformIdx % PLATFORMS.length];
       if (el) setWordWidth(el.offsetWidth);
     };
     measure();
@@ -343,18 +347,33 @@ export default function Home() {
     return () => window.removeEventListener("resize", measure);
   }, [platformIdx]);
 
-  // Rotate platform + sync corner 3D/blurred icons
+  // Rotate platform upward in a seamless loop + sync corner 3D/blurred icons
   useEffect(() => {
     if (!motionOk) return;
     const timer = setInterval(() => {
       setMorphing(true);
       setTimeout(() => {
-        setPlatformIdx((i) => (i + 1) % PLATFORMS.length);
+        setPlatformIdx((i) => i + 1);
         setMorphing(false);
       }, 240);
     }, 2500);
     return () => clearInterval(timer);
   }, [motionOk]);
+
+  // After sliding up to the cloned YouTube item, snap back to index 0 without transition
+  useEffect(() => {
+    if (platformIdx !== PLATFORMS.length) return;
+    const resetTimer = setTimeout(() => {
+      setNoTransition(true);
+      setPlatformIdx(0);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setNoTransition(false);
+        });
+      });
+    }, 720);
+    return () => clearTimeout(resetTimer);
+  }, [platformIdx]);
 
   useEffect(() => {
     if (proofPaused || zoom || !motionOk) return;
@@ -456,24 +475,32 @@ export default function Home() {
                 style={{ width: wordWidth ? `${wordWidth}px` : "auto" }}
               >
                 <span
-                  className="flex flex-col items-start transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  className={`flex flex-col items-start ${
+                    noTransition
+                      ? "transition-none"
+                      : "transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  }`}
                   style={{ transform: `translateY(-${platformIdx * 1.2}em)` }}
                 >
-                  {PLATFORMS.map((p, i) => (
+                  {LOOP_PLATFORMS.map((p, i) => (
                     <span
-                      key={p.id}
+                      key={`${p.id}-${i}`}
                       ref={(el) => {
                         itemRefs.current[i] = el;
                       }}
                       className="h-[1.2em] inline-flex items-center gap-[0.22em] whitespace-nowrap font-extrabold"
                     >
                       <PlatformLogo id={p.id} className="w-[0.78em] h-[0.78em] shrink-0" />
-                      <span
-                        className="bg-clip-text text-transparent"
-                        style={{ backgroundImage: p.gradient }}
-                      >
-                        {p.label}
-                      </span>
+                      {p.gradient ? (
+                        <span
+                          className="bg-clip-text text-transparent"
+                          style={{ backgroundImage: p.gradient }}
+                        >
+                          {p.label}
+                        </span>
+                      ) : (
+                        <span style={{ color: p.color }}>{p.label}</span>
+                      )}
                     </span>
                   ))}
                 </span>
@@ -483,7 +510,7 @@ export default function Home() {
 
           {/* Personalized "I" Description (Zero em-dashes) */}
           <p className="text-[16px] sm:text-[18.5px] text-on-surface-variant max-w-2xl leading-relaxed mb-8">
-            I help creators and businesses grow faster with strategy, editing, thumbnails, and channel management, without the cost of hiring internally.
+            I help creators and brands reach the right audience with content strategy, editing, publishing, and full social media management, all handled end-to-end.
           </p>
 
           {/* Dual CTAs with Purple-Blue Gradient Call Button */}
@@ -495,8 +522,8 @@ export default function Home() {
               Book Free Strategy Call
               <Arrow />
             </Link>
-            <Link href="/services" className="btn btn-secondary">
-              View Services
+            <Link href="/case-studies" className="btn btn-secondary">
+              View Case Studies
             </Link>
           </div>
         </div>
@@ -541,7 +568,7 @@ export default function Home() {
             </div>
           </div>
           <p className="text-center text-xs sm:text-[13px] text-on-surface-variant font-medium mt-3">
-            Tim Cakir · AI Operator &amp; Creator
+            <span className="font-semibold text-on-surface">Tim Cakir</span> · Founder of AI Operator, helping businesses adopt AI workflows &amp; automation
           </p>
         </div>
       </section>

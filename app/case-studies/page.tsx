@@ -82,7 +82,7 @@ export default function CaseStudiesAndTestimonialsPage() {
         <VideoTestimonial
           videoId="TbP5kY8BXUI"
           clientName="Tim Cakir"
-          clientRole="AI Operator & Creator"
+          clientRole="Founder of AI Operator"
           avatarUrl="/avatars/tim-cakir.jpg"
           headline="Tim Cakir: Client Testimonial"
           quote="Consistent editing and packaging turned my YouTube channel into $50,000 in client deals."
